@@ -30,13 +30,15 @@ class ProjectsPage extends Component {
   render() {
     const data = this.state.projects.data;
     return (
-      <div className="row">
+      <div className="container projects-results">
         {Object.keys(data).map(key => {
           return (
             <Project
               slug={data[key].slug}
               thumb={data[key].featured_image_thumbnail_url}
               title={data[key].title.rendered}
+              transactions={data[key].transactions}
+              price={data[key].price}
               shortDescription={data[key].excerpt.rendered}
             />
           );

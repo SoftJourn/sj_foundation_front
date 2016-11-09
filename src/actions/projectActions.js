@@ -31,6 +31,13 @@ export function getProjectMetaBySlug(slug) {
 }
 
 export function pledgeProject(id, amount) {
+  return (dispatch, getState) => {
+    return dispatch(pledgeProjectRequest(id, amount))
+    .then(dispatch(getProjectBySlug(getState().project.data.slug)));
+  }
+}
+
+export function pledgeProjectRequest(id, amount) {
   return {
     [CALL_API]: {
       method: 'POST',

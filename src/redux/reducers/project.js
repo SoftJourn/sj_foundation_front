@@ -32,6 +32,20 @@ export default function project(state = initialData, action) {
         backers: getBackersCount(action.response[0]['transactions']),
         pledgeSum: getPledgeSum(action.response[0]['transactions'])
       });
+    case types.PLEDGE_SUCCESS:
+      return Object.assign({}, state, {
+        pledgeSuccess: true,
+        pledgeError: false,
+      });
+    case types.PLEDGE_FAILURE:
+      return Object.assign({}, state, {
+        pledgeSuccess: false,
+        pledgeError: true,
+      });
+    case types.SHOW_PLEDGE_MODAL:
+      return Object.assign({}, state, {
+        showModal: true,
+      });
   }
   return state;
 }

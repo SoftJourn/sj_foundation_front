@@ -4,6 +4,7 @@ import { getProjectBySlug } from '../actions/projectActions';
 import moment from 'moment';
 import SJCoin from '../components/sjCoin';
 import PledgeModal from '../components/PledgeModal';
+import { SHOW_PLEDGE_MODAL } from '../ActionTypes';
 
 class ProjectPage extends Component {
 
@@ -42,43 +43,68 @@ class ProjectPage extends Component {
   }
 
   render() {
-    const data = this.state.project.data;
-    if (this.state.project.isFetching) {
-      return (<div className="row"><div>loading..</div></div>);
+    const { project } = this.state;
+    const data = project.data;
+    if (project.isFetching) {
+      return (<div className="container"><div className="row"><div>loading..</div></div></div>);
     }
     return (
       <div className="row">
-        <div className="col-md-12 project-title">
-          <h1 className="text-center">{data.title.rendered}</h1>
-        </div>
-        <div className="col-md-9 project-content">
-          <div dangerouslySetInnerHTML={{__html: data.content.rendered}}/>
-        </div>
-        <div className="col-md-3 project-sidebar">
-          <div>
-            <h2>{this.state.project.backers}</h2>
-            backers
+        <div className="project-header">
+          <div className="container">
+            {project.pledgeSuccess ?
+              <div className="alert alert-success" role="alert">Success! You successfully pledged.</div> : null
+            }
+            <div className="col-sm-12 project-title">
+              <h1 className="text-left">{data.title.rendered}</h1>
+            </div>
+            <div className="col-md-9">
+              <div className="img" style={{backgroundImage: `url(${data.featured_image_thumbnail_url})`}}></div>
+            </div>
+            <div className="col-md-3 project-sidebar">
+              <div>
+                <h2>{project.backers}</h2>
+                backers
+              </div>
+              <div>
+                <h2><SJCoin />{project.pledgeSum}</h2>
+                pledged of <b>{data.price}</b> goal
+              </div>
+              { this.getDaysTogo() ? (
+                <div>
+                  <h2>{this.getDaysTogo()}</h2>
+                  days to go
+                </div>) : null}
+              <div className="text-left">
+                <br/>
+                <button type="button" data-toggle="modal" data-target="#pledge-modal" className="btn btn-success" onClick={() => this.props.dispatch({type: SHOW_PLEDGE_MODAL})}>
+                  Pledge
+                </button>
+                <PledgeModal
+                  dispatch={this.props.dispatch}
+                  amount={data.price}
+                  id={data.id}
+                  show={project.showModal}
+                />
+              </div>
+            </div>
           </div>
-          <div>
-            <h2><SJCoin />{this.state.project.pledgeSum}</h2>
-            pledged of <b>{data.price}</b> goal
+        </div>
+        <div className="project-nav">
+          <div className="container">
+            <div className="col-md-12">
+              <ul className="nav nav-pills" role="tablist">
+                <li role="presentation" className="active"><a href="#">Overview</a></li>
+                <li role="presentation"><a href="#">Comments <span className="badge">0</span></a></li>
+              </ul>
+            </div>
           </div>
-          { this.getDaysTogo() ? (
-          <div>
-            <h2>{this.getDaysTogo()}</h2>
-            days to go
-          </div>) : null}
-          <div className="text-center">
-            <br/>
-            {/*<a className="btn btn-md btn-success" role="button">Back</a>*/}
-            <button type="button" className="btn btn-success btn-lg" data-toggle="modal" data-target="#back-modal">
-              Back
-            </button>
-            <PledgeModal
-              dispatch={this.props.dispatch}
-              amount={data.price}
-              id={data.id}
-            />
+        </div>
+        <div className="container">
+          <div className="col-md-12">
+            <div className=" project-content">
+              <div dangerouslySetInnerHTML={{__html: data.content.rendered}}/>
+            </div>
           </div>
         </div>
       </div>

@@ -3,8 +3,12 @@ body {
     padding-bottom: 40px;
 }
 
+.main-content {
+    padding-top: 10px;
+}
+
 .container {
-    width: 900px;
+    max-width: 900px;
 }
 
 .projects {
@@ -12,15 +16,39 @@ body {
 }
 
 .project-sidebar {
+    padding-left: 25px;
+}
+
+.project-header {
+    padding: 50px 0;
+    color: inherit;
     background-color: #eee;
-    padding-top: 8px;
-    padding-bottom: 24px;
-    border-radius: 6px;
+}
+
+.project-header .img {
+    width: 100%;
+    height: 320px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
 }
 
 .project-content {
-    font-size: 16px;
+    font-size: 18px;
+    font-weight: 200;
+    padding-top: 20px;
 }
+
+.project-nav {
+    border-bottom: 1px solid #eee;
+    padding: 15px 0;
+}
+
+
+.projects-results {
+    margin-top: 50px;
+}
+
 
 .project-grid {
     border: 1px solid #eee;
