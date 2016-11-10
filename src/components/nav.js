@@ -3,9 +3,17 @@ import { Link } from 'react-router'
 
 export default class Nav extends Component {
 
-  constructor() {
+  constructor(props) {
     super();
-    this.state = {};
+    this.state = {
+      user: props.user,
+    };
+  }
+
+  componentWillReceiveProps(newProps) {
+    this.setState({
+      user: newProps.user
+    });
   }
 
   render() {
@@ -27,10 +35,12 @@ export default class Nav extends Component {
                 <a href="/wp-admin/post-new.php?post_type=project_type">Create project</a>
               </li>
               <li className="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                   Account <span className="caret"></span>
                 </a>
                 <ul className="dropdown-menu">
+                  <li className="dropdown-header">Your balance: {this.state.user.balance}</li>
+                  <li role="separator" className="divider"></li>
                   <li><a href="/wp-admin/profile.php">Profile</a></li>
                   <li><a href="#">Transactions</a></li>
                   <li role="separator" className="divider"></li>

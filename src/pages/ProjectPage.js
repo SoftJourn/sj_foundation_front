@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getProjectBySlug } from '../actions/projectActions';
+import { getBalance } from '../actions/userActions';
 import moment from 'moment';
 import SJCoin from '../components/sjCoin';
 import PledgeModal from '../components/PledgeModal';
@@ -29,6 +30,10 @@ class ProjectPage extends Component {
       projects: nextProps.projects,
       project: nextProps.project,
     });
+    if (nextProps.project.pledgeSuccess && this.state.project.pledgeSuccess !== nextProps.project.pledgeSuccess ) {
+      this.props.dispatch(getProjectBySlug(nextProps.project.data.slug));
+      this.props.dispatch(getBalance());
+    }
   }
 
 
@@ -77,7 +82,7 @@ class ProjectPage extends Component {
                 </div>) : null}
               <div className="text-left">
                 <br/>
-                <button type="button" data-toggle="modal" data-target="#pledge-modal" className="btn btn-success" onClick={() => this.props.dispatch({type: SHOW_PLEDGE_MODAL})}>
+                <button type="button" className="btn btn-primary" onClick={() => this.props.dispatch({type: SHOW_PLEDGE_MODAL})}>
                   Pledge
                 </button>
                 <PledgeModal

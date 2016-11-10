@@ -2,12 +2,29 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import 'styles/styles.css';
 import Nav from './components/nav';
+import { getBalance } from 'actions/userActions';
 
 /**
  * main component - wrapper for all pages
  */
 class App extends Component {
 
+  constructor(props) {
+    super();
+    if (window.wpApiSettings.user.ID) {
+      props.dispatch(getBalance());
+    }
+
+    this.state = {
+      user: props.user,
+    }
+  }
+
+  componentWillReceiveProps(newProps) {
+    this.setState({
+      user: newProps.user
+    });
+  }
   /**
    * render layout
    * @returns {XML}
@@ -16,7 +33,7 @@ class App extends Component {
     const { children } = this.props;
     return (
       <div>
-        <Nav/>
+        <Nav user={this.state.user} />
         <div className="main-content">
           {children}
         </div>
@@ -29,8 +46,10 @@ class App extends Component {
  * map redux state to searchPage properties
  * @function mapStateToProps
  */
-function mapStateToProps() {
-  return {};
+function mapStateToProps(state) {
+  return {
+    user: state.user,
+  };
 }
 
 /**
