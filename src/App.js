@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import 'styles/styles.css';
 import Nav from './components/nav';
 import { getBalance } from 'actions/userActions';
+
+import 'styles/styles.scss';
 
 /**
  * main component - wrapper for all pages

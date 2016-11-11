@@ -1,0 +1,17 @@
+@import './components/project';
+@import './components/projectGrid';
+@import './components/login';
+
+
+body {
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+
+.container {
+  max-width: 900px;
+}
+
+.main-content {
+  padding-top: 10px;
+}

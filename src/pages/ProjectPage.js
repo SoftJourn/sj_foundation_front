@@ -54,7 +54,7 @@ class ProjectPage extends Component {
       return (<div className="container"><div className="row"><div>loading..</div></div></div>);
     }
     return (
-      <div className="row">
+      <div className="row project-page">
         <div className="project-header">
           <div className="container">
             {project.pledgeSuccess ?

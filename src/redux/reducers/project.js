@@ -21,8 +21,6 @@ export default function project(state = initialData, action) {
         error: false,
         showModal: false,
         pledgeIsFetching: false,
-        pledgeError: false,
-        pledgeSuccess: false,
         bakers: 0,
       });
     case types.PROJECT_SUCCESS:
