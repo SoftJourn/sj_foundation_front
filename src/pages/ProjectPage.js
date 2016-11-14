@@ -12,7 +12,9 @@ class ProjectPage extends Component {
 
   constructor(props) {
     super();
+    console.log(props);
     this.state = {
+      tab: props.routeParams.tab ? props.routeParams.tab : '',
       slug: props.routeParams.slug,
       project: props.project,
     };
@@ -29,6 +31,7 @@ class ProjectPage extends Component {
   componentWillReceiveProps(nextProps) {
     this.setState({
       slug: nextProps.routeParams.slug,
+      tab: nextProps.routeParams.tab ? nextProps.routeParams.tab : '',
       user: nextProps.user,
       form: nextProps.form,
       projects: nextProps.projects,
@@ -54,25 +57,30 @@ class ProjectPage extends Component {
   }
 
   render() {
-    const { project } = this.state;
+    const { project, slug, tab } = this.state;
+    const mainUrl = `/project/${slug}/`;
     const data = project.data;
     if (project.isFetching) {
       return (<div className="container"><div className="row project-results text-center"><div>loading..</div></div></div>);
     }
     return (
-      <div className="row project-page">
+      <div className="project-page">
         <div className="project-header">
           <div className="container">
-            {project.pledgeSuccess ?
-              <div className="alert alert-success" role="alert">Success! You successfully pledged.</div> : null
-            }
+            {data.user_transactions.map((transaction) => {
+              return (
+                <div className="raw alert alert-success">
+                  You successfully pledged {transaction.amount}
+                </div>
+              );
+            })}
             <div className="col-sm-12 project-title">
               <h1 className="text-left">{data.title.rendered}</h1>
             </div>
-            <div className="col-md-9">
+            <div className="col-xs-12 col-sm-9">
               <div className="img" style={{backgroundImage: `url(${data.featured_image_thumbnail_url})`}}></div>
             </div>
-            <div className="col-md-3 project-sidebar">
+            <div className="col-xs-12 col-sm-3 project-sidebar">
               <div>
                 <h2>{project.backers}</h2>
                 backers
@@ -105,29 +113,52 @@ class ProjectPage extends Component {
           <div className="container">
             <div className="col-md-12">
               <ul className="nav nav-pills" role="tablist">
-                <li role="presentation" className="active"><a href="#">Overview</a></li>
-                <li role="presentation"><a href="#">Comments <span className="badge">0</span></a></li>
+                <li role="presentation" className={(tab === '' || tab == 'overview') && "active"}><Link to={`${mainUrl}overview`}>Overview</Link></li>
+                {data.attachments.length > 0 && (<li role="presentation" className={tab == 'attachments' && "active"}><Link to={`${mainUrl}attachments`}>Attachments <span className="badge">{data.attachments.length}</span></Link></li>)}
+                <li className={tab == 'comments' && "active"} role="presentation"><Link to={`${mainUrl}comments`}>Comments <span className="badge">0</span></Link></li>
               </ul>
             </div>
           </div>
         </div>
         <div className="container">
-          <div className="col-md-12">
-            <div className=" project-content">
-              <div dangerouslySetInnerHTML={{__html: data.content.rendered}}/>
+          {
+            (tab === '' || tab === 'overview') &&
+            <div className="col-md-12">
+              <div className="project-content">
+                <div dangerouslySetInnerHTML={{__html: data.content.rendered}}/>
+              </div>
             </div>
-          </div>
+          }
+          {
+            (tab == 'attachments') &&
+            <div className="raw project-content">
+              {data.attachments.map((attachment) => {
+                return (
+                  <div className="col-xs-12 col-sm-3">
+                    <div onClick={() => window.open(attachment.url,'_blank')} className="attachment text-center">
+                      <div dangerouslySetInnerHTML={{__html: attachment.thumbnail}}/>
+                      <div className="caption">
+                        <p href={attachment.url} target="_blank" ><b>{attachment.title}</b></p>
+                        {/*<p><a className="btn btn-default">Open</a></p>*/}
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          }
         </div>
         <div className="project-footer">
           <div className="container">
-            <div className="container">
-              <div className="row">
-                <div className="text-left col-sm-6">
-                  {data.prev_project && <Link to={`/project/${data.prev_project}`} className="btn btn-default btn-xs">&larr; Previous project</Link>}
-                </div>
-                <div className="text-right col-sm-6">
-                  {data.next_project && <Link to={`/project/${data.next_project}`} className="btn btn-default btn-xs">Next project &rarr;</Link>}
-                </div>
+            <div className="raw">
+              <div className="col-sm-12">
+                <input className="project-comment-input" type="text" placeholder="Comment this" size="50" />
+              </div>
+              <div className="text-left col-sm-6">
+                {data.prev_project && <Link to={`/project/${data.prev_project}`} className="btn btn-default btn-xs">&larr; Previous project</Link>}
+              </div>
+              <div className="text-right col-sm-6">
+                {data.next_project && <Link to={`/project/${data.next_project}`} className="btn btn-default btn-xs">Next project &rarr;</Link>}
               </div>
             </div>
           </div>

@@ -56,7 +56,7 @@ class ProjectsPage extends Component {
         })}
         <div className="col-sm-12 text-center">
           { pages > this.state.page && !isFetching ? <button
-            className="btn"
+            className="btn btn-default"
             onClick={this.handleLoadMore.bind(this)}
           >
             Load more

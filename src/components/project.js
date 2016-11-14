@@ -25,15 +25,15 @@ export default class Project extends Component {
   render() {
     const { slug, percent } = this.state;
     return(
-      <div className="col-md-4">
+      <div className="col-xs-12 col-sm-4">
         <div className="project-grid">
           <div className="img" style={{backgroundImage: `url(${this.state.thumb})`}}></div>
           <Link to={`/project/${slug}`}>
             <h3 className="project-title">{this.state.title}</h3>
           </Link>
-          <p dangerouslySetInnerHTML={{__html: this.state.shortDescription}}/>
+          <p className="short-description" dangerouslySetInnerHTML={{__html: this.state.shortDescription}}/>
           <div className="project-grid-bottom">
-            <div className="progress" style={{height: '10px'}}>
+            <div className="progress">
               <div className="progress-bar progress-bar-success" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style={{width: `${percent}%`}}>
                 <span className="sr-only">{percent}% Complete</span>
               </div>
