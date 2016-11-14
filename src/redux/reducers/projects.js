@@ -1,9 +1,12 @@
 import * as types from '../../ActionTypes';
+import rename from 'rename-keys';
 
 const initialData = {
-  data: [],
+  data: {},
   isFetching: false,
   error: false,
+  page: 1,
+  pages: 1,
 };
 
 export default function projects(state = initialData, action) {
@@ -13,9 +16,22 @@ export default function projects(state = initialData, action) {
         isFetching: true,
       });
     case types.SEARCH_SUCCESS:
+      const response = rename(action.response.data, (str) => {return `${state.page}${str}`});
+      let data = Object.assign({}, state.data, {...response});
       return Object.assign({}, state, {
-        data: action.response,
+        data,
+        pages: action.response.meta.pages,
         isFetching: false,
+      });
+    case types.SEARCH_LOAD_MORE:
+      return Object.assign({}, state, {
+        page: state.page+1,
+      });
+    case types.SEARCH_INIT:
+      return Object.assign({}, state, {
+        page: 1,
+        pages: 1,
+        data: [],
       });
   }
   return state;

@@ -6,6 +6,7 @@ import moment from 'moment';
 import SJCoin from '../components/sjCoin';
 import PledgeModal from '../components/PledgeModal';
 import { SHOW_PLEDGE_MODAL } from '../ActionTypes';
+import { Link } from 'react-router'
 
 class ProjectPage extends Component {
 
@@ -18,6 +19,8 @@ class ProjectPage extends Component {
     props.dispatch(getProjectBySlug(props.routeParams.slug));
   }
 
+
+
   /**
    * new props from redux state
    * @function componentWillReceiveProps
@@ -25,17 +28,20 @@ class ProjectPage extends Component {
    */
   componentWillReceiveProps(nextProps) {
     this.setState({
+      slug: nextProps.routeParams.slug,
       user: nextProps.user,
       form: nextProps.form,
       projects: nextProps.projects,
       project: nextProps.project,
     });
+    if (nextProps.routeParams.slug !== this.state.slug) {
+      this.props.dispatch(getProjectBySlug(nextProps.routeParams.slug));
+    }
     if (nextProps.project.pledgeSuccess && this.state.project.pledgeSuccess !== nextProps.project.pledgeSuccess ) {
       this.props.dispatch(getProjectBySlug(nextProps.project.data.slug));
       this.props.dispatch(getBalance());
     }
   }
-
 
   getDaysTogo() {
     const dueDate = this.state.project.data.due_date;
@@ -51,7 +57,7 @@ class ProjectPage extends Component {
     const { project } = this.state;
     const data = project.data;
     if (project.isFetching) {
-      return (<div className="container"><div className="row"><div>loading..</div></div></div>);
+      return (<div className="container"><div className="row project-results text-center"><div>loading..</div></div></div>);
     }
     return (
       <div className="row project-page">
@@ -109,6 +115,20 @@ class ProjectPage extends Component {
           <div className="col-md-12">
             <div className=" project-content">
               <div dangerouslySetInnerHTML={{__html: data.content.rendered}}/>
+            </div>
+          </div>
+        </div>
+        <div className="project-footer">
+          <div className="container">
+            <div className="container">
+              <div className="row">
+                <div className="text-left col-sm-6">
+                  {data.prev_project && <Link to={`/project/${data.prev_project}`} className="btn btn-default btn-xs">&larr; Previous project</Link>}
+                </div>
+                <div className="text-right col-sm-6">
+                  {data.next_project && <Link to={`/project/${data.next_project}`} className="btn btn-default btn-xs">Next project &rarr;</Link>}
+                </div>
+              </div>
             </div>
           </div>
         </div>

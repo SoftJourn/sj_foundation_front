@@ -6,13 +6,14 @@ import { getBalance } from '../actions/userActions';
 /**
  * get project
  * @param slug
+ * @param page
  * @returns {{}}
  */
 export function getProjectBySlug(slug) {
   return {
     [CALL_API]: {
       types: [types.PROJECT_REQUEST, types.PROJECT_SUCCESS, types.PROJECT_FAILURE],
-      endpoint: `projects/?filter[name]=${slug}`,
+      endpoint: `projects?filter[name]=${slug}`,
     },
   };
 }
@@ -49,4 +50,11 @@ export function pledgeProjectRequest(id, amount) {
       }
     },
   };
+}
+
+export function loadMore() {
+  (dispatch, getState) => {
+    dispatch({type: types.SEARCH_LOAD_MORE});
+    dispatch(getProjectBySlug())
+  }
 }

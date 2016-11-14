@@ -3,6 +3,7 @@ import * as types from '../../ActionTypes';
 const initialData = {
   loggedIn: true,
   balance: 0,
+  transactions: {},
 };
 
 export default function user(state = initialData, action) {
@@ -13,7 +14,11 @@ export default function user(state = initialData, action) {
       });
     case types.USER_BALANCE_SUCCESS:
       return Object.assign({}, state, {
-        balance: action.response.amount,
+        balance: action.response.data.amount,
+      });
+    case types.TRANSACTIONS_SUCCESS:
+      return Object.assign({}, state, {
+        transactions: action.response.data,
       });
   }
   return state;

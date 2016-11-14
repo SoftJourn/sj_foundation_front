@@ -14,3 +14,16 @@ export function getBalance() {
     },
   };
 }
+
+/**
+ * get balance
+ * @returns {{}}
+ */
+export function getTransactions(id) {
+  return {
+    [CALL_API]: {
+      types: [types.TRANSACTIONS_REQUEST, types.TRANSACTIONS_SUCCESS, types.TRANSACTIONS_FAILURE],
+      endpoint: `get_transactions`,
+    },
+  };
+}

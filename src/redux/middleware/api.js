@@ -29,10 +29,18 @@ function callApi(endpoint, store, method, body) {
         return response.json().then(json => ({ json, response }))
     })
     .then(({ json, response }) => {
+      const headers = response.headers;
+      const pages = parseInt(headers.get('X-WP-TotalPages'));
+      const result = {
+        data: json,
+        meta: {
+          pages,
+        }
+      };
       if (!response.ok) {
         return Promise.reject(json);
       }
-      return Object.assign({}, json);
+      return Object.assign({}, result);
     })
     .catch((err) =>
       Promise.reject(err)

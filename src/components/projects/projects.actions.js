@@ -4,14 +4,14 @@ import * as types from '../../ActionTypes';
 
 /**
  * fetches projects
- * @param params
+ * @param page
  * @returns {{}}
  */
-function fetchSearch(params = '') {
+function fetchSearch(page = 1) {
   return {
     [CALL_API]: {
       types: [types.SEARCH_REQUEST, types.SEARCH_SUCCESS, types.SEARCH_FAILURE],
-      endpoint: `projects/${params}`,
+      endpoint: `projects?per_page=9&page=${page}`,
     },
   };
 }
@@ -19,8 +19,13 @@ function fetchSearch(params = '') {
 /**
  * change url and dispatch search action
  */
-export function getProjects() {
+export function getProjects(page = 1) {
   return (dispatch) => {
-    return dispatch(fetchSearch());
+    if (page === 1) {
+      dispatch({type: types.SEARCH_INIT})
+    } else {
+      dispatch({type: types.SEARCH_LOAD_MORE})
+    }
+    return dispatch(fetchSearch(page));
   };
 }

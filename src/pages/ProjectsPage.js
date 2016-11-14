@@ -10,8 +10,10 @@ class ProjectsPage extends Component {
     super();
     this.state = {
       projects: props.projects,
+      page: 1,
     };
-    props.dispatch(getProjects());
+    this.handleLoadMore.bind(this);
+    props.dispatch(getProjects(1));
   }
 
   /**
@@ -27,8 +29,17 @@ class ProjectsPage extends Component {
     });
   }
 
+  handleLoadMore() {
+    const page = this.state.page + 1;
+    this.setState({
+      page,
+    });
+    this.props.dispatch(getProjects(page));
+  }
+
   render() {
-    const data = this.state.projects.data;
+    const {pages, data, isFetching} = this.state.projects;
+
     return (
       <div className="container project-results">
         {Object.keys(data).map(key => {
@@ -43,6 +54,18 @@ class ProjectsPage extends Component {
             />
           );
         })}
+        <div className="col-sm-12 text-center">
+          { pages > this.state.page && !isFetching ? <button
+            className="btn"
+            onClick={this.handleLoadMore.bind(this)}
+          >
+            Load more
+          </button> : null
+          }
+          {
+            isFetching ? 'loading...' : null
+          }
+        </div>
       </div>
     );
   }

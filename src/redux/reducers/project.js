@@ -25,10 +25,10 @@ export default function project(state = initialData, action) {
       });
     case types.PROJECT_SUCCESS:
       return Object.assign({}, state, {
-        data: action.response[0],
+        data: action.response.data[0],
         isFetching: false,
-        backers: getBackersCount(action.response[0]['transactions']),
-        pledgeSum: getPledgeSum(action.response[0]['transactions'])
+        backers: getBackersCount(action.response.data[0]['transactions']),
+        pledgeSum: getPledgeSum(action.response.data[0]['transactions'])
       });
     case types.PLEDGE_SUCCESS:
       return Object.assign({}, state, {
