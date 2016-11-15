@@ -42,7 +42,7 @@ export default class Nav extends Component {
                   <li className="dropdown-header">Your balance: {this.state.user.balance}</li>
                   <li role="separator" className="divider"></li>
                   <li><a href="/wp-admin/profile.php">Profile</a></li>
-                  <li><Link to="transactions">Transactions</Link></li>
+                  <li><Link to="/transactions">Transactions</Link></li>
                   <li role="separator" className="divider"></li>
                   <li><a href={`/wp-login.php?action=logout&redirect_to=%2F&_wpnonce=${window.wpApiSettings.nonce}`}>Logout</a></li>
                 </ul>

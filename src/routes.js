@@ -9,6 +9,7 @@ import TransactionPage from './pages/TransactionPage';
 export default (
   <Route path="/" component={App}>
     <IndexRoute component={ProjectsPage} />
+    <Route path="/cat/:category" component={ProjectsPage} />
     <Route path="/signin" component={LoginPage} />
     <Route path="/transactions" component={TransactionPage} />
     <Route path="/project/:slug(/:tab)" component={ProjectPage} />

@@ -1,6 +1,20 @@
 
 .project-results {
-  margin-top: 50px;
+  .project-results-header {
+    border-bottom: 1px solid #eeeeee;
+    margin: 30px 0 30px 0;
+    .category-filter {
+      a {
+        color: #333;
+        padding-bottom: 20px;
+        &.active {
+          border-bottom: 2px solid #337ab7;
+        }
+      }
+
+    }
+  }
+
   .project-grid {
     border: 1px solid #eee;
     border-radius: 3px;
@@ -44,13 +58,26 @@
       position: absolute;
       bottom: 0;
       width: 100%;
-      height: 25px;
+      height: 50px;
       padding-right: 20px;
       background-color: white;
       z-index: -1;
 
       .progress {
         height: 8px;
+        margin-bottom: 10px;
+      }
+
+      .progress-empty {
+        height: 18px;
+      }
+      .project-short-overview {
+        margin-bottom: 5px;
+        font-size: 12px;
+        .glyphicon {
+          color: #777;
+          margin: 0 2px 0 7px;
+        }
       }
     }
   }

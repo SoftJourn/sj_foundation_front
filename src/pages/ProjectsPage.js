@@ -1,19 +1,23 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Project from '../components/project';
-import { getProjects } from '../components/projects/projects.actions';
+import CategoriesFilter from '../components/CategoriesFilter';
+import { getProjects, fetchProjectCategories } from '../components/projects/projects.actions';
 
 
 class ProjectsPage extends Component {
 
   constructor(props) {
     super();
+    const selectedCategory = props.routeParams.category ? props.routeParams.category : '';
     this.state = {
       projects: props.projects,
+      selectedCategory,
       page: 1,
     };
     this.handleLoadMore.bind(this);
-    props.dispatch(getProjects(1));
+    props.dispatch(getProjects(1, selectedCategory));
+    props.dispatch(fetchProjectCategories());
   }
 
   /**
@@ -22,11 +26,17 @@ class ProjectsPage extends Component {
    * @param {object} nextProps - new props for component
    */
   componentWillReceiveProps(nextProps) {
+    const selectedCategory = nextProps.routeParams.category ? nextProps.routeParams.category : '';
     this.setState({
       user: nextProps.user,
       form: nextProps.form,
       projects: nextProps.projects,
+      selectedCategory,
     });
+    if (this.state.selectedCategory !== selectedCategory) {
+      this.props.dispatch(getProjects(1, selectedCategory));
+      this.setState({ page: 1});
+    }
   }
 
   handleLoadMore() {
@@ -38,33 +48,44 @@ class ProjectsPage extends Component {
   }
 
   render() {
-    const {pages, data, isFetching} = this.state.projects;
-
+    const {pages, data, isFetching, categories } = this.state.projects;
+    const {selectedCategory} = this.state;
     return (
-      <div className="container project-results">
-        {Object.keys(data).map(key => {
-          return (
-            <Project
-              slug={data[key].slug}
-              thumb={data[key].featured_image_thumbnail_url}
-              title={data[key].title.rendered}
-              transactions={data[key].transactions}
-              price={data[key].price}
-              shortDescription={data[key].excerpt.rendered}
-            />
-          );
-        })}
-        <div className="col-sm-12 text-center">
-          { pages > this.state.page && !isFetching ? <button
-            className="btn btn-default"
-            onClick={this.handleLoadMore.bind(this)}
-          >
-            Load more
-          </button> : null
-          }
-          {
-            isFetching ? 'loading...' : null
-          }
+      <div className="project-results">
+        <div className="project-results-header">
+          <div className="container">
+            <div className="raw">
+              <CategoriesFilter selectedCategory={selectedCategory} categories={categories} dispatch={this.props.dispatch} />
+            </div>
+          </div>
+        </div>
+        <div className="container ">
+          <div className="raw">
+            {Object.keys(data).map(key => {
+              return (
+                <Project
+                  slug={data[key].slug}
+                  thumb={data[key].featured_image_thumbnail_url}
+                  title={data[key].title.rendered}
+                  transactions={data[key].transactions}
+                  price={data[key].price}
+                  shortDescription={data[key].excerpt.rendered}
+                />
+              );
+            })}
+            <div className="col-sm-12 text-center">
+              { pages > this.state.page && !isFetching ? <button
+                className="btn btn-default"
+                onClick={this.handleLoadMore.bind(this)}
+              >
+                Load more
+              </button> : null
+              }
+              {
+                isFetching ? 'loading...' : null
+              }
+            </div>
+          </div>
         </div>
       </div>
     );
