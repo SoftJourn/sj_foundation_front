@@ -30,10 +30,10 @@ export default class Nav extends Component {
             <Link className="navbar-brand" to="/">SJ Projects</Link>
           </div>
           <div className="collapse navbar-collapse" id="navbar-collapse-bar">
+            <ul className="nav navbar-nav nav-create-project">
+              <li><a href="/wp-admin/post-new.php?post_type=project_type">Create project</a></li>
+            </ul>
             <ul className="nav navbar-nav navbar-right">
-              <li>
-                <a href="/wp-admin/post-new.php?post_type=project_type">Create project</a>
-              </li>
               <li className="dropdown">
                 <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                   Account <span className="caret"></span>

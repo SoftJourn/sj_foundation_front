@@ -7,6 +7,7 @@ import SJCoin from '../components/sjCoin';
 import PledgeModal from '../components/PledgeModal';
 import { SHOW_PLEDGE_MODAL } from '../ActionTypes';
 import { Link } from 'react-router'
+import Spinner from '../components/Spinner';
 
 class ProjectPage extends Component {
 
@@ -61,7 +62,7 @@ class ProjectPage extends Component {
     const mainUrl = `/project/${slug}/`;
     const data = project.data;
     if (project.isFetching) {
-      return (<div className="container"><div className="row project-results text-center"><div>loading..</div></div></div>);
+      return (<div className="project-results text-center"><div style={{marginTop: '100px'}}><Spinner/></div></div>);
     }
     return (
       <div className="project-page">
@@ -87,7 +88,7 @@ class ProjectPage extends Component {
               </div>
               <div>
                 <h2><SJCoin />{project.pledgeSum}</h2>
-                pledged of <b>{data.price}</b> goal
+                pledged {data.price !== '' && <span>of <b>{data.price}</b> goal</span>}
               </div>
               { this.getDaysTogo() ? (
                 <div>
@@ -139,7 +140,6 @@ class ProjectPage extends Component {
                       <div dangerouslySetInnerHTML={{__html: attachment.thumbnail}}/>
                       <div className="caption">
                         <p href={attachment.url} target="_blank" ><b>{attachment.title}</b></p>
-                        {/*<p><a className="btn btn-default">Open</a></p>*/}
                       </div>
                     </div>
                   </div>
@@ -153,12 +153,12 @@ class ProjectPage extends Component {
             <div className="raw">
               <div className="col-sm-12">
                 <input className="project-comment-input" type="text" placeholder="Comment this" size="50" />
-              </div>
-              <div className="text-left col-sm-6">
-                {data.prev_project && <Link to={`/project/${data.prev_project}`} className="btn btn-default btn-xs">&larr; Previous project</Link>}
-              </div>
-              <div className="text-right col-sm-6">
-                {data.next_project && <Link to={`/project/${data.next_project}`} className="btn btn-default btn-xs">Next project &rarr;</Link>}
+                <nav>
+                  <ul className="pager">
+                    { data.prev_project && <li className="previous"><Link to={`/project/${data.prev_project}`}><span aria-hidden="true">&larr;</span> Previous project</Link></li>}
+                    { data.next_project &&  <li className="next"><Link to={`/project/${data.next_project}`}>Next project <span aria-hidden="true">&rarr;</span></Link></li>}
+                  </ul>
+                </nav>
               </div>
             </div>
           </div>

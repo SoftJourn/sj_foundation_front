@@ -11,8 +11,11 @@ export default class Project extends Component {
       title: props.title,
       thumb: props.thumb,
       price: props.price,
+      attachments: props.attachments,
       percent: this.getProjectPledgePercent(props.transactions, props.price),
       shortDescription: props.shortDescription,
+      backersCount: this.getBackersCount(props.transactions),
+      pledgeSum: this.getPledgeSum(props.transactions),
     };
   }
 
@@ -24,8 +27,17 @@ export default class Project extends Component {
     return parseInt((_.sumBy(transactions, 'amount')/price)*100);
   }
 
+  getPledgeSum(transactions) {
+    return _.sumBy(transactions, 'amount');
+  }
+
+  getBackersCount(transactions) {
+    var result = _.uniqBy(transactions, 'accountId');
+    return result.length;
+  }
+
   render() {
-    const { slug, percent, price } = this.state;
+    const { slug, percent, price, pledgeSum, backersCount, attachments } = this.state;
     return(
       <div className="col-xs-12 col-sm-4">
         <div className="project-grid">
@@ -35,18 +47,25 @@ export default class Project extends Component {
           </Link>
           <p className="short-description" dangerouslySetInnerHTML={{__html: this.state.shortDescription}}/>
           <div className="project-grid-bottom">
-            { (price > 0 || price !== '') ? <div className="progress">
-              <div className="progress-bar progress-bar-success" role="progressbar" aria-valuenow="60" aria-valuemin="0"
-                   aria-valuemax="100" style={{width: `${percent}%`}}>
-                <span className="sr-only">{percent}% Complete</span>
+            { (price > 0 || price !== '') ?
+              <div className="progress">
+                <div className="progress-bar progress-bar-success" role="progressbar" aria-valuenow="60" aria-valuemin="0"
+                     aria-valuemax="100" style={{width: `${percent}%`}}>
+                  <span className="sr-only">{percent}% Complete</span>
+                </div>
               </div>
-            </div> : <div className="progress-empty"></div>
+              :
+              <div className="progress-empty"></div>
             }
             <div className="project-short-overview">
-              <SJCoin />100/1000
-              <span className="glyphicon glyphicon-user" aria-hidden="true"></span>3
-              <span className="glyphicon glyphicon-comment" aria-hidden="true"></span>5
-              <span className="glyphicon glyphicon-file" aria-hidden="true"></span>2
+              <div className="project-grid-icons">
+                <span style={{marginRight: '2px'}}><SJCoin /></span>{pledgeSum}{price && <span>/{price}</span>}
+              </div>
+              <div className="text-right">
+                { backersCount > 0 && <span><span className="glyphicon glyphicon-user" aria-hidden="true"></span>{backersCount}</span> }
+                { false && <span><span className="glyphicon glyphicon-comment" aria-hidden="true"></span>0</span> }
+                { attachments.length > 0 && <span><span className="glyphicon glyphicon-file" aria-hidden="true"></span>{attachments.length}</span> }
+              </div>
             </div>
           </div>
         </div>

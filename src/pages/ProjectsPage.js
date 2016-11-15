@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Project from '../components/project';
 import CategoriesFilter from '../components/CategoriesFilter';
 import { getProjects, fetchProjectCategories } from '../components/projects/projects.actions';
-
+import Spinner from '../components/Spinner';
 
 class ProjectsPage extends Component {
 
@@ -59,7 +59,7 @@ class ProjectsPage extends Component {
             </div>
           </div>
         </div>
-        <div className="container ">
+        <div className="container">
           <div className="raw">
             {Object.keys(data).map(key => {
               return (
@@ -70,20 +70,19 @@ class ProjectsPage extends Component {
                   transactions={data[key].transactions}
                   price={data[key].price}
                   shortDescription={data[key].excerpt.rendered}
+                  attachments={data[key].attachments}
                 />
               );
             })}
             <div className="col-sm-12 text-center">
-              { pages > this.state.page && !isFetching ? <button
+              { pages > this.state.page && !isFetching &&
+              <button
                 className="btn btn-default"
                 onClick={this.handleLoadMore.bind(this)}
               >
                 Load more
-              </button> : null
-              }
-              {
-                isFetching ? 'loading...' : null
-              }
+              </button>}
+              {isFetching && <Spinner /> }
             </div>
           </div>
         </div>
