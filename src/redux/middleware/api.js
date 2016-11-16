@@ -1,5 +1,5 @@
-import {authLogout} from '../../components/login/login.actions.js'
-import { browserHistory } from 'react-router'
+import {authLogout} from '../../actions/loginActions';
+import { browserHistory } from 'react-router';
 
 let API_ROOT = '/wp-json/wp/v2/';
 require('es6-promise');

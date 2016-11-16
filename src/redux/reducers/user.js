@@ -1,7 +1,7 @@
 import * as types from '../../ActionTypes';
 
 const initialData = {
-  loggedIn: true,
+  loggedIn: window.wpApiSettings.user.ID ? true : false,
   balance: 0,
   transactions: {},
 };

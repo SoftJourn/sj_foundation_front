@@ -1,5 +1,4 @@
-
-import { AUTH_LOGOUT, AUTH_SET_USER } from '../../ActionTypes'
+import { AUTH_LOGOUT, AUTH_SET_USER } from '../ActionTypes'
 
 
 export function authLogout(){

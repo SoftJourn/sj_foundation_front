@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Nav from './components/nav';
+import Header from './components/Header';
 import { getBalance } from 'actions/userActions';
 
 import 'styles/styles.scss';
@@ -34,7 +34,7 @@ class App extends Component {
     const { children } = this.props;
     return (
       <div>
-        <Nav user={this.state.user} />
+        <Header user={this.state.user} />
         <div className="main-content">
           {children}
         </div>

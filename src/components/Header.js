@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router'
 
-export default class Nav extends Component {
+export default class Header extends Component {
 
   constructor(props) {
     super();
@@ -17,6 +17,9 @@ export default class Nav extends Component {
   }
 
   render() {
+    if (!this.state.user.loggedIn) {
+      return null;
+    }
     return(
       <nav className="navbar navbar-default navbar-fixed-top">
         <div className="container">
@@ -27,7 +30,7 @@ export default class Nav extends Component {
               <span className="icon-bar"></span>
               <span className="icon-bar"></span>
             </button>
-            <Link className="navbar-brand" to="/">SJ Projects</Link>
+            <Link className="navbar-brand" to="/">SJ Foundation</Link>
           </div>
           <div className="collapse navbar-collapse" id="navbar-collapse-bar">
             <ul className="nav navbar-nav nav-create-project">

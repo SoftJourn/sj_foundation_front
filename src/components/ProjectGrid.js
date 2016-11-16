@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router'
 import SJCoin from './sjCoin';
 
-export default class Project extends Component {
+export default class ProjectGrid extends Component {
 
   constructor(props) {
     super();

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Project from '../components/project';
+import ProjectGrid from '../components/ProjectGrid';
 import CategoriesFilter from '../components/CategoriesFilter';
-import { getProjects, fetchProjectCategories } from '../components/projects/projects.actions';
+import { getProjects, fetchProjectCategories } from '../actions/projectActions';
 import Spinner from '../components/Spinner';
 
 class ProjectsPage extends Component {
@@ -63,7 +63,7 @@ class ProjectsPage extends Component {
           <div className="raw">
             {Object.keys(data).map(key => {
               return (
-                <Project
+                <ProjectGrid
                   slug={data[key].slug}
                   thumb={data[key].featured_image_thumbnail_url}
                   title={data[key].title.rendered}
