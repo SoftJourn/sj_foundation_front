@@ -1,9 +1,12 @@
+@import './components/wp';
+@import './vars';
 @import './main';
+@import './components/header';
 @import './components/project';
 @import './components/projectGrid';
 @import './components/login';
 @import './components/transactions';
-@import './components/wp';
+@import './components/comment';
 
 
 body {

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getProjectBySlug } from '../actions/projectActions';
+import { fetchComments } from '../actions/commentActions';
 import { getBalance } from '../actions/userActions';
 import moment from 'moment';
 import SJCoin from '../components/sjCoin';
@@ -8,21 +9,22 @@ import PledgeModal from '../components/PledgeModal';
 import { SHOW_PLEDGE_MODAL } from '../ActionTypes';
 import { Link } from 'react-router'
 import Spinner from '../components/Spinner';
+import CommentInput from '../components/CommentInput';
+import CommentBox from '../components/CommentBox';
+import { browserHistory } from 'react-router';
 
 class ProjectPage extends Component {
 
   constructor(props) {
     super();
-    console.log(props);
     this.state = {
       tab: props.routeParams.tab ? props.routeParams.tab : '',
       slug: props.routeParams.slug,
       project: props.project,
+      id: 0,
     };
     props.dispatch(getProjectBySlug(props.routeParams.slug));
   }
-
-
 
   /**
    * new props from redux state
@@ -37,7 +39,17 @@ class ProjectPage extends Component {
       form: nextProps.form,
       projects: nextProps.projects,
       project: nextProps.project,
+      id: nextProps.project.data.id,
     });
+    if (this.state.project.commentSuccess === false && nextProps.project.commentSuccess === true) {
+      this.setState({});
+      this.props.dispatch(fetchComments(nextProps.project.data.id));
+      const mainUrl = this.getMainUrl();
+      browserHistory.push(`${mainUrl}comments`);
+    }
+    if (nextProps.project.data.id !== this.state.id) {
+      this.props.dispatch(fetchComments(nextProps.project.data.id));
+    }
     if (nextProps.routeParams.slug !== this.state.slug) {
       this.props.dispatch(getProjectBySlug(nextProps.routeParams.slug));
     }
@@ -57,8 +69,12 @@ class ProjectPage extends Component {
     return a.diff(b, 'days');
   }
 
+  getMainUrl() {
+    return `/project/${this.state.slug}/`;
+  }
+
   render() {
-    const { project, slug, tab } = this.state;
+    const { project, slug, tab, id } = this.state;
     const mainUrl = `/project/${slug}/`;
     const data = project.data;
     if (project.isFetching) {
@@ -103,20 +119,20 @@ class ProjectPage extends Component {
                 <PledgeModal
                   dispatch={this.props.dispatch}
                   amount={data.price}
-                  id={data.id}
+                  id={id}
                   show={project.showModal}
                 />
               </div>
             </div>
           </div>
         </div>
-        <div className="project-nav">
+        <div className="project-nav" id="project-nav">
           <div className="container">
             <div className="col-md-12">
               <ul className="nav nav-pills" role="tablist">
                 <li role="presentation" className={(tab === '' || tab == 'overview') && "active"}><Link to={`${mainUrl}overview`}>Overview</Link></li>
                 {data.attachments.length > 0 && (<li role="presentation" className={tab == 'attachments' && "active"}><Link to={`${mainUrl}attachments`}>Attachments <span className="badge">{data.attachments.length}</span></Link></li>)}
-                <li className={tab == 'comments' && "active"} role="presentation"><Link to={`${mainUrl}comments`}>Comments <span className="badge">0</span></Link></li>
+                <li className={tab == 'comments' && "active"} role="presentation"><Link to={`${mainUrl}comments`}>Comments <span className="badge">{project.comments.length}</span></Link></li>
               </ul>
             </div>
           </div>
@@ -147,12 +163,33 @@ class ProjectPage extends Component {
               })}
             </div>
           }
+          {
+            (tab == 'comments') &&
+            <div className="project-footer">
+              <div className="container">
+                <div className="raw project-content">
+                  {project.comments.map((comment) => {
+                    return (
+                      <CommentBox
+                        key={comment.id}
+                        comment={comment}
+                        isNew={project.newCommentId === comment.id}
+                      />
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
+          }
         </div>
         <div className="project-footer">
           <div className="container">
             <div className="raw">
               <div className="col-sm-12">
-                <input className="project-comment-input" type="text" placeholder="Comment this" size="50" />
+                <CommentInput
+                  dispatch={this.props.dispatch}
+                  postId={id}
+                />
                 <nav>
                   <ul className="pager">
                     { data.prev_project && <li className="previous"><Link to={`/project/${data.prev_project}`}><span aria-hidden="true">&larr;</span> Previous project</Link></li>}

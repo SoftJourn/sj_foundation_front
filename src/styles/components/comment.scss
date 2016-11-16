@@ -1,0 +1,18 @@
+.comment-box {
+  border: 1px solid $clouds;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  font-size: 14px;
+  padding: 5px;
+  &.new-comment {
+    background-color: lighten($lightGreen, 25);
+  }
+  .comment-author-name {
+    font-weight: bold;
+  }
+
+  .comment-date {
+    font-size: 12px;
+    color: $grey;
+  }
+}

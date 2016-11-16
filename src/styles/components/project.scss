@@ -36,6 +36,10 @@
     border-top: 1px solid #eee;
     padding: 25px 0;
 
+    .form-comment {
+      margin-bottom: 50px;
+    }
+
     .project-comment-input {
       margin-bottom: 25px;
     }
@@ -56,7 +60,7 @@
 
   .alert {
     margin-bottom: 5px;
-    padding: 8px 15px;
+    padding: px 15px;
     &:last-child {
       margin-bottom: 20px;
     }

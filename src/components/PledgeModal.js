@@ -68,14 +68,20 @@ export default class PledgeModal extends Component {
                   <label className="sr-only" htmlFor="InputAmount">Amount</label>
                   <div className="input-group">
                     <div className="input-group-addon"><SJCoin/></div>
-                    <input type="text" value={this.state.value}  size="8" onChange={this.handleChange} className="form-control" id="InputAmount" placeholder="amount" />
-                    {/*<div className="input-group-addon">.00</div>*/}
+                    <input
+                      type="text"
+                      value={this.state.value}
+                      size="8"
+                      onChange={this.handleChange}
+                      className="form-control"
+                      id="InputAmount"
+                      placeholder="amount"
+                    />
                   </div>
                 </div>
                 <button
                   type="button"
                   className="btn btn-success"
-                  data-dismiss="modal"
                   onClick={this.handleSubmit}
                   style={{marginLeft: '10px'}}
                 >

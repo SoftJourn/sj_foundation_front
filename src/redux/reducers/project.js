@@ -9,8 +9,11 @@ const initialData = {
   pledgeIsFetching: false,
   pledgeError: false,
   pledgeSuccess: false,
+  comments:[],
   backers: 0,
   pledgeSum: 0,
+  commentSuccess: false,
+  newCommentId: 0,
 };
 
 export default function project(state = initialData, action) {
@@ -43,6 +46,15 @@ export default function project(state = initialData, action) {
     case types.SHOW_PLEDGE_MODAL:
       return Object.assign({}, state, {
         showModal: true,
+      });
+    case types.COMMENT_SUCCESS:
+      return Object.assign({}, state, {
+        comments: action.response.data,
+      });
+    case types.COMMENT_POST_SUCCESS:
+      return Object.assign({}, state, {
+        commentSuccess: true,
+        newCommentId: action.response.data.id,
       });
   }
   return state;

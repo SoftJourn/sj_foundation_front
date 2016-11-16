@@ -1,0 +1,13 @@
+.navbar-fixed-top {
+  background-color: $paper;
+  .nav-create-project {
+    li {
+      a {
+        border: 1px solid $river;
+        border-radius: 4px;
+        padding: 6px;
+        margin: 8px 0 6px 11px;
+      }
+    }
+  }
+}
