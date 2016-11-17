@@ -5,7 +5,7 @@ import { fetchComments } from '../actions/commentActions';
 import { getBalance } from '../actions/userActions';
 import moment from 'moment';
 import SJCoin from '../components/sjCoin';
-import PledgeModal from '../components/PledgeModal';
+import PledgeInput from '../components/PledgeInput';
 import { SHOW_PLEDGE_MODAL } from '../ActionTypes';
 import { Link } from 'react-router'
 import Spinner from '../components/Spinner';
@@ -84,20 +84,16 @@ class ProjectPage extends Component {
       <div className="project-page">
         <div className="project-header">
           <div className="container">
-            {data.user_transactions.map((transaction) => {
-              return (
-                <div className="raw alert alert-success">
-                  You successfully pledged {transaction.amount}
-                </div>
-              );
-            })}
+            <div className="raw alert alert-success">
+              You successfully pledged <b><SJCoin /> {project.accountPledgeSum}</b>
+            </div>
             <div className="col-sm-12 project-title">
               <h1 className="text-left">{data.title.rendered}</h1>
             </div>
-            <div className="col-xs-12 col-sm-9">
+            <div className="col-xs-12 col-sm-8 col-md-9">
               <div className="img" style={{backgroundImage: `url(${data.featured_image_thumbnail_url})`}}></div>
             </div>
-            <div className="col-xs-12 col-sm-3 project-sidebar">
+            <div className="col-xs-12 col-sm-4 col-md-3 project-sidebar">
               <div>
                 <h2>{project.backers}</h2>
                 backers
@@ -111,18 +107,12 @@ class ProjectPage extends Component {
                   <h2>{this.getDaysTogo()}</h2>
                   days to go
                 </div>) : null}
-              <div className="text-left">
-                <br/>
-                <button type="button" className="btn btn-primary" onClick={() => this.props.dispatch({type: SHOW_PLEDGE_MODAL})}>
-                  Pledge
-                </button>
-                <PledgeModal
-                  dispatch={this.props.dispatch}
-                  amount={data.price}
-                  id={id}
-                  show={project.showModal}
-                />
-              </div>
+              <PledgeInput
+                dispatch={this.props.dispatch}
+                amount={data.price}
+                id={id}
+                show={project.showModal}
+              />
             </div>
           </div>
         </div>

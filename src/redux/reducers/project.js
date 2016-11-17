@@ -14,6 +14,7 @@ const initialData = {
   pledgeSum: 0,
   commentSuccess: false,
   newCommentId: 0,
+  accountPledgeSum: 0,
 };
 
 export default function project(state = initialData, action) {
@@ -25,13 +26,21 @@ export default function project(state = initialData, action) {
         showModal: false,
         pledgeIsFetching: false,
         bakers: 0,
+        pledgeError: false,
+        pledgeSuccess: false,
+        comments:[],
+        backers: 0,
+        pledgeSum: 0,
+        commentSuccess: false,
+        newCommentId: 0,
       });
     case types.PROJECT_SUCCESS:
       return Object.assign({}, state, {
         data: action.response.data[0],
         isFetching: false,
         backers: getBackersCount(action.response.data[0]['transactions']),
-        pledgeSum: getPledgeSum(action.response.data[0]['transactions'])
+        pledgeSum: getPledgeSum(action.response.data[0]['transactions']),
+        accountPledgeSum: getPledgeSum(action.response.data[0]['user_transactions']),
       });
     case types.PLEDGE_SUCCESS:
       return Object.assign({}, state, {

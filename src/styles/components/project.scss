@@ -5,7 +5,9 @@
   }
 
   .project-sidebar {
-
+    .project-pledge-form {
+      margin-top: 20px;
+    }
   }
 
   .project-header {
@@ -60,11 +62,17 @@
 
   .alert {
     margin-bottom: 5px;
-    padding: px 15px;
+    padding: 10px 15px;
     &:last-child {
       margin-bottom: 20px;
     }
   }
+}
 
-
+.pledge-modal {
+  .modal-body {
+    button {
+      margin: 5px;
+    }
+  }
 }

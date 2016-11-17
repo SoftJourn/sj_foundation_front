@@ -5,7 +5,7 @@ import CategoriesFilter from '../components/CategoriesFilter';
 import { getProjects, fetchProjectCategories } from '../actions/projectActions';
 import Spinner from '../components/Spinner';
 
-class ProjectsPage extends Component {
+class ProjectListPage extends Component {
 
   constructor(props) {
     super();
@@ -108,4 +108,4 @@ function mapStateToProps(state, ownProps) {
 /**
  * get the data from redux and feed it into component via props
  */
-export default connect(mapStateToProps)(ProjectsPage);
+export default connect(mapStateToProps)(ProjectListPage);

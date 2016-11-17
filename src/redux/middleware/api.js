@@ -15,8 +15,7 @@ function callApi(endpoint, store, method, body) {
     apiHeaders.append('X-WP-Nonce', window.wpApiSettings.nonce);
   }
   return fetch(fullUrl, {
-      // body: JSON.stringify(body),
-      body: body,
+      body: JSON.stringify(body),
       credentials: 'same-origin',
       mode: 'cors',
       headers: apiHeaders,
