@@ -26,6 +26,7 @@ class App extends Component {
       user: newProps.user
     });
   }
+
   /**
    * render layout
    * @returns {XML}

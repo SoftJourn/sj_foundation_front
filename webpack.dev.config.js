@@ -32,7 +32,7 @@ module.exports = {
     loaders: [
       {
         test: /\.js$/,
-        loaders: ['react-hot'],
+        loaders: ['react-hot-loader/webpack'],
       },
       {
         test: /\.js$/,
