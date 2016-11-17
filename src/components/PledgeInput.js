@@ -6,13 +6,14 @@ import Modal from 'react-modal';
 import classNames from 'classnames';
 
 const customStyles = {
+  zIndex: 3,
   content : {
     top                   : '50%',
     left                  : '50%',
     right                 : 'auto',
     bottom                : 'auto',
     marginRight           : '-50%',
-    transform             : 'translate(-50%, -50%)'
+    transform             : 'translate(-50%, -50%)',
   }
 };
 
