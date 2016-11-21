@@ -2,6 +2,15 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Header from './components/Header';
 import { getBalance } from 'actions/userActions';
+import {addLocaleData, FormattedMessage} from 'react-intl'
+import enLocaleData from 'react-intl/locale-data/en'
+import ruLocaleData from 'react-intl/locale-data/ru'
+import {updateIntl} from 'react-intl-redux'
+
+addLocaleData([
+  ...enLocaleData,
+  ...ruLocaleData,
+])
 
 import 'styles/styles.scss';
 
@@ -19,6 +28,12 @@ class App extends Component {
     this.state = {
       user: props.user,
     }
+
+
+    props.dispatch(updateIntl({
+      locale: 'ua',
+      messages: props.intl.messages,
+    }))
   }
 
   componentWillReceiveProps(newProps) {
@@ -36,6 +51,7 @@ class App extends Component {
     return (
       <div>
         <Header user={this.state.user} />
+        {/*<FormattedMessage id="app.greeting" defaultMessage="Hello!" />*/}
         <div className="main-content">
           {children}
         </div>
@@ -51,6 +67,7 @@ class App extends Component {
 function mapStateToProps(state) {
   return {
     user: state.user,
+    intl: state.intl,
   };
 }
 

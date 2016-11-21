@@ -6,7 +6,6 @@ import { getBalance } from '../actions/userActions';
 import moment from 'moment';
 import SJCoin from '../components/sjCoin';
 import PledgeInput from '../components/PledgeInput';
-import { SHOW_PLEDGE_MODAL } from '../ActionTypes';
 import { Link } from 'react-router'
 import Spinner from '../components/Spinner';
 import CommentInput from '../components/CommentInput';
@@ -69,6 +68,19 @@ class ProjectPage extends Component {
     return a.diff(b, 'days');
   }
 
+  canPledge() {
+    return this.getDaysTogo() > 0;
+  }
+
+  getStatus() {
+    switch (this.state.project.data.api_data.status) {
+      case 'founded':
+        return 'Founded';
+      case 'not_founded':
+        return 'Not Founded'
+    }
+  }
+
   getMainUrl() {
     return `/project/${this.state.slug}/`;
   }
@@ -84,9 +96,9 @@ class ProjectPage extends Component {
       <div className="project-page">
         <div className="project-header">
           <div className="container">
-            <div className="raw alert alert-success">
+            {data.api_data.status != 'not_founded' && project.accountPledgeSum > 0 && <div className="raw alert alert-success">
               You successfully pledged <b><SJCoin /> {project.accountPledgeSum}</b>
-            </div>
+            </div>}
             <div className="col-sm-12 project-title">
               <h1 className="text-left">{data.title.rendered}</h1>
             </div>
@@ -102,17 +114,24 @@ class ProjectPage extends Component {
                 <h2><SJCoin />{project.pledgeSum}</h2>
                 pledged {data.price !== '' && <span>of <b>{data.price}</b> goal</span>}
               </div>
-              { this.getDaysTogo() ? (
+              { this.getDaysTogo() > 0 ? (
                 <div>
                   <h2>{this.getDaysTogo()}</h2>
                   days to go
                 </div>) : null}
-              <PledgeInput
-                dispatch={this.props.dispatch}
-                amount={data.price}
-                id={id}
-                show={project.showModal}
-              />
+              { this.canPledge() &&
+                <PledgeInput
+                  dispatch={this.props.dispatch}
+                  amount={data.price}
+                  id={id}
+                  show={project.showModal} />
+              }
+              {
+                !this.canPledge() &&
+                  <div>
+                    <h2>{this.getStatus()}</h2>
+                  </div>
+              }
             </div>
           </div>
         </div>
