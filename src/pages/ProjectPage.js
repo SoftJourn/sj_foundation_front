@@ -43,7 +43,6 @@ class ProjectPage extends Component {
       id: nextProps.project.data.id,
     });
     if (this.state.project.commentSuccess === false && nextProps.project.commentSuccess === true) {
-      this.setState({});
       this.props.dispatch(fetchComments(nextProps.project.data.id));
       const mainUrl = this.getMainUrl();
       browserHistory.push(`${mainUrl}comments`);
@@ -55,7 +54,7 @@ class ProjectPage extends Component {
       this.props.dispatch(getProjectBySlug(nextProps.routeParams.slug));
     }
     if (nextProps.project.pledgeSuccess && this.state.project.pledgeSuccess !== nextProps.project.pledgeSuccess ) {
-      this.props.dispatch({type: types.PROJECT_INIT})
+      this.props.dispatch({type: types.PROJECT_INIT});
       this.props.dispatch(getProjectBySlug(nextProps.project.data.slug));
       this.props.dispatch(getBalance());
     }
@@ -72,15 +71,16 @@ class ProjectPage extends Component {
   }
 
   canPledge() {
-    return this.getDaysTogo() > 0;
+    return (this.getDaysTogo() > 0 && this.state.project.data.api_data.canDonateMore) ||
+      this.state.project.data.api_data.status == 'active'
   }
 
   getStatus() {
     switch (this.state.project.data.api_data.status) {
       case 'founded':
-        return 'Founded';
+        return 'Won';
       case 'not_founded':
-        return 'Not Founded'
+        return 'Lost'
     }
   }
 
@@ -118,7 +118,7 @@ class ProjectPage extends Component {
             <div className="col-xs-12 col-sm-4 col-md-3 project-sidebar">
               <div>
                 <h2>{project.backers}</h2>
-                backers
+                supporters
               </div>
               <div>
                 <h2>
@@ -128,12 +128,12 @@ class ProjectPage extends Component {
                     <span> ({project.accountPledgeSum})</span>
                   }
                 </h2>
-                pledged {data.price !== '' && <span>of <b>{data.price}</b> goal</span>}
+                donated {data.price !== '' && <span>of <b>{data.price}</b> goal</span>}
               </div>
               { this.getDaysTogo() > 0 ? (
                 <div>
                   <h2>{this.getDaysTogo()}</h2>
-                  days to go
+                  days remain
                 </div>) : null}
               { this.canPledge() &&
                 <PledgeInput
