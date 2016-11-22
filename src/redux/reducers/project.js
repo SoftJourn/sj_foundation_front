@@ -9,6 +9,7 @@ const initialData = {
   pledgeIsFetching: false,
   pledgeError: false,
   pledgeSuccess: false,
+  pledgeSuccessSum: false,
   comments:[],
   backers: 0,
   pledgeSum: 0,
@@ -19,6 +20,23 @@ const initialData = {
 
 export default function project(state = initialData, action) {
   switch(action.type) {
+    case types.PROJECT_INIT:
+      return Object.assign({}, state, {
+        data: [],
+        isFetching: true,
+        error: false,
+        showModal: false,
+        pledgeIsFetching: false,
+        pledgeError: false,
+        pledgeSuccess: false,
+        pledgeSuccessSum: false,
+        comments:[],
+        backers: 0,
+        pledgeSum: 0,
+        commentSuccess: false,
+        newCommentId: 0,
+        accountPledgeSum: 0,
+      });
     case types.PROJECT_REQUEST:
       return Object.assign({}, state, {
         isFetching: true,
@@ -26,8 +44,6 @@ export default function project(state = initialData, action) {
         showModal: false,
         pledgeIsFetching: false,
         bakers: 0,
-        pledgeError: false,
-        pledgeSuccess: false,
         comments:[],
         backers: 0,
         pledgeSum: 0,
@@ -43,10 +59,19 @@ export default function project(state = initialData, action) {
         accountPledgeSum: getPledgeSum(action.response.data[0]['user_transactions']),
       });
     case types.PLEDGE_SUCCESS:
-      return Object.assign({}, state, {
-        pledgeSuccess: true,
-        pledgeError: false,
-      });
+      if (action.response.data.status === 'success') {
+        return Object.assign({}, state, {
+          pledgeSuccess: true,
+          pledgeError: false,
+          pledgeSuccessSum: action.response.data.amount,
+        });
+      } else {
+        return Object.assign({}, state, {
+          pledgeSuccess: false,
+          pledgeError: true,
+          pledgeMessage: action.response.data.message
+        });
+      }
     case types.PLEDGE_FAILURE:
       return Object.assign({}, state, {
         pledgeSuccess: false,

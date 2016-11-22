@@ -11,6 +11,7 @@ import Spinner from '../components/Spinner';
 import CommentInput from '../components/CommentInput';
 import CommentBox from '../components/CommentBox';
 import { browserHistory } from 'react-router';
+import * as types from '../ActionTypes';
 
 class ProjectPage extends Component {
 
@@ -20,6 +21,7 @@ class ProjectPage extends Component {
       tab: props.routeParams.tab ? props.routeParams.tab : '',
       slug: props.routeParams.slug,
       project: props.project,
+      user: props.user,
       id: 0,
     };
     props.dispatch(getProjectBySlug(props.routeParams.slug));
@@ -53,6 +55,7 @@ class ProjectPage extends Component {
       this.props.dispatch(getProjectBySlug(nextProps.routeParams.slug));
     }
     if (nextProps.project.pledgeSuccess && this.state.project.pledgeSuccess !== nextProps.project.pledgeSuccess ) {
+      this.props.dispatch({type: types.PROJECT_INIT})
       this.props.dispatch(getProjectBySlug(nextProps.project.data.slug));
       this.props.dispatch(getBalance());
     }
@@ -96,9 +99,16 @@ class ProjectPage extends Component {
       <div className="project-page">
         <div className="project-header">
           <div className="container">
-            {data.api_data.status != 'not_founded' && project.accountPledgeSum > 0 && <div className="raw alert alert-success">
-              You successfully pledged <b><SJCoin /> {project.accountPledgeSum}</b>
-            </div>}
+            { project.pledgeSuccess &&
+              <div className="raw alert alert-success">
+                You successfully pledged <b><SJCoin /> {project.pledgeSuccessSum}</b>
+              </div>
+            }
+            { project.pledgeError &&
+              <div className="raw alert alert-danger">
+                {project.pledgeMessage}
+              </div>
+            }
             <div className="col-sm-12 project-title">
               <h1 className="text-left">{data.title.rendered}</h1>
             </div>
@@ -111,7 +121,13 @@ class ProjectPage extends Component {
                 backers
               </div>
               <div>
-                <h2><SJCoin />{project.pledgeSum}</h2>
+                <h2>
+                  <SJCoin />{project.pledgeSum}
+                  {
+                    data.api_data.status != 'not_founded' && project.accountPledgeSum > 0 &&
+                    <span> ({project.accountPledgeSum})</span>
+                  }
+                </h2>
                 pledged {data.price !== '' && <span>of <b>{data.price}</b> goal</span>}
               </div>
               { this.getDaysTogo() > 0 ? (
@@ -123,6 +139,8 @@ class ProjectPage extends Component {
                 <PledgeInput
                   dispatch={this.props.dispatch}
                   amount={data.price}
+                  pledgeSum={project.pledgeSum}
+                  balance={this.state.user.balance}
                   id={id}
                   show={project.showModal} />
               }
