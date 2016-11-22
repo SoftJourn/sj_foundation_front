@@ -47,7 +47,7 @@ class ProjectPage extends Component {
       const mainUrl = this.getMainUrl();
       browserHistory.push(`${mainUrl}comments`);
     }
-    if (nextProps.project.data.id !== this.state.id) {
+    if (nextProps.project.data.id && nextProps.project.data.id !== this.state.id) {
       this.props.dispatch(fetchComments(nextProps.project.data.id));
     }
     if (nextProps.routeParams.slug !== this.state.slug) {
