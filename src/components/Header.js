@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router'
-import {FormattedMessage} from 'react-intl';
 
 export default class Header extends Component {
 
@@ -40,10 +39,6 @@ export default class Header extends Component {
             <ul className="nav navbar-nav navbar-right">
               <li className="dropdown">
                 <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                  <FormattedMessage
-                    id="app.header.account"
-                    defaultMessage="Account "
-                  />
                   <span className="caret"></span>
                 </a>
                 <ul className="dropdown-menu">

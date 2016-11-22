@@ -102,16 +102,14 @@ export default class PledgeInput extends Component {
               id="InputAmount"
             />
           </div>
-          {/*<div className="col-xs-4">*/}
             <button
               type="button"
               className="btn btn-primary"
               onClick={this.openConfirmation}
               style={{marginLeft: '10px'}}
             >
-              Pledge
+              Donate
             </button>
-          {/*</div>*/}
         </div>
         <Modal
           isOpen={this.state.show}
@@ -120,11 +118,11 @@ export default class PledgeInput extends Component {
         >
           <div className="pledge-modal">
             <div className="modal-header">
-              <h3 className="modal-title text-center" id="">Confirm pledge</h3>
+              <h3 className="modal-title text-center" id="">Confirm donation</h3>
             </div>
             <div className="modal-body text-center">
               <button className="btn btn-success" onClick={this.handleSubmit}>
-                Pledge <b><SJCoin />{this.state.value}</b>
+                Donate <b><SJCoin />{this.state.value}</b>
               </button>
               <button className="btn btn-default" onClick={this.closeModal}>
                 Cancel

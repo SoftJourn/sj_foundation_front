@@ -4,7 +4,6 @@ import { Provider } from 'react-redux';
 import routes from '../routes';
 import DevTools from './DevTools';
 import { Router } from 'react-router';
-import {IntlProvider} from 'react-intl-redux'
 
 /**
  * Dev Root component to transfer data to react app & init DevTool
@@ -21,12 +20,10 @@ export default class Root extends Component {
     const { store, history } = this.props;
     return (
       <Provider store={store}>
-        <IntlProvider>
-          <div>
-            <Router history={history} routes={routes} />
-            <DevTools />
-          </div>
-        </IntlProvider>
+        <div>
+          <Router history={history} routes={routes} />
+          <DevTools />
+        </div>
       </Provider>
     );
   }

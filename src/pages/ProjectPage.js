@@ -72,7 +72,8 @@ class ProjectPage extends Component {
 
   canPledge() {
     return (this.getDaysTogo() > 0 && this.state.project.data.api_data.canDonateMore) ||
-      this.state.project.data.api_data.status == 'active'
+      this.state.project.data.api_data.status == 'active' ||
+      (this.getDaysTogo() > 0 && this.state.project.data.api_data.price == 0)
   }
 
   getStatus() {

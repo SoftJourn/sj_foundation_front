@@ -37,8 +37,6 @@
     "moment": "^2.15.2",
     "react": "^15.0.0",
     "react-dom": "^15.0.0",
-    "react-intl": "^2.1.5",
-    "react-intl-redux": "^0.1.0",
     "react-modal": "^1.5.2",
     "react-redux": "^4.4.5",
     "react-router": "^2.5.1",
