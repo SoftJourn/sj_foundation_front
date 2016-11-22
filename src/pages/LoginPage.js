@@ -13,6 +13,11 @@ export default class LoginPage extends Component {
             <input name="pwd" type="password" id="inputPassword" className="form-control" placeholder="Password" required="" />
             <input type="hidden" name="redirect_to" value="/" />
             <button className="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+            <p>
+              <br/>
+                <a href="/wp-login.php?action=register">Registration</a> |
+                <a href="/wp-login.php?action=lostpassword"> Lost your password?</a>
+            </p>
           </form>
         </div>
       </div>
