@@ -42,16 +42,17 @@ export default class ProjectGrid extends Component {
 
   render() {
     const { slug, percent, price, pledgeSum, backersCount, attachments, commentsCount, donationType, daysRemain, categories } = this.state;
-    // const category = categories.length > 0 ? categories[0].
+    const category = categories.length > 0 ? categories[0].name : '';
     return(
       <div className="col-xs-12 col-sm-4">
         <div className="project-grid">
           <div className="img" style={{backgroundImage: `url(${this.state.thumb})`}}></div>
           <div className="row project-donation-status">
             <div className="col-xs-12">
+              <span className="alignleft project-category-name">{category}</span>
               <span className="alignright">
-              {donationType == 'closed' ? 'Donation closed' : `${daysRemain} days remain`}
-            </span>
+                {donationType == 'closed' ? 'Donation closed' : `${daysRemain} days remain`}
+              </span>
             </div>
           </div>
           <Link to={`/project/${slug}`}>
