@@ -1,8 +1,5 @@
 var path = require('path');
 var webpack = require('webpack');
-// var ExtractTextPlugin = require('extract-text-webpack-plugin');
-// var extractCSS = new ExtractTextPlugin('[name].css');
-// require('es6-promise').polyfill();
 
 module.exports = {
   devtool: 'eval',
@@ -16,11 +13,10 @@ module.exports = {
   output: {
     path: path.join(__dirname, '/static/'),
     filename: '[name].bundle.js',
-    publicPath: '/static/',
+    publicPath: 'http://sj-foundation-static.testing.softjourn.if.ua/',
   },
   plugins: [
     new webpack.NoErrorsPlugin(),
-    //new ExtractTextPlugin('[name].css'),
     new webpack.DefinePlugin({
       'process.env': {
         'NODE_ENV': JSON.stringify('production'),

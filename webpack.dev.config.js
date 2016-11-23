@@ -15,7 +15,7 @@ module.exports = {
   output: {
     path: path.join(__dirname, '/assets/dist/'),
     filename: '[name].bundle.js',
-    publicPath: '/assets/dist/'
+    publicPath: 'http://localhost:3000/assets/dist/'
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
@@ -38,7 +38,7 @@ module.exports = {
         loader: 'babel',
         include: [path.join(__dirname, 'src')],
         query: {
-          presets: ["es2015", "stage-0", "react-hot-loader/webpack"]
+          presets: ["es2015", "stage-0", "react"]
         }
       },
 
