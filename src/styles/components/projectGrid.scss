@@ -32,8 +32,16 @@
       background-position: center center;
     }
 
+    .project-donation-status {
+      font-size: 12px;
+      color: $grey;
+      .alignright {
+        margin: 5px 0 0 0;
+      }
+    }
+
     .project-title {
-      padding-bottom: 0px;
+      padding-bottom: 0;
       margin: 10px 0 15px;
 
       overflow: hidden;
@@ -50,9 +58,9 @@
       text-overflow: ellipsis;
       display: -webkit-box;
       -webkit-box-orient: vertical;
-      -webkit-line-clamp: 6; /* number of lines to show */
+      -webkit-line-clamp: 5; /* number of lines to show */
       line-height: 20px;        /* fallback */
-      max-height: 120px;
+      max-height: 100px;
     }
 
     .project-grid-bottom {
@@ -72,7 +80,7 @@
       }
       .project-short-overview {
         margin-bottom: 5px;
-        font-size: 12px;
+        font-size: 13px;
         .project-grid-icons {
           position: absolute;
         }

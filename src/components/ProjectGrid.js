@@ -11,7 +11,11 @@ export default class ProjectGrid extends Component {
       title: props.title,
       thumb: props.thumb,
       price: props.price,
+      commentsCount: props.commentsCount,
+      categories: props.categories,
+      donationType: props.donationType,
       attachments: props.attachments,
+      daysRemain: props.daysRemain,
       percent: this.getProjectPledgePercent(props.transactions, props.price),
       shortDescription: props.shortDescription,
       backersCount: this.getBackersCount(props.transactions),
@@ -37,11 +41,19 @@ export default class ProjectGrid extends Component {
   }
 
   render() {
-    const { slug, percent, price, pledgeSum, backersCount, attachments } = this.state;
+    const { slug, percent, price, pledgeSum, backersCount, attachments, commentsCount, donationType, daysRemain, categories } = this.state;
+    // const category = categories.length > 0 ? categories[0].
     return(
       <div className="col-xs-12 col-sm-4">
         <div className="project-grid">
           <div className="img" style={{backgroundImage: `url(${this.state.thumb})`}}></div>
+          <div className="row project-donation-status">
+            <div className="col-xs-12">
+              <span className="alignright">
+              {donationType == 'closed' ? 'Donation closed' : `${daysRemain} days remain`}
+            </span>
+            </div>
+          </div>
           <Link to={`/project/${slug}`}>
             <h3 className="project-title"><span dangerouslySetInnerHTML={{__html: this.state.title}}/></h3>
           </Link>
@@ -62,8 +74,8 @@ export default class ProjectGrid extends Component {
                 <span style={{marginRight: '2px'}}><SJCoin /></span>{pledgeSum}{price && <span>/{price}</span>}
               </div>
               <div className="text-right">
+                { commentsCount > 0 && <span><span className="glyphicon glyphicon-comment" aria-hidden="true"></span>{commentsCount}</span> }
                 { backersCount > 0 && <span><span className="glyphicon glyphicon-user" aria-hidden="true"></span>{backersCount}</span> }
-                { false && <span><span className="glyphicon glyphicon-comment" aria-hidden="true"></span>0</span> }
                 { attachments.length > 0 && <span><span className="glyphicon glyphicon-file" aria-hidden="true"></span>{attachments.length}</span> }
               </div>
             </div>

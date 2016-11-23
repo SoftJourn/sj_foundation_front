@@ -68,9 +68,13 @@ class ProjectListPage extends Component {
                   thumb={data[key].featured_image_thumbnail_url}
                   title={data[key].title.rendered}
                   transactions={data[key].transactions}
+                  commentsCount={data[key].comments_count.total_comments}
                   price={data[key].price}
                   shortDescription={data[key].excerpt.rendered}
                   attachments={data[key].attachments}
+                  donationType={data[key].donation_type}
+                  daysRemain={data[key].days_remain}
+                  categories={data[key].categories}
                 />
               );
             })}

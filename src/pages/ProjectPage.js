@@ -24,6 +24,7 @@ class ProjectPage extends Component {
       user: props.user,
       id: 0,
     };
+    props.dispatch({type: types.PROJECT_INIT});
     props.dispatch(getProjectBySlug(props.routeParams.slug));
   }
 
