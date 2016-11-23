@@ -54,7 +54,6 @@ class ProjectPage extends Component {
       this.props.dispatch(getProjectBySlug(nextProps.routeParams.slug));
     }
     if (nextProps.project.pledgeSuccess && this.state.project.pledgeSuccess !== nextProps.project.pledgeSuccess ) {
-      this.props.dispatch({type: types.PROJECT_INIT});
       this.props.dispatch(getProjectBySlug(nextProps.project.data.slug));
       this.props.dispatch(getBalance());
     }
