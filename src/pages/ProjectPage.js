@@ -110,7 +110,9 @@ class ProjectPage extends Component {
               </div>
             }
             <div className="col-sm-12 project-title">
-              <h1 className="text-left">{data.title.rendered}</h1>
+              <h1 className="text-left">
+                <span dangerouslySetInnerHTML={{__html: data.title.rendered}}/>
+              </h1>
             </div>
             <div className="col-xs-12 col-sm-8 col-md-9">
               <div className="img" style={{backgroundImage: `url(${data.featured_image_thumbnail_url})`}}></div>

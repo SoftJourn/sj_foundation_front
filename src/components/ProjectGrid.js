@@ -43,7 +43,7 @@ export default class ProjectGrid extends Component {
         <div className="project-grid">
           <div className="img" style={{backgroundImage: `url(${this.state.thumb})`}}></div>
           <Link to={`/project/${slug}`}>
-            <h3 className="project-title">{this.state.title}</h3>
+            <h3 className="project-title"><span dangerouslySetInnerHTML={{__html: this.state.title}}/></h3>
           </Link>
           <p className="short-description" dangerouslySetInnerHTML={{__html: this.state.shortDescription}}/>
           <div className="project-grid-bottom">
