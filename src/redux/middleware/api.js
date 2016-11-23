@@ -1,8 +1,10 @@
 import {authLogout} from '../../actions/loginActions';
 import { browserHistory } from 'react-router';
+import 'whatwg-fetch';
 
 let API_ROOT = '/wp-json/wp/v2/';
-require('es6-promise');
+// require('es6-promise');
+
 
 /**
  * call api and return results

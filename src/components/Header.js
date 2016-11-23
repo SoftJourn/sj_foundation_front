@@ -39,7 +39,7 @@ export default class Header extends Component {
             <ul className="nav navbar-nav navbar-right">
               <li className="dropdown">
                 <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                  <span className="caret"></span>
+                  Account <span className="caret"></span>
                 </a>
                 <ul className="dropdown-menu">
                   <li className="dropdown-header">Your balance: {this.state.user.balance}</li>

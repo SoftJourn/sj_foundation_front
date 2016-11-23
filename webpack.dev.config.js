@@ -1,7 +1,5 @@
 var path = require('path');
 var webpack = require('webpack');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
-var extractCSS = new ExtractTextPlugin('[name].css');
 
 module.exports = {
   devtool: 'eval',
@@ -9,6 +7,8 @@ module.exports = {
     app: [
       'webpack-dev-server/client?http://localhost:3000',
       'webpack/hot/only-dev-server',
+      'bootstrap-loader',
+      'font-awesome-loader',
       './src/index'
     ]
   },
@@ -20,49 +20,46 @@ module.exports = {
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
-    //new ExtractTextPlugin('[name].css'),
     new webpack.DefinePlugin({
       'process.env': {
         'NODE_ENV': JSON.stringify('development')
       }
     }),
-    extractCSS
   ],
   module: {
     loaders: [
-      {
-        test: /\.js$/,
-        loaders: ['react-hot-loader/webpack'],
-      },
+      // {
+      //   test: /\.js$/,
+      //   loaders: ['react-hot-loader/webpack'],
+      // },
       {
         test: /\.js$/,
         exclude: /(node_modules|bower_components)/,
-        loader: 'babel', // 'babel-loader' is also a legal name to reference
-        include: [path.join(__dirname, 'src'), path.join(__dirname, 'config')],
+        loader: 'babel',
+        include: [path.join(__dirname, 'src')],
         query: {
-          presets: ["es2015", "stage-0", "react"]
+          presets: ["es2015", "stage-0", "react-hot-loader/webpack"]
         }
       },
+
+      { test: /\.css$/, loaders: ['style-loader', 'css-loader'] },
+
+      { test: /\.scss$/, loaders: [ 'style-loader', 'css-loader', 'sass-loader' ] },
+      // {
+      //   test: /\.(jpe?g|png|gif|svg)$/i,
+      //   loaders: [
+      //     'file?hash=sha512&digest=hex&name=[hash].[ext]',
+      //     'image-webpack?bypassOnDebug&optimizationLevel=7&interlaced=false'
+      //   ]
+      // },
       {
-        test: /\.css$/,
-        loader: "style!css"
+        test: /\.woff2?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        loader: "url-loader?limit=10000"
       },
       {
-        test: /\.svg$/,
-        loader: 'svg-loader'
+        test: /\.(ttf|eot|svg)(\?[\s\S]+)?$/,
+        loader: 'file-loader'
       },
-      {
-        test: /\.scss$/,
-        loaders: ["style", "css", "sass"]
-        //loader: extractCSS.extract(['css','sass']),
-      },
-      {
-        test: /\.(jpe?g|png|gif|svg)$/i,
-        loaders: [
-          'file?hash=sha512&digest=hex&name=[hash].[ext]',
-          'image-webpack?bypassOnDebug&optimizationLevel=7&interlaced=false'
-        ]
-      }
     ]
   },
   resolve: {

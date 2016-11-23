@@ -8,6 +8,8 @@ module.exports = {
   devtool: 'eval',
   entry: {
     app: [
+      'bootstrap-loader',
+      'font-awesome-loader',
       './src/index',
     ],
   },
@@ -37,19 +39,12 @@ module.exports = {
         loader: 'babel' // 'babel-loader' is also a legal name to reference
         // include: [path.join(__dirname, 'src')],
       },
-      {
-        test: /\.css$/,
-        loader: "style!css"
-      },
-      {
-        test: /\.svg$/,
-        loader: 'svg-loader'
-      },
-      {
-        test: /\.scss$/,
-        loaders: ["style", "css", "sass"]
-        //loader: extractCSS.extract(['style', 'css','sass']),
-      },
+      { test: /\.css$/, loaders: ['style-loader', 'css-loader'] },
+
+      { test: /\.scss$/, loaders: [ 'style-loader', 'css-loader', 'sass-loader' ] },
+
+      { test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "url-loader?limit=10000&mimetype=application/font-woff" },
+      { test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "file-loader" },
       {
         test: /\.(jpe?g|png|gif|svg)$/i,
         loaders: [
