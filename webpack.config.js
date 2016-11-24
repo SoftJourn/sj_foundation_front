@@ -6,6 +6,7 @@ module.exports = {
   entry: {
     app: [
       'bootstrap-loader',
+      'babel-polyfill',
       'font-awesome-loader',
       './src/index',
     ],
