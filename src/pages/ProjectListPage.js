@@ -64,6 +64,7 @@ class ProjectListPage extends Component {
             {Object.keys(data).map(key => {
               return (
                 <ProjectGrid
+                  key={data[key].slug}
                   slug={data[key].slug}
                   thumb={data[key].featured_image_thumbnail_url}
                   title={data[key].title.rendered}

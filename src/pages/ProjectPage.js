@@ -215,11 +215,13 @@ class ProjectPage extends Component {
         <div className="project-footer">
           <div className="container">
             <div className="raw">
-              <div className="col-sm-12">
+              <div className="">
                 <CommentInput
                   dispatch={this.props.dispatch}
                   postId={id}
                 />
+              </div>
+              <div className="col-xs-12">
                 <nav>
                   <ul className="pager">
                     { data.prev_project && <li className="previous"><Link to={`/project/${data.prev_project}`}><span aria-hidden="true">&larr;</span> Previous project</Link></li>}

@@ -40,17 +40,23 @@ export default class CommentInput extends Component {
     return (
       <div>
         { !active &&
-          <input
-            className="project-comment-input"
-            type="text"
-            placeholder="Comment this"
-            size="50"
-            onFocus={this.onFocus.bind(this)}
-          />
+          <div className="raw">
+            <div className="form-comment">
+              <div className="form-group col-xs-12 col-sm-6 col-md-4">
+                <input
+                  className="project-comment-input form-control input-sm"
+                  type="text"
+                  placeholder="Comment this"
+                  size="50"
+                  onFocus={this.onFocus.bind(this)}
+                />
+              </div>
+            </div>
+          </div>
         }
         {
           active &&
-          <div className="form-comment">
+          <div className="form-comment col-xs-12">
             <div className="form-group">
               <label htmlFor="comment">Comment:</label>
               <textarea autoFocus onChange={this.onChange.bind(this)} className="form-control" rows="5" id="comment" />
