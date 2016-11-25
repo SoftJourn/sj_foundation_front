@@ -104,7 +104,7 @@ export default class PledgeInput extends Component {
           </div>
             <button
               type="button"
-              className="btn btn-primary"
+              className="btn btn-primary donate-button"
               onClick={this.openConfirmation}
               style={{marginLeft: '10px'}}
             >

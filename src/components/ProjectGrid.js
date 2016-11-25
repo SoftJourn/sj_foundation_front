@@ -11,6 +11,7 @@ export default class ProjectGrid extends Component {
       title: props.title,
       thumb: props.thumb,
       price: props.price,
+      canDonateMore: props.canDonateMore,
       commentsCount: props.commentsCount,
       categories: props.categories,
       donationType: props.donationType,
@@ -41,7 +42,7 @@ export default class ProjectGrid extends Component {
   }
 
   render() {
-    const { slug, percent, price, pledgeSum, backersCount, attachments, commentsCount, donationType, daysRemain, categories } = this.state;
+    const { slug, percent, price, pledgeSum, backersCount, attachments, commentsCount, donationType, daysRemain, categories, canDonateMore } = this.state;
     const category = categories.length > 0 ? categories[0].name : '';
     return(
       <div className="col-xs-12 col-sm-4">
@@ -72,7 +73,8 @@ export default class ProjectGrid extends Component {
             }
             <div className="project-short-overview">
               <div className="project-grid-icons">
-                <span style={{marginRight: '2px'}}><SJCoin /></span>{pledgeSum}{price && <span>/{price}</span>}
+                <span style={{marginRight: '2px'}}><SJCoin /></span>
+                {pledgeSum}{price && <span>/{price}{canDonateMore && <span>+</span>}</span>}
               </div>
               <div className="text-right">
                 { commentsCount > 0 && <span><span className="glyphicon glyphicon-comment" aria-hidden="true"></span>{commentsCount}</span> }

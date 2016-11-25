@@ -76,6 +76,7 @@ class ProjectListPage extends Component {
                   donationType={data[key].donation_type}
                   daysRemain={data[key].days_remain}
                   categories={data[key].categories}
+                  canDonateMore={data[key].api_data.canDonateMore}
                 />
               );
             })}

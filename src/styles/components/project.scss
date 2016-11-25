@@ -2,11 +2,19 @@
 
   .project-title {
     padding-bottom: 30px;
+    h1 {
+      color: $asphalt;
+    }
   }
 
   .project-sidebar {
+    color: $asphalt;
     .project-pledge-form {
       margin-top: 20px;
+      .donate-button {
+        background-color: $nephritis;
+        border-color: $green;
+      }
     }
   }
 
@@ -32,6 +40,13 @@
   .project-nav {
     border-bottom: 1px solid #eee;
     padding: 15px 0;
+
+    .nav-pills {
+      .active a {
+        background-color: $belize;
+      }
+    }
+
   }
 
   .project-footer {

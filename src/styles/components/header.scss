@@ -1,7 +1,7 @@
 .navbar-fixed-top {
   background-color: $paper;
   .nav-create-project {
-    li {
+    li:first-child {
       a {
         border: 1px solid $river;
         border-radius: 4px;

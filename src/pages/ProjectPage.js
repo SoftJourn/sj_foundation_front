@@ -71,9 +71,7 @@ class ProjectPage extends Component {
   }
 
   canPledge() {
-    return (this.getDaysTogo() > 0 && this.state.project.data.api_data.canDonateMore) ||
-      this.state.project.data.api_data.status == 'active' ||
-      (this.getDaysTogo() > 0 && this.state.project.data.api_data.price == 0)
+    return this.state.project.data.donation_type === 'open';
   }
 
   getStatus() {
@@ -131,7 +129,7 @@ class ProjectPage extends Component {
                     <span> ({project.accountPledgeSum})</span>
                   }
                 </h2>
-                donated {data.price !== '' && <span>of <b>{data.price}</b> goal</span>}
+                donated {data.price !== '' && <span>of <b>{data.price}</b> goal {data.api_data.canDonateMore && <span>or more</span>}</span>}
               </div>
               { this.getDaysTogo() > 0 ? (
                 <div>
