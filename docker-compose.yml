@@ -21,7 +21,9 @@ services:
       - "8008:80"
     environment:
       WORDPRESS_DB_HOST: db:3306
-      WORDPRESS_DB_PASSWORD: root
+      WORDPRESS_DB_USER: sj_foundation
+      WORDPRESS_DB_PASSWORD: sj_foundation
+      WORDPRESS_DB_NAME: sj_foundation
   node:
     build: ../sj_foundation_api/
     volumes:
