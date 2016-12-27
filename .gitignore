@@ -6,3 +6,4 @@ build
 npm-debug.log
 .idea
 static
+.data
