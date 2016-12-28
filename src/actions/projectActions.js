@@ -60,6 +60,20 @@ export function getProjectBySlug(slug) {
 }
 
 /**
+ * get project by id
+ * @param id
+ * @returns {{}}
+ */
+export function getProjectById(id) {
+  return {
+    [CALL_API]: {
+      types: [types.PROJECT_PREVIEW_REQUEST, types.PROJECT_PREVIEW_SUCCESS, types.PROJECT_PREVIEW_FAILURE],
+      endpoint: `projects/${id}`,
+    },
+  };
+}
+
+/**
  * get project
  * @param slug
  * @returns {{}}

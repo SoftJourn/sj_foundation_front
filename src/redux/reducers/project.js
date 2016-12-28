@@ -38,6 +38,7 @@ export default function project(state = initialData, action) {
         accountPledgeSum: 0,
       });
     case types.PROJECT_REQUEST:
+    case types.PROJECT_PREVIEW_REQUEST:
       return Object.assign({}, state, {
         isFetching: true,
         error: false,
@@ -57,6 +58,14 @@ export default function project(state = initialData, action) {
         backers: getBackersCount(action.response.data[0]['transactions']),
         pledgeSum: getPledgeSum(action.response.data[0]['transactions']),
         accountPledgeSum: getPledgeSum(action.response.data[0]['user_transactions']),
+      });
+    case types.PROJECT_PREVIEW_SUCCESS:
+      return Object.assign({}, state, {
+        data: action.response.data,
+        isFetching: false,
+        backers: 0,
+        pledgeSum: 0,
+        accountPledgeSum: 0,
       });
     case types.PLEDGE_SUCCESS:
       if (action.response.data.status === 'success') {

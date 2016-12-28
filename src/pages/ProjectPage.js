@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getProjectBySlug } from '../actions/projectActions';
+import { getProjectBySlug, getProjectById } from '../actions/projectActions';
 import { fetchComments } from '../actions/commentActions';
 import { getBalance } from '../actions/userActions';
 import moment from 'moment';
@@ -22,10 +22,14 @@ class ProjectPage extends Component {
       slug: props.routeParams.slug,
       project: props.project,
       user: props.user,
-      id: 0,
+      preview: props.route.preview,
     };
     props.dispatch({type: types.PROJECT_INIT});
-    props.dispatch(getProjectBySlug(props.routeParams.slug));
+    if (this.state.preview) {
+      props.dispatch(getProjectById(props.routeParams.slug));
+    } else {
+      props.dispatch(getProjectBySlug(props.routeParams.slug));
+    }
   }
 
   /**
@@ -88,7 +92,7 @@ class ProjectPage extends Component {
   }
 
   render() {
-    const { project, slug, tab, id } = this.state;
+    const { project, slug, tab, id, preview } = this.state;
     const mainUrl = `/project/${slug}/`;
     const data = project.data;
     if (project.isFetching) {
@@ -158,9 +162,9 @@ class ProjectPage extends Component {
           <div className="container">
             <div className="col-md-12">
               <ul className="nav nav-pills" role="tablist">
-                <li role="presentation" className={(tab === '' || tab == 'overview') && "active"}><Link to={`${mainUrl}overview`}>Overview</Link></li>
-                {data.attachments.length > 0 && (<li role="presentation" className={tab == 'attachments' && "active"}><Link to={`${mainUrl}attachments`}>Attachments <span className="badge">{data.attachments.length}</span></Link></li>)}
-                <li className={tab == 'comments' && "active"} role="presentation"><Link to={`${mainUrl}comments`}>Comments <span className="badge">{project.comments.length}</span></Link></li>
+                {!preview && <li role="presentation" className={(tab === '' || tab == 'overview') && "active"}><Link to={`${mainUrl}overview`}>Overview</Link></li>}
+                {data.attachments.length > 0 && !preview && (<li role="presentation" className={tab == 'attachments' && "active"}><Link to={`${mainUrl}attachments`}>Attachments <span className="badge">{data.attachments.length}</span></Link></li>)}
+                {!preview && <li className={tab == 'comments' && "active"} role="presentation"><Link to={`${mainUrl}comments`}>Comments <span className="badge">{project.comments.length}</span></Link></li>}
               </ul>
             </div>
           </div>
@@ -175,7 +179,7 @@ class ProjectPage extends Component {
             </div>
           }
           {
-            (tab == 'attachments') &&
+            (tab == 'attachments' && !preview) &&
             <div className="raw project-content">
               {data.attachments.map((attachment) => {
                 return (
@@ -192,7 +196,7 @@ class ProjectPage extends Component {
             </div>
           }
           {
-            (tab == 'comments') &&
+            (tab == 'comments' && !preview) &&
             <div className="project-footer">
               <div className="container">
                 <div className="raw project-content">
@@ -212,22 +216,24 @@ class ProjectPage extends Component {
         </div>
         <div className="project-footer">
           <div className="container">
-            <div className="raw">
-              <div className="">
-                <CommentInput
-                  dispatch={this.props.dispatch}
-                  postId={id}
-                />
+            {!preview &&
+              <div className="raw">
+                <div className="">
+                  <CommentInput
+                    dispatch={this.props.dispatch}
+                    postId={id}
+                  />
+                </div>
+                <div className="col-xs-12">
+                  <nav>
+                    <ul className="pager">
+                      { data.prev_project && <li className="previous"><Link to={`/project/${data.prev_project}`}><span aria-hidden="true">&larr;</span> Previous project</Link></li>}
+                      { data.next_project &&  <li className="next"><Link to={`/project/${data.next_project}`}>Next project <span aria-hidden="true">&rarr;</span></Link></li>}
+                    </ul>
+                  </nav>
+                </div>
               </div>
-              <div className="col-xs-12">
-                <nav>
-                  <ul className="pager">
-                    { data.prev_project && <li className="previous"><Link to={`/project/${data.prev_project}`}><span aria-hidden="true">&larr;</span> Previous project</Link></li>}
-                    { data.next_project &&  <li className="next"><Link to={`/project/${data.next_project}`}>Next project <span aria-hidden="true">&rarr;</span></Link></li>}
-                  </ul>
-                </nav>
-              </div>
-            </div>
+            }
           </div>
         </div>
       </div>

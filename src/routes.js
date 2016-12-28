@@ -14,7 +14,8 @@ export default (
     <Route path="/cat/:category" component={ProjectListPage} />
     <Route path="/signin" component={LoginPage} />
     <Route path="/transactions" component={TransactionPage} />
-    <Route path="/project/:slug(/:tab)" component={ProjectPage} />
+    <Route path="/project/:slug(/:tab)" preview={false} component={ProjectPage} />
+    <Route path="/preview/:slug(/:tab)" preview={true} component={ProjectPage} />
     <Route path="/admin_panel" component={AdminPage} />
     <Route path="/how-it-works" component={HowItWorksPage} />
   </Route>
