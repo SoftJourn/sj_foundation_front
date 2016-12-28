@@ -3,6 +3,20 @@ import * as types from '../ActionTypes';
 
 
 /**
+ * get user data
+ * @returns {{}}
+ */
+export function getUser(id) {
+  return {
+    [CALL_API]: {
+      types: [types.USER_REQUEST, types.USER_SUCCESS, types.USER_FAILURE],
+      endpoint: `users/${id}`,
+    },
+  };
+}
+
+
+/**
  * get balance
  * @returns {{}}
  */

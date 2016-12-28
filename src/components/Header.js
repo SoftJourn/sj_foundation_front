@@ -17,7 +17,8 @@ export default class Header extends Component {
   }
 
   render() {
-    if (!this.state.user.loggedIn) {
+    const {user} = this.state;
+    if (!user.loggedIn) {
       return null;
     }
     return(
@@ -35,7 +36,8 @@ export default class Header extends Component {
           <div className="collapse navbar-collapse" id="navbar-collapse-bar">
             <ul className="nav navbar-nav nav-create-project">
               <li><a href="/wp-admin/post-new.php?post_type=project_type">Create project</a></li>
-              <li><a href="/how-it-works">How it works</a></li>
+              <li><Link to="/how-it-works">How it works</Link></li>
+              {user.data.roles.includes('administrator') && <li><Link to="/admin_panel">Panel</Link></li>}
             </ul>
             <ul className="nav navbar-nav navbar-right">
               <li className="dropdown">

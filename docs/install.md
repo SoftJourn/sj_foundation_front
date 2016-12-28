@@ -9,6 +9,7 @@
     *  `git clone https://github.com/SoftJourn/sj_foundation_wp_plugin.git WordPress/wp-content/plugins/sj_foundation_plugin`
     *  `git clone https://github.com/SoftJourn/sj_foundation_wp_theme.git WordPress/wp-content/themes/sj_foundation_theme`
     *  `git clone https://github.com/WP-API/WP-API.git WordPress/wp-content/plugins/rest-api`
+    *  `git clone https://github.com/jchristopher/attachments.git WordPress/wp-content/plugins/attachments`
 * `cd sj_foundation_front` go to the front dir and run docker containers:
     
     ```
@@ -24,13 +25,13 @@
 * in admin panel open settings->permalinks page and change settings to "Post name"
 * activate plugins and sj_foundation theme
 
-###Loopback create tables
-
-* open node container bash: `sudo docker exec -i -t sjfoundationfront_node_1 /bin/bash`
-* in node container run migration: `node server/bin/automigrate.js`
 
 ###Problems
 
-* If you will see FTP connection, add define('FS_METHOD', 'direct'); to wp-config.php file
+* problem with plugin installation
+If you will see FTP connection, add define('FS_METHOD', 'direct'); to wp-config.php file
 http://stackoverflow.com/questions/640409/can-i-install-update-wordpress-plugins-without-providing-ftp-access
 
+* loopback can't find table. Run automigration script:
+    * open node container bash: `sudo docker exec -i -t sjfoundationfront_node_1 /bin/bash`
+    * in node container run migration: `node server/bin/automigrate.js`

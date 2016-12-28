@@ -4,6 +4,7 @@ const initialData = {
   loggedIn: window.wpApiSettings.user.ID ? true : false,
   balance: 0,
   transactions: {},
+  data: window.wpApiSettings.user,
 };
 
 export default function user(state = initialData, action) {
@@ -19,6 +20,10 @@ export default function user(state = initialData, action) {
     case types.TRANSACTIONS_SUCCESS:
       return Object.assign({}, state, {
         transactions: action.response.data,
+      });
+    case types.USER_SUCCESS:
+      return Object.assign({}, state, {
+        data: action.response.data,
       });
   }
   return state;
