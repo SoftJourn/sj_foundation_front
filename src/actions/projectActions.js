@@ -10,7 +10,7 @@ function fetchSearch(page = 1, category = '') {
   return {
     [CALL_API]: {
       types: [types.SEARCH_REQUEST, types.SEARCH_SUCCESS, types.SEARCH_FAILURE],
-      endpoint: `projects?per_page=9&page=${page}&filter[category_name]=${category}`,
+      endpoint: category ? `projects/?per_page=9&page=${page}&categories[]=${category}` : `projects/?per_page=9&page=${page}` ,
     },
   };
 }

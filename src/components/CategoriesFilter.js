@@ -31,7 +31,7 @@ export default class CategoriesFilter extends Component {
           }
           const buttonClass = classNames('btn btn-link', { active: category.slug === selectedCategory});
           return (
-            <Link to={`/cat/${category.slug}`} className={buttonClass} key={category.slug}>{category.name}</Link>
+            <Link to={`/cat/${category.id}`} className={buttonClass} key={category.id}>{category.name}</Link>
           );
         })}
       </div>
