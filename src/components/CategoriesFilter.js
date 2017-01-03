@@ -26,12 +26,12 @@ export default class CategoriesFilter extends Component {
       <div className="col-xs-12 category-filter">
         <Link to="/" className={allButtonClass} key="all">All</Link>
         {categories.map(category => {
-          if (category.slug === 'uncategorized') {
+          if (category.slug === 'uncategorized' || category.count == 0) {
             return null
           }
-          const buttonClass = classNames('btn btn-link', { active: category.slug === selectedCategory});
+          const buttonClass = classNames('btn btn-link', { active: category.id == selectedCategory});
           return (
-            <Link to={`/cat/${category.id}`} className={buttonClass} key={category.id}>{category.name}</Link>
+            <Link to={`/c/${category.id}`} className={buttonClass} key={category.id}>{category.name}</Link>
           );
         })}
       </div>

@@ -61,6 +61,10 @@ class ProjectListPage extends Component {
         </div>
         <div className="container">
           <div className="raw">
+            {Object.keys(data).length == 0 && !isFetching &&
+              <div className="col-sm-12 text-center"><h4>No results</h4></div>
+
+            }
             {Object.keys(data).map(key => {
               return (
                 <ProjectGrid

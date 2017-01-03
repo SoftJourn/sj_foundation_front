@@ -54,7 +54,7 @@ export function getProjectBySlug(slug) {
   return {
     [CALL_API]: {
       types: [types.PROJECT_REQUEST, types.PROJECT_SUCCESS, types.PROJECT_FAILURE],
-      endpoint: `projects?filter[name]=${slug}`,
+      endpoint: `projects?filter[slug]=${slug}`,
     },
   };
 }
