@@ -37,7 +37,6 @@ export default class Header extends Component {
             <ul className="nav navbar-nav nav-create-project">
               <li><a href="/wp-admin/post-new.php?post_type=project_type">Create project</a></li>
               <li><Link to="/how-it-works">How it works</Link></li>
-              {user.data.roles.includes('administrator') && <li><Link to="/admin_panel">Panel</Link></li>}
             </ul>
             <ul className="nav navbar-nav navbar-right">
               <li className="dropdown">
