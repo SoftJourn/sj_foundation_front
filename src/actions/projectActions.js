@@ -47,14 +47,13 @@ export function getProjects(page = 1, category = '') {
 /**
  * get project
  * @param slug
- * @param page
  * @returns {{}}
  */
 export function getProjectBySlug(slug) {
   return {
     [CALL_API]: {
       types: [types.PROJECT_REQUEST, types.PROJECT_SUCCESS, types.PROJECT_FAILURE],
-      endpoint: `projects?filter[slug]=${slug}`,
+      endpoint: `projects?slug=${slug}`,
     },
   };
 }
@@ -108,7 +107,7 @@ export function pledgeProjectRequest(id, amount) {
 }
 
 export function loadMore() {
-  (dispatch, getState) => {
+  return (dispatch, getState) => {
     dispatch({type: types.SEARCH_LOAD_MORE});
     dispatch(getProjectBySlug())
   }
