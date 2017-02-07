@@ -29,9 +29,9 @@ export default class CategoriesFilter extends Component {
           if (category.slug === 'uncategorized' || category.count == 0) {
             return null
           }
-          const buttonClass = classNames('btn btn-link', { active: category.id == selectedCategory});
+          const buttonClass = classNames('btn btn-link', { active: category.slug == selectedCategory});
           return (
-            <Link to={`/c/${category.id}`} className={buttonClass} key={category.id}>{category.name}</Link>
+            <Link to={`/category/${category.slug}`} className={buttonClass} key={category.id}>{category.name}</Link>
           );
         })}
       </div>

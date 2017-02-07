@@ -12,6 +12,8 @@ import CommentInput from '../components/CommentInput';
 import CommentBox from '../components/CommentBox';
 import { browserHistory } from 'react-router';
 import * as types from '../ActionTypes';
+import ProjectSideBar from '../components/project/ProjectSideBar';
+import ProjectNav from '../components/project/ProjectNav';
 
 class ProjectPage extends Component {
 
@@ -59,7 +61,7 @@ class ProjectPage extends Component {
       this.props.dispatch(getProjectBySlug(nextProps.routeParams.slug));
     }
     if (nextProps.project.pledgeSuccess && this.state.project.pledgeSuccess !== nextProps.project.pledgeSuccess ) {
-      this.props.dispatch(getProjectBySlug(nextProps.project.data.slug));
+      this.props.dispatch(getProjectBySlug(nextProps.routeParams.slug));
       this.props.dispatch(getBalance());
     }
   }
@@ -79,7 +81,7 @@ class ProjectPage extends Component {
   }
 
   getStatus() {
-    switch (this.state.project.data.api_data.status) {
+    switch (this.state.project.data.status) {
       case 'founded':
         return 'Won';
       case 'not_founded':
@@ -88,15 +90,34 @@ class ProjectPage extends Component {
   }
 
   getMainUrl() {
+    if (this.state.preview) {
+      return `/preview/${this.state.id}/`;
+    }
     return `/project/${this.state.slug}/`;
   }
 
   render() {
     const { project, slug, tab, id, preview } = this.state;
-    const mainUrl = `/project/${slug}/`;
+    const mainUrl = this.getMainUrl();
     const data = project.data;
     if (project.isFetching) {
       return (<div className="project-results text-center"><div style={{marginTop: '100px'}}><Spinner/></div></div>);
+    } else if(project.error) {
+      return (
+        <div className="container">
+          <div className="raw alert alert-danger">
+            Field to load project
+          </div>
+        </div>
+        );
+    } else if(preview && !id) {
+      return (
+        <div className="container">
+          <div className="raw alert alert-warning">
+            Try to save draft for preview
+          </div>
+        </div>
+      );
     }
     return (
       <div className="project-page">
@@ -114,72 +135,45 @@ class ProjectPage extends Component {
             }
             <div className="col-sm-12 project-title">
               <h1 className="text-left">
-                <span dangerouslySetInnerHTML={{__html: data.title.rendered}}/>
+                <span dangerouslySetInnerHTML={{__html: data.title}}/>
               </h1>
             </div>
             <div className="col-xs-12 col-sm-8 col-md-9">
-              <div className="img" style={{backgroundImage: `url(${data.featured_image_thumbnail_url})`}}></div>
+              <div className="img" style={{backgroundImage: `url(${data.thumbnailUrl})`}}></div>
             </div>
-            <div className="col-xs-12 col-sm-4 col-md-3 project-sidebar">
-              <div>
-                <h2>{project.backers}</h2>
-                supporters
-              </div>
-              <div>
-                <h2>
-                  <SJCoin />{project.pledgeSum}
-                  {
-                    data.api_data.status != 'not_founded' && project.accountPledgeSum > 0 &&
-                    <span> ({project.accountPledgeSum})</span>
-                  }
-                </h2>
-                donated {data.price !== '' && <span>of <b>{data.price}</b> goal {data.api_data.canDonateMore && <span>or more</span>}</span>}
-              </div>
-              { this.getDaysTogo() > 0 ? (
-                <div>
-                  <h2>{this.getDaysTogo()}</h2>
-                  days remain
-                </div>) : null}
-              { this.canPledge() &&
-                <PledgeInput
-                  dispatch={this.props.dispatch}
-                  amount={data.price}
-                  pledgeSum={project.pledgeSum}
-                  balance={this.state.user.balance}
-                  id={id}
-                  show={project.showModal} />
-              }
-              {
-                !this.canPledge() &&
-                  <div>
-                    <h2>{this.getStatus()}</h2>
-                  </div>
-              }
-            </div>
+            <ProjectSideBar
+              dispatch={this.props.dispatch}
+              projectId={data.id}
+              status={data.status}
+              supporters={data.supporters}
+              raised={data.raised}
+              userRaised={data.userRaised}
+              price={data.price}
+              canDonateMore={data.canDonateMore}
+              durationLeft={data.durationLeft}
+              user={this.state.user}
+              showModal={project.showModal}
+            />
           </div>
         </div>
-        <div className="project-nav" id="project-nav">
-          <div className="container">
-            <div className="col-md-12">
-              <ul className="nav nav-pills" role="tablist">
-                {!preview && <li role="presentation" className={(tab === '' || tab == 'overview') && "active"}><Link to={`${mainUrl}overview`}>Overview</Link></li>}
-                {data.attachments.length > 0 && !preview && (<li role="presentation" className={tab == 'attachments' && "active"}><Link to={`${mainUrl}attachments`}>Attachments <span className="badge">{data.attachments.length}</span></Link></li>)}
-                {!preview && <li className={tab == 'comments' && "active"} role="presentation"><Link to={`${mainUrl}comments`}>Comments <span className="badge">{project.comments.length}</span></Link></li>}
-              </ul>
-            </div>
-          </div>
-        </div>
+        <ProjectNav
+          preview={preview}
+          mainUrl={mainUrl}
+          tab={tab}
+          commentsCount={data.commentsCount ? data.commentsCount.total_comments : 0}
+          attachmentsCount={data.attachments.length}
+        />
         <div className="container">
           {
             (tab === '' || tab === 'overview') &&
             <div className="col-md-12">
               <div className="project-content">
-                <div dangerouslySetInnerHTML={{__html: data.content.rendered}}/>
+                <div dangerouslySetInnerHTML={{__html: data.content}}/>
               </div>
             </div>
           }
           {
-            (tab == 'attachments' && !preview) &&
+            (tab == 'attachments') &&
             <div className="raw project-content">
               {data.attachments.map((attachment) => {
                 return (

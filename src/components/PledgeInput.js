@@ -4,6 +4,7 @@ import '../../node_modules/react-select/dist/react-select.css';
 import SJCoin from '../components/sjCoin';
 import Modal from 'react-modal';
 import classNames from 'classnames';
+import {Link} from 'react-router';
 
 const customStyles = {
   zIndex: 3,
@@ -25,6 +26,7 @@ export default class PledgeInput extends Component {
       value: '',
       show: props.show,
       error: false,
+      user: props.user,
       pledgeSum: props.pledgeSum,
       balance: props.balance,
       canPledgeMore: false,
@@ -85,6 +87,14 @@ export default class PledgeInput extends Component {
   }
 
   render() {
+    if (!this.state.user.loggedIn) {
+      return (
+        <div className="">
+          <h3><Link to="signin">LOGIN</Link></h3>
+          to donate this project
+        </div>
+      );
+    }
     const formClass = classNames('form-group', {'has-error': this.state.error});
     return (
       <div className="form-inline raw project-pledge-form">

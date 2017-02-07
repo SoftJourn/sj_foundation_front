@@ -10,7 +10,7 @@ function fetchSearch(page = 1, category = '') {
   return {
     [CALL_API]: {
       types: [types.SEARCH_REQUEST, types.SEARCH_SUCCESS, types.SEARCH_FAILURE],
-      endpoint: category ? `projects/?per_page=9&page=${page}&categories[]=${category}` : `projects/?per_page=9&page=${page}` ,
+      endpoint: `get_projects/?&page=${page}&category=${category}`,
     },
   };
 }
@@ -53,7 +53,7 @@ export function getProjectBySlug(slug) {
   return {
     [CALL_API]: {
       types: [types.PROJECT_REQUEST, types.PROJECT_SUCCESS, types.PROJECT_FAILURE],
-      endpoint: `projects?slug=${slug}`,
+      endpoint: `get_project?slug=${slug}`,
     },
   };
 }
@@ -67,7 +67,7 @@ export function getProjectById(id) {
   return {
     [CALL_API]: {
       types: [types.PROJECT_PREVIEW_REQUEST, types.PROJECT_PREVIEW_SUCCESS, types.PROJECT_PREVIEW_FAILURE],
-      endpoint: `projects/${id}`,
+      endpoint: `get_project?id=${id}`,
     },
   };
 }
