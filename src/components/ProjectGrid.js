@@ -10,39 +10,46 @@ export default class ProjectGrid extends Component {
       slug: props.slug,
       title: props.title,
       thumb: props.thumb,
-      price: props.price,
+      price: parseInt(props.price),
       canDonateMore: props.canDonateMore,
+      durationLeft: props.durationLeft,
       commentsCount: props.commentsCount,
       categories: props.categories,
       donationType: props.donationType,
       attachments: props.attachments,
       daysRemain: props.daysRemain,
-      percent: this.getProjectPledgePercent(props.transactions, props.price),
+      percent: this.getProjectPledgePercent(props.raised, props.price),
       shortDescription: props.shortDescription,
-      backersCount: this.getBackersCount(props.transactions),
-      pledgeSum: this.getPledgeSum(props.transactions),
+      supporters: props.supporters,
+      raised: props.raised,
     };
   }
 
-  getProjectPledgePercent(transactions, price) {
-    if (transactions.length == 0 || _.sumBy(transactions, 'amount') == 0){
+  getProjectPledgePercent(raised, price) {
+    if (raised == 0){
       return 0;
     }
 
-    return parseInt((_.sumBy(transactions, 'amount')/price)*100);
+    return Math.round((raised/price)*100);
   }
 
-  getPledgeSum(transactions) {
-    return _.sumBy(transactions, 'amount');
+  getTimeRemain() {
+    //in minutes
+    const durationLeft = this.state.durationLeft;
+    if (durationLeft <= 0) {
+      return null;
+    } else if (durationLeft < 60) {
+      return <span>{durationLeft} minutes remain</span>
+    } else if (durationLeft < 60*24) {
+      return <span>{Math.round(durationLeft/60)} hours remain</span>
+    }
+    return <span>{Math.round(durationLeft/(60*24))} days remain</span>;
+
   }
 
-  getBackersCount(transactions) {
-    var result = _.uniqBy(transactions, 'accountId');
-    return result.length;
-  }
 
   render() {
-    const { slug, percent, price, pledgeSum, backersCount, attachments, commentsCount, donationType, daysRemain, categories, canDonateMore } = this.state;
+    const { slug, percent, price, supporters, raised, attachments, commentsCount, donationType, daysRemain, categories, canDonateMore } = this.state;
     const category = categories.length > 0 ? categories[0].name : '';
     return(
       <div className="col-xs-12 col-sm-4">
@@ -52,7 +59,7 @@ export default class ProjectGrid extends Component {
             <div className="col-xs-12">
               <span className="alignleft project-category-name">{category}</span>
               <span className="alignright">
-                {donationType == 'closed' ? 'Donation closed' : `${daysRemain} days remain`}
+                {donationType == 'closed' ? 'Donation closed' : this.getTimeRemain()}
               </span>
             </div>
           </div>
@@ -74,11 +81,11 @@ export default class ProjectGrid extends Component {
             <div className="project-short-overview">
               <div className="project-grid-icons">
                 <span style={{marginRight: '2px'}}><SJCoin /></span>
-                {pledgeSum}{price && <span>/{price}{canDonateMore && <span>+</span>}</span>}
+                {raised}{price > 0 && <span>/{price}{canDonateMore && <span>+</span>}</span>}
               </div>
               <div className="text-right">
                 { commentsCount > 0 && <span><span className="glyphicon glyphicon-comment" aria-hidden="true"></span>{commentsCount}</span> }
-                { backersCount > 0 && <span><span className="glyphicon glyphicon-user" aria-hidden="true"></span>{backersCount}</span> }
+                { supporters > 0 && <span><span className="glyphicon glyphicon-user" aria-hidden="true"></span>{supporters}</span> }
                 { attachments.length > 0 && <span><span className="glyphicon glyphicon-file" aria-hidden="true"></span>{attachments.length}</span> }
               </div>
             </div>

@@ -53,11 +53,14 @@ export default function project(state = initialData, action) {
       });
     case types.PROJECT_SUCCESS:
       return Object.assign({}, state, {
-        data: action.response.data[0],
+        data: action.response.data,
         isFetching: false,
-        backers: getBackersCount(action.response.data[0]['transactions']),
-        pledgeSum: getPledgeSum(action.response.data[0]['transactions']),
-        accountPledgeSum: getPledgeSum(action.response.data[0]['user_transactions']),
+      });
+    case types.PROJECT_FAILURE:
+      return Object.assign({}, state, {
+        data: [],
+        isFetching: false,
+        error: true,
       });
     case types.PROJECT_PREVIEW_SUCCESS:
       return Object.assign({}, state, {

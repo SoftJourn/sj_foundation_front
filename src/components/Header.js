@@ -16,10 +16,27 @@ export default class Header extends Component {
     });
   }
 
+  renderNotLogged() {
+    return (
+      <nav className="navbar navbar-default navbar-fixed-top">
+        <div className="container">
+          <div className="navbar-header">
+            <Link className="navbar-brand" to="/">SJ Foundation</Link>
+          </div>
+          <div className="">
+            <ul className="nav navbar-nav navbar-right">
+              <li><Link to="signin">Login</Link></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    );
+  }
+
   render() {
     const {user} = this.state;
     if (!user.loggedIn) {
-      return null;
+      return this.renderNotLogged();
     }
     return(
       <nav className="navbar navbar-default navbar-fixed-top">

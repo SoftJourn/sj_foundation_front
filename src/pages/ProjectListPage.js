@@ -68,19 +68,21 @@ class ProjectListPage extends Component {
             {Object.keys(data).map(key => {
               return (
                 <ProjectGrid
-                  key={data[key].slug}
+                  key={data[key].id}
                   slug={data[key].slug}
-                  thumb={data[key].featured_image_thumbnail_url}
-                  title={data[key].title.rendered}
+                  thumb={data[key].thumbnailUrl}
+                  title={data[key].title}
                   transactions={data[key].transactions}
-                  commentsCount={data[key].comments_count.total_comments}
+                  commentsCount={data[key].commentsCount}
                   price={data[key].price}
-                  shortDescription={data[key].excerpt.rendered}
+                  shortDescription={data[key].shortDescription}
                   attachments={data[key].attachments}
-                  donationType={data[key].donation_type}
-                  daysRemain={data[key].days_remain}
+                  donationType={data[key].status}
+                  durationLeft={data[key].durationLeft}
                   categories={data[key].categories}
-                  canDonateMore={data[key].api_data.canDonateMore}
+                  canDonateMore={data[key].canDonateMore}
+                  supporters={data[key].supporters}
+                  raised={data[key].raised}
                 />
               );
             })}
