@@ -22,6 +22,7 @@ export default class ProjectGrid extends Component {
       shortDescription: props.shortDescription,
       supporters: props.supporters,
       raised: props.raised,
+      isHover: false,
     };
   }
 
@@ -44,16 +45,27 @@ export default class ProjectGrid extends Component {
       return <span>{Math.round(durationLeft/60)} hours remain</span>
     }
     return <span>{Math.round(durationLeft/(60*24))} days remain</span>;
+  }
 
+  onHover() {
+    this.setState({
+      isHover: true
+    })
+  }
+
+  onMouseLeave() {
+    this.setState({
+      isHover: false
+  })
   }
 
 
   render() {
-    const { slug, percent, price, supporters, raised, attachments, commentsCount, donationType, daysRemain, categories, canDonateMore } = this.state;
+    const { slug, percent, price, supporters, raised, attachments, commentsCount, donationType, daysRemain, categories, canDonateMore, isHover } = this.state;
     const category = categories.length > 0 ? categories[0].name : '';
     return(
       <div className="col-xs-12 col-sm-4">
-        <div className="project-grid">
+        <div className="project-grid" onMouseEnter={this.onHover.bind(this)} onMouseLeave={this.onMouseLeave.bind(this)}>
           <div className="img" style={{backgroundImage: `url(${this.state.thumb})`}}></div>
           <div className="row project-donation-status">
             <div className="col-xs-12">

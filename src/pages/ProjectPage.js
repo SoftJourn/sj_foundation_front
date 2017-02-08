@@ -191,7 +191,7 @@ class ProjectPage extends Component {
             </div>
           }
           {
-            (tab == 'comments' && !preview && user.loggedIn) &&
+            (tab == 'comments' && !preview) &&
             <div className="project-footer">
               <div className="container">
                 <div className="raw project-content">
@@ -211,7 +211,7 @@ class ProjectPage extends Component {
         </div>
         <div className="project-footer">
           <div className="container">
-            {!preview &&
+            {!(preview && this.state.user.loggedIn) &&
               <div className="raw">
                 <div className="">
                   <CommentInput
