@@ -10,7 +10,7 @@ export default class ProjectGrid extends Component {
       slug: props.slug,
       title: props.title,
       thumb: props.thumb,
-      price: props.price,
+      price: parseInt(props.price),
       canDonateMore: props.canDonateMore,
       durationLeft: props.durationLeft,
       commentsCount: props.commentsCount,
@@ -81,7 +81,7 @@ export default class ProjectGrid extends Component {
             <div className="project-short-overview">
               <div className="project-grid-icons">
                 <span style={{marginRight: '2px'}}><SJCoin /></span>
-                {raised}{price && <span>/{price}{canDonateMore && <span>+</span>}</span>}
+                {raised}{price > 0 && <span>/{price}{canDonateMore && <span>+</span>}</span>}
               </div>
               <div className="text-right">
                 { commentsCount > 0 && <span><span className="glyphicon glyphicon-comment" aria-hidden="true"></span>{commentsCount}</span> }

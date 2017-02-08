@@ -50,6 +50,7 @@ class ProjectPage extends Component {
       id: nextProps.project.data.id,
     });
     if (this.state.project.commentSuccess === false && nextProps.project.commentSuccess === true) {
+      this.props.dispatch(getProjectBySlug(this.props.routeParams.slug));
       this.props.dispatch(fetchComments(nextProps.project.data.id));
       const mainUrl = this.getMainUrl();
       browserHistory.push(`${mainUrl}comments`);
@@ -190,7 +191,7 @@ class ProjectPage extends Component {
             </div>
           }
           {
-            (tab == 'comments' && !preview) &&
+            (tab == 'comments' && !preview && user.loggedIn) &&
             <div className="project-footer">
               <div className="container">
                 <div className="raw project-content">
