@@ -1,19 +1,23 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router'
+import { Link, browserHistory } from 'react-router'
 import SJCoin from './sjCoin';
+import DonationModal from './modals/DonationModal';
 
 export default class ProjectGrid extends Component {
 
   constructor(props) {
     super();
     this.state = {
+      id: props.id,
+      user: props.user,
+      donation: props.donation,
       slug: props.slug,
       title: props.title,
       thumb: props.thumb,
       price: parseInt(props.price),
       canDonateMore: props.canDonateMore,
       durationLeft: props.durationLeft,
-      commentsCount: props.commentsCount,
+      commentsCount: props.commentsCount ? props.commentsCount.total_comments : 0,
       categories: props.categories,
       donationType: props.donationType,
       attachments: props.attachments,
@@ -23,7 +27,15 @@ export default class ProjectGrid extends Component {
       supporters: props.supporters,
       raised: props.raised,
       isHover: false,
+      showDonateModal: false,
     };
+  }
+
+  componentWillReceiveProps(newProps) {
+    this.setState({
+      donation: newProps.donation,
+    })
+    console.log(newProps.donation);
   }
 
   getProjectPledgePercent(raised, price) {
@@ -59,14 +71,85 @@ export default class ProjectGrid extends Component {
   })
   }
 
+  clickDonate() {
+    this.setState({
+      showDonateModal: true,
+    })
+  }
+
+  onCloseDonateModal() {
+    this.setState({
+      showDonateModal: false,
+    })
+  }
+
+  projectClick(slug){
+    if(!this.state.isHover) {
+      browserHistory.push(`/project/${slug}`);
+    }
+  }
+
+  getDonation() {
+    const donation = this.state.donation;
+    if (donation.length == 0) {
+      return null;
+    }
+    if (donation.donationRequest) {
+      return(
+        <div className="project-short-overview">
+          <p className="text-warning">
+            pending...
+          </p>
+        </div>
+      )
+    }
+    if (donation.donationError) {
+      return(
+        <div className="project-short-overview">
+          <p className="text-danger">
+            Error donate project!
+          </p>
+        </div>
+      )
+    }
+    return(
+      <div className="project-short-overview">
+        <p className="text-success">
+          Success donated <SJCoin /><b>{donation.donationAmount}</b>
+        </p>
+      </div>
+    )
+  }
+
 
   render() {
-    const { slug, percent, price, supporters, raised, attachments, commentsCount, donationType, daysRemain, categories, canDonateMore, isHover } = this.state;
+    const { slug, donation, percent, price, supporters, raised, attachments, commentsCount, donationType, daysRemain, categories, canDonateMore, isHover } = this.state;
     const category = categories.length > 0 ? categories[0].name : '';
+    const donationInfo = this.getDonation();
     return(
       <div className="col-xs-12 col-sm-4">
-        <div className="project-grid" onMouseEnter={this.onHover.bind(this)} onMouseLeave={this.onMouseLeave.bind(this)}>
-          <div className="img" style={{backgroundImage: `url(${this.state.thumb})`}}></div>
+        <DonationModal
+          id={this.state.id}
+          title={this.state.title}
+          dispatch={this.props.dispatch}
+          onClose={this.onCloseDonateModal.bind(this)}
+          show={this.state.showDonateModal}
+          user={this.state.user}
+          pledgeSum={raised}
+          balance={this.state.user.balance}
+          canPledgeMore={canDonateMore}
+        />
+        <div className="project-grid" >
+          <a onClick={this.projectClick.bind(this, slug)} >
+            <div className="img" style={{backgroundImage: `url(${this.state.thumb})`}}>
+              { this.state.user.loggedIn &&
+                <button onMouseEnter={this.onHover.bind(this)} onMouseLeave={this.onMouseLeave.bind(this)}
+                      onClick={this.clickDonate.bind(this)}
+                      className="btn btn-xs btn-default btn-donate project-grid-donate-button">Donate
+                </button>
+              }
+            </div>
+          </a>
           <div className="row project-donation-status">
             <div className="col-xs-12">
               <span className="alignleft project-category-name">{category}</span>
@@ -90,7 +173,7 @@ export default class ProjectGrid extends Component {
               :
               <div className="progress-empty"></div>
             }
-            <div className="project-short-overview">
+            {donation.length == 0 && <div className="project-short-overview">
               <div className="project-grid-icons">
                 <span style={{marginRight: '2px'}}><SJCoin /></span>
                 {raised}{price > 0 && <span>/{price}{canDonateMore && <span>+</span>}</span>}
@@ -100,7 +183,8 @@ export default class ProjectGrid extends Component {
                 { supporters > 0 && <span><span className="glyphicon glyphicon-user" aria-hidden="true"></span>{supporters}</span> }
                 { attachments.length > 0 && <span><span className="glyphicon glyphicon-file" aria-hidden="true"></span>{attachments.length}</span> }
               </div>
-            </div>
+            </div>}
+            {donationInfo}
           </div>
         </div>
       </div>

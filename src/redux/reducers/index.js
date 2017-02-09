@@ -4,6 +4,7 @@ import projects from './projects';
 import user from './user';
 import project from './project';
 import pages from './pages';
+import donation from './donation';
 import { routerReducer as routing } from 'react-router-redux';
 
 // combine all reducers
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
   project,
   user,
   pages,
+  donation,
 });
 
 export default rootReducer;

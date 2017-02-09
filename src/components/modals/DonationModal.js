@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import { pledgeProject } from '../actions/projectActions';
-import '../../node_modules/react-select/dist/react-select.css';
-import SJCoin from '../components/sjCoin';
+import { pledgeProject } from '../../actions/projectActions';
+import '../../../node_modules/react-select/dist/react-select.css';
+import SJCoin from '../../components/sjCoin';
 import Modal from 'react-modal';
 import classNames from 'classnames';
 import {Link} from 'react-router';
@@ -18,18 +18,21 @@ const customStyles = {
   }
 };
 
-export default class PledgeInput extends Component {
+export default class DonationModal extends Component {
 
   constructor(props) {
     super();
     this.state = {
       value: '',
+      id: props.id,
+      title: props.title,
       show: props.show,
       error: false,
       user: props.user,
       pledgeSum: props.pledgeSum,
       balance: props.balance,
       canPledgeMore: false,
+      confirm: false,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -65,6 +68,13 @@ export default class PledgeInput extends Component {
 
   handleSubmit() {
     this.props.dispatch(pledgeProject(this.props.id, this.state.value));
+    this.props.onClose();
+  }
+
+  handleDonate() {
+    this.setState({
+      confirm: true
+    })
   }
 
   openConfirmation() {
@@ -88,56 +98,43 @@ export default class PledgeInput extends Component {
 
   render() {
     if (!this.state.user.loggedIn) {
-      return (
-        <div className="">
-          <h3><Link to="signin">LOGIN</Link></h3>
-          to donate this project
-        </div>
-      );
+      return null;
     }
     const formClass = classNames('form-group', {'has-error': this.state.error});
     return (
       <div className="form-inline raw project-pledge-form">
-        <div className={formClass}>
-          <label className="sr-only" htmlFor="InputAmount">Amount</label>
-          <div className="input-group " style={{float: 'left'}}>
-            {/*<div className="input-group-addon"><SJCoin/></div>*/}
-            <input
-              type="text"
-              value={this.state.value}
-              size="6"
-              placeholder='amount'
-              onChange={this.handleChange}
-              className="form-control"
-              id="InputAmount"
-            />
-          </div>
-            <button
-              type="button"
-              className="btn btn-primary donate-button"
-              onClick={this.openConfirmation}
-              style={{marginLeft: '10px'}}
-            >
-              Donate
-            </button>
-        </div>
         <Modal
           isOpen={this.state.show}
-          onRequestClose={this.closeModal}
+          onRequestClose={this.props.onClose}
           style={customStyles}
-          contentLabel="B"
+          contentLabel="A"
         >
           <div className="pledge-modal">
             <div className="modal-header">
-              <h3 className="modal-title text-center" id="">Confirm donation</h3>
+              <h3 className="modal-title" id="">{this.state.title}</h3>
             </div>
             <div className="modal-body text-center">
-              <button className="btn btn-success" onClick={this.handleSubmit}>
-                Donate <b><SJCoin />{this.state.value}</b>
-              </button>
-              <button className="btn btn-default" onClick={this.closeModal}>
-                Cancel
-              </button>
+              {this.state.confirm &&
+                <div>
+                  <button className="btn btn-success" onClick={this.handleSubmit.bind(this)}>
+                    Confirm donate <b><SJCoin />{this.state.value}</b>
+                  </button>
+                  <button className="btn btn-default" onClick={this.props.onClose}>
+                    Cancel
+                  </button>
+                </div>
+              }
+              {!this.state.confirm &&
+                <div>
+                  <input type="text" className="input" value={this.state.value} onChange={this.handleChange} placeholder="amount" />
+                  <button className="btn btn-success" onClick={this.handleDonate.bind(this)}>
+                    Donate
+                  </button>
+                  <button className="btn btn-default" onClick={this.props.onClose}>
+                    Cancel
+                  </button>
+                </div>
+              }
             </div>
           </div>
         </Modal>

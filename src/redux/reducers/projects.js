@@ -38,7 +38,7 @@ export default function projects(state = initialData, action) {
     case types.CATEGORIES_SUCCESS:
       return Object.assign({}, state, {
         categories: action.response.data
-      })
+      });
   }
   return state;
 }
