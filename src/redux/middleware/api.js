@@ -99,6 +99,7 @@ export default store => next => action => {
     })),
     error => next(actionWith({
       type: failureType,
+      ...body,
       error: error.message || 'Something bad happened',
     }))
   );

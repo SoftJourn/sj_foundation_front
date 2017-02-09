@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link, browserHistory } from 'react-router'
 import SJCoin from './sjCoin';
 import DonationModal from './modals/DonationModal';
+import {withdrawProject} from '../actions/projectActions';
 
 export default class ProjectGrid extends Component {
 
@@ -16,6 +17,8 @@ export default class ProjectGrid extends Component {
       thumb: props.thumb,
       price: parseInt(props.price),
       canDonateMore: props.canDonateMore,
+      canDonate: props.canDonate,
+      canWithdraw: props.canWithdraw,
       durationLeft: props.durationLeft,
       commentsCount: props.commentsCount ? props.commentsCount.total_comments : 0,
       categories: props.categories,
@@ -28,14 +31,15 @@ export default class ProjectGrid extends Component {
       raised: props.raised,
       isHover: false,
       showDonateModal: false,
+      withdraw: props.withdraw,
     };
   }
 
   componentWillReceiveProps(newProps) {
     this.setState({
       donation: newProps.donation,
-    })
-    console.log(newProps.donation);
+      withdraw: newProps.withdraw,
+    });
   }
 
   getProjectPledgePercent(raised, price) {
@@ -89,6 +93,10 @@ export default class ProjectGrid extends Component {
     }
   }
 
+  handleWithdraw() {
+    this.props.dispatch(withdrawProject(this.state.id));
+  }
+
   getDonation() {
     const donation = this.state.donation;
     if (donation.length == 0) {
@@ -96,36 +104,57 @@ export default class ProjectGrid extends Component {
     }
     if (donation.donationRequest) {
       return(
-        <div className="project-short-overview">
-          <p className="text-warning">
-            pending...
-          </p>
+        <div className="project-short-overview text-warning">
+          pending...
         </div>
       )
     }
     if (donation.donationError) {
       return(
-        <div className="project-short-overview">
-          <p className="text-danger">
-            Error donate project!
-          </p>
+        <div className="project-short-overview text-dange">
+          Error donate project!
         </div>
       )
     }
     return(
-      <div className="project-short-overview">
-        <p className="text-success">
-          Success donated <SJCoin /><b>{donation.donationAmount}</b>
-        </p>
+      <div className="project-short-overview text-success">
+        Success donated <SJCoin /><b>{donation.donationAmount}</b>
+      </div>
+    )
+  }
+
+  getWithdrawInfo() {
+    const withdraw = this.state.withdraw;
+    if (withdraw.length == 0) {
+      return null;
+    }
+    if (withdraw.request) {
+      return(
+        <div className="project-short-overview text-warning">
+            pending...
+        </div>
+      )
+    }
+    if (withdraw.error) {
+      return(
+        <div className="project-short-overview text-danger">
+            Error withdraw project!
+        </div>
+      )
+    }
+    return(
+      <div className="project-short-overview text-success">
+          Success withdraw!
       </div>
     )
   }
 
 
   render() {
-    const { slug, donation, percent, price, supporters, raised, attachments, commentsCount, donationType, daysRemain, categories, canDonateMore, isHover } = this.state;
+    const { slug, donation, canDonate, canWithdraw, percent, price, supporters, raised, attachments, commentsCount, donationType, daysRemain, categories, canDonateMore, isHover } = this.state;
     const category = categories.length > 0 ? categories[0].name : '';
     const donationInfo = this.getDonation();
+    const withdrawInfo = this.getWithdrawInfo();
     return(
       <div className="col-xs-12 col-sm-4">
         <DonationModal
@@ -142,20 +171,35 @@ export default class ProjectGrid extends Component {
         <div className="project-grid" >
           <a onClick={this.projectClick.bind(this, slug)} >
             <div className="img" style={{backgroundImage: `url(${this.state.thumb})`}}>
-              { this.state.user.loggedIn &&
+              { (this.state.user.loggedIn && canDonate) &&
                 <button onMouseEnter={this.onHover.bind(this)} onMouseLeave={this.onMouseLeave.bind(this)}
                       onClick={this.clickDonate.bind(this)}
                       className="btn btn-xs btn-default btn-donate project-grid-donate-button">Donate
                 </button>
               }
+              { (this.state.user.loggedIn && canWithdraw) &&
+              <button onMouseEnter={this.onHover.bind(this)} onMouseLeave={this.onMouseLeave.bind(this)}
+                      onClick={this.handleWithdraw.bind(this)}
+                      className="btn btn-xs btn-default btn-donate project-grid-donate-button">Withdraw
+              </button>
+              }
             </div>
           </a>
           <div className="row project-donation-status">
+
             <div className="col-xs-12">
-              <span className="alignleft project-category-name">{category}</span>
-              <span className="alignright">
-                {donationType == 'closed' ? 'Donation closed' : this.getTimeRemain()}
+              <span className="alignleft project-category-name">
+                {donationInfo}
+                {withdrawInfo}
               </span>
+              {(!donationInfo && !withdrawInfo) &&
+                <span>
+                  <span className="alignleft project-category-name">{category}</span>
+                  <span className="alignright">
+                    {donationType == 'closed' ? 'Donation closed' : this.getTimeRemain()}
+                  </span>
+                </span>
+              }
             </div>
           </div>
           <Link to={`/project/${slug}`}>
@@ -173,7 +217,7 @@ export default class ProjectGrid extends Component {
               :
               <div className="progress-empty"></div>
             }
-            {donation.length == 0 && <div className="project-short-overview">
+           <div className="project-short-overview">
               <div className="project-grid-icons">
                 <span style={{marginRight: '2px'}}><SJCoin /></span>
                 {raised}{price > 0 && <span>/{price}{canDonateMore && <span>+</span>}</span>}
@@ -183,8 +227,7 @@ export default class ProjectGrid extends Component {
                 { supporters > 0 && <span><span className="glyphicon glyphicon-user" aria-hidden="true"></span>{supporters}</span> }
                 { attachments.length > 0 && <span><span className="glyphicon glyphicon-file" aria-hidden="true"></span>{attachments.length}</span> }
               </div>
-            </div>}
-            {donationInfo}
+            </div>
           </div>
         </div>
       </div>
