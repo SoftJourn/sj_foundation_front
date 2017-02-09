@@ -126,7 +126,7 @@ export default class DonationModal extends Component {
               }
               {!this.state.confirm &&
                 <div>
-                  <input type="text" className="input" value={this.state.value} onChange={this.handleChange} placeholder="amount" />
+                  <input type="text" className="form-control" size="10" value={this.state.value} onChange={this.handleChange} placeholder="amount" />
                   <button className="btn btn-success" onClick={this.handleDonate.bind(this)}>
                     Donate
                   </button>

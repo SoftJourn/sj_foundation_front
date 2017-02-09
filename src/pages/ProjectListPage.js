@@ -116,6 +116,7 @@ class ProjectListPage extends Component {
                   canWithdraw={data[key].canWithdraw}
                   supporters={data[key].supporters}
                   raised={data[key].raised}
+                  donationStatus={data[key].donationStatus}
                 />
               );
             })}

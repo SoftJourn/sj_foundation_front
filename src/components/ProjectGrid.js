@@ -32,6 +32,7 @@ export default class ProjectGrid extends Component {
       isHover: false,
       showDonateModal: false,
       withdraw: props.withdraw,
+      donationStatus: props.donationStatus,
     };
   }
 
@@ -149,12 +150,22 @@ export default class ProjectGrid extends Component {
     )
   }
 
+  getDonationStatus() {
+    switch(this.state.donationStatus) {
+      case 'won':
+        return <span className="text-success">Won</span>
+      case 'lost':
+        return <span className="text-warning">Lost</span>
+    }
+  }
+
 
   render() {
-    const { slug, donation, canDonate, canWithdraw, percent, price, supporters, raised, attachments, commentsCount, donationType, daysRemain, categories, canDonateMore, isHover } = this.state;
+    const { slug, donation, donationStatus, canDonate, canWithdraw, percent, price, supporters, raised, attachments, commentsCount, donationType, daysRemain, categories, canDonateMore, isHover } = this.state;
     const category = categories.length > 0 ? categories[0].name : '';
     const donationInfo = this.getDonation();
     const withdrawInfo = this.getWithdrawInfo();
+    const getDonationStatus = this.getDonationStatus();
     return(
       <div className="col-xs-12 col-sm-4">
         <DonationModal
@@ -186,7 +197,6 @@ export default class ProjectGrid extends Component {
             </div>
           </a>
           <div className="row project-donation-status">
-
             <div className="col-xs-12">
               <span className="alignleft project-category-name">
                 {donationInfo}
@@ -196,7 +206,7 @@ export default class ProjectGrid extends Component {
                 <span>
                   <span className="alignleft project-category-name">{category}</span>
                   <span className="alignright">
-                    {donationType == 'closed' ? 'Donation closed' : this.getTimeRemain()}
+                    {donationStatus == 'open' ? this.getTimeRemain() : getDonationStatus }
                   </span>
                 </span>
               }
