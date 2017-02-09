@@ -92,6 +92,12 @@ export function pledgeProject(id, amount) {
   }
 }
 
+export function withdrawProject(id) {
+  return (dispatch) => {
+    return dispatch(withdrawProjectRequest(id));
+  }
+}
+
 export function pledgeProjectRequest(id, amount) {
   return {
     [CALL_API]: {
@@ -101,6 +107,19 @@ export function pledgeProjectRequest(id, amount) {
       body: {
         project_id: id,
         amount,
+      }
+    },
+  };
+}
+
+export function withdrawProjectRequest(id) {
+  return {
+    [CALL_API]: {
+      method: 'POST',
+      types: [types.WITHDRAW_REQUEST, types.WITHDRAW_SUCCESS, types.WITHDRAW_FAILURE],
+      endpoint: `withdraw?projectId=${id}`,
+      body: {
+        project_id: id,
       }
     },
   };

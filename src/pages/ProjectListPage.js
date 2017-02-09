@@ -61,10 +61,22 @@ class ProjectListPage extends Component {
     return returning;
   }
 
+  getProjectWithdrawById(id) {
+    const withdraws = this.state.donation.withdraw;
+    let returning = [];
+    withdraws.map((value) => {
+      if (value.id == id) {
+        returning = value;
+      }
+    });
+    return returning;
+  }
+
   render() {
     const {pages, data, isFetching, categories } = this.state.projects;
     const {projects, selectedCategory, user, donation} = this.state;
     const getProjectDonationById = this.getProjectDonationById.bind(this);
+    const getProjectWithdrawById = this.getProjectWithdrawById.bind(this);
     return (
       <div className="project-results">
         <div className="project-results-header">
@@ -85,6 +97,7 @@ class ProjectListPage extends Component {
                   id={data[key].id}
                   dispatch={this.props.dispatch}
                   donation={getProjectDonationById(data[key].id)}
+                  withdraw={getProjectWithdrawById(data[key].id)}
                   key={data[key].id}
                   user={user}
                   slug={data[key].slug}
@@ -99,8 +112,11 @@ class ProjectListPage extends Component {
                   durationLeft={data[key].durationLeft}
                   categories={data[key].categories}
                   canDonateMore={data[key].canDonateMore}
+                  canDonate={data[key].canDonate}
+                  canWithdraw={data[key].canWithdraw}
                   supporters={data[key].supporters}
                   raised={data[key].raised}
+                  donationStatus={data[key].donationStatus}
                 />
               );
             })}
