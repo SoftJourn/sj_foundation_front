@@ -23,6 +23,7 @@ class ProjectPage extends Component {
       tab: props.routeParams.tab ? props.routeParams.tab : '',
       slug: props.routeParams.slug,
       project: props.project,
+      donation: props.donation,
       user: props.user,
       preview: props.route.preview,
     };
@@ -48,6 +49,7 @@ class ProjectPage extends Component {
       projects: nextProps.projects,
       project: nextProps.project,
       id: nextProps.project.data.id,
+      donation: nextProps.donation,
     });
     if (this.state.project.commentSuccess === false && nextProps.project.commentSuccess === true) {
       this.props.dispatch(getProjectBySlug(this.props.routeParams.slug));
@@ -211,7 +213,7 @@ class ProjectPage extends Component {
         </div>
         <div className="project-footer">
           <div className="container">
-            {!(preview && this.state.user.loggedIn) &&
+            {(!preview && this.state.user.loggedIn) &&
               <div className="raw">
                 <div className="">
                   <CommentInput

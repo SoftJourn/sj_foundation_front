@@ -11,9 +11,11 @@ class ProjectListPage extends Component {
     super();
     const selectedCategory = props.routeParams.category ? props.routeParams.category : '';
     this.state = {
+      donation: props.donation,
       projects: props.projects,
       selectedCategory,
       page: 1,
+      user: props.user,
     };
     this.handleLoadMore.bind(this);
     props.dispatch(getProjects(1, selectedCategory));
@@ -32,6 +34,7 @@ class ProjectListPage extends Component {
       form: nextProps.form,
       projects: nextProps.projects,
       selectedCategory,
+      donation: nextProps.donation,
     });
     if (this.state.selectedCategory !== selectedCategory) {
       this.props.dispatch(getProjects(1, selectedCategory));
@@ -47,9 +50,21 @@ class ProjectListPage extends Component {
     this.props.dispatch(getProjects(page));
   }
 
+  getProjectDonationById(id) {
+    const donations = this.state.donation;
+    let returning = [];
+    donations.data.map((value) => {
+      if (value.donationId == id) {
+        returning = value;
+      }
+    });
+    return returning;
+  }
+
   render() {
     const {pages, data, isFetching, categories } = this.state.projects;
-    const {selectedCategory} = this.state;
+    const {projects, selectedCategory, user, donation} = this.state;
+    const getProjectDonationById = this.getProjectDonationById.bind(this);
     return (
       <div className="project-results">
         <div className="project-results-header">
@@ -63,12 +78,15 @@ class ProjectListPage extends Component {
           <div className="raw">
             {Object.keys(data).length == 0 && !isFetching &&
               <div className="col-sm-12 text-center"><h4>No results</h4></div>
-
             }
             {Object.keys(data).map(key => {
               return (
                 <ProjectGrid
+                  id={data[key].id}
+                  dispatch={this.props.dispatch}
+                  donation={getProjectDonationById(data[key].id)}
                   key={data[key].id}
+                  user={user}
                   slug={data[key].slug}
                   thumb={data[key].thumbnailUrl}
                   title={data[key].title}
@@ -114,6 +132,7 @@ function mapStateToProps(state, ownProps) {
     form: state.form,
     projects: state.projects,
     user: state.user,
+    donation: state.donation,
   };
 }
 

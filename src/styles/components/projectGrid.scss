@@ -30,6 +30,12 @@
       background-size: cover;
       background-repeat: no-repeat;
       background-position: center center;
+
+      .project-grid-donate-button {
+        position: absolute;
+        margin-top: 96px;
+        margin-left: 2px;
+      }
     }
 
     .project-donation-status {

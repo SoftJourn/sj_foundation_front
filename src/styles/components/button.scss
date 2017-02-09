@@ -1,0 +1,13 @@
+.btn-donate {
+  border-color: rgba($teal, .3);
+  background-color: rgba($paper, .75);
+  color: $asphalt;
+  border-radius: 1px;
+
+  &:hover {
+    border-color: rgba($greenSea, 1);
+    background-color: rgba($teal, .9);
+    color: $paper;
+    border-radius: 1px;
+  }
+}
