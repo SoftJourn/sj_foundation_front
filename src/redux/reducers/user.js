@@ -5,6 +5,7 @@ const initialData = {
   balance: 0,
   transactions: {},
   data: window.wpApiSettings.user,
+  isAdmin: false,
 };
 
 export default function user(state = initialData, action) {
@@ -16,6 +17,7 @@ export default function user(state = initialData, action) {
     case types.USER_BALANCE_SUCCESS:
       return Object.assign({}, state, {
         balance: action.response.data.amount,
+        isAdmin: action.response.data.isAdmin,
       });
     case types.TRANSACTIONS_SUCCESS:
       return Object.assign({}, state, {

@@ -188,7 +188,7 @@ export default class ProjectGrid extends Component {
                       className="btn btn-xs btn-default btn-donate project-grid-donate-button">Donate
                 </button>
               }
-              { (this.state.user.loggedIn && canWithdraw) &&
+              { (this.state.user.isAdmin && canWithdraw) &&
               <button onMouseEnter={this.onHover.bind(this)} onMouseLeave={this.onMouseLeave.bind(this)}
                       onClick={this.handleWithdraw.bind(this)}
                       className="btn btn-xs btn-default btn-donate project-grid-donate-button">Withdraw
