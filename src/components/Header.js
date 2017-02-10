@@ -61,7 +61,7 @@ export default class Header extends Component {
           <div className="collapse navbar-collapse" id="navbar-collapse-bar">
             <ul className="nav navbar-nav nav-create-project">
               <li><a href="/wp-admin/post-new.php?post_type=project_type">Create project</a></li>
-              {/*<li><Link to="/how-it-works">How it works</Link></li>*/}
+              <li><Link to="/how-it-works">How it works</Link></li>
             </ul>
             <ul className="nav navbar-nav navbar-right">
               <li className="dropdown">

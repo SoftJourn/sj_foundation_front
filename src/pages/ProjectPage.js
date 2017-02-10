@@ -172,7 +172,9 @@ class ProjectPage extends Component {
             <div className="col-md-12">
               <div className="project-content">
                 <div dangerouslySetInnerHTML={{__html: data.content}}/>
+
               </div>
+                <p className="text-right"><small>Author: {data.author}</small></p>
             </div>
           }
           {
