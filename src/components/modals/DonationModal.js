@@ -116,7 +116,7 @@ export default class DonationModal extends Component {
             <div className="modal-body text-center">
               {this.state.confirm &&
                 <div>
-                  <button className="btn btn-success" onClick={this.handleSubmit.bind(this)}>
+                  <button className="btn btn-donate btn-success" onClick={this.handleSubmit.bind(this)}>
                     Confirm donate <b><SJCoin />{this.state.value}</b>
                   </button>
                   <button className="btn btn-default" onClick={this.props.onClose}>
@@ -126,13 +126,21 @@ export default class DonationModal extends Component {
               }
               {!this.state.confirm &&
                 <div>
-                  <input type="text" className="form-control" size="10" value={this.state.value} onChange={this.handleChange} placeholder="amount" />
-                  <button className="btn btn-success" onClick={this.handleDonate.bind(this)}>
-                    Donate
-                  </button>
-                  <button className="btn btn-default" onClick={this.props.onClose}>
-                    Cancel
-                  </button>
+                  <div className="form-inline">
+                    <div className="form-group">
+                      <input type="numbers" autofocus className="form-control" size="10" value={this.state.value} onChange={this.handleChange} placeholder="amount" />
+                    </div>
+                    <div className="form-group">
+                      <button className="btn btn-donate btn-success" onClick={this.handleDonate.bind(this)}>
+                        Donate
+                      </button>
+                    </div>
+                    <div className="form-group">
+                      <button className="btn btn-default" onClick={this.props.onClose}>
+                        Cancel
+                      </button>
+                    </div>
+                  </div>
                 </div>
               }
             </div>
