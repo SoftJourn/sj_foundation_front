@@ -88,13 +88,13 @@ export function getProjectMetaBySlug(slug) {
 
 export function pledgeProject(id, amount) {
   return (dispatch, getState) => {
-    return dispatch(pledgeProjectRequest(id, amount));
+    return dispatch(pledgeProjectRequest(id, amount)).then(() => dispatch(updateProjectById(id)));
   }
 }
 
 export function withdrawProject(id) {
   return (dispatch) => {
-    return dispatch(withdrawProjectRequest(id));
+    return dispatch(withdrawProjectRequest(id)).then(() => dispatch(updateProjectById(id)));
   }
 }
 
@@ -121,6 +121,20 @@ export function withdrawProjectRequest(id) {
       body: {
         project_id: id,
       }
+    },
+  };
+}
+
+/**
+ * get project by id
+ * @param id
+ * @returns {{}}
+ */
+export function updateProjectById(id) {
+  return {
+    [CALL_API]: {
+      types: [types.PROJECT_UPDATE_REQUEST, types.PROJECT_UPDATE_SUCCESS, types.PROJECT_UPDATE_FAILURE],
+      endpoint: `get_project?id=${id}`,
     },
   };
 }

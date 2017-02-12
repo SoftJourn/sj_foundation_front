@@ -3,6 +3,7 @@ import { Link, browserHistory } from 'react-router'
 import SJCoin from './sjCoin';
 import DonationModal from './modals/DonationModal';
 import {withdrawProject} from '../actions/projectActions';
+import classNames from 'classnames';
 
 export default class ProjectGrid extends Component {
 
@@ -40,6 +41,27 @@ export default class ProjectGrid extends Component {
     this.setState({
       donation: newProps.donation,
       withdraw: newProps.withdraw,
+      user: newProps.user,
+      slug: newProps.slug,
+      title: newProps.title,
+      thumb: newProps.thumb,
+      price: parseInt(newProps.price),
+      canDonateMore: newProps.canDonateMore,
+      canDonate: newProps.canDonate,
+      canWithdraw: newProps.canWithdraw,
+      durationLeft: newProps.durationLeft,
+      commentsCount: newProps.commentsCount ? newProps.commentsCount.total_comments : 0,
+      categories: newProps.categories,
+      donationType: newProps.donationType,
+      attachments: newProps.attachments,
+      daysRemain: newProps.daysRemain,
+      percent: this.getProjectPledgePercent(newProps.raised, newProps.price),
+      shortDescription: newProps.shortDescription,
+      supporters: newProps.supporters,
+      raised: newProps.raised,
+      isHover: false,
+      showDonateModal: false,
+      donationStatus: newProps.donationStatus,
     });
   }
 
@@ -161,11 +183,12 @@ export default class ProjectGrid extends Component {
 
 
   render() {
-    const { slug, donation, donationStatus, canDonate, canWithdraw, percent, price, supporters, raised, attachments, commentsCount, donationType, daysRemain, categories, canDonateMore, isHover } = this.state;
+    const { slug, donation, donationStatus, canDonate, canWithdraw, percent, price, supporters, raised, userRaised, attachments, commentsCount, donationType, daysRemain, categories, canDonateMore, isHover } = this.state;
     const category = categories.length > 0 ? categories[0].name : '';
     const donationInfo = this.getDonation();
     const withdrawInfo = this.getWithdrawInfo();
     const getDonationStatus = this.getDonationStatus();
+    const supportersClass = classNames({'icon-selected': userRaised != 0});
     return(
       <div className="col-xs-12 col-sm-4">
         <DonationModal
@@ -234,8 +257,8 @@ export default class ProjectGrid extends Component {
               </div>
               <div className="text-right">
                 { commentsCount > 0 && <span><span className="glyphicon glyphicon-comment" aria-hidden="true"></span>{commentsCount}</span> }
-                { supporters > 0 && <span><span className="glyphicon glyphicon-user" aria-hidden="true"></span>{supporters}</span> }
                 { attachments.length > 0 && <span><span className="glyphicon glyphicon-file" aria-hidden="true"></span>{attachments.length}</span> }
+                { supporters > 0 && <span className={supportersClass}><span className="glyphicon glyphicon-user" aria-hidden="true"></span>{supporters}</span> }
               </div>
             </div>
           </div>

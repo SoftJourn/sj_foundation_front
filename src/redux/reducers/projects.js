@@ -39,6 +39,17 @@ export default function projects(state = initialData, action) {
       return Object.assign({}, state, {
         categories: action.response.data
       });
+    case types.PROJECT_UPDATE_SUCCESS: {
+      let projects = state.data;
+      Object.keys(projects).map((key) => {
+          if (action.response.data.id == projects[key].id) {
+            projects[key] = action.response.data;
+          }
+      });
+      return Object.assign({}, state, {
+        data: projects,
+      });
+    }
   }
   return state;
 }

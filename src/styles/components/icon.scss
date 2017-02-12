@@ -1,0 +1,10 @@
+.glyphicon {
+  color: #777;
+}
+
+.icon-selected{
+  color: $belize;
+  .glyphicon {
+    color: $belize;
+  }
+}
