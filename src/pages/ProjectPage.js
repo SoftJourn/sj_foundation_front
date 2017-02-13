@@ -156,6 +156,7 @@ class ProjectPage extends Component {
               durationLeft={data.durationLeft}
               user={this.state.user}
               showModal={project.showModal}
+              donationStatus={data.donationStatus}
             />
           </div>
         </div>
@@ -174,7 +175,11 @@ class ProjectPage extends Component {
                 <div dangerouslySetInnerHTML={{__html: data.content}}/>
 
               </div>
-                <p className="text-right"><small>Author: {data.author}</small></p>
+              { this.state.user.loggedIn &&
+              <p className="text-right">
+                <small>Author: {data.author}</small>
+              </p>
+              }
             </div>
           }
           {

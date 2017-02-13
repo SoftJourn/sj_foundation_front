@@ -67,6 +67,11 @@ export default class DonationModal extends Component {
   }
 
   handleSubmit() {
+    this.setState({
+      value:'',
+      confirm: false,
+
+    });
     this.props.dispatch(pledgeProject(this.props.id, this.state.value));
     this.props.onClose();
   }

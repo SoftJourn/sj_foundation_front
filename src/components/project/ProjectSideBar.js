@@ -20,6 +20,7 @@ export default class ProjectSideBar extends Component {
       user: props.user,
       showModal: props.showModal,
       canPledge: false,
+      donationStatus: props.donationStatus,
     };
   }
 
@@ -82,7 +83,7 @@ export default class ProjectSideBar extends Component {
   }
 
   render() {
-    const {projectId, showModal, status, supporters, raised, price, canDonateMore, userRaised, user} = this.state;
+    const {projectId, showModal, status, supporters, donationStatus, canPledge, raised, price, canDonateMore, userRaised, user} = this.state;
     return (
         <div className="col-xs-12 col-sm-4 col-md-3 project-sidebar">
           <div>
@@ -100,7 +101,7 @@ export default class ProjectSideBar extends Component {
             donated {price !== '' && <span>of <b>{price}</b> goal {canDonateMore && <span>or more</span>}</span>}
           </div>
           {this.getTimeRemain()}
-          { this.canPledge() &&
+          { canPledge &&
             <PledgeInput
               dispatch={this.props.dispatch}
               user={user}
@@ -111,9 +112,9 @@ export default class ProjectSideBar extends Component {
               show={showModal} />
             }
           {
-            !this.canPledge() &&
+            !canPledge &&
             <div>
-              <h2>{this.getStatus()}</h2>
+              <h2>{donationStatus.toUpperCase()}</h2>
             </div>
           }
         </div>

@@ -26,7 +26,8 @@ function callApi(endpoint, store, method, body) {
     .then(response => {
         if (response.status === 401 || response.status === 403) {
           // store.dispatch(authLogout())
-          // browserHistory.push('signin');
+          // browserHistory.push('/');
+          window.location.href = '/';
         }
         return response.json().then(json => ({ json, response }))
     })
