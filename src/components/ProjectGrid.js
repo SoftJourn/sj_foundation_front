@@ -30,6 +30,7 @@ export default class ProjectGrid extends Component {
       shortDescription: props.shortDescription,
       supporters: props.supporters,
       raised: props.raised,
+      userRaised: props.userRaised,
       isHover: false,
       showDonateModal: false,
       withdraw: props.withdraw,
@@ -59,6 +60,7 @@ export default class ProjectGrid extends Component {
       shortDescription: newProps.shortDescription,
       supporters: newProps.supporters,
       raised: newProps.raised,
+      userRaised: newProps.userRaised,
       isHover: false,
       showDonateModal: false,
       donationStatus: newProps.donationStatus,
@@ -188,7 +190,7 @@ export default class ProjectGrid extends Component {
     const donationInfo = this.getDonation();
     const withdrawInfo = this.getWithdrawInfo();
     const getDonationStatus = this.getDonationStatus();
-    const supportersClass = classNames({'icon-selected': userRaised != 0});
+    const supportersClass = classNames({'icon-selected': parseInt(userRaised) != 0});
     return(
       <div className="col-xs-12 col-sm-4">
         <DonationModal
