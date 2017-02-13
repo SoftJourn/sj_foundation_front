@@ -157,6 +157,7 @@ class ProjectPage extends Component {
               user={this.state.user}
               showModal={project.showModal}
               donationStatus={data.donationStatus}
+              canDonate={data.canDonate}
             />
           </div>
         </div>
