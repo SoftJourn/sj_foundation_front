@@ -24,11 +24,11 @@ export default function projects(state = initialData, action) {
       });
     case types.SEARCH_SUCCESS:
       //change data keynames
-      const response = rename(action.response.data, (str) => {return `${state.page}${str}`});
+      const response = rename(action.response.data.data, (str) => {return `${state.page}${str}`});
       let data = Object.assign({}, state.data, {...response});
       return Object.assign({}, state, {
         data,
-        pages: action.response.meta.pages,
+        pages: action.response.data.meta.pages,
         isFetching: false,
       });
     case types.SEARCH_LOAD_MORE:
