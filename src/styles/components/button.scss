@@ -1,13 +1,24 @@
-.btn-donate {
-  border-color: rgba($teal, .3);
-  background-color: rgba($paper, .75);
-  color: $asphalt;
+.btn {
   border-radius: 1px;
+  &.btn-donate {
+    border-color: rgba($teal, .3);
+    background-color: rgba($paper, .75);
+    color: $asphalt;
 
-  &:hover {
-    border-color: rgba($greenSea, 1);
-    background-color: rgba($teal, .9);
-    color: $paper;
-    border-radius: 1px;
+    &:hover {
+      border-color: rgba($greenSea, 1);
+      background-color: rgba($teal, .9);
+      color: $paper;
+    }
+  }
+
+  &.btn-success {
+    color:white;
+    background-color: $nephritis;
+
+    :hover {
+      color: white;
+      background-color:  darken($greenSea, .1);
+    }
   }
 }
