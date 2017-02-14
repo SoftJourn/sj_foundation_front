@@ -1,5 +1,6 @@
 import { CALL_API } from '../redux/middleware/api';
 import * as types from '../ActionTypes';
+import {getBalance} from './userActions';
 
 
 /**
@@ -88,13 +89,22 @@ export function getProjectMetaBySlug(slug) {
 
 export function pledgeProject(id, amount) {
   return (dispatch, getState) => {
-    return dispatch(pledgeProjectRequest(id, amount)).then(() => dispatch(updateProjectById(id)));
+    return dispatch(pledgeProjectRequest(id, amount)).then(
+      () => {
+        dispatch(updateProjectById(id));
+        dispatch(getBalance());
+      }
+    );
   }
 }
 
 export function withdrawProject(id) {
   return (dispatch) => {
-    return dispatch(withdrawProjectRequest(id)).then(() => dispatch(updateProjectById(id)));
+    return dispatch(withdrawProjectRequest(id)).then(
+      () => {
+        dispatch(updateProjectById(id));
+        dispatch(getBalance());
+      });
   }
 }
 
