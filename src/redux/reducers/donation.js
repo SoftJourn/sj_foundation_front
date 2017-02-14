@@ -56,7 +56,7 @@ export default function donation(state = initialData, action) {
         withdraw: withdraws,
       });
     case types.WITHDRAW_SUCCESS:
-      success = action.response.success;
+      success = action.response.data.success;
       withdraws.push({
         success: success,
         error: !success,
