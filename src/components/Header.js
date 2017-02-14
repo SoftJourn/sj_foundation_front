@@ -30,6 +30,9 @@ export default class Header extends Component {
             <Link className="navbar-brand" to="/">SJ Foundation</Link>
           </div>
           <div className="collapse navbar-collapse" id="navbar-collapse-bar">
+            <ul className="nav navbar-nav ">
+              <li><Link to="/how-it-works">How it works</Link></li>
+            </ul>
             <ul className="nav navbar-nav navbar-right">
               <li>
                 <Link to="/signin">Login</Link>
