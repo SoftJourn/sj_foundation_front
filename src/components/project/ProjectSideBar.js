@@ -3,6 +3,7 @@ import SJCoin from '../sjCoin';
 import PledgeInput from '../PledgeInput';
 import { Link } from 'react-router'
 import { browserHistory } from 'react-router';
+import CoinsSum from '../helper/CoinsSum';
 
 export default class ProjectSideBar extends Component {
 
@@ -93,13 +94,13 @@ export default class ProjectSideBar extends Component {
           </div>
           <div>
             <h2>
-              <SJCoin />{raised}
+              <SJCoin /><CoinsSum value={raised}/>
               {
                 status != 'not_founded' && userRaised > 0 &&
                 <span> ({userRaised})</span>
               }
             </h2>
-            donated {price !== '' && <span>of <b>{price}</b> goal {canDonateMore && <span>or more</span>}</span>}
+            donated {price !== '' && <span>of <b><CoinsSum value={price}/></b> goal {canDonateMore && <span>or more</span>}</span>}
           </div>
           {this.getTimeRemain()}
           { canDonate &&

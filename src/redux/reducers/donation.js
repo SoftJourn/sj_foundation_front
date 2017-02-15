@@ -28,6 +28,7 @@ export default function donation(state = initialData, action) {
         donationError: !success,
         donationRequest: false,
         donationId: action.response.data.id,
+        errorMessage: action.response.data.message,
         donationAmount: success ? action.response.data.amount : 0,
       });
       return Object.assign({}, state, {
@@ -39,6 +40,7 @@ export default function donation(state = initialData, action) {
         donationError: true,
         donationRequest: false,
         donationId: action.response.data.id,
+        errorMessage: action.response.data.message,
         donationAmount: success ? action.response.data.amount : 0,
       });
       return Object.assign({}, state, {

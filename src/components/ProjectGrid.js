@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link, browserHistory } from 'react-router'
 import SJCoin from './sjCoin';
+import CoinsSum from './helper/CoinsSum';
 import DonationModal from './modals/DonationModal';
 import {withdrawProject} from '../actions/projectActions';
 import classNames from 'classnames';
@@ -137,7 +138,7 @@ export default class ProjectGrid extends Component {
     if (donation.donationError) {
       return(
         <div className="project-short-overview text-dange">
-          Error donate project!
+          Error donate project! {donation.errorMessage}
         </div>
       )
     }
@@ -255,7 +256,7 @@ export default class ProjectGrid extends Component {
            <div className="project-short-overview">
               <div className="project-grid-icons">
                 <span style={{marginRight: '2px'}}><SJCoin /></span>
-                {raised}{price > 0 && <span>/{price}{canDonateMore && <span>+</span>}</span>}
+                <CoinsSum value={raised} short={true}/>{price > 0 && <span>/<CoinsSum value={price} short={true}/>{canDonateMore && <span>+</span>}</span>}
               </div>
               <div className="text-right">
                 { commentsCount > 0 && <span><span className="glyphicon glyphicon-comment" aria-hidden="true"></span>{commentsCount}</span> }

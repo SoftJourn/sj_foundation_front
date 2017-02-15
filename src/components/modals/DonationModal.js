@@ -124,7 +124,7 @@ export default class DonationModal extends Component {
                   <button className="btn btn-donate btn-success" onClick={this.handleSubmit.bind(this)}>
                     Confirm donate <b><SJCoin />{this.state.value}</b>
                   </button>
-                  <button className="btn btn-default" onClick={this.props.onClose}>
+                  <button className="btn btn-default" onClick={() => this.setState({confirm: false})}>
                     Cancel
                   </button>
                 </div>
@@ -133,7 +133,7 @@ export default class DonationModal extends Component {
                 <div>
                   <div className="form-inline">
                     <div className="form-group">
-                      <input type="numbers" autofocus className="form-control" size="10" value={this.state.value} onChange={this.handleChange} placeholder="amount" />
+                      <input type="numbers" autoFocus className="form-control" size="10" value={this.state.value} onChange={this.handleChange} placeholder="amount" />
                     </div>
                     <div className="form-group">
                       <button className="btn btn-donate btn-success" onClick={this.handleDonate.bind(this)}>
