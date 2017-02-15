@@ -12,14 +12,8 @@ const CoinsSum = (props) => {
     }
   } else {
     let num = value+'';
-    const gap_size = 3;
-
-    while (num.length > 0)
-    {
-      formattedValue = formattedValue + " " + num.substring(0, gap_size);
-      num = num.substring(gap_size);
-    }
-
+    const remainder = num.length % 3;
+    formattedValue = (num.substr(0, remainder) + num.substr(remainder).replace(/(\d{3})/g, ' $1')).trim();
   }
   return (
     <span>{formattedValue}</span>
