@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {createComment} from '../actions/commentActions';
+import {createComment} from '../../actions/commentActions';
 import moment from 'moment';
 import classNames from 'classnames';
 

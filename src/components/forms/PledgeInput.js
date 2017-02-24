@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import { pledgeProject } from '../actions/projectActions';
-import '../../node_modules/react-select/dist/react-select.css';
-import SJCoin from '../components/sjCoin';
+import { pledgeProject } from '../../actions/projectActions';
+import '../../../node_modules/react-select/dist/react-select.css';
+import SJCoin from '../../components/helper/sjCoin';
 import Modal from 'react-modal';
 import classNames from 'classnames';
 import {Link} from 'react-router';

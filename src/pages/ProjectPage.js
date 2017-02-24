@@ -4,12 +4,11 @@ import { getProjectBySlug, getProjectById } from '../actions/projectActions';
 import { fetchComments } from '../actions/commentActions';
 import { getBalance } from '../actions/userActions';
 import moment from 'moment';
-import SJCoin from '../components/sjCoin';
-import PledgeInput from '../components/PledgeInput';
+import SJCoin from '../components/helper/sjCoin';
 import { Link } from 'react-router'
-import Spinner from '../components/Spinner';
-import CommentInput from '../components/CommentInput';
-import CommentBox from '../components/CommentBox';
+import Spinner from '../components/helper/Spinner';
+import CommentInput from '../components/comment/CommentInput';
+import CommentBox from '../components/comment/CommentBox';
 import { browserHistory } from 'react-router';
 import * as types from '../ActionTypes';
 import ProjectSideBar from '../components/project/ProjectSideBar';

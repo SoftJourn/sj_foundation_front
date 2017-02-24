@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Link, browserHistory } from 'react-router'
-import SJCoin from './sjCoin';
-import CoinsSum from './helper/CoinsSum';
-import DonationModal from './modals/DonationModal';
-import {withdrawProject} from '../actions/projectActions';
+import SJCoin from '../../helper/sjCoin';
+import CoinsSum from '../../helper/CoinsSum';
+import DonationModal from '../../modals/DonationModal';
+import {withdrawProject} from '../../../actions/projectActions';
 import classNames from 'classnames';
 
 export default class ProjectGrid extends Component {

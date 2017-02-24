@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import SJCoin from '../sjCoin';
-import PledgeInput from '../PledgeInput';
+import SJCoin from '../helper/sjCoin';
+import PledgeInput from '../forms/PledgeInput';
 import { Link } from 'react-router'
 import { browserHistory } from 'react-router';
 import CoinsSum from '../helper/CoinsSum';

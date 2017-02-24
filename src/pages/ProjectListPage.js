@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import ProjectGrid from '../components/ProjectGrid';
-import CategoriesFilter from '../components/CategoriesFilter';
+import ProjectGrid from '../components/project/projectGrid/ProjectGrid';
+import CategoriesFilter from '../components/forms/CategoriesFilter';
 import { getProjects, fetchProjectCategories } from '../actions/projectActions';
-import Spinner from '../components/Spinner';
+import Spinner from '../components/helper/Spinner';
 
 class ProjectListPage extends Component {
 
