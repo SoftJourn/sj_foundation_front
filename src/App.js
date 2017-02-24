@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Header from './components/Header';
+import Header from './components/layout/Header';
 import { getBalance } from 'actions/userActions';
 
 import 'styles/styles.scss';

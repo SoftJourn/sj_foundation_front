@@ -260,7 +260,7 @@ export default class ProjectGrid extends Component {
               </div>
               <div className="text-right">
                 { commentsCount > 0 && <span><span className="glyphicon glyphicon-comment" aria-hidden="true"></span>{commentsCount}</span> }
-                { attachments.length > 0 && <span><span className="glyphicon glyphicon-file" aria-hidden="true"></span>{attachments.length}</span> }
+                {/*{ attachments.length > 0 && <span><span className="glyphicon glyphicon-file" aria-hidden="true"></span>{attachments.length}</span> }*/}
                 { supporters > 0 && <span className={supportersClass}><span className="glyphicon glyphicon-user" aria-hidden="true"></span>{supporters}</span> }
               </div>
             </div>
