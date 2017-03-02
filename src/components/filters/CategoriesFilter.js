@@ -28,7 +28,7 @@ export default class CategoriesFilter extends Component {
       let parentWidth = filterElement[0].offsetParent.offsetWidth;
       let categories = this.state.categories;
 
-      if((parentWidth - width - 100) < 0 && categories.length > 1) {
+      if((parentWidth - width - 80) < 0 && categories.length > 1) {
         const lastCategory = categories.slice(-1).pop();
         let moreCategories = this.state.moreCategories;
         categories.pop();

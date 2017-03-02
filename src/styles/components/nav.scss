@@ -1,5 +1,13 @@
 .navbar {
   &.navbar-default {
-    background-color: $paper;
+    background-color: white;
+  }
+  .navbar-header {
+    width: 100%;
+
+    .navbar-right {
+      float: right !important;
+      margin-right: 0px;
+    }
   }
 }

@@ -1,13 +1,24 @@
 .project-results-header {
   border-bottom: 1px solid #eeeeee;
-  margin: 30px 0 40px 0;
+  margin-bottom: 40px;
+  background-color: $lightGray;
+  padding-top: 30px;
   .category-filter {
     float: left;
     a, button {
-      color: #333;
-      padding-bottom: 20px;
+      text-decoration: none;
+      padding: 11px 2px;
+      margin-right: 5px;
+      color: $simpleGray;
+      &:focus,
+      &:active {
+        outline: none;
+      }
       &.active {
+        color: $darkGray;
+        font-weight: bold;
         border-bottom: 2px solid $river;
+        padding-bottom: 10px;
       }
     }
   }
