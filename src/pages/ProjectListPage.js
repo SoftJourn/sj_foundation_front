@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ProjectGrid from '../components/project/projectGrid/ProjectGrid';
-import CategoriesFilter from '../components/forms/CategoriesFilter';
 import { getProjects, fetchProjectCategories } from '../actions/projectActions';
 import Spinner from '../components/helper/Spinner';
+import ProjectListFilters from '../components/filters/ProjectListFilters';
+
 
 class ProjectListPage extends Component {
 
@@ -79,13 +80,10 @@ class ProjectListPage extends Component {
     const getProjectWithdrawById = this.getProjectWithdrawById.bind(this);
     return (
       <div className="project-results">
-        <div className="project-results-header">
-          <div className="container">
-            <div className="raw">
-              <CategoriesFilter selectedCategory={selectedCategory} categories={categories} dispatch={this.props.dispatch} />
-            </div>
-          </div>
-        </div>
+        <ProjectListFilters
+          selectedCategory={selectedCategory}
+          categories={categories}
+        />
         <div className="container">
           <div className="raw">
             {Object.keys(data).length == 0 && !isFetching &&

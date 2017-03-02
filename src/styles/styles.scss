@@ -4,6 +4,7 @@
 @import './components/header';
 @import './components/button';
 @import './components/forms';
+@import './components/filters';
 @import './components/project';
 @import './components/projectGrid';
 @import './components/login';
@@ -20,7 +21,7 @@ body {
 }
 
 .container {
-  max-width: 900px;
+  max-width: 1024px;
 }
 
 .static-page {
