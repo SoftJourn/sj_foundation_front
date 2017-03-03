@@ -5,10 +5,10 @@ import { Link } from 'react-router';
 class CategoryFilterDropdown extends React.Component {
 
   getLabel() {
-    const {items, selectedCategory} = this.props;
+    const {items, query} = this.props;
     let selectedItem = false;
     items.map(value => {
-      if (encodeURI(value.slug) == selectedCategory) {
+      if (encodeURI(value.slug) == query.category) {
         selectedItem = value.name;
       }
     });
@@ -16,7 +16,7 @@ class CategoryFilterDropdown extends React.Component {
   }
 
   render() {
-    const {items, selectedCategory} = this.props;
+    const {items, selectedCategory, query} = this.props;
     if (items.length == 0) {
       return null;
     }
@@ -32,7 +32,7 @@ class CategoryFilterDropdown extends React.Component {
                 }
                 const buttonClass = classNames('btn btn-link');
                 return (
-                  <MenuItem><Link to={`/category/${category.slug}`} className={buttonClass} key={category.id}>{category.name}</Link></MenuItem>
+                  <MenuItem><Link to={{pathname: '/search', query: {...query, category: category.slug} }} className={buttonClass} key={category.id}>{category.name}</Link></MenuItem>
                 );
               })}
             </MenuList>

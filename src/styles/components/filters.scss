@@ -3,28 +3,36 @@
   margin-bottom: 40px;
   background-color: $lightGray;
   padding-top: 30px;
+  a, button {
+    text-decoration: none;
+    color: $simpleGray;
+    outline: none;
+    &:focus,
+    &:focus:active,
+    &:hover,
+    &:active {
+      outline: none;
+      text-decoration: none;
+    }
+    &.active {
+      color: $darkGray;
+      font-weight: bold;
+    }
+  }
   .category-filter {
     float: left;
     a, button {
-      text-decoration: none;
       padding: 11px 2px;
       margin-right: 5px;
-      color: $simpleGray;
-      &:focus,
-      &:active {
-        outline: none;
-      }
       &.active {
-        color: $darkGray;
-        font-weight: bold;
         border-bottom: 2px solid $river;
         padding-bottom: 10px;
       }
     }
   }
+  .project-filters {
+    padding-top: 5px;
+    text-align: right;
+  }
 }
 
-.project-filters {
-  padding: 2px 0;
-  text-align: right;
-}
