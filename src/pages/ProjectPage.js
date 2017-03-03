@@ -26,11 +26,14 @@ class ProjectPage extends Component {
       user: props.user,
       preview: props.route.preview,
     };
-    props.dispatch({type: types.PROJECT_INIT});
+  }
+
+  componentWillMount() {
+    this.props.dispatch({type: types.PROJECT_INIT});
     if (this.state.preview) {
-      props.dispatch(getProjectById(props.routeParams.slug));
+      this.props.dispatch(getProjectById(this.props.routeParams.slug));
     } else {
-      props.dispatch(getProjectBySlug(props.routeParams.slug));
+      this.props.dispatch(getProjectBySlug(this.props.routeParams.slug));
     }
   }
 

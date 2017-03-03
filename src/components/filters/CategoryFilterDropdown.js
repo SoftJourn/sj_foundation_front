@@ -32,7 +32,14 @@ class CategoryFilterDropdown extends React.Component {
                 }
                 const buttonClass = classNames('btn btn-link');
                 return (
-                  <MenuItem><Link to={{pathname: '/search', query: {...query, category: category.slug} }} className={buttonClass} key={category.id}>{category.name}</Link></MenuItem>
+                  <MenuItem key={category.id}>
+                    <Link
+                      to={{pathname: '/search', query: {...query, category: category.slug} }}
+                      className={buttonClass}
+                    >
+                      {category.name}
+                      </Link>
+                  </MenuItem>
                 );
               })}
             </MenuList>

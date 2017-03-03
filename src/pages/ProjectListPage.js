@@ -24,8 +24,12 @@ class ProjectListPage extends Component {
       query: {...queryInit, ...props.location.query},
     };
     this.handleLoadMore.bind(this);
-    props.dispatch(fetchProjectCategories());
-    props.dispatch(getProjects(1, this.state.query));
+
+  }
+
+  componentWillMount() {
+    this.props.dispatch(fetchProjectCategories());
+    this.props.dispatch(getProjects(1, this.state.query));
   }
 
   /**
