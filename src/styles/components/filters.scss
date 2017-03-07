@@ -1,0 +1,38 @@
+.project-results-header {
+  border-bottom: 1px solid #eeeeee;
+  margin-bottom: 40px;
+  background-color: $lightGray;
+  padding-top: 30px;
+  a, button {
+    text-decoration: none;
+    color: $simpleGray;
+    outline: none;
+    &:focus,
+    &:focus:active,
+    &:hover,
+    &:active {
+      outline: none;
+      text-decoration: none;
+    }
+    &.active {
+      color: $darkGray;
+      font-weight: bold;
+    }
+  }
+  .category-filter {
+    float: left;
+    a, button {
+      padding: 11px 2px;
+      margin-right: 5px;
+      &.active {
+        border-bottom: 2px solid $river;
+        padding-bottom: 10px;
+      }
+    }
+  }
+  .project-filters {
+    padding-top: 5px;
+    text-align: right;
+  }
+}
+

@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
+import {Link} from 'react-router';
 import { connect } from 'react-redux';
 import { getProjectBySlug, getProjectById } from '../actions/projectActions';
 import { fetchComments } from '../actions/commentActions';
 import { getBalance } from '../actions/userActions';
 import moment from 'moment';
 import SJCoin from '../components/helper/sjCoin';
-import { Link } from 'react-router'
 import Spinner from '../components/helper/Spinner';
 import CommentInput from '../components/comment/CommentInput';
 import CommentBox from '../components/comment/CommentBox';
@@ -27,11 +27,14 @@ class ProjectPage extends Component {
       user: props.user,
       preview: props.route.preview,
     };
-    props.dispatch({type: types.PROJECT_INIT});
+  }
+
+  componentWillMount() {
+    this.props.dispatch({type: types.PROJECT_INIT});
     if (this.state.preview) {
-      props.dispatch(getProjectById(props.routeParams.slug));
+      this.props.dispatch(getProjectById(this.props.routeParams.slug));
     } else {
-      props.dispatch(getProjectBySlug(props.routeParams.slug));
+      this.props.dispatch(getProjectBySlug(this.props.routeParams.slug));
     }
   }
 
@@ -140,6 +143,14 @@ class ProjectPage extends Component {
               <h1 className="text-left">
                 <span dangerouslySetInnerHTML={{__html: data.title}}/>
               </h1>
+              <div className="project-author">
+                <span>
+                  <Link to={{pathname: '/search', query: {category: data.categories[0].slug} }}>
+                    {data.categories[0].name}
+                  </Link>
+                </span>
+                { this.state.user.loggedIn && <span>Author: {data.author}</span> }
+              </div>
             </div>
             <div className="col-xs-12 col-sm-8 col-md-9">
               <div className="img" style={{backgroundImage: `url(${data.thumbnailUrl})`}}></div>
@@ -177,13 +188,7 @@ class ProjectPage extends Component {
             <div className="col-md-12">
               <div className="project-content">
                 <div dangerouslySetInnerHTML={{__html: data.content}}/>
-
               </div>
-              { this.state.user.loggedIn &&
-              <p className="text-right">
-                <small>Author: {data.author}</small>
-              </p>
-              }
             </div>
           }
           {

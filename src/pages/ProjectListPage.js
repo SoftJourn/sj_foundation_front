@@ -1,14 +1,19 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ProjectGrid from '../components/project/projectGrid/ProjectGrid';
-import CategoriesFilter from '../components/forms/CategoriesFilter';
 import { getProjects, fetchProjectCategories } from '../actions/projectActions';
 import Spinner from '../components/helper/Spinner';
+import ProjectListFilters from '../components/filters/ProjectListFilters';
+import _ from 'lodash';
+
+
+const queryInit = {category: '', type: '', sort: ''};
 
 class ProjectListPage extends Component {
 
   constructor(props) {
     super();
+
     const selectedCategory = props.routeParams.category ? props.routeParams.category : '';
     this.state = {
       donation: props.donation,
@@ -16,10 +21,15 @@ class ProjectListPage extends Component {
       selectedCategory,
       page: 1,
       user: props.user,
+      query: {...queryInit, ...props.location.query},
     };
     this.handleLoadMore.bind(this);
-    props.dispatch(getProjects(1, selectedCategory));
-    props.dispatch(fetchProjectCategories());
+
+  }
+
+  componentWillMount() {
+    this.props.dispatch(fetchProjectCategories());
+    this.props.dispatch(getProjects(1, this.state.query));
   }
 
   /**
@@ -29,15 +39,18 @@ class ProjectListPage extends Component {
    */
   componentWillReceiveProps(nextProps) {
     const selectedCategory = nextProps.routeParams.category ? nextProps.routeParams.category : '';
+    const query = {...queryInit, ...this.state.query};
+    const newQuery = {...query, ...nextProps.location.query};
     this.setState({
       user: nextProps.user,
       form: nextProps.form,
       projects: nextProps.projects,
       selectedCategory,
       donation: nextProps.donation,
+      query: newQuery,
     });
-    if (this.state.selectedCategory !== selectedCategory) {
-      this.props.dispatch(getProjects(1, selectedCategory));
+    if (!_.isEqual(newQuery, query)) {
+      this.props.dispatch(getProjects(1, newQuery));
       this.setState({ page: 1});
     }
   }
@@ -74,18 +87,16 @@ class ProjectListPage extends Component {
 
   render() {
     const {pages, data, isFetching, categories } = this.state.projects;
-    const {projects, selectedCategory, user, donation} = this.state;
+    const {projects, selectedCategory, user, query, donation} = this.state;
     const getProjectDonationById = this.getProjectDonationById.bind(this);
     const getProjectWithdrawById = this.getProjectWithdrawById.bind(this);
     return (
       <div className="project-results">
-        <div className="project-results-header">
-          <div className="container">
-            <div className="raw">
-              <CategoriesFilter selectedCategory={selectedCategory} categories={categories} dispatch={this.props.dispatch} />
-            </div>
-          </div>
-        </div>
+        <ProjectListFilters
+          selectedCategory={selectedCategory}
+          categories={categories}
+          query={query}
+        />
         <div className="container">
           <div className="raw">
             {Object.keys(data).length == 0 && !isFetching &&

@@ -1,17 +1,17 @@
 import { CALL_API } from '../redux/middleware/api';
 import * as types from '../ActionTypes';
 import {getBalance} from './userActions';
-
+import {serialize} from '../utils/utils'
 
 /**
  * fetches projects
  * @returns {{}}
  */
-function fetchSearch(page = 1, category = '') {
+function fetchSearch(page = 1, query= {}) {
   return {
     [CALL_API]: {
       types: [types.SEARCH_REQUEST, types.SEARCH_SUCCESS, types.SEARCH_FAILURE],
-      endpoint: `get_projects/?&page=${page}&category=${category}`,
+      endpoint: `get_projects/?&page=${page}&${serialize(query)}`,
     },
   };
 }
@@ -32,14 +32,14 @@ export function fetchProjectCategories() {
 /**
  * change url and dispatch search action
  */
-export function getProjects(page = 1, category = '') {
+export function getProjects(page = 1, query = {}) {
   return (dispatch) => {
     if (page === 1) {
       dispatch({type: types.SEARCH_INIT})
     } else {
       dispatch({type: types.SEARCH_LOAD_MORE})
     }
-    return dispatch(fetchSearch(page, category));
+    return dispatch(fetchSearch(page, query));
   };
 }
 

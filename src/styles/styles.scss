@@ -1,9 +1,12 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto');
 @import './components/wp';
 @import './vars';
+@import './components/nav';
 @import './components/header';
+@import './components/footer';
 @import './components/button';
 @import './components/forms';
+@import './components/filters';
 @import './components/project';
 @import './components/projectGrid';
 @import './components/login';
@@ -15,12 +18,11 @@
 
 body {
   padding-top: 40px;
-  padding-bottom: 40px;
   font-family: 'Roboto', sans-serif;
 }
 
 .container {
-  max-width: 900px;
+  max-width: 1024px;
 }
 
 .static-page {
