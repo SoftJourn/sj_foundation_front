@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router'
+import { Link } from 'react-router';
 import { browserHistory } from 'react-router';
 import ProjectNavLink from './ProjectNavLink';
+import ProjectUpdateButton from './ProjectUpdateButton';
 
 export default class ProjectNav extends Component {
 
@@ -11,8 +12,11 @@ export default class ProjectNav extends Component {
       preview: props.preview,
       tab: props.tab,
       mainUrl: props.mainUrl,
+      user: props.user,
       commentsCount: props.commentsCount,
       attachmentsCount: props.attachmentsCount,
+      updatesCount: props.updatesCount,
+      author: props.author
     };
   }
 
@@ -21,13 +25,16 @@ export default class ProjectNav extends Component {
       preview: props.preview,
       tab: props.tab,
       mainUrl: props.mainUrl,
+      user: props.user,
       commentsCount: props.commentsCount,
       attachmentsCount: props.attachmentsCount,
+      updatesCount: props.updatesCount,
+      author: props.author
     });
   }
 
   render() {
-    const {preview, mainUrl, attachmentsCount, commentsCount, tab} = this.state;
+    const {mainUrl, attachmentsCount, commentsCount, updatesCount, tab, user, author} = this.state;
     return (
       <div className="project-nav" id="project-nav">
         <div className="container">
@@ -47,6 +54,19 @@ export default class ProjectNav extends Component {
                 mainUrl={mainUrl}
                 name="comments"
                 count={commentsCount}
+              />
+              <ProjectNavLink
+                tab={tab}
+                mainUrl={mainUrl}
+                name="updates"
+                count={updatesCount}
+              />
+              <ProjectUpdateButton
+                tab={tab}
+                mainUrl={mainUrl}
+                name="addUpdate"
+                user={user}
+                author={author}
               />
             </ul>
           </div>

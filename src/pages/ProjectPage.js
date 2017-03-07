@@ -13,6 +13,7 @@ import { browserHistory } from 'react-router';
 import * as types from '../ActionTypes';
 import ProjectSideBar from '../components/project/ProjectSideBar';
 import ProjectNav from '../components/project/ProjectNav';
+import TextEditor from '../components/project/TextEditor';
 
 class ProjectPage extends Component {
 
@@ -99,7 +100,7 @@ class ProjectPage extends Component {
   }
 
   render() {
-    const { project, slug, tab, id, preview } = this.state;
+    const { project, slug, tab, id, preview, user } = this.state;
     const mainUrl = this.getMainUrl();
     const data = project.data;
     if (project.isFetching) {
@@ -153,7 +154,7 @@ class ProjectPage extends Component {
               price={data.price}
               canDonateMore={data.canDonateMore}
               durationLeft={data.durationLeft}
-              user={this.state.user}
+              user={user}
               showModal={project.showModal}
               donationStatus={data.donationStatus}
               canDonate={data.canDonate}
@@ -166,6 +167,9 @@ class ProjectPage extends Component {
           tab={tab}
           commentsCount={data.commentsCount ? data.commentsCount.total_comments : 0}
           attachmentsCount={data.attachments.length}
+          updatesCount={data.updates ? data.updates.length : 0}
+          user={user}
+          author={data.author}
         />
         <div className="container">
           {
@@ -215,6 +219,12 @@ class ProjectPage extends Component {
                   })}
                 </div>
               </div>
+            </div>
+          }
+          {
+            (tab == 'addUpdate') &&
+            <div className="raw project-content">
+              <TextEditor/>
             </div>
           }
         </div>
