@@ -14,6 +14,8 @@ import * as types from '../ActionTypes';
 import ProjectSideBar from '../components/project/ProjectSideBar';
 import ProjectNav from '../components/project/ProjectNav';
 import TextEditor from '../components/project/TextEditor';
+import TabContainer from '../components/tab/TabContainer';
+import Updates from '../components/project/tabs/Updates';
 
 class ProjectPage extends Component {
 
@@ -178,21 +180,19 @@ class ProjectPage extends Component {
           tab={tab}
           commentsCount={data.commentsCount ? data.commentsCount.total_comments : 0}
           attachmentsCount={data.attachments.length}
-          updatesCount={data.updatesCount}
+          updatesCount={data.updates.length}
           user={user}
           author={data.author}
         />
         <div className="container">
-          {
-            (tab === '' || tab === 'overview') &&
+          <TabContainer name="overview" show={tab === ''} activeTab={tab}>
             <div className="col-md-12">
               <div className="project-content">
                 <div dangerouslySetInnerHTML={{__html: data.content}}/>
               </div>
             </div>
-          }
-          {
-            (tab == 'attachments') &&
+          </TabContainer>
+          <TabContainer name="attachments" activeTab={tab}>
             <div className="raw project-content">
               {data.attachments.map((attachment) => {
                 return (
@@ -207,9 +207,8 @@ class ProjectPage extends Component {
                 );
               })}
             </div>
-          }
-          {
-            (tab == 'comments' && !preview) &&
+          </TabContainer>
+          <TabContainer name="comments" activeTab={tab}>
             <div className="project-footer">
               <div className="container">
                 <div className="raw project-content">
@@ -225,16 +224,20 @@ class ProjectPage extends Component {
                 </div>
               </div>
             </div>
-          }
-          {
-            (tab == 'addUpdate') &&
+          </TabContainer>
+          <TabContainer name="updates" activeTab={tab}>
+            <div className="raw project-content">
+              <Updates updates={data.updates} />
+            </div>
+          </TabContainer>
+          <TabContainer name="addUpdate" activeTab={tab}>
             <div className="raw project-content">
               <TextEditor
                 dispatch={this.props.dispatch}
                 projectId={project.data.id}
               />
             </div>
-          }
+          </TabContainer>
         </div>
         <div className="project-footer">
           <div className="container">

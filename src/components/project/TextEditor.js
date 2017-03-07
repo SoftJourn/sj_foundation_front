@@ -22,7 +22,7 @@ class TextEditor extends Component {
         this.setState({
             active: false,
         });
-        console.log(this.state)
+        console.log(textEditorContent);
     }
 
     render() {
@@ -34,14 +34,16 @@ class TextEditor extends Component {
                 config={{
                     selector: "#textEditor",
                     theme: 'modern',
+                    menubar: false,
+                    height: 500,
                     plugins: [
-                        'advlist autolink lists link image charmap print preview hr anchor pagebreak',
-                        'searchreplace wordcount visualblocks visualchars code fullscreen',
+                        'advlist autolink lists link image charmap preview hr anchor pagebreak',
+                        'searchreplace visualblocks visualchars code fullscreen',
                         'insertdatetime media nonbreaking save table contextmenu directionality',
-                        'emoticons template paste textcolor colorpicker textpattern imagetools codesample toc save',
+                        'template paste textcolor colorpicker textpattern imagetools toc save',
                     ],
-                    toolbar1: 'undo redo | insert | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
-                    toolbar2: 'print preview media | forecolor backcolor emoticons | codesample | save',
+                    toolbar1: 'undo redo | insert | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent',
+                    toolbar2: 'preview | | link image media | codesample | save',
                     save_onsavecallback: handleEditorChange
                 }}
                 />
