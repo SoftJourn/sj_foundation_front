@@ -1,6 +1,8 @@
 
 .project-results {
 
+  min-height: 80vh;
+
   .project-grid {
     background-color: #F8F8F8;
     border: 1px solid #eee;
@@ -66,7 +68,7 @@
       padding-right: 20px;
 
       .progress {
-        height: 8px;
+        height: 6px;
         margin-bottom: 10px;
         .progress-bar {
           background-color: $nephritis;

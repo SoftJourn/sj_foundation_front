@@ -24,10 +24,11 @@ class Footer extends React.Component {
                 {chunk.map((category, categoryIndex) => {
                     return (
                         <p key={categoryIndex}>
-                            <Link className="footer-link" to={`category/${category.slug}`}>
+                            <Link className="footer-link" to={{ pathname:"search", query: {category: category.slug}}}>
                                 {category.name}
                             </Link>
-                        </p>)
+                        </p>
+                    )
                 })}
             </div>
         )

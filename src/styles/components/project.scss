@@ -1,9 +1,21 @@
 .project-page {
 
   .project-title {
-    padding-bottom: 30px;
+    padding-bottom: 15px;
     h1 {
       color: $asphalt;
+    }
+  }
+
+  .project-author {
+    span {
+      padding-right: 7px;
+      margin-right: 7px;
+      border-right: 1px solid $grey;
+
+      &:last-child {
+        border-right: none;
+      }
     }
   }
 
@@ -34,7 +46,7 @@
   .project-content {
     font-size: 18px;
     font-weight: 200;
-    padding: 20px 0 10px 0;
+    padding: 45px 0 10px 0;
   }
 
   .project-nav {
