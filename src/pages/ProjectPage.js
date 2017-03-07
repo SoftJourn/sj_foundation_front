@@ -167,7 +167,7 @@ class ProjectPage extends Component {
           tab={tab}
           commentsCount={data.commentsCount ? data.commentsCount.total_comments : 0}
           attachmentsCount={data.attachments.length}
-          updatesCount={data.updates ? data.updates.length : 0}
+          updatesCount={data.updatesCount}
           user={user}
           author={data.author}
         />
@@ -224,7 +224,10 @@ class ProjectPage extends Component {
           {
             (tab == 'addUpdate') &&
             <div className="raw project-content">
-              <TextEditor/>
+              <TextEditor
+                dispatch={this.props.dispatch}
+                projectId={project.data.id}
+              />
             </div>
           }
         </div>
