@@ -1,13 +1,11 @@
 import { CALL_API } from '../redux/middleware/api';
 import * as types from '../ActionTypes';
 
-
-export function setCoinsToAll(amount) {
+export function fetchAdminStats() {
   return {
     [CALL_API]: {
-      method: 'GET',
-      types: ['setCoinsToAll', 'setCoinsToAll', 'setCoinsToAll'],
-      endpoint: `setCoinsToAll?amount=${amount}`,
+      types: [types.ADMIN_STATS_REQUEST, types.ADMIN_STATS_SUCCESS, types.ADMIN_STATS_FAILURE],
+      endpoint: `get_admin_stats`,
     },
   };
 }
