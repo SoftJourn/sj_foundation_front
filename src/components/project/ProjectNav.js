@@ -29,13 +29,10 @@ export default class ProjectNav extends Component {
   render() {
     const {preview, mainUrl, attachmentsCount, commentsCount, tab} = this.state;
     return (
-      <div className="project-nav" id="project-nav">
+      <div className="project-nav">
         <div className="container">
-          <div className="col-md-12">
-            <ul className="nav nav-pills" role="tablist">
-              <li role="presentation" className={(tab === '' || tab == 'overview') && "active"}>
-                <Link to={`${mainUrl}overview`}>OVERVIEW</Link>
-              </li>
+          <nav className="col-md-12">
+            <Link className={(tab === '' || tab == 'overview') && "active"} to={`${mainUrl}overview`}>OVERVIEW</Link>
               <ProjectNavLink
                 tab={tab}
                 mainUrl={mainUrl}
@@ -48,8 +45,7 @@ export default class ProjectNav extends Component {
                 name="comments"
                 count={commentsCount}
               />
-            </ul>
-          </div>
+          </nav>
         </div>
       </div>
     );
