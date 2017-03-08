@@ -66,7 +66,7 @@ export default class ProjectNav extends Component {
               name="addUpdate"
               label="+add update"
               count={0}
-              show={updatesCount == 0}
+              show={updatesCount == 0 && user.isAdmin}
             />
           </nav>
         </div>

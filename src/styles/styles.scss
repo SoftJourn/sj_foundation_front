@@ -14,29 +14,4 @@
 @import './components/comment';
 @import './components/spinner';
 @import './components/icon';
-
-
-body {
-  padding-top: 40px;
-  font-family: 'Roboto', sans-serif;
-}
-
-.container {
-  max-width: 1024px;
-}
-
-.static-page {
-  padding-top: 50px;
-  h1 {
-    text-align: left;
-    margin-bottom: 40px;
-  }
-}
-
-.main-content {
-  padding-top: 10px;
-}
-
-.ReactModal__Overlay {
-  z-index: 2;
-}
+@import './layout';

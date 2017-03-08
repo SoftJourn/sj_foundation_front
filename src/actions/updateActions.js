@@ -1,5 +1,7 @@
 import { CALL_API } from '../redux/middleware/api';
 import * as types from '../ActionTypes';
+import {browserHistory} from 'react-router';
+import {updateProjectById, getProjectById} from './projectActions';
 
 
 export function createUpdate(projectId, content) {
@@ -14,4 +16,12 @@ export function createUpdate(projectId, content) {
             endpoint: 'add_update'
         },
     };
+}
+
+export function createUpdateAndRedirect(projectId, content, redirectUrl) {
+  return (dispatch) => {
+    dispatch(createUpdate(projectId, content))
+    .then(dispatch(updateProjectById(projectId)))
+    .then(browserHistory.push(redirectUrl));
+  }
 }

@@ -1,19 +1,20 @@
 import React, {PropTypes} from 'react';
+import {Link} from 'react-router';
 
 class Updates extends React.Component {
 
   render() {
-    const {updates} = this.props;
+    const {updates, showAddButton} = this.props;
     return (
       <div>
+        {showAddButton && <Link to={`${this.props.mainUrl}addUpdate`}>+add update</Link>}
         {updates.map(update => {
           return(
-            <div className="comment-box">
+            <div className="comment-box" key={update.id}>
               <div dangerouslySetInnerHTML={{__html: update.content}} />
             </div>
           );
         })}
-
       </div>
     );
   }
@@ -21,11 +22,13 @@ class Updates extends React.Component {
 }
 
 Updates.propTypes = {
-  updates: PropTypes.array
+  updates: PropTypes.array,
+  showAddButton: PropTypes.bool,
 };
 
 Updates.defaultProps = {
-  updates: []
+  updates: [],
+  showAddButton: false,
 };
 
 export default Updates;
