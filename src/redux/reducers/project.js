@@ -52,6 +52,7 @@ export default function project(state = initialData, action) {
         newCommentId: 0,
       });
     case types.PROJECT_SUCCESS:
+    case types.PROJECT_UPDATE_SUCCESS:
       return Object.assign({}, state, {
         data: action.response.data,
         isFetching: false,

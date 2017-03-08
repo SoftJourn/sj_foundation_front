@@ -33,21 +33,21 @@ class ProjectListFilters extends React.Component {
                   query={query}
                 />
               </div>
-              <MediaQuery query='(min-width: 769px)' className="col-sm-6 col-md-5 col-lg-4 project-filters">
-                <TextFilterDropdown options={projectFilterOptions} filter="type" query={query} />
-                <TextFilterDropdown prefix="sort by " options={projectSortOptions} filter="sort" query={query} />
-              </MediaQuery>
+              {/*<MediaQuery query='(min-width: 769px)' className="col-sm-6 col-md-5 col-lg-4 project-filters">*/}
+                {/*<TextFilterDropdown options={projectFilterOptions} filter="type" query={query} />*/}
+                {/*<TextFilterDropdown prefix="sort by " options={projectSortOptions} filter="sort" query={query} />*/}
+              {/*</MediaQuery>*/}
             </div>
           </div>
         </div>
-        <MediaQuery query='(max-width: 768px)' className="col-sm-4">
-          <div className="container">
-            <div className="raw">
-              <div className="col-sm-12">
-              </div>
-            </div>
-          </div>
-        </MediaQuery>
+        {/*<MediaQuery query='(max-width: 768px)' className="col-sm-4">*/}
+          {/*<div className="container">*/}
+            {/*<div className="raw">*/}
+              {/*<div className="col-sm-12">*/}
+              {/*</div>*/}
+            {/*</div>*/}
+          {/*</div>*/}
+        {/*</MediaQuery>*/}
       </div>
     );
   }

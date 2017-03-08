@@ -13,6 +13,10 @@ import { browserHistory } from 'react-router';
 import * as types from '../ActionTypes';
 import ProjectSideBar from '../components/project/ProjectSideBar';
 import ProjectNav from '../components/project/ProjectNav';
+import TabContainer from '../components/tab/TabContainer';
+import Updates from '../components/project/tabs/Updates';
+import AddUpdateForm from '../components/forms/AddUpdateForm';
+import PledgeInput from '../components/forms/PledgeInput';
 
 class ProjectPage extends Component {
 
@@ -102,7 +106,7 @@ class ProjectPage extends Component {
   }
 
   render() {
-    const { project, slug, tab, id, preview } = this.state;
+    const { project, slug, tab, id, preview, user } = this.state;
     const mainUrl = this.getMainUrl();
     const data = project.data;
     if (project.isFetching) {
@@ -164,7 +168,7 @@ class ProjectPage extends Component {
               price={data.price}
               canDonateMore={data.canDonateMore}
               durationLeft={data.durationLeft}
-              user={this.state.user}
+              user={user}
               showModal={project.showModal}
               donationStatus={data.donationStatus}
               canDonate={data.canDonate}
@@ -177,38 +181,42 @@ class ProjectPage extends Component {
           tab={tab}
           commentsCount={data.commentsCount ? data.commentsCount.total_comments : 0}
           attachmentsCount={data.attachments.length}
+          updatesCount={data.updates.length}
+          user={user}
+          author={data.author}
         />
         <div className="container">
-          {
-            (tab === '' || tab === 'overview') &&
-            <div className="col-md-12">
-              <div className="project-content">
-                <div dangerouslySetInnerHTML={{__html: data.content}}/>
-              </div>
-            </div>
-          }
-          {
-            (tab == 'attachments') &&
-            <div className="raw project-content">
-              {data.attachments.map((attachment) => {
-                return (
-                  <div className="col-xs-12 col-sm-3">
-                    <div onClick={() => window.open(attachment.url,'_blank')} className="attachment text-center">
-                      <div dangerouslySetInnerHTML={{__html: attachment.thumbnail}}/>
-                      <div className="caption">
-                        <p href={attachment.url} target="_blank" ><b>{attachment.title}</b></p>
+          <div className="row">
+            <div className="col-xs-12 col-sm-8 col-md-9">
+              <TabContainer name="overview" show={tab === ''} activeTab={tab}>
+                <div className="project-content">
+                  <div dangerouslySetInnerHTML={{__html: data.content}}/>
+                </div>
+                <div className="row">
+                  <CommentInput
+                    dispatch={this.props.dispatch}
+                    postId={id}
+                  />
+                </div>
+              </TabContainer>
+              <TabContainer name="attachments" activeTab={tab}>
+                <div className=" project-content">
+                  {data.attachments.map((attachment) => {
+                    return (
+                      <div className="col-xs-12 col-sm-3">
+                        <div onClick={() => window.open(attachment.url,'_blank')} className="attachment text-center">
+                          <div dangerouslySetInnerHTML={{__html: attachment.thumbnail}}/>
+                          <div className="caption">
+                            <p href={attachment.url} target="_blank" ><b>{attachment.title}</b></p>
+                          </div>
+                        </div>
                       </div>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          }
-          {
-            (tab == 'comments' && !preview) &&
-            <div className="project-footer">
-              <div className="container">
-                <div className="raw project-content">
+                    );
+                  })}
+                </div>
+              </TabContainer>
+              <TabContainer name="comments" activeTab={tab}>
+                <div className="project-content">
                   {project.comments.map((comment) => {
                     return (
                       <CommentBox
@@ -219,30 +227,36 @@ class ProjectPage extends Component {
                     );
                   })}
                 </div>
-              </div>
-            </div>
-          }
-        </div>
-        <div className="project-footer">
-          <div className="container">
-            {(!preview && this.state.user.loggedIn) &&
-              <div className="raw">
-                <div className="">
+                <div className="row project-content">
                   <CommentInput
                     dispatch={this.props.dispatch}
                     postId={id}
                   />
                 </div>
-                <div className="col-xs-12">
-                  <nav>
-                    <ul className="pager">
-                      { data.prev_project && <li className="previous"><Link to={`/project/${data.prev_project}`}><span aria-hidden="true">&larr;</span> Previous project</Link></li>}
-                      { data.next_project &&  <li className="next"><Link to={`/project/${data.next_project}`}>Next project <span aria-hidden="true">&rarr;</span></Link></li>}
-                    </ul>
-                  </nav>
+              </TabContainer>
+              <TabContainer name="updates" activeTab={tab}>
+                <div className=" project-content">
+                  <Updates mainUrl={mainUrl} updates={data.updates} showAddButton={user.isAdmin} />
                 </div>
-              </div>
-            }
+              </TabContainer>
+              <TabContainer name="addUpdate" activeTab={tab}>
+                <div className=" project-content">
+                  <AddUpdateForm dispatch={this.props.dispatch} projectId={data.id} mainUrl={mainUrl} />
+                </div>
+              </TabContainer>
+            </div>
+            <div className="col-xs-12 col-sm-4 col-md-3">
+              {/*{ data.canDonate &&*/}
+                {/*<PledgeInput*/}
+                  {/*dispatch={this.props.dispatch}*/}
+                  {/*user={user}*/}
+                  {/*amount={data.price}*/}
+                  {/*pledgeSum={data.raised}*/}
+                  {/*balance={this.state.user.balance}*/}
+                  {/*id={data.id}*/}
+                  {/*show={project.showModal} />*/}
+              {/*}*/}
+            </div>
           </div>
         </div>
       </div>

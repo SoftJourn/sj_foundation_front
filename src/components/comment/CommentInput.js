@@ -46,7 +46,7 @@ export default class CommentInput extends Component {
                 <input
                   className="project-comment-input form-control input-sm"
                   type="text"
-                  placeholder="Comment this"
+                  placeholder="add comment"
                   size="50"
                   onFocus={this.onFocus.bind(this)}
                 />
