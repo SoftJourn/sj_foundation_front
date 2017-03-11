@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import AdminStats from '../components/admin/AdminStats'
-import {fetchAdminStats} from '../actions/adminActions'
+import AdminStats from '../../components/admin/AdminStats'
+import {fetchAdminStats} from '../../actions/adminActions'
 
 class AdminPage extends Component {
 
@@ -21,7 +21,6 @@ class AdminPage extends Component {
   componentDidMount() {
     this.props.dispatch(fetchAdminStats());
   }
-
 
   render() {
     return (

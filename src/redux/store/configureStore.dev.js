@@ -5,7 +5,7 @@ import thunk from 'redux-thunk';
 import api from '../middleware/api';
 import createLogger from 'redux-logger';
 import rootReducer from '../reducers';
-import DevTools from '../../pages/DevTools';
+import DevTools from '../containers/DevTools';
 
 /**
  * configure store and apply thunk, api, logger middlewares
