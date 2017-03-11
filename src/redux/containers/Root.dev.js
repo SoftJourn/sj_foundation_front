@@ -1,7 +1,7 @@
 /* eslint react/prefer-stateless-function: off */
 import React, { Component, PropTypes } from 'react';
 import { Provider } from 'react-redux';
-import routes from '../routes';
+import routes from '../../routes';
 import DevTools from './DevTools';
 import { Router } from 'react-router';
 

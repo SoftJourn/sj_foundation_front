@@ -148,7 +148,7 @@ class ProjectPage extends Component {
               </h1>
               <div className="project-author">
                 <span>
-                  <Link to={{pathname: '/search', query: {category: data.categories[0].slug} }}>
+                  <Link to={{pathname: '/search', query: {category: data.categories.length ? data.categories[0].slug : '' } }}>
                     {data.categories[0].name}
                   </Link>
                 </span>
