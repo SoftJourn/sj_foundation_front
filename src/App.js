@@ -12,9 +12,9 @@ class App extends Component {
 
   constructor(props) {
     super();
-    if (window.wpApiSettings.user.ID) {
-      props.dispatch(getBalance());
-    }
+    // if (window.wpApiSettings.user.ID) {
+    //   props.dispatch(getBalance());
+    // }
 
     this.state = {
       user: props.user,

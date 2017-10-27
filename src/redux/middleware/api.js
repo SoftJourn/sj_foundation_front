@@ -13,9 +13,9 @@ let API_ROOT = '/wp-json/wp/v2/';
 function callApi(endpoint, store, method, body) {
   const fullUrl = (endpoint.indexOf(API_ROOT) === -1) ? API_ROOT + endpoint : endpoint;
   let apiHeaders = new Headers();
-  if (window.wpApiSettings.nonce) {
-    apiHeaders.append('X-WP-Nonce', window.wpApiSettings.nonce);
-  }
+  // if (window.wpApiSettings.nonce) {
+  //   apiHeaders.append('X-WP-Nonce', window.wpApiSettings.nonce);
+  // }
   return fetch(fullUrl, {
       body: JSON.stringify(body),
       credentials: 'same-origin',
