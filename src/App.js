@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Header from './components/Header';
+import Header from './components/layout/Header';
+import Footer from './components/layout/Footer';
 import { getBalance } from 'actions/userActions';
 
 import 'styles/styles.scss';
@@ -18,13 +19,15 @@ class App extends Component {
 
     this.state = {
       user: props.user,
+      projects: props.projects
     }
 
   }
 
   componentWillReceiveProps(newProps) {
     this.setState({
-      user: newProps.user
+      user: newProps.user,
+      projects: newProps.projects
     });
   }
 
@@ -40,6 +43,7 @@ class App extends Component {
         <div className="main-content">
           {children}
         </div>
+        <Footer categories={this.state.projects.categories}/>
       </div>
     );
   }
@@ -52,6 +56,7 @@ class App extends Component {
 function mapStateToProps(state) {
   return {
     user: state.user,
+    projects: state.projects
   };
 }
 

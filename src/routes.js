@@ -11,6 +11,7 @@ import HowItWorksPage from './pages/HowItWorksPage';
 export default (
   <Route path="/" component={App}>
     <IndexRoute component={ProjectListPage} />
+    <Route path="/search" component={ProjectListPage} />
     <Route path="/project" component={ProjectListPage} />
     <Route path="/category/:category" component={ProjectListPage} />
     <Route path="/signin" component={LoginPage} />

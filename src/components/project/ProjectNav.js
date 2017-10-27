@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router'
-import { browserHistory } from 'react-router';
-import ProjectNavLink from './ProjectNavLink';
+import { Link } from 'react-router';
+import TabButton from '../tab/TabButton';
 
 export default class ProjectNav extends Component {
 
@@ -11,8 +10,11 @@ export default class ProjectNav extends Component {
       preview: props.preview,
       tab: props.tab,
       mainUrl: props.mainUrl,
+      user: props.user,
       commentsCount: props.commentsCount,
       attachmentsCount: props.attachmentsCount,
+      updatesCount: props.updatesCount,
+      author: props.author,
     };
   }
 
@@ -21,35 +23,52 @@ export default class ProjectNav extends Component {
       preview: props.preview,
       tab: props.tab,
       mainUrl: props.mainUrl,
+      user: props.user,
       commentsCount: props.commentsCount,
       attachmentsCount: props.attachmentsCount,
+      updatesCount: props.updatesCount,
+      author: props.author
     });
   }
 
   render() {
-    const {preview, mainUrl, attachmentsCount, commentsCount, tab} = this.state;
+    const {mainUrl, attachmentsCount, commentsCount, updatesCount, tab, user, author} = this.state;
+
     return (
-      <div className="project-nav" id="project-nav">
+      <div className="project-nav">
         <div className="container">
-          <div className="col-md-12">
-            <ul className="nav nav-pills" role="tablist">
-              <li role="presentation" className={(tab === '' || tab == 'overview') && "active"}>
-                <Link to={`${mainUrl}overview`}>OVERVIEW</Link>
-              </li>
-              <ProjectNavLink
-                tab={tab}
-                mainUrl={mainUrl}
-                name="attachments"
-                count={attachmentsCount}
-              />
-              <ProjectNavLink
-                tab={tab}
-                mainUrl={mainUrl}
-                name="comments"
-                count={commentsCount}
-              />
-            </ul>
-          </div>
+          <nav className="">
+            <Link className={(tab === '' || tab == 'overview') && "active"} to={`${mainUrl}overview`}>OVERVIEW</Link>
+            <TabButton
+              activeTab={tab}
+              mainUrl={mainUrl}
+              name="attachments"
+              label="Attachments"
+              count={attachmentsCount}
+            />
+            <TabButton
+              activeTab={tab}
+              mainUrl={mainUrl}
+              name="comments"
+              label="Comments"
+              count={commentsCount}
+            />
+            <TabButton
+              activeTab={tab}
+              mainUrl={mainUrl}
+              name="updates"
+              label="Updates"
+              count={updatesCount}
+            />
+            <TabButton
+              activeTab={tab}
+              mainUrl={mainUrl}
+              name="addUpdate"
+              label="+add update"
+              count={0}
+              show={updatesCount == 0 && user.isAdmin}
+            />
+          </nav>
         </div>
       </div>
     );
