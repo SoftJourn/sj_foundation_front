@@ -40,6 +40,9 @@ export default class ProjectSideBar extends Component {
   getTimeRemain() {
     //in minutes
     const durationLeft = this.state.durationLeft;
+    if (!(!!durationLeft)) {
+      return null;
+    }
     if (durationLeft <= 0) {
       return null;
     } else if (durationLeft < 60) {

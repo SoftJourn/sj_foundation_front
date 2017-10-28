@@ -7,7 +7,7 @@ export function createComment(postId, content) {
     [CALL_API]: {
       method: 'POST',
       types: [types.COMMENT_POST_REQUEST, types.COMMENT_POST_SUCCESS, types.COMMENT_POST_FAILURE],
-      endpoint: `comments?post=${postId}&content=${content}`,
+      endpoint: `api/comments?post=${postId}&content=${content}`,
     },
   };
 }
@@ -16,7 +16,7 @@ export function fetchComments(postId) {
   return {
     [CALL_API]: {
       types: [types.COMMENT_REQUEST, types.COMMENT_SUCCESS, types.COMMENT_FAILURE],
-      endpoint: `comments?per_page=100&post=${postId}`,
+      endpoint: `api/comments?per_page=100&post=${postId}`,
     },
   };
 }

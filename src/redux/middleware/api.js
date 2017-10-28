@@ -2,7 +2,7 @@ import {authLogout} from '../../actions/loginActions';
 import { browserHistory } from 'react-router';
 import 'whatwg-fetch';
 
-let API_ROOT = '/wp-json/wp/v2/';
+let API_ROOT = 'http://localhost:3010/';
 // require('es6-promise');
 
 

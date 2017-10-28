@@ -1,8 +1,7 @@
 import * as types from '../../ActionTypes';
-import rename from 'rename-keys';
 
 const initialData = {
-  data: {},
+  data: [],
   categories: [],
   isFetching: false,
   error: false,
@@ -23,12 +22,9 @@ export default function projects(state = initialData, action) {
         isFetching: true,
       });
     case types.SEARCH_SUCCESS:
-      //change data keynames
-      const response = rename(action.response.data.data, (str) => {return `${state.page}${str}`});
-      let data = Object.assign({}, state.data, {...response});
       return Object.assign({}, state, {
-        data,
-        pages: action.response.data.meta.pages,
+        data: action.response.data,
+        // pages: action.response.data.meta.pages,
         isFetching: false,
       });
     case types.SEARCH_LOAD_MORE:

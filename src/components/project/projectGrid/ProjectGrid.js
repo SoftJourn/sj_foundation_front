@@ -24,10 +24,11 @@ export default class ProjectGrid extends Component {
       durationLeft: props.durationLeft,
       commentsCount: props.commentsCount ? props.commentsCount.total_comments : 0,
       categories: props.categories,
+      category: props.category,
       donationType: props.donationType,
       attachments: props.attachments,
       daysRemain: props.daysRemain,
-      percent: this.getProjectPledgePercent(props.raised, props.price),
+      percent: this.getProjectPledgePercent(props.projectStats.raised, props.price),
       shortDescription: props.shortDescription,
       supporters: props.supporters,
       raised: props.raised,
@@ -36,6 +37,7 @@ export default class ProjectGrid extends Component {
       showDonateModal: false,
       withdraw: props.withdraw,
       donationStatus: props.donationStatus,
+      projectStats: props.projectStats,
     };
   }
 
@@ -54,6 +56,7 @@ export default class ProjectGrid extends Component {
       durationLeft: newProps.durationLeft,
       commentsCount: newProps.commentsCount ? newProps.commentsCount.total_comments : 0,
       categories: newProps.categories,
+      category: newProps.category,
       donationType: newProps.donationType,
       attachments: newProps.attachments,
       daysRemain: newProps.daysRemain,
@@ -65,6 +68,7 @@ export default class ProjectGrid extends Component {
       isHover: false,
       showDonateModal: false,
       donationStatus: newProps.donationStatus,
+      projectStats: newProps.projectStats,
     });
   }
 
@@ -186,8 +190,8 @@ export default class ProjectGrid extends Component {
 
 
   render() {
-    const { slug, donation, donationStatus, canDonate, canWithdraw, percent, price, supporters, raised, userRaised, attachments, commentsCount, donationType, daysRemain, categories, canDonateMore, isHover } = this.state;
-    const category = categories.length > 0 ? categories[0].name : '';
+    const { slug, projectStats, donation, category, donationStatus, canDonate, canWithdraw, percent, price, supporters, raised, userRaised, attachments, commentsCount, donationType, daysRemain, categories, canDonateMore, isHover } = this.state;
+    // const category = categories.length > 0 ? categories[0].name : '';
     const donationInfo = this.getDonation();
     const withdrawInfo = this.getWithdrawInfo();
     const getDonationStatus = this.getDonationStatus();
@@ -201,7 +205,7 @@ export default class ProjectGrid extends Component {
           onClose={this.onCloseDonateModal.bind(this)}
           show={this.state.showDonateModal}
           user={this.state.user}
-          pledgeSum={raised}
+          pledgeSum={projectStats.raised}
           balance={this.state.user.balance}
           canPledgeMore={canDonateMore}
         />
@@ -256,7 +260,7 @@ export default class ProjectGrid extends Component {
            <div className="project-short-overview">
               <div className="project-grid-icons">
                 <span style={{marginRight: '2px'}}><SJCoin /></span>
-                <CoinsSum value={raised} short={true}/>{price > 0 && <span>/<CoinsSum value={price} short={true}/>{canDonateMore && <span>+</span>}</span>}
+                <CoinsSum value={projectStats.raised} short={true}/>{price > 0 && <span>/<CoinsSum value={price} short={true}/>{canDonateMore && <span>+</span>}</span>}
               </div>
               <div className="text-right">
                 { commentsCount > 0 && <span><span className="glyphicon glyphicon-comment" aria-hidden="true"></span>{commentsCount}</span> }

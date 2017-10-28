@@ -102,33 +102,34 @@ class ProjectListPage extends Component {
             {Object.keys(data).length == 0 && !isFetching &&
               <div className="col-sm-12 text-center"><h4>No results</h4></div>
             }
-            {Object.keys(data).map(key => {
+            {data.length > 0 && data.map(project => {
               return (
                 <ProjectGrid
-                  id={data[key].id}
+                  id={project.id}
                   dispatch={this.props.dispatch}
-                  donation={getProjectDonationById(data[key].id)}
-                  withdraw={getProjectWithdrawById(data[key].id)}
-                  key={data[key].id}
+                  donation={getProjectDonationById(project.id)}
+                  withdraw={getProjectWithdrawById(project.id)}
+                  key={project.id}
                   user={user}
-                  slug={data[key].slug}
-                  thumb={data[key].thumbnailUrl}
-                  title={data[key].title}
-                  transactions={data[key].transactions}
-                  commentsCount={data[key].commentsCount}
-                  price={data[key].price}
-                  shortDescription={data[key].shortDescription}
-                  attachments={data[key].attachments}
-                  donationType={data[key].status}
-                  durationLeft={data[key].durationLeft}
-                  categories={data[key].categories}
-                  canDonateMore={data[key].canDonateMore}
-                  canDonate={data[key].canDonate}
-                  canWithdraw={data[key].canWithdraw}
-                  supporters={data[key].supporters}
-                  raised={data[key].raised}
-                  userRaised={data[key].userRaised}
-                  donationStatus={data[key].donationStatus}
+                  slug={project.slug}
+                  thumb={project.thumbUrl}
+                  title={project.title}
+                  transactions={project.transactions}
+                  commentsCount={project.commentsCount}
+                  price={project.price}
+                  shortDescription={project.shortDescription}
+                  attachments={project.attachments}
+                  donationType={project.status}
+                  durationLeft={project.durationLeft}
+                  categories={project.categories}
+                  category={project.category}
+                  canDonateMore={project.canDonateMore}
+                  canDonate={project.canDonate}
+                  canWithdraw={project.canWithdraw}
+                  supporters={project.supporters}
+                  raised={project.projectraised}
+                  projectStats={project.projectStats}
+                  donationStatus={project.donationStatus}
                 />
               );
             })}

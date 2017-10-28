@@ -76,7 +76,7 @@ class ProjectPage extends Component {
   }
 
   getDaysTogo() {
-    const dueDate = this.state.project.data.due_date;
+    const dueDate = this.state.project.data.dueDate;
     if (!dueDate) {
       return false;
     }
@@ -148,22 +148,22 @@ class ProjectPage extends Component {
               </h1>
               <div className="project-author">
                 <span>
-                  <Link to={{pathname: '/search', query: {category: data.categories[0].slug} }}>
-                    {data.categories[0].name}
-                  </Link>
+                  {/*<Link to={{pathname: '/search', query: {category: data.categories[0].slug} }}>*/}
+                    {/*{data.categories[0].name}*/}
+                  {/*</Link>*/}
                 </span>
                 { this.state.user.loggedIn && <span>Author: {data.author}</span> }
               </div>
             </div>
             <div className="col-xs-12 col-sm-8 col-md-9">
-              <div className="img" style={{backgroundImage: `url(${data.thumbnailUrl})`}}></div>
+              <div className="img" style={{backgroundImage: `url(${data.thumbUrl})`}}></div>
             </div>
             <ProjectSideBar
               dispatch={this.props.dispatch}
               projectId={data.id}
               status={data.status}
               supporters={data.supporters}
-              raised={data.raised}
+              raised={data.projectStats.raised}
               userRaised={data.userRaised}
               price={data.price}
               canDonateMore={data.canDonateMore}
@@ -180,8 +180,7 @@ class ProjectPage extends Component {
           mainUrl={mainUrl}
           tab={tab}
           commentsCount={data.commentsCount ? data.commentsCount.total_comments : 0}
-          attachmentsCount={data.attachments.length}
-          updatesCount={data.updates.length}
+          attachmentsCount={0}
           user={user}
           author={data.author}
         />
@@ -200,20 +199,20 @@ class ProjectPage extends Component {
                 </div>
               </TabContainer>
               <TabContainer name="attachments" activeTab={tab}>
-                <div className=" project-content">
-                  {data.attachments.map((attachment) => {
-                    return (
-                      <div className="col-xs-12 col-sm-3">
-                        <div onClick={() => window.open(attachment.url,'_blank')} className="attachment text-center">
-                          <div dangerouslySetInnerHTML={{__html: attachment.thumbnail}}/>
-                          <div className="caption">
-                            <p href={attachment.url} target="_blank" ><b>{attachment.title}</b></p>
-                          </div>
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
+                {/*<div className=" project-content">*/}
+                  {/*{data.attachments.map((attachment) => {*/}
+                    {/*return (*/}
+                      {/*<div className="col-xs-12 col-sm-3">*/}
+                        {/*<div onClick={() => window.open(attachment.url,'_blank')} className="attachment text-center">*/}
+                          {/*<div dangerouslySetInnerHTML={{__html: attachment.thumbnail}}/>*/}
+                          {/*<div className="caption">*/}
+                            {/*<p href={attachment.url} target="_blank" ><b>{attachment.title}</b></p>*/}
+                          {/*</div>*/}
+                        {/*</div>*/}
+                      {/*</div>*/}
+                    {/*);*/}
+                  {/*})}*/}
+                {/*</div>*/}
               </TabContainer>
               <TabContainer name="comments" activeTab={tab}>
                 <div className="project-content">

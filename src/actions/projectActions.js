@@ -11,7 +11,7 @@ function fetchSearch(page = 1, query= {}) {
   return {
     [CALL_API]: {
       types: [types.SEARCH_REQUEST, types.SEARCH_SUCCESS, types.SEARCH_FAILURE],
-      endpoint: `get_projects/?&page=${page}&${serialize(query)}`,
+      endpoint: `api/projects/?&page=${page}&${serialize(query)}`,
     },
   };
 }
@@ -24,7 +24,7 @@ export function fetchProjectCategories() {
   return {
     [CALL_API]: {
       types: [types.CATEGORIES_REQUEST, types.CATEGORIES_SUCCESS, types.CATEGORIES_FAILURE],
-      endpoint: `categories`,
+      endpoint: `api/categories`,
     },
   };
 }
@@ -54,7 +54,7 @@ export function getProjectBySlug(slug) {
   return {
     [CALL_API]: {
       types: [types.PROJECT_REQUEST, types.PROJECT_SUCCESS, types.PROJECT_FAILURE],
-      endpoint: `get_project?slug=${slug}`,
+      endpoint: `api/projects/${slug}`,
     },
   };
 }
