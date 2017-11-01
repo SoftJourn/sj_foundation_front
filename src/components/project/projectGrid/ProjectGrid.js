@@ -190,7 +190,7 @@ export default class ProjectGrid extends Component {
 
 
   render() {
-    const { slug, projectStats, donation, category, donationStatus, canDonate, canWithdraw, percent, price, supporters, raised, userRaised, attachments, commentsCount, donationType, daysRemain, categories, canDonateMore, isHover } = this.state;
+    const { id, slug, projectStats, donation, category, donationStatus, canDonate, canWithdraw, percent, price, supporters, raised, userRaised, attachments, commentsCount, donationType, daysRemain, categories, canDonateMore, isHover } = this.state;
     // const category = categories.length > 0 ? categories[0].name : '';
     const donationInfo = this.getDonation();
     const withdrawInfo = this.getWithdrawInfo();
@@ -210,7 +210,7 @@ export default class ProjectGrid extends Component {
           canPledgeMore={canDonateMore}
         />
         <div className="project-grid" >
-          <a onClick={this.projectClick.bind(this, slug)} >
+          <a onClick={this.projectClick.bind(this, id)} >
             <div className="img" style={{backgroundImage: `url(${this.state.thumb})`}}>
               { (this.state.user.loggedIn && canDonate) &&
                 <button onMouseEnter={this.onHover.bind(this)} onMouseLeave={this.onMouseLeave.bind(this)}
@@ -242,7 +242,7 @@ export default class ProjectGrid extends Component {
               }
             </div>
           </div>
-          <Link to={`/project/${slug}`}>
+          <Link to={`/project/${id}`}>
             <h3 className="project-title"><span dangerouslySetInnerHTML={{__html: this.state.title}}/></h3>
           </Link>
           <p className="short-description" dangerouslySetInnerHTML={{__html: this.state.shortDescription}}/>
