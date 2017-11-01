@@ -18,17 +18,9 @@ export default class Header extends Component {
 
   renderNotLogged() {
     return (
-      <nav className="navbar navbar-default navbar-fixed-top">
-        <div className="raw">
-          <div className="navbar-header">
-            <Link className="navbar-brand" to="/">SJ Foundation</Link>
-            <ul className="nav navbar-nav navbar-right">
-              <li>
-                <Link to="/signin">Login</Link>
-              </li>
-            </ul>
-          </div>
-        </div>
+      <nav className="navbar navbar-expand-lg navbar-light">
+        <Link className="navbar-brand" to="/">SJ Foundation</Link>
+        <Link to="/signin">Login</Link>
       </nav>
     );
   }

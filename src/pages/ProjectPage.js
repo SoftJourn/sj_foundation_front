@@ -114,7 +114,7 @@ class ProjectPage extends Component {
     } else if(project.error) {
       return (
         <div className="container">
-          <div className="raw alert alert-danger">
+          <div className="row alert alert-danger">
             Field to load project
           </div>
         </div>
@@ -122,7 +122,7 @@ class ProjectPage extends Component {
     } else if(preview && !id) {
       return (
         <div className="container">
-          <div className="raw alert alert-warning">
+          <div className="row alert alert-warning">
             Try to save draft for preview
           </div>
         </div>
@@ -132,47 +132,51 @@ class ProjectPage extends Component {
       <div className="project-page">
         <div className="project-header">
           <div className="container">
-            { project.pledgeSuccess &&
-              <div className="raw alert alert-success">
-                You successfully pledged <b><SJCoin /> {project.pledgeSuccessSum}</b>
-              </div>
-            }
-            { project.pledgeError &&
-              <div className="raw alert alert-danger">
-                {project.pledgeMessage}
-              </div>
-            }
-            <div className="col-sm-12 project-title">
-              <h1 className="text-left">
-                <span dangerouslySetInnerHTML={{__html: data.title}}/>
-              </h1>
-              <div className="project-author">
-                <span>
-                  {/*<Link to={{pathname: '/search', query: {category: data.categories[0].slug} }}>*/}
-                    {/*{data.categories[0].name}*/}
-                  {/*</Link>*/}
-                </span>
-                { this.state.user.loggedIn && <span>Author: {data.author}</span> }
+            <div>
+              { project.pledgeSuccess &&
+                <div className="row alert alert-success">
+                  You successfully pledged <b><SJCoin /> {project.pledgeSuccessSum}</b>
+                </div>
+              }
+              { project.pledgeError &&
+                <div className="row alert alert-danger">
+                  {project.pledgeMessage}
+                </div>
+              }
+              <div className="col-sm-12 project-title">
+                <h1 className="text-left">
+                  <span dangerouslySetInnerHTML={{__html: data.title}}/>
+                </h1>
+                <div className="project-author">
+                  <span>
+                    {/*<Link to={{pathname: '/search', query: {category: data.categories[0].slug} }}>*/}
+                      {/*{data.categories[0].name}*/}
+                    {/*</Link>*/}
+                  </span>
+                  { this.state.user.loggedIn && <span>Author: {data.author}</span> }
+                </div>
               </div>
             </div>
-            <div className="col-xs-12 col-sm-8 col-md-9">
-              <div className="img" style={{backgroundImage: `url(${data.thumbUrl})`}}></div>
+            <div className="row">
+              <div className="col-xs-12 col-sm-8 col-md-9">
+                <div className="img" style={{backgroundImage: `url(${data.thumbUrl})`}}></div>
+              </div>
+              <ProjectSideBar
+                dispatch={this.props.dispatch}
+                projectId={data.id}
+                status={data.status}
+                supporters={data.supporters}
+                raised={data.projectStats.raised}
+                userRaised={data.userRaised}
+                price={data.price}
+                canDonateMore={data.canDonateMore}
+                durationLeft={data.durationLeft}
+                user={user}
+                showModal={project.showModal}
+                donationStatus={data.donationStatus}
+                canDonate={data.canDonate}
+              />
             </div>
-            <ProjectSideBar
-              dispatch={this.props.dispatch}
-              projectId={data.id}
-              status={data.status}
-              supporters={data.supporters}
-              raised={data.projectStats.raised}
-              userRaised={data.userRaised}
-              price={data.price}
-              canDonateMore={data.canDonateMore}
-              durationLeft={data.durationLeft}
-              user={user}
-              showModal={project.showModal}
-              donationStatus={data.donationStatus}
-              canDonate={data.canDonate}
-            />
           </div>
         </div>
         <ProjectNav

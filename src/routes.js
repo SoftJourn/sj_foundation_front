@@ -7,6 +7,7 @@ import ProjectPage from './pages/ProjectPage';
 import TransactionPage from './pages/TransactionPage';
 import AdminPage from './pages/AdminPage';
 import HowItWorksPage from './pages/HowItWorksPage';
+import StartProjectPage from './pages/StartProjectPage';
 
 export default (
   <Route path="/" component={App}>
@@ -18,7 +19,8 @@ export default (
     <Route path="/transactions" component={TransactionPage} />
     <Route path="/project/:slug(/:tab)" preview={false} component={ProjectPage} />
     <Route path="/preview/:slug(/:tab)" preview={true} component={ProjectPage} />
-    <Route path="/admin_panel" component={AdminPage} />
+    <Route path="/admin" component={AdminPage} />
     <Route path="/how-it-works" component={HowItWorksPage} />
+    <Route path="/start" component={StartProjectPage} />
   </Route>
 );

@@ -227,11 +227,12 @@ export default class ProjectGrid extends Component {
             </div>
           </a>
           <div className="row project-donation-status">
-            <div className="col-xs-12">
-              <span className="alignleft project-category-name">
-                {donationInfo}
-                {withdrawInfo}
-              </span>
+            <div className="col-12">
+              { donationInfo &&
+                <span className="alignleft project-category-name">
+                  {donationInfo}
+                </span>
+              }
               {(!donationInfo && !withdrawInfo) &&
                 <span>
                   <span className="alignleft project-category-name">{category}</span>

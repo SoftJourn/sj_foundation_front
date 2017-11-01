@@ -24,7 +24,7 @@ class ProjectListFilters extends React.Component {
       <div>
         <div className="project-results-header">
           <div className="container">
-            <div className="raw">
+            <div className="row">
               <div className="col-xs-12 col-sm-6 col-md-7 col-lg-8">
                 <CategoriesFilter
                   selectedCategory={selectedCategory}

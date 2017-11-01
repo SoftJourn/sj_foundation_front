@@ -1,8 +1,10 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto');
+@import './bootstrap/scss/bootstrap';
+//@import './bootstrap/bootstrap.min.css';
 @import './components/wp';
 @import './vars';
 @import './components/nav';
-@import './components/header';
+//@import './components/header';
 @import './components/footer';
 @import './components/button';
 @import './components/forms';
@@ -14,4 +16,5 @@
 @import './components/comment';
 @import './components/spinner';
 @import './components/icon';
+@import './components/editor';
 @import './layout';

@@ -98,7 +98,7 @@ class ProjectListPage extends Component {
           query={query}
         />
         <div className="container">
-          <div className="raw">
+          <div className="row">
             {Object.keys(data).length == 0 && !isFetching &&
               <div className="col-sm-12 text-center"><h4>No results</h4></div>
             }
