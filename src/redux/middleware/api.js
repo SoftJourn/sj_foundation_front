@@ -13,12 +13,16 @@ let API_ROOT = 'http://localhost:3010/';
 function callApi(endpoint, store, method, body) {
   const fullUrl = (endpoint.indexOf(API_ROOT) === -1) ? API_ROOT + endpoint : endpoint;
   let apiHeaders = new Headers();
+  var token = window.localStorage.getItem('token');
+  apiHeaders.append('Authorization', token)
+  apiHeaders.append('Content-Type', 'application/json')
   // if (window.wpApiSettings.nonce) {
   //   apiHeaders.append('X-WP-Nonce', window.wpApiSettings.nonce);
   // }
-  return fetch(fullUrl, {
+
+  return fetch(fullUrl+'?access_token='+token, {
       body: JSON.stringify(body),
-      credentials: 'same-origin',
+      credentials: 'include',
       mode: 'cors',
       headers: apiHeaders,
       method: method
@@ -27,7 +31,7 @@ function callApi(endpoint, store, method, body) {
         if (response.status === 401 || response.status === 403) {
           // store.dispatch(authLogout())
           // browserHistory.push('/');
-          window.location.href = '/';
+          // window.location.href = '/';
         }
         return response.json().then(json => ({ json, response }))
     })

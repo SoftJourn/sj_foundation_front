@@ -36,8 +36,8 @@ export default class ProjectNav extends Component {
 
     return (
       <div className="project-nav">
-        <div className="container">
-          <nav className="">
+        <div className="row">
+          <nav className="container">
             <Link className={(tab === '' || tab == 'overview') && "active"} to={`${mainUrl}overview`}>OVERVIEW</Link>
             <TabButton
               activeTab={tab}

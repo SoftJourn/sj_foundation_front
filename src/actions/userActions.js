@@ -41,3 +41,16 @@ export function getTransactions(id) {
     },
   };
 }
+
+/**
+ * get balance
+ * @returns {{}}
+ */
+export function checkUser() {
+  return {
+    [CALL_API]: {
+      types: ['user', 'userDone', 'userFail'],
+      endpoint: `api/accounts/me`,
+    },
+  };
+}

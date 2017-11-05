@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
-import { getBalance } from 'actions/userActions';
+import { checkUser } from 'actions/userActions';
 
 import 'styles/styles.scss';
 
@@ -21,7 +21,10 @@ class App extends Component {
       user: props.user,
       projects: props.projects
     }
+  }
 
+  componentDidMount() {
+    this.props.dispatch(checkUser())
   }
 
   componentWillReceiveProps(newProps) {

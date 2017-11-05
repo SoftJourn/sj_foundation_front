@@ -54,17 +54,17 @@ class ProjectPage extends Component {
       form: nextProps.form,
       projects: nextProps.projects,
       project: nextProps.project,
-      id: nextProps.project.data.id,
+      id: nextProps.project.id,
       donation: nextProps.donation,
     });
     if (this.state.project.commentSuccess === false && nextProps.project.commentSuccess === true) {
       this.props.dispatch(getProjectBySlug(this.props.routeParams.slug));
-      this.props.dispatch(fetchComments(nextProps.project.data.id));
+      this.props.dispatch(fetchComments(nextProps.project.id));
       const mainUrl = this.getMainUrl();
       browserHistory.push(`${mainUrl}comments`);
     }
-    if (nextProps.project.data.id && nextProps.project.data.id !== this.state.id) {
-      this.props.dispatch(fetchComments(nextProps.project.data.id));
+    if (nextProps.project.id && nextProps.project.id !== this.state.id) {
+      this.props.dispatch(fetchComments(nextProps.project.id));
     }
     if (nextProps.routeParams.slug !== this.state.slug) {
       this.props.dispatch(getProjectBySlug(nextProps.routeParams.slug));
@@ -163,7 +163,7 @@ class ProjectPage extends Component {
               </div>
               <ProjectSideBar
                 dispatch={this.props.dispatch}
-                projectId={data.id}
+                projectId={project.id}
                 status={data.status}
                 supporters={data.supporters}
                 raised={data.projectStats.raised}
