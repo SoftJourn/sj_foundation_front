@@ -50,6 +50,7 @@
     "isomorphic-fetch": "^2.2.1",
     "lodash": "^4.16.2",
     "moment": "^2.15.2",
+    "prop-types": "^15.6.0",
     "react": "^15.6.2",
     "react-dom": "^15.6.2",
     "react-draft-wysiwyg": "^1.10.12",

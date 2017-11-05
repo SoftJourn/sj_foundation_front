@@ -53,6 +53,12 @@ export default function project(state = initialData, action) {
       });
     case types.PROJECT_SUCCESS:
     case types.PROJECT_UPDATE_SUCCESS:
+      if (!action.response.data) {
+        return Object.assign({}, state, {
+          error: true,
+          isFetching: false,
+        });
+      }
       return Object.assign({}, state, {
         data: action.response.data,
         isFetching: false,

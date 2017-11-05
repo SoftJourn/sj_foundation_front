@@ -1,22 +1,10 @@
 import React, { Component } from 'react';
-import {Link} from 'react-router';
 import { connect } from 'react-redux';
 import { getProjectBySlug, getProjectById } from '../actions/projectActions';
-import { fetchComments } from '../actions/commentActions';
-import { getBalance } from '../actions/userActions';
 import moment from 'moment';
-import SJCoin from '../components/helper/sjCoin';
 import Spinner from '../components/helper/Spinner';
-import CommentInput from '../components/comment/CommentInput';
-import CommentBox from '../components/comment/CommentBox';
-import { browserHistory } from 'react-router';
 import * as types from '../ActionTypes';
-import ProjectSideBar from '../components/project/ProjectSideBar';
-import ProjectNav from '../components/project/ProjectNav';
-import TabContainer from '../components/tab/TabContainer';
-import Updates from '../components/project/tabs/Updates';
-import AddUpdateForm from '../components/forms/AddUpdateForm';
-import PledgeInput from '../components/forms/PledgeInput';
+import Project from "../components/project/Project";
 
 class ProjectPage extends Component {
 
@@ -57,22 +45,6 @@ class ProjectPage extends Component {
       id: nextProps.project.id,
       donation: nextProps.donation,
     });
-    if (this.state.project.commentSuccess === false && nextProps.project.commentSuccess === true) {
-      this.props.dispatch(getProjectBySlug(this.props.routeParams.slug));
-      this.props.dispatch(fetchComments(nextProps.project.id));
-      const mainUrl = this.getMainUrl();
-      browserHistory.push(`${mainUrl}comments`);
-    }
-    if (nextProps.project.id && nextProps.project.id !== this.state.id) {
-      this.props.dispatch(fetchComments(nextProps.project.id));
-    }
-    if (nextProps.routeParams.slug !== this.state.slug) {
-      this.props.dispatch(getProjectBySlug(nextProps.routeParams.slug));
-    }
-    if (nextProps.project.pledgeSuccess && this.state.project.pledgeSuccess !== nextProps.project.pledgeSuccess ) {
-      this.props.dispatch(getProjectBySlug(nextProps.routeParams.slug));
-      this.props.dispatch(getBalance());
-    }
   }
 
   getDaysTogo() {
@@ -80,13 +52,9 @@ class ProjectPage extends Component {
     if (!dueDate) {
       return false;
     }
-    var a = moment(this.state.project.data.due_date, 'YYYY-MM-DD');
-    var b = moment();
+    const a = moment(this.state.project.data.due_date, 'YYYY-MM-DD');
+    const b = moment();
     return a.diff(b, 'days');
-  }
-
-  canPledge() {
-    return this.state.project.data.donation_type === 'open';
   }
 
   getStatus() {
@@ -95,6 +63,8 @@ class ProjectPage extends Component {
         return 'Won';
       case 'not_founded':
         return 'Lost'
+      default :
+        return 'Closed';
     }
   }
 
@@ -114,154 +84,21 @@ class ProjectPage extends Component {
     } else if(project.error) {
       return (
         <div className="container">
-          <div className="row alert alert-danger">
+          <div className="row text-center">
             Field to load project
           </div>
         </div>
         );
-    } else if(preview && !id) {
-      return (
-        <div className="container">
-          <div className="row alert alert-warning">
-            Try to save draft for preview
-          </div>
-        </div>
-      );
     }
     return (
-      <div className="project-page">
-        <div className="project-header">
-          <div className="container">
-            <div>
-              { project.pledgeSuccess &&
-                <div className="row alert alert-success">
-                  You successfully pledged <b><SJCoin /> {project.pledgeSuccessSum}</b>
-                </div>
-              }
-              { project.pledgeError &&
-                <div className="row alert alert-danger">
-                  {project.pledgeMessage}
-                </div>
-              }
-              <div className="col-sm-12 project-title">
-                <h1 className="text-left">
-                  <span dangerouslySetInnerHTML={{__html: data.title}}/>
-                </h1>
-                <div className="project-author">
-                  <span>
-                    {/*<Link to={{pathname: '/search', query: {category: data.categories[0].slug} }}>*/}
-                      {/*{data.categories[0].name}*/}
-                    {/*</Link>*/}
-                  </span>
-                  { this.state.user.loggedIn && <span>Author: {data.author}</span> }
-                </div>
-              </div>
-            </div>
-            <div className="row">
-              <div className="col-xs-12 col-sm-8 col-md-9">
-                <div className="img" style={{backgroundImage: `url(${data.thumbUrl})`}}></div>
-              </div>
-              <ProjectSideBar
-                dispatch={this.props.dispatch}
-                projectId={project.id}
-                status={data.status}
-                supporters={data.supporters}
-                raised={data.projectStats.raised}
-                userRaised={data.userRaised}
-                price={data.price}
-                canDonateMore={data.canDonateMore}
-                durationLeft={data.durationLeft}
-                user={user}
-                showModal={project.showModal}
-                donationStatus={data.donationStatus}
-                canDonate={data.canDonate}
-              />
-            </div>
-          </div>
-        </div>
-        <ProjectNav
-          preview={preview}
+      <div>
+        <Project
+          title={project.data.title}
+          slug={project.data.slug}
           mainUrl={mainUrl}
-          tab={tab}
-          commentsCount={data.commentsCount ? data.commentsCount.total_comments : 0}
-          attachmentsCount={0}
-          user={user}
-          author={data.author}
+          project={project.data}
+          projectStats={project.data.projectStats}
         />
-        <div className="container">
-          <div className="row">
-            <div className="col-xs-12 col-sm-8 col-md-9">
-              <TabContainer name="overview" show={tab === ''} activeTab={tab}>
-                <div className="project-content">
-                  <div dangerouslySetInnerHTML={{__html: data.content}}/>
-                </div>
-                <div className="row">
-                  <CommentInput
-                    dispatch={this.props.dispatch}
-                    postId={id}
-                  />
-                </div>
-              </TabContainer>
-              <TabContainer name="attachments" activeTab={tab}>
-                {/*<div className=" project-content">*/}
-                  {/*{data.attachments.map((attachment) => {*/}
-                    {/*return (*/}
-                      {/*<div className="col-xs-12 col-sm-3">*/}
-                        {/*<div onClick={() => window.open(attachment.url,'_blank')} className="attachment text-center">*/}
-                          {/*<div dangerouslySetInnerHTML={{__html: attachment.thumbnail}}/>*/}
-                          {/*<div className="caption">*/}
-                            {/*<p href={attachment.url} target="_blank" ><b>{attachment.title}</b></p>*/}
-                          {/*</div>*/}
-                        {/*</div>*/}
-                      {/*</div>*/}
-                    {/*);*/}
-                  {/*})}*/}
-                {/*</div>*/}
-              </TabContainer>
-              <TabContainer name="comments" activeTab={tab}>
-                <div className="project-content">
-                  {project.comments.map((comment) => {
-                    return (
-                      <CommentBox
-                        key={comment.id}
-                        comment={comment}
-                        isNew={project.newCommentId === comment.id}
-                      />
-                    );
-                  })}
-                </div>
-                <div className="row project-content">
-                  <CommentInput
-                    dispatch={this.props.dispatch}
-                    postId={id}
-                  />
-                </div>
-              </TabContainer>
-              <TabContainer name="updates" activeTab={tab}>
-                <div className=" project-content">
-                  <Updates mainUrl={mainUrl} updates={data.updates} showAddButton={user.isAdmin} />
-                </div>
-              </TabContainer>
-              <TabContainer name="addUpdate" activeTab={tab}>
-                <div className=" project-content">
-                  <AddUpdateForm dispatch={this.props.dispatch} projectId={data.id} mainUrl={mainUrl} />
-                </div>
-              </TabContainer>
-            </div>
-            <div className="col-xs-12 col-sm-4 col-md-3">
-              {/*{ data.canDonate &&*/}
-                {/*<PledgeInput*/}
-                  {/*dispatch={this.props.dispatch}*/}
-                  {/*user={user}*/}
-                  {/*amount={data.price}*/}
-                  {/*pledgeSum={data.raised}*/}
-                  {/*balance={this.state.user.balance}*/}
-                  {/*id={data.id}*/}
-                  {/*show={project.showModal} />*/}
-              {/*}*/}
-            </div>
-          </div>
-        </div>
       </div>
     );
   }

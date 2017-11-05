@@ -1,119 +1,153 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { getProjectBySlug, getProjectById } from '../actions/projectActions';
-import { fetchComments } from '../actions/commentActions';
-import { getBalance } from '../actions/userActions';
-import moment from 'moment';
-import SJCoin from '../components/sjCoin';
-import PledgeInput from '../components/PledgeInput';
-import { Link } from 'react-router'
-import Spinner from '../components/Spinner';
-import CommentInput from '../components/CommentInput';
-import CommentBox from '../components/CommentBox';
-import { browserHistory } from 'react-router';
-import * as types from '../ActionTypes';
+import { string, object, number, bool, array, shape } from 'prop-types';
+import ProjectNav from './ProjectNav';
+import ProjectSideBar from "./ProjectSideBar";
+import TabContainer from "../tab/TabContainer";
 
-class Project extends Component {
+export default class Project extends Component {
+
+
+  static propTypes = {
+    user: object,
+    tab: string,
+    mainUrl: string,
+    comments: array,
+    project: shape({
+      id: number,
+      slug: string,
+      title: string,
+      author: string,
+    }),
+    projectStats: shape({
+      supporters: number,
+      raised: number,
+      status: string,
+      canPledge: bool,
+      donationStatus: string
+    }),
+  };
+
+  static defaultProps = {
+    tab: 'overview',
+    slug: '',
+    donation: 'closed',
+    user: {loggedIn: false},
+    preview: '',
+    mainUrl: '',
+    comments: [],
+    project: {
+      title: '',
+      id: 0,
+      author: '',
+      slug: '',
+      price: 0,
+      content: '',
+    },
+    projectStats: {
+      supporters: 0,
+      raised: 0,
+      status: 'Closed',
+      canPledge: false,
+      donationStatus: 'Closed'
+    },
+  };
+
 
   constructor(props) {
-    super();
+    super(props);
     this.state = {
       project: props.project,
+      projectStats: props.projectStats,
+      user: props.user,
+      comments: props.comments,
+      tab: props.tab,
     };
   }
 
-  /**
-   * new props from redux state
-   * @function componentWillReceiveProps
-   * @param {object} nextProps - new props for component
-   */
+
+
   componentWillReceiveProps(nextProps) {
     this.setState({
-      project: nextProps.project
+      project: nextProps.project,
+      projectStats: nextProps.projectStats,
+      user: nextProps.user,
+      comments: props.comments,
     });
   }
 
 
   render() {
+    const { project, projectStats, comments, tab, preview, user, mainUrl} = this.state;
+    console.log(project)
     return (
-      <div className="project-header">
-        <div className="container">
-          { project.pledgeSuccess &&
-          <div className="raw alert alert-success">
-            You successfully pledged <b><SJCoin /> {project.pledgeSuccessSum}</b>
-          </div>
-          }
-          { project.pledgeError &&
-          <div className="raw alert alert-danger">
-            {project.pledgeMessage}
-          </div>
-          }
-          <div className="col-sm-12 project-title">
-            <h1 className="text-left">
-              <span dangerouslySetInnerHTML={{__html: data.title.rendered}}/>
-            </h1>
-          </div>
-          <div className="col-xs-12 col-sm-8 col-md-9">
-            <div className="img" style={{backgroundImage: `url(${data.featured_image_thumbnail_url})`}}></div>
-          </div>
-          <div className="col-xs-12 col-sm-4 col-md-3 project-sidebar">
+      <div className="project-page">
+        <div className="project-header">
+          <div className="container">
             <div>
-              <h2>{project.backers}</h2>
-              supporters
-            </div>
-            <div>
-              <h2>
-                <SJCoin />{project.pledgeSum}
-                {
-                  data.status != 'not_founded' && project.accountPledgeSum > 0 &&
-                  <span> ({project.accountPledgeSum})</span>
-                }
-              </h2>
-              donated {data.price !== '' && <span>of <b>{data.price}</b> goal {data.api_data.canDonateMore && <span>or more</span>}</span>}
-            </div>
-            { this.getDaysTogo() > 0 ? (
-              <div>
-                <h2>{this.getDaysTogo()}</h2>
-                days remain
-              </div>) : null}
-            { this.canPledge() &&
-            <PledgeInput
-              dispatch={this.props.dispatch}
-              amount={data.price}
-              pledgeSum={project.pledgeSum}
-              balance={this.state.user.balance}
-              id={id}
-              show={project.showModal} />
-            }
-            {
-              !this.canPledge() &&
-              <div>
-                <h2>{this.getStatus()}</h2>
+              <div className="col-sm-12 project-title">
+                <h1 className="text-left">
+                  <span dangerouslySetInnerHTML={{__html: project.title}}/>
+                </h1>
+                <div className="project-author">
+                  { this.state.user.loggedIn && <span>Author: {project.author}</span> }
+                </div>
               </div>
-            }
+            </div>
+            <div className="row">
+              <div className="col-xs-12 col-sm-8 col-md-9">
+                <div className="img" style={{backgroundImage: `url(${project.thumbUrl})`}}></div>
+              </div>
+              <ProjectSideBar
+                dispatch={this.props.dispatch}
+                projectId={project.id}
+                status={project.status}
+                supporters={projectStats.supporters}
+                raised={projectStats.raised}
+                price={project.price}
+                canDonateMore={project.canDonateMore}
+                durationLeft={projectStats.durationLeft}
+                user={user}
+                showModal={project.showModal}
+                donationStatus={project.donationStatus}
+                canDonate={projectStats.canDonate}
+              />
+            </div>
+          </div>
+        </div>
+        <ProjectNav
+          preview={preview}
+          mainUrl={mainUrl}
+          tab={tab}
+          commentsCount={0}
+          attachmentsCount={0}
+          user={user}
+          author={project.author}
+        />
+        <div className="container">
+          <div className="row">
+            <div className="col-12 col-sm-8 col-md-9">
+              <TabContainer name="overview" show={tab === ''} activeTab={tab}>
+                <div className="project-content">
+                  <div dangerouslySetInnerHTML={{__html: project.content}}/>
+                </div>
+              </TabContainer>
+              <TabContainer name="comments" activeTab={tab}>
+                <div className="project-content">
+                  {comments.map((comment) => {
+                    return (
+                      <CommentBox
+                        key={comment.id}
+                        comment={comment}
+                        isNew={project.newCommentId === comment.id}
+                      />
+                    );
+                  })}
+                </div>
+              </TabContainer>
+            </div>
           </div>
         </div>
       </div>
     );
   }
 }
-
-/**
- * map redux state to project page properties
- * @function mapStateToProps
- * @param {object} state - redux state object
- * @param {object} ownProps - redux properties
- */
-function mapStateToProps(state, ownProps) {
-  return {
-    form: state.form,
-    projects: state.projects,
-    project: state.project,
-    user: state.user,
-  };
-}
-
-/**
- * get the data from redux and feed it into component via props
- */
-export default connect(mapStateToProps)(ProjectPage);

@@ -63,33 +63,9 @@ class ProjectListPage extends Component {
     this.props.dispatch(getProjects(page));
   }
 
-  getProjectDonationById(id) {
-    const donations = this.state.donation;
-    let returning = [];
-    donations.data.map((value) => {
-      if (value.donationId == id) {
-        returning = value;
-      }
-    });
-    return returning;
-  }
-
-  getProjectWithdrawById(id) {
-    const withdraws = this.state.donation.withdraw;
-    let returning = [];
-    withdraws.map((value) => {
-      if (value.id == id) {
-        returning = value;
-      }
-    });
-    return returning;
-  }
-
   render() {
     const {pages, data, isFetching, categories } = this.state.projects;
     const {projects, selectedCategory, user, query, donation} = this.state;
-    const getProjectDonationById = this.getProjectDonationById.bind(this);
-    const getProjectWithdrawById = this.getProjectWithdrawById.bind(this);
     return (
       <div className="project-results">
         <ProjectListFilters
@@ -107,29 +83,8 @@ class ProjectListPage extends Component {
                 <ProjectGrid
                   id={project.id}
                   dispatch={this.props.dispatch}
-                  donation={getProjectDonationById(project.id)}
-                  withdraw={getProjectWithdrawById(project.id)}
-                  key={project.id}
-                  user={user}
-                  slug={project.slug}
-                  thumb={project.thumbUrl}
-                  title={project.title}
-                  transactions={project.transactions}
-                  commentsCount={project.commentsCount}
-                  price={project.price}
-                  shortDescription={project.shortDescription}
-                  attachments={project.attachments}
-                  donationType={project.status}
-                  durationLeft={project.durationLeft}
-                  categories={project.categories}
-                  category={project.category}
-                  canDonateMore={project.canDonateMore}
-                  canDonate={project.canDonate}
-                  canWithdraw={project.canWithdraw}
-                  supporters={project.supporters}
-                  raised={project.projectraised}
                   projectStats={project.projectStats}
-                  donationStatus={project.donationStatus}
+                  project={project}
                 />
               );
             })}
