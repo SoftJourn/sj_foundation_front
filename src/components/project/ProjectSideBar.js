@@ -90,38 +90,30 @@ export default class ProjectSideBar extends Component {
   render() {
     const {projectId, showModal, status, supporters, donationStatus, canDonate, raised, price, canDonateMore, userRaised, user} = this.state;
     return (
-        <div className="col-xs-12 col-sm-4 col-md-3 project-sidebar">
-          <div>
+        <div className="row text-center justify-content-md-center project-stats">
+          <div className="col-3">
             <h2>{supporters}</h2>
             supporters
           </div>
-          <div>
+          <div className="col-3">
             <h2>
               <SJCoin /><CoinsSum value={raised}/>
-              {
-                status != 'not_founded' && userRaised > 0 &&
-                <span> ({userRaised})</span>
-              }
             </h2>
             donated {price !== '' && <span>of <b><CoinsSum value={price}/></b> goal {canDonateMore && <span>or more</span>}</span>}
           </div>
-          {this.getTimeRemain()}
-          { canDonate &&
-            <PledgeInput
-              dispatch={this.props.dispatch}
-              user={user}
-              amount={price}
-              pledgeSum={raised}
-              balance={this.state.user.balance}
-              id={projectId}
-              show={showModal} />
-            }
           {
             !canDonate &&
-            <div>
+            <div className="col-3">
               <h2>{donationStatus.toUpperCase()}</h2>
+              status
             </div>
           }
+          { this.getTimeRemain() &&
+            <div className="col-4">
+              {this.getTimeRemain()}
+            </div>
+          }
+
         </div>
     );
   }

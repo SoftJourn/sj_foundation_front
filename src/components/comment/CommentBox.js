@@ -42,9 +42,9 @@ export default class CommentBox extends Component {
     return (
       <div className={commentClass}>
         <div className="comment-author-name">
-          {comment.author_name}:
+          {comment.authorName}:
         </div>
-        <div dangerouslySetInnerHTML={{__html: comment.content.rendered}}/>
+        <div dangerouslySetInnerHTML={{__html: comment.content}}/>
         <div className="comment-date">{this.getCommentDate()}</div>
       </div>
     );

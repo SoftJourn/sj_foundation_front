@@ -3,6 +3,7 @@ import { string, object, number, bool, array, shape } from 'prop-types';
 import ProjectNav from './ProjectNav';
 import ProjectSideBar from "./ProjectSideBar";
 import TabContainer from "../tab/TabContainer";
+import CommentBox from "../comment/CommentBox";
 
 export default class Project extends Component {
 
@@ -78,7 +79,6 @@ export default class Project extends Component {
 
   render() {
     const { project, projectStats, comments, tab, preview, user, mainUrl} = this.state;
-    console.log(project)
     return (
       <div className="project-page">
         <div className="project-header">
@@ -93,10 +93,12 @@ export default class Project extends Component {
                 </div>
               </div>
             </div>
-            <div className="row">
-              <div className="col-xs-12 col-sm-8 col-md-9">
+            <div className="row justify-content-md-center">
+              <div className="col-12">
                 <div className="img" style={{backgroundImage: `url(${project.thumbUrl})`}}></div>
               </div>
+            </div>
+            <div className="">
               <ProjectSideBar
                 dispatch={this.props.dispatch}
                 projectId={project.id}
@@ -125,25 +127,27 @@ export default class Project extends Component {
         />
         <div className="container">
           <div className="row">
-            <div className="col-12 col-sm-8 col-md-9">
+            <div className="col-12">
               <TabContainer name="overview" show={tab === ''} activeTab={tab}>
                 <div className="project-content">
                   <div dangerouslySetInnerHTML={{__html: project.content}}/>
                 </div>
               </TabContainer>
-              <TabContainer name="comments" activeTab={tab}>
-                <div className="project-content">
-                  {comments.map((comment) => {
-                    return (
-                      <CommentBox
-                        key={comment.id}
-                        comment={comment}
-                        isNew={project.newCommentId === comment.id}
-                      />
-                    );
-                  })}
-                </div>
-              </TabContainer>
+            </div>
+          </div>
+        </div>
+        <div className="container">
+          <div className="row">
+            <div className="col-12">
+              {comments.length > 0 && <p className="text-center"><h4>Comments</h4></p> }
+              {comments.map((comment) => {
+                return (
+                  <CommentBox
+                    key={comment.id}
+                    comment={comment}
+                  />
+                );
+              })}
             </div>
           </div>
         </div>
