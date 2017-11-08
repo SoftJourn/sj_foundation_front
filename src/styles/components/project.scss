@@ -3,7 +3,7 @@
   .project-title {
     padding-bottom: 15px;
     h1 {
-      color: $asphalt;
+      color: $dark;
     }
   }
 
@@ -11,7 +11,7 @@
     span {
       padding-right: 7px;
       margin-right: 7px;
-      border-right: 1px solid $grey;
+      border-right: 1px solid $gray;
 
       &:last-child {
         border-right: none;
@@ -21,13 +21,13 @@
 
   .project-stats {
     padding-top: 60px;
-    color: $asphalt;
+    color: $dark;
   }
 
   .project-header {
     padding: 50px 0;
     color: inherit;
-    background-color: $lightGray;
+    background-color: $cloud;
     .img {
       width: 100%;
       height: 320px;
@@ -49,7 +49,7 @@
 
   .project-nav {
     border-bottom: 1px solid #eee;
-    background-color: $lightGray;
+    background-color: $cloud;
 
     nav {
       position: relative;
@@ -68,7 +68,7 @@
           font-weight: 600;
           color: #24292e;
           background-color: #fff;
-          border-color: $grey #eee transparent;
+          border-color: $gray #eee transparent;
         }
       }
     }

@@ -102,19 +102,16 @@ export default class ProjectGrid extends Component {
     const { project, projectStats, percent} = this.state;
     const getDonationStatus = this.getDonationStatus();
     return(
-      <div className="col-xs-12 col-sm-4">
+      <div className="col-12 col-sm-8 col-md-6 col-lg-4">
         <div className="project-grid" >
           <a onClick={this.projectClick.bind(this, project.id)} >
             <div className="img" style={{backgroundImage: `url(${project.thumbUrl})`}}></div>
           </a>
           <div className="row project-donation-status">
             <div className="col-12">
-              <span>
-                <span className="alignleft project-category-name">{project.category}</span>
-                <span className="alignright">
-                  {project.donationStatus == 'open' ? this.getTimeRemain() : getDonationStatus }
-                </span>
-              </span>
+              <div className="row">
+                <span className="col project-category-name">{project.category}</span>
+              </div>
             </div>
           </div>
           <Link to={`/project/${project.id}`}>
@@ -122,6 +119,10 @@ export default class ProjectGrid extends Component {
           </Link>
           <p className="short-description" dangerouslySetInnerHTML={{__html: project.shortDescription}}/>
           <div className="project-grid-bottom">
+            <div className="project-grid-icons">
+              <span style={{marginRight: '2px'}}><SJCoin /></span>
+              <CoinsSum value={projectStats.raised} short={true}/>{project.price > 0 && <span>/<CoinsSum value={project.price} short={true}/>{project.canDonateMore && <span>+</span>}</span>}
+            </div>
             { (project.price > 0 || project.price !== '') ?
               <div className="progress">
                 <div className="progress-bar progress-bar-success" role="progressbar" aria-valuenow="60" aria-valuemin="0"
@@ -132,14 +133,27 @@ export default class ProjectGrid extends Component {
               :
               <div className="progress-empty"></div>
             }
-           <div className="project-short-overview">
-              <div className="project-grid-icons">
-                <span style={{marginRight: '2px'}}><SJCoin /></span>
-                <CoinsSum value={projectStats.raised} short={true}/>{project.price > 0 && <span>/<CoinsSum value={project.price} short={true}/>{project.canDonateMore && <span>+</span>}</span>}
+            <div className="row">
+              <div className="col-4 text-center">
+                <div>{ projectStats.supporters }</div>
+                <small>Founded</small>
               </div>
-              <div className="text-right">
-                { projectStats.supporters > 0 && <span><span className="glyphicon glyphicon-user" aria-hidden="true"></span>{projectStats.supporters}</span> }
+              <div className="col-4 text-center">
+                <div>{projectStats.supporters}</div>
+                <small>supporters</small>
               </div>
+              { project.donationStatus === 'open' &&
+                <div className="col-4 text-center">
+                  <div>0</div>
+                  <small className="text-small">Hours to go</small>
+                </div>
+              }
+              {  project.donationStatus !== 'open' &&
+                <div className="col-4 text-center">
+                  <div>{this.getDonationStatus()}</div>
+                  <small className="text-small">Status</small>
+                </div>
+              }
             </div>
           </div>
         </div>

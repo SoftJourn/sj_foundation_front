@@ -1,22 +1,23 @@
 .project-results-header {
   border-bottom: 1px solid #eeeeee;
   margin-bottom: 40px;
-  background-color: $lightGray;
+  background-color: $cloud;
   padding-top: 30px;
   a, button {
     border-radius: 0;
     text-decoration: none;
-    color: $simpleGray;
+    color: $gray-dark;
     outline: none;
     &:focus,
     &:focus:active,
     &:hover,
     &:active {
+      color: $dark;
       outline: none;
       text-decoration: none;
     }
     &.active {
-      color: $darkGray;
+      color: $black;
       font-weight: bold;
     }
   }
@@ -26,7 +27,7 @@
       padding: 11px 2px;
       margin-right: 5px;
       &.active {
-        border-bottom: 2px solid $darkGray;
+        border-bottom: 2px solid $dark;
         padding-bottom: 10px;
       }
     }
