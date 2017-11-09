@@ -5,7 +5,6 @@ module.exports = {
   devtool: 'eval',
   entry: {
     app: [
-      'bootstrap-loader',
       'babel-polyfill',
       'font-awesome-loader',
       './src/index',
