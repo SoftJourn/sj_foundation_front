@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react';
 import {MenuList, MenuButton, Dropdown, MenuItem} from 'react-menu-list';
 import classNames from 'classnames';
-import { Link } from 'react-router';
+import { NavLink } from 'react-router-dom';
 
 class TextFilterDropdown extends React.Component {
 
@@ -28,9 +28,9 @@ class TextFilterDropdown extends React.Component {
                 newQuery[filter] = option.value;
                 return (
                   <MenuItem key={option.value}>
-                    <Link to={{ pathname: '/search', query: newQuery }} className="btn btn-link">
+                    <NavLink to={{ pathname: '/search', query: newQuery }} className="btn btn-link">
                       {option.label}
-                    </Link>
+                    </NavLink>
                   </MenuItem>
                 );
               })}

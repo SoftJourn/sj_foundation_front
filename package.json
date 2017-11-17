@@ -51,6 +51,7 @@
     "lodash": "^4.16.2",
     "moment": "^2.15.2",
     "prop-types": "^15.6.0",
+    "query-string": "^5.0.1",
     "react": "^15.6.2",
     "react-dom": "^15.6.2",
     "react-draft-wysiwyg": "^1.10.12",

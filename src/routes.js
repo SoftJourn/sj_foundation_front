@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, IndexRoute } from 'react-router';
+import { Route, Switch } from 'react-router-dom';
 import App from './App';
 import LoginPage from './pages/LoginPage';
 import ProjectListPage from './pages/ProjectListPage';
@@ -10,8 +10,8 @@ import HowItWorksPage from './pages/HowItWorksPage';
 import StartProjectPage from './pages/StartProjectPage';
 
 export default (
-  <Route path="/" component={App}>
-    <IndexRoute component={ProjectListPage} />
+  <Switch path="/" component={App}>
+    <Route path="/" component={ProjectListPage} />
     <Route path="/search" component={ProjectListPage} />
     <Route path="/project" component={ProjectListPage} />
     <Route path="/category/:category" component={ProjectListPage} />
@@ -22,5 +22,5 @@ export default (
     <Route path="/admin" component={AdminPage} />
     <Route path="/how-it-works" component={HowItWorksPage} />
     <Route path="/start" component={StartProjectPage} />
-  </Route>
+  </Switch>
 );

@@ -62,6 +62,7 @@ export default class Project extends Component {
       user: props.user,
       comments: props.comments,
       tab: props.tab,
+      donationStatus: props.donationStatus,
     };
   }
 
@@ -139,7 +140,7 @@ export default class Project extends Component {
         <div className="container">
           <div className="row">
             <div className="col-12">
-              {comments.length > 0 && <p className="text-center"><h4>Comments</h4></p> }
+              {comments.length > 0 && <h4 className="text-center">Comments</h4> }
               {comments.map((comment) => {
                 return (
                   <CommentBox

@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router';
+import { NavLink } from 'react-router-dom';
 import classNames from 'classnames';
 import CategoryFilterDropdown from './CategoryFilterDropdown';
+import queryString from 'query-string';
 
 export default class CategoriesFilter extends Component {
 
@@ -65,17 +66,24 @@ export default class CategoriesFilter extends Component {
 
   render() {
     const { categories, selectedCategory, moreCategories, query } = this.state;
-    const allButtonClass = classNames('btn btn-link', { active: '' === query.category });
+    const allButtonClass = classNames('btn btn-link', { active: '' === selectedCategory });
     return(
       <div className="category-filter">
-        <Link to={{pathname: '/search', query: {...query, category: ''} }} className={allButtonClass} key="all">All</Link>
+        <NavLink to={{pathname: '/search', search: queryString.stringify({...query, category: ''}) }} className={allButtonClass} key="all">All</NavLink>
         {categories.map(category => {
-          if (category.slug === 'uncategorized' || category.count == 0) {
-            return null
+          if (category.count === 0) {
+            return null;
           }
-          const buttonClass = classNames('btn btn-link', { active: encodeURI(category.slug) == query.category});
+          const buttonClass = classNames('btn btn-link', { active: !!(category.name === selectedCategory)});
+          console.log(category.name+'/'+selectedCategory, query);
           return (
-            <Link to={{pathname: '/search', query: {...query, category: category.slug} }} className={buttonClass} key={category.id}>{category.name}</Link>
+            <NavLink
+              key={category.slug}
+              to={{pathname: '/search', search: queryString.stringify({...query, category: category.slug}) }}
+              className={buttonClass}
+            >
+              {category.name}
+            </NavLink>
           );
         })}
         <CategoryFilterDropdown

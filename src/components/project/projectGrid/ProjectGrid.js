@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link, browserHistory } from 'react-router'
+import { NavLink, browserHistory } from 'react-router-dom'
 import SJCoin from '../../helper/sjCoin';
 import CoinsSum from '../../helper/CoinsSum';
 import { string, object, number, bool, array, shape } from 'prop-types';
@@ -100,7 +100,7 @@ export default class ProjectGrid extends Component {
 
   render() {
     const { project, projectStats, percent} = this.state;
-    const getDonationStatus = this.getDonationStatus();
+
     return(
       <div className="col-12 col-sm-8 col-md-6 col-lg-4">
         <div className="project-grid" >
@@ -114,9 +114,9 @@ export default class ProjectGrid extends Component {
               </div>
             </div>
           </div>
-          <Link to={`/project/${project.id}`}>
+          <NavLink to={`/project/${project.id}`}>
             <h3 className="project-title"><span dangerouslySetInnerHTML={{__html: project.title}}/></h3>
-          </Link>
+          </NavLink>
           <p className="short-description" dangerouslySetInnerHTML={{__html: project.shortDescription}}/>
           <div className="project-grid-bottom">
             <div className="project-grid-icons">

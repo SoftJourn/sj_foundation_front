@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react';
 import {MenuList, MenuButton, Dropdown, MenuItem} from 'react-menu-list';
 import classNames from 'classnames';
-import { Link } from 'react-router';
+import { NavLink } from 'react-router-dom';
 class CategoryFilterDropdown extends React.Component {
 
   getLabel() {
@@ -33,12 +33,12 @@ class CategoryFilterDropdown extends React.Component {
                 const buttonClass = classNames('btn btn-link');
                 return (
                   <MenuItem key={category.id}>
-                    <Link
+                    <NavLink
                       to={{pathname: '/search', query: {...query, category: category.slug} }}
                       className={buttonClass}
                     >
                       {category.name}
-                      </Link>
+                      </NavLink>
                   </MenuItem>
                 );
               })}

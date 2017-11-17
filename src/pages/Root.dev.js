@@ -1,9 +1,10 @@
 /* eslint react/prefer-stateless-function: off */
 import React, { Component, PropTypes } from 'react';
 import { Provider } from 'react-redux';
-import routes from '../routes';
+// import routes from '../routes';
 import DevTools from './DevTools';
-import { Router } from 'react-router';
+import Main from './Main';
+import App from '../App';
 
 /**
  * Dev Root component to transfer data to react app & init DevTool
@@ -17,11 +18,13 @@ export default class Root extends Component {
    * @returns {XML}
    */
   render() {
-    const { store, history } = this.props;
+    const { store } = this.props;
     return (
       <Provider store={store}>
         <div>
-          <Router history={history} routes={routes} />
+          <App>
+            <Main />
+          </App>
           <DevTools />
         </div>
       </Provider>
@@ -35,5 +38,4 @@ export default class Root extends Component {
  */
 Root.propTypes = {
   store: PropTypes.object.isRequired,
-  history: PropTypes.object.isRequired,
 };

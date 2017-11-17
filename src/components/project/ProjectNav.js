@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router';
+import { NavLink } from 'react-router-dom';
 import TabButton from '../tab/TabButton';
 
 export default class ProjectNav extends Component {
@@ -38,7 +38,7 @@ export default class ProjectNav extends Component {
       <div className="project-nav">
         <div className="row">
           <nav className="container">
-            <Link className={(tab === '' || tab == 'overview') && "active"} to={`${mainUrl}overview`}>OVERVIEW</Link>
+            <NavLink className={(tab === '' || tab == 'overview') && "active"} to={`${mainUrl}overview`}>OVERVIEW</NavLink>
             <TabButton
               activeTab={tab}
               mainUrl={mainUrl}

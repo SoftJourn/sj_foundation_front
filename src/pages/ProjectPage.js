@@ -11,21 +11,23 @@ class ProjectPage extends Component {
   constructor(props) {
     super();
     this.state = {
-      tab: props.routeParams.tab ? props.routeParams.tab : '',
-      slug: props.routeParams.slug,
+      // tab: props.routeParams.tab ? props.routeParams.tab : '',
+      tab: props.match.params.tab,
+      slug: props.match.params.slug,
+      // slug: props.routeParams.slug,
       project: props.project,
       donation: props.donation,
       user: props.user,
-      preview: props.route.preview,
+      preview: false,
     };
   }
 
   componentWillMount() {
     this.props.dispatch({type: types.PROJECT_INIT});
     if (this.state.preview) {
-      this.props.dispatch(getProjectById(this.props.routeParams.slug));
+      this.props.dispatch(getProjectById(this.state.slug));
     } else {
-      this.props.dispatch(getProjectBySlug(this.props.routeParams.slug));
+      this.props.dispatch(getProjectBySlug(this.state.slug));
     }
   }
 
@@ -36,8 +38,8 @@ class ProjectPage extends Component {
    */
   componentWillReceiveProps(nextProps) {
     this.setState({
-      slug: nextProps.routeParams.slug,
-      tab: nextProps.routeParams.tab ? nextProps.routeParams.tab : '',
+      tab: nextProps.match.params.tab,
+      slug: nextProps.match.params.slug,
       user: nextProps.user,
       form: nextProps.form,
       projects: nextProps.projects,
@@ -62,7 +64,7 @@ class ProjectPage extends Component {
       case 'founded':
         return 'Won';
       case 'not_founded':
-        return 'Lost'
+        return 'Lost';
       default :
         return 'Closed';
     }

@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
 import SJCoin from '../helper/sjCoin';
-import PledgeInput from '../forms/PledgeInput';
-import { Link } from 'react-router'
-import { browserHistory } from 'react-router';
 import CoinsSum from '../helper/CoinsSum';
 
 export default class ProjectSideBar extends Component {

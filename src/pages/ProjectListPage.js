@@ -5,6 +5,7 @@ import { getProjects, fetchProjectCategories } from '../actions/projectActions';
 import Spinner from '../components/helper/Spinner';
 import ProjectListFilters from '../components/filters/ProjectListFilters';
 import _ from 'lodash';
+import queryString from 'query-string';
 
 
 const queryInit = {category: '', type: '', sort: ''};
@@ -13,8 +14,11 @@ class ProjectListPage extends Component {
 
   constructor(props) {
     super();
+    console.log(props)
 
-    const selectedCategory = props.routeParams.category ? props.routeParams.category : '';
+    const queryParams = queryString.parse(props.location.search);
+
+    const selectedCategory = queryParams.category ? queryParams.category : '';
     this.state = {
       donation: props.donation,
       projects: props.projects,
@@ -38,7 +42,8 @@ class ProjectListPage extends Component {
    * @param {object} nextProps - new props for component
    */
   componentWillReceiveProps(nextProps) {
-    const selectedCategory = nextProps.routeParams.category ? nextProps.routeParams.category : '';
+    const queryParams = queryString.parse(nextProps.location.search);
+    const selectedCategory = queryParams.category ? queryParams.category : '';
     const query = {...queryInit, ...this.state.query};
     const newQuery = {...query, ...nextProps.location.query};
     this.setState({

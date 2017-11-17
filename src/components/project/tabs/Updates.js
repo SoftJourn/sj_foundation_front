@@ -1,5 +1,5 @@
 import React, {PropTypes} from 'react';
-import {Link} from 'react-router';
+import {NavLink} from 'react-router';
 
 class Updates extends React.Component {
 
@@ -7,7 +7,7 @@ class Updates extends React.Component {
     const {updates, showAddButton} = this.props;
     return (
       <div>
-        {showAddButton && <Link to={`${this.props.mainUrl}addUpdate`}>+add update</Link>}
+        {showAddButton && <NavLink to={`${this.props.mainUrl}addUpdate`}>+add update</NavLink>}
         {updates.map(update => {
           return(
             <div className="comment-box" key={update.id}>

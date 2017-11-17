@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router'
+import { NavLink } from 'react-router-dom'
 
 export default class Header extends Component {
 
@@ -19,10 +19,10 @@ export default class Header extends Component {
   renderNotLogged() {
     return (
       <nav className="navbar navbar-light">
-        <Link className="navbar-brand" to="/">SJ Foundation</Link>
+        <NavLink className="navbar-brand" to="/">SJ Foundation</NavLink>
         <ul className="navbar-nav">
           <li className="nav-item active">
-            <Link className="nav-link" to="/signin">Login</Link>
+            <NavLink className="nav-link" to="/signin">Login</NavLink>
           </li>
         </ul>
       </nav>
@@ -38,7 +38,7 @@ export default class Header extends Component {
       <nav className="navbar navbar-default navbar-fixed-top">
         <div className="raw">
           <div className="navbar-header">
-            <Link className="navbar-brand" to="/">SJ Foundation</Link>
+            <NavLink className="navbar-brand" to="/">SJ Foundation</NavLink>
             <ul className="nav navbar-nav navbar-right">
               <li className="dropdown">
                 <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">

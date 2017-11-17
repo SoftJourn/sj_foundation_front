@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Link } from 'react-router'
+import { NavLink } from 'react-router-dom'
 
 class TabButton extends React.Component {
 
@@ -27,9 +27,9 @@ class TabButton extends React.Component {
       return null;
     }
     return (
-      <Link to={`${mainUrl}${name}`} className={activeTab == name && "active"}>
+      <NavLink to={`${mainUrl}${name}`} className={activeTab == name && "active"}>
         {label} <span className="badge">{count != 0 && count}</span>
-      </Link>
+      </NavLink>
     )
   }
 

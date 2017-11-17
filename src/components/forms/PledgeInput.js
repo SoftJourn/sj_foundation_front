@@ -4,7 +4,7 @@ import '../../../node_modules/react-select/dist/react-select.css';
 import SJCoin from '../../components/helper/sjCoin';
 import Modal from 'react-modal';
 import classNames from 'classnames';
-import {Link} from 'react-router';
+import {NavLink} from 'react-router-dom';
 
 const customStyles = {
   zIndex: 3,
@@ -90,7 +90,7 @@ export default class PledgeInput extends Component {
     if (!this.state.user.loggedIn) {
       return (
         <div className="">
-          <h3><Link to="signin">LOGIN</Link></h3>
+          <h3><NavLink to="signin">LOGIN</NavLink></h3>
           to donate this project
         </div>
       );
