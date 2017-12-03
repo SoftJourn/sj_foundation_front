@@ -1,6 +1,6 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto');
-@import './bootstrap/scss/bootstrap';
-//@import './bootstrap/bootstrap.min.css';
+@import './fonts/font';
+@import '../../node_modules/bootstrap/scss/bootstrap';
+
 @import './components/wp';
 //@import './vars';
 @import './colors';
