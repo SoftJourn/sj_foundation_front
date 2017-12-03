@@ -1,0 +1,11 @@
+input[type="text"] {
+    border: none;
+    font-size: $font-size-base;
+    padding: 8px;
+    border-bottom: 2px solid $fnd-gray;
+    color: $fnd-dark-gray;
+
+    &:focus {
+        outline: none;
+    }
+}

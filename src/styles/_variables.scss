@@ -1,0 +1,60 @@
+
+//
+// Color system
+//
+
+$fnd-red:               #e85154;
+$fnd-blue:              #344a94;
+$fnd-dark-purple:       #2f334d;
+$fnd-purple:            #2b204a;
+$fnd-dark-gray:         #1f1f1f;
+$fnd-gray:              #b3b4b5;
+$fnd-light-gray:        #ededed;
+$fnd-dark-green:        #2b805e;
+$fnd-green:             #469e62;
+$fnd-light-green:       #61b06f;
+$fnd-orange:            #f08513;
+$fnd-dark-yellow:       #fcbf17;
+$fnd-yellow:            #fada5a;
+$fnd-light-yellow:      #fcf5cf;
+
+// Body
+
+$body-color:                  $fnd-dark-gray;
+
+// Components
+
+$border-width:                1px;
+$border-color:                $fnd-dark-gray;
+
+$border-radius:               .25rem;
+$border-radius-lg:            .3rem;
+$border-radius-sm:            .2rem;
+
+// Fonts
+
+$font-family-base:            'WorkSans';
+$font-size-base:              .875rem;
+$font-size-sm:                .75rem;
+$font-size-lg:                1rem;
+$font-size-xl:                1.125rem;
+
+$h1-font-size:                $font-size-base * 3.42;
+$h2-font-size:                $font-size-base * 2.2;
+$h3-font-size:                $font-size-base * 1.85;
+$h4-font-size:                $font-size-base * 1.55;
+$h5-font-size:                $font-size-base * 1.3;
+$h6-font-size:                $font-size-base * 1.1;
+
+// Buttons
+
+$input-btn-padding-y:         12px;
+$input-btn-padding-x:         30px;
+$input-btn-line-height:       1;
+$btn-border-radius:           2em;
+$btn-border-radius-xs:        1em;
+$btn-border-width:            2px;
+
+// Types
+
+$headings-line-height:        1;

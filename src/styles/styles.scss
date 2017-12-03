@@ -1,6 +1,16 @@
 @import './fonts/font';
 @import '../../node_modules/bootstrap/scss/bootstrap';
 
+@import "variables";
+@import "custom";
+
+@import "common/header";
+@import "elements/buttons";
+@import "elements/inputs";
+
+
+/*
+
 @import './components/wp';
 //@import './vars';
 @import './colors';
@@ -19,3 +29,5 @@
 //@import './components/icon';
 //@import './components/editor';
 @import './layout';
+
+*/

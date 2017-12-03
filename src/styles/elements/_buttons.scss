@@ -1,0 +1,41 @@
+.btn {
+    box-shadow: none  !important;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-width: $btn-border-width;
+    font-size: $font-size-sm;
+    
+    &.btn-default {
+        @include button-size($input-btn-padding-y, $input-btn-padding-x, $font-size-sm, $input-btn-line-height, none);
+        color: $fnd-green;
+        border-color: $fnd-green;
+        background-color: transparent;
+
+        &.disabled,
+        &:disabled {
+          border-color: lighten($fnd-green, 50%);
+        }
+    }
+
+    &.btn-rounded {
+        @include button-size($input-btn-padding-y, $input-btn-padding-x, $font-size-sm, $input-btn-line-height, $btn-border-radius);
+        color: $white;
+        border-color: $fnd-blue;
+        background-color: $fnd-blue;
+
+        &.disabled,
+        &:disabled {
+          border-color: lighten($fnd-blue, 50%);
+          background-color: lighten($fnd-blue, 50%);
+        }
+    }
+    
+    &.btn-long {
+        width: 100%;
+        max-width: 300px;
+    }
+
+    &.btn-full-widht {
+        width: 100%;
+    }
+}
