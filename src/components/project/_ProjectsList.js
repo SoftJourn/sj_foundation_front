@@ -19,42 +19,96 @@ class ProjectsList extends React.Component {
                         <div className="col-auto">Art</div>
                         <div className="col-auto">Design</div>
                         <div className="col-auto">Film&Video</div>
-                        <div className="col-auto">Food</div>
+                        <div className="col-auto active">Food</div>
                         <div className="col-2"></div>
                     </div>
                     <div className="row grid-projects align-items-center">
                         <div className="card-deck">
 
-                            <div className="card project-card">
+                            <div className="card card-project">
                                 <img className="card-img-top" src="https://x.kinja-static.com/assets/images/logos/placeholders/default.png" alt="Card image cap"/>
                                 <div className="card-body">
-                                    <h4 className="card-title">Card title</h4>
-                                    <p className="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                                    <div className="card-link">Office</div>
+                                    <h4 className="card-title">Dim Sirka</h4>
+                                    <div className="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</div>
+                                    <div className="card-link">by John Smith</div>
                                 </div>
                                 <div className="card-footer">
-                                    <small className="text-muted">Last updated 3 mins ago</small>
+                                    <div className="card-coins">
+                                        <span>10,500</span> of 25,000
+                                    </div>
+                                    <div className="card-status-bar progress">
+                                        <div className="progress-bar" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                    <div className="row card-stats">
+                                        <div className="col">
+                                            <div className="card-stats-value">72% </div> funded
+                                        </div>
+                                        <div className="col">
+                                            <div className="card-stats-value">15 </div> investors
+                                        </div>
+                                        <div className="col">
+                                            <div className="card-stats-value">22 </div> hours to go
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
-                            <div className="card project-card">
+                            <div className="card card-project">
                                 <img className="card-img-top" src="https://x.kinja-static.com/assets/images/logos/placeholders/default.png" alt="Card image cap"/>
                                 <div className="card-body">
-                                    <h4 className="card-title">Card title</h4>
-                                    <p className="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                                    <div className="card-link">Office</div>
+                                    <h4 className="card-title">Dim Sirka</h4>
+                                    <div className="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</div>
+                                    <div className="card-link">by John Smith</div>
                                 </div>
                                 <div className="card-footer">
-                                    <small className="text-muted">Last updated 3 mins ago</small>
+                                    <div className="card-coins">
+                                        <span>10,500</span> of 25,000
+                                    </div>
+                                    <div className="card-status-bar progress">
+                                        <div className="progress-bar" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                    <div className="row card-stats">
+                                        <div className="col">
+                                            <div className="card-stats-value">72% </div> funded
+                                        </div>
+                                        <div className="col">
+                                            <div className="card-stats-value">15 </div> investors
+                                        </div>
+                                        <div className="col">
+                                            <div className="card-stats-value">22 </div> hours to go
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
-                            <div className="card project-card">
+                            <div className="card card-project">
                                 <img className="card-img-top" src="https://x.kinja-static.com/assets/images/logos/placeholders/default.png" alt="Card image cap"/>
                                 <div className="card-body">
-                                    <h4 className="card-title">Card title</h4>
-                                    <p className="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                                    <div className="card-link">Office</div>
+                                    <h4 className="card-title">Dim Sirka</h4>
+                                    <div className="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</div>
+                                    <div className="card-link">by John Smith</div>
                                 </div>
                                 <div className="card-footer">
-                                    <small className="text-muted">Last updated 3 mins ago</small>
+                                    <div className="card-coins">
+                                        <span>10,500</span> of 25,000
+                                    </div>
+                                    <div className="card-status-bar progress">
+                                        <div className="progress-bar" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                    <div className="row card-stats">
+                                        <div className="col">
+                                            <div className="card-stats-value">72% </div> funded
+                                        </div>
+                                        <div className="col">
+                                            <div className="card-stats-value">15 </div> investors
+                                        </div>
+                                        <div className="col">
+                                            <div className="card-stats-value">22 </div> hours to go
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
