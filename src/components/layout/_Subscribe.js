@@ -11,15 +11,13 @@ class Subscribe extends React.Component {
         return (
             <div className="container-fluid block-subscribe">
                 <div className="container">
-                    <div className="row align-items-center">
+                    <div className="row align-items-start">
                         <div className="col">
-                            <h1>Get Newsletter <br/> today</h1>
+                            <div className="title-subscribe">Get Newsletter <br/> today</div>
                         </div>
-                        <div className="col">
+                        <div className="col block-subscribe-form">
                             <div>Interested in receiving our e-mails? Just subscribe </div>
-                            <br/>
-                            <input type="text" placeholder="you@mail.com"/>
-                            <br/>
+                            <input type="text" placeholder="you@mail.com"/> <br/>
                             <button className="btn btn-rounded">Start project</button>
                         </div>
                     </div>
