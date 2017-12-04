@@ -7,28 +7,24 @@ import ProjectListFilters from '../components/filters/ProjectListFilters';
 import _ from 'lodash';
 import queryString from 'query-string';
 
-
-const queryInit = {category: '', type: '', sort: ''};
+const queryParamNames = ['category', 'type', 'sort'];
 
 class ProjectListPage extends Component {
 
   constructor(props) {
     super();
-    console.log(props)
-
     const queryParams = queryString.parse(props.location.search);
-
     const selectedCategory = queryParams.category ? queryParams.category : '';
+
     this.state = {
       donation: props.donation,
       projects: props.projects,
       selectedCategory,
       page: 1,
       user: props.user,
-      query: {...queryInit, ...props.location.query},
+      query: _.pick(queryParams, queryParamNames),
     };
     this.handleLoadMore.bind(this);
-
   }
 
   componentWillMount() {
@@ -44,8 +40,8 @@ class ProjectListPage extends Component {
   componentWillReceiveProps(nextProps) {
     const queryParams = queryString.parse(nextProps.location.search);
     const selectedCategory = queryParams.category ? queryParams.category : '';
-    const query = {...queryInit, ...this.state.query};
-    const newQuery = {...query, ...nextProps.location.query};
+    const newQuery = _.pick(queryParams, queryParamNames);
+    const oldQuery = this.state.query;
     this.setState({
       user: nextProps.user,
       form: nextProps.form,
@@ -54,7 +50,7 @@ class ProjectListPage extends Component {
       donation: nextProps.donation,
       query: newQuery,
     });
-    if (!_.isEqual(newQuery, query)) {
+    if (!_.isEqual(newQuery, oldQuery)) {
       this.props.dispatch(getProjects(1, newQuery));
       this.setState({ page: 1});
     }
@@ -70,7 +66,7 @@ class ProjectListPage extends Component {
 
   render() {
     const {pages, data, isFetching, categories } = this.state.projects;
-    const {projects, selectedCategory, user, query, donation} = this.state;
+    const {selectedCategory, query} = this.state;
     return (
       <div className="project-results">
         <ProjectListFilters
@@ -80,7 +76,7 @@ class ProjectListPage extends Component {
         />
         <div className="container">
           <div className="row">
-            {Object.keys(data).length == 0 && !isFetching &&
+            {Object.keys(data).length === 0 && !isFetching &&
               <div className="col-sm-12 text-center"><h4>No results</h4></div>
             }
             {data.length > 0 && data.map(project => {

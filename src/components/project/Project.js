@@ -111,7 +111,7 @@ export default class Project extends Component {
                 durationLeft={projectStats.durationLeft}
                 user={user}
                 showModal={project.showModal}
-                donationStatus={project.donationStatus}
+                donationStatus={projectStats.donationStatus}
                 canDonate={projectStats.canDonate}
               />
             </div>
