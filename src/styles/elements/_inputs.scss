@@ -4,8 +4,13 @@ input[type="text"] {
     padding: 8px;
     border-bottom: 2px solid $fnd-gray;
     color: $fnd-dark-gray;
+    background: transparent;
 
     &:focus {
         outline: none;
+    }
+
+    &.input-outline {
+        border: 0;
     }
 }
