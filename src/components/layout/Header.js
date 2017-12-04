@@ -38,7 +38,7 @@ export default class Header extends Component {
         <nav className="container-fluid header">
           <div className="container">
             <div className="row align-items-center header-inner">
-              <div className="col-2 logo">
+              <div className="col-2 sj-logo">
                 sj
               </div>
               <div className="col">
