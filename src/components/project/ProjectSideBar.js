@@ -18,7 +18,7 @@ export default class ProjectSideBar extends Component {
       user: props.user,
       showModal: props.showModal,
       canPledge: false,
-      donationStatus: props.donationStatus,
+      donationStatus: props.donationStatus ? props.donationStatus : '',
       canDonate: props.canDonate,
     };
   }

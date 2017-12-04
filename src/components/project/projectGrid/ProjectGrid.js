@@ -89,7 +89,7 @@ export default class ProjectGrid extends Component {
   }
 
   getDonationStatus() {
-    switch(this.state.project.donationStatus) {
+    switch(this.state.project.projectStats.donationStatus) {
       case 'won':
         return <span className="text-success">Won</span>
       case 'lost':
@@ -110,7 +110,7 @@ export default class ProjectGrid extends Component {
           <div className="row project-donation-status">
             <div className="col-12">
               <div className="row">
-                <span className="col project-category-name">{project.category}</span>
+                <span className="col project-category-name">{project.category.name}</span>
               </div>
             </div>
           </div>

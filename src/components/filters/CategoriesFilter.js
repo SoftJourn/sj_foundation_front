@@ -66,7 +66,7 @@ export default class CategoriesFilter extends Component {
 
   render() {
     const { categories, selectedCategory, moreCategories, query } = this.state;
-    const allButtonClass = classNames('btn btn-link', { active: '' === selectedCategory });
+    const allButtonClass = classNames('btn btn-link', { 'active-link': '' === selectedCategory });
     return(
       <div className="category-filter">
         <NavLink to={{pathname: '/search', search: queryString.stringify({...query, category: ''}) }} className={allButtonClass} key="all">All</NavLink>
@@ -74,8 +74,7 @@ export default class CategoriesFilter extends Component {
           if (category.count === 0) {
             return null;
           }
-          const buttonClass = classNames('btn btn-link', { active: !!(category.name === selectedCategory)});
-          console.log(category.name+'/'+selectedCategory, query);
+          const buttonClass = classNames('btn btn-link', { 'active-link': (category.slug === selectedCategory)});
           return (
             <NavLink
               key={category.slug}

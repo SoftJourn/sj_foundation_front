@@ -1,10 +1,6 @@
-import {authLogout} from '../../actions/loginActions';
-import { browserHistory } from 'react-router';
 import 'whatwg-fetch';
 
-let API_ROOT = 'http://localhost:3010/';
-// require('es6-promise');
-
+let API_ROOT = process.env.API_HOST;
 
 /**
  * call api and return results
@@ -13,40 +9,28 @@ let API_ROOT = 'http://localhost:3010/';
 function callApi(endpoint, store, method, body) {
   const fullUrl = (endpoint.indexOf(API_ROOT) === -1) ? API_ROOT + endpoint : endpoint;
   let apiHeaders = new Headers();
-  var token = window.localStorage.getItem('token');
-  apiHeaders.append('Authorization', token)
-  apiHeaders.append('Content-Type', 'application/json')
-  // if (window.wpApiSettings.nonce) {
-  //   apiHeaders.append('X-WP-Nonce', window.wpApiSettings.nonce);
-  // }
+  apiHeaders.append('Content-Type', 'application/json');
 
-  return fetch(fullUrl+'?access_token='+token, {
+  return fetch(fullUrl, {
       body: JSON.stringify(body),
-      credentials: 'include',
-      mode: 'cors',
-      headers: apiHeaders,
+      // mode: 'cors',
+      // headers: apiHeaders,
       method: method
     })
     .then(response => {
         if (response.status === 401 || response.status === 403) {
-          // store.dispatch(authLogout())
-          // browserHistory.push('/');
-          // window.location.href = '/';
+
         }
         return response.json().then(json => ({ json, response }))
     })
     .then(({ json, response }) => {
-      const headers = response.headers;
-      const pages = parseInt(headers.get('X-WP-TotalPages'));
+      const pages = 0;
       const result = {
         data: json,
         meta: {
           pages,
         }
       };
-      if (!response.ok) {
-        return Promise.reject(json);
-      }
       return Object.assign({}, result);
     })
     .catch((err) =>
