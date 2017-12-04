@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Stats from '../components/layout/_Stats';
 import ProjectsList from '../components/project/_ProjectsList';
+import Subscribe from '../components/layout/_Subscribe';
 
 const queryInit = {category: '', type: '', sort: ''};
 
@@ -17,6 +18,7 @@ class MainPage extends Component {
         <div>
           <Stats />
           <ProjectsList />
+          <Subscribe />
         </div>
     );
   }
