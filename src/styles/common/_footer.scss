@@ -1,16 +1,18 @@
 .footer {
     background-color: $fnd-dark-gray;
-    color: #f9f9f9;
-    padding-top: 30px;
-    padding-bottom: 30px;
+    color: #eeeeee;
+    padding-top: 60px;
+    padding-bottom: 20px;
 
     .footer-links {
         cursor: pointer;
+        font-weight: normal;
+        line-height: 2;
     }
 
     .copyright {
-        padding-top: 70px;
+        padding-top: 180px;
         text-align: right;
-        color: #f5f5f5;
+        color: #dddddd;
     }
 }
