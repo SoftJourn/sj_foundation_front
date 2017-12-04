@@ -35,7 +35,7 @@ export default class Header extends Component {
     //   return this.renderNotLogged();
     // }
     return(
-        <nav className="container-fluid header">
+        <nav className="container-fluid header sticky-top">
           <div className="container">
             <div className="row align-items-center header-inner">
               <div className="col-2 sj-logo">
