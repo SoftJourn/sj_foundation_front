@@ -1,7 +1,7 @@
 input[type="text"] {
     border: none;
     font-size: $font-size-base;
-    padding: 8px;
+    padding: 8px 0;
     border-bottom: 2px solid $fnd-gray;
     color: $fnd-dark-gray;
     background: transparent;
@@ -12,5 +12,9 @@ input[type="text"] {
 
     &.input-outline {
         border: 0;
+    }
+
+    &.input-full-width {
+      width: 100%;
     }
 }

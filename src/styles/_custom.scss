@@ -38,6 +38,18 @@ h1, h2, h3, h4, h5, h6,
   font-size: 3rem;
 }
 
+.custom-input {
+  margin: 15px 0;
+
+  .input-label {
+    //font-size: $font-size-base;
+  }
+
+  & > input:focus {
+    border-bottom-color: $fnd-light-green;
+  }
+}
+
 // -------------------------------------------------------------------------------
 // MAIN PAGE
 // -------------------------------------------------------------------------------
@@ -229,5 +241,11 @@ h1, h2, h3, h4, h5, h6,
         }
       }
     }
+  }
+
+  .tab-panel {
+    max-width: 400px;
+    margin: auto;
+    @include make-container();
   }
 }
