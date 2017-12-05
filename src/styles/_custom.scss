@@ -33,6 +33,15 @@ h1, h2, h3, h4, h5, h6,
   font-weight: bold;
 }
 
+.text-heading {
+  font-weight: bold;
+  font-size: 3rem;
+}
+
+// -------------------------------------------------------------------------------
+// MAIN PAGE
+// -------------------------------------------------------------------------------
+
 // info block
 
 .block-info {
@@ -58,10 +67,6 @@ h1, h2, h3, h4, h5, h6,
   padding-top: 90px;
   padding-bottom: 90px;
   background: #f9f9f9;
-
-  .heading-projects {
-    font-weight: bold;
-  }
 
   .filter-projects {
     border-bottom: 1px solid lighten($fnd-dark-gray, 70%);
@@ -172,6 +177,57 @@ h1, h2, h3, h4, h5, h6,
   .block-subscribe-form {
     > * {
       margin-bottom: 30px;
+    }
+  }
+}
+
+// -------------------------------------------------------------------------------
+// CREATE PROJECT PAGE
+// -------------------------------------------------------------------------------
+
+.create-project-page {
+
+  .block-heading {
+    background: #f5f5f5;
+    padding-top: 30px;
+    border-bottom: 1px solid lighten($fnd-dark-gray, 67%);
+
+    .text-heading {
+      margin-bottom: 30px;
+    }
+
+    .btn-rounded {
+      margin-left: 30px;
+    }
+
+    .create-project-controls {
+      padding-bottom: 45px;
+    }
+
+    .form-tabs {
+      padding: 0 15px;
+      margin-bottom: 0;
+
+      .form-tab {
+        list-style-type: none;
+        cursor: pointer;
+        padding: 10px 15px;
+        margin: 0 1px;
+        font-size: $font-size-base;
+        background: lighten($fnd-dark-gray, 70%);
+        color: lighten($fnd-dark-gray, 20%);
+        border: 1px solid lighten($fnd-dark-gray, 67%);
+        border-bottom-width: 0;
+        //border-radius: ;
+
+        &[aria-selected=true] {
+          outline: none;
+          background: white;
+          border-bottom: none;
+          color: $fnd-dark-gray;
+          margin-bottom: -1px;
+        }
+      }
     }
   }
 }

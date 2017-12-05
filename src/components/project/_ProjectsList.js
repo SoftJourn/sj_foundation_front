@@ -10,8 +10,8 @@ class ProjectsList extends React.Component {
         return (
             <div className="container-fluid block-projects">
                 <div className="container">
-                    <div className="row heading-projects align-items-center">
-                        <h2 className="col text-center">Projects</h2>
+                    <div className="row align-items-center">
+                        <div className="col text-center text-heading">Projects</div>
                     </div>
                     <div className="row filter-projects align-items-center justify-content-between">
                         <input type="text" className="col-2 input-outline align-self-start" />
