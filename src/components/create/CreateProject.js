@@ -3,6 +3,8 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import TabMain from './TabMain';
 import TabDetails from './TabDetails';
 import TabTeam from './TabTeam';
+import '../../../node_modules/react-select/dist/react-select.css';
+import '../../../node_modules/pretty-checkbox/src/pretty-checkbox.scss';
 
 export class CreateProject extends React.Component {
 
@@ -32,13 +34,13 @@ export class CreateProject extends React.Component {
                     </div>
                     <div className="container">
                         <div className="row">
-                            <TabPanel>
+                            <TabPanel selectedClassName="tab-panel">
                                 <TabMain />
                             </TabPanel>
-                            <TabPanel>
+                            <TabPanel selectedClassName="tab-panel">
                                 <TabDetails />
                             </TabPanel>
-                            <TabPanel>
+                            <TabPanel selectedClassName="tab-panel">
                                 <TabTeam />
                             </TabPanel>
                         </div>

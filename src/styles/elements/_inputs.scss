@@ -8,6 +8,7 @@ input[type="text"] {
 
     &:focus {
         outline: none;
+        border-bottom-color: $fnd-light-green;
     }
 
     &.input-outline {
@@ -15,6 +16,14 @@ input[type="text"] {
     }
 
     &.input-full-width {
-      width: 100%;
+        width: 100%;
     }
+}
+
+.custom-input {
+  margin: 15px 0;
+
+  .input-label {
+    //font-size: $font-size-base;
+  }
 }

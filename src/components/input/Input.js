@@ -10,7 +10,9 @@ class Input extends Component {
         return (
             <div className="custom-input">
                 <div className="input-label">{this.props.label}</div>
-                <input type="text" className={this.props.className}/>
+                <input type="text"
+                       className={this.props.className}
+                       placeholder={this.props.placeholder}/>
             </div>
         )
     }
