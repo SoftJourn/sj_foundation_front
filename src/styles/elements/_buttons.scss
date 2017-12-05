@@ -13,7 +13,8 @@
 
         &.disabled,
         &:disabled {
-          border-color: lighten($fnd-green, 50%);
+            border-color: lighten($fnd-green, 50%);
+            color: lighten($fnd-green, 50%);
         }
     }
 
@@ -27,6 +28,18 @@
         &:disabled {
           border-color: lighten($fnd-blue, 50%);
           background-color: lighten($fnd-blue, 50%);
+        }
+    }
+
+    &.btn-outline {
+        @include button-size($input-btn-padding-y, $input-btn-padding-x, $font-size-sm, $input-btn-line-height, none);
+        color: $fnd-blue;
+        border: none;
+        background-color: transparent;
+
+        &.disabled,
+        &:disabled {
+            color: lighten($fnd-blue, 50%);
         }
     }
     
