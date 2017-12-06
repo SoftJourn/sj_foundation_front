@@ -28,7 +28,9 @@ export class CreateProject extends React.Component {
                             <TabList className="row justify-content-center form-tabs">
                                 <Tab className="form-tab col text-center rounded-top">Main</Tab>
                                 <Tab className="form-tab col text-center rounded-top">Details</Tab>
-                                <Tab className="form-tab col text-center rounded-top">Team</Tab>
+                                <Tab disabled
+                                     className="form-tab col text-center rounded-top"
+                                     disabledClassName="form-tab-disabled">Team</Tab>
                             </TabList>
                         </div>
                     </div>
