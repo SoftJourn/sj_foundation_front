@@ -23,9 +23,9 @@ export default class Present extends Component {
                             </div>
                         </div>
                         <div className="row align-items-center">
-                            <div className="col text-heading">
-                                Create more interesting
-                                projects together
+                            <div className="col text-heading text-heading-thin">
+                                Create more interesting projects
+                                <span className="text-heading-accent"> together</span>
                             </div>
                         </div>
 

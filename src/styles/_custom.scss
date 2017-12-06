@@ -11,6 +11,7 @@
 
 body {
     font-family: $font-family-base;
+    font-weight: $font-weight-base
     //line-height: $main-line-height;
 }
 
@@ -28,6 +29,8 @@ h1, h2, h3, h4, h5, h6,
   line-height: 1;
 }
 
+// other
+
 .sj-logo {
   font-size: 2rem;
   font-weight: bold;
@@ -38,7 +41,11 @@ h1, h2, h3, h4, h5, h6,
   font-size: 3rem;
 
   &.text-heading-thin {
-    font-weight: 100;
+    font-weight: $font-weight-base;
+  }
+
+  .text-heading-accent {
+    color: $fnd-dark-yellow;
   }
 }
 
