@@ -3,6 +3,7 @@ import { Switch, Route } from 'react-router-dom'
 import App from '../App';
 import LoginPage from './LoginPage';
 import ProjectListPage from './ProjectListPage';
+import MainPage from './_MainPage';
 import ProjectPage from './ProjectPage';
 import TransactionPage from './TransactionPage';
 import AdminPage from './AdminPage';
@@ -12,7 +13,7 @@ import StartProjectPage from './StartProjectPage';
 const Main = () => (
   <main>
     <Switch>
-      <Route path="/" exact component={ProjectListPage} />
+      <Route path="/" exact component={MainPage} />
       <Route path="/search" component={ProjectListPage} />
       <Route path="/category/:category" component={ProjectListPage} />
       <Route path="/signin" component={LoginPage} />
@@ -24,6 +25,6 @@ const Main = () => (
       <Route path="/start" component={StartProjectPage} />
     </Switch>
   </main>
-)
+);
 
 export default Main

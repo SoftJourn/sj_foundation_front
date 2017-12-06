@@ -1,6 +1,17 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto');
-@import './bootstrap/scss/bootstrap';
-//@import './bootstrap/bootstrap.min.css';
+@import './fonts/font';
+@import '../../node_modules/bootstrap/scss/bootstrap';
+
+@import "variables";
+@import "custom";
+
+@import "common/header";
+@import "common/footer";
+@import "elements/buttons";
+@import "elements/inputs";
+
+
+/*
+
 @import './components/wp';
 //@import './vars';
 @import './colors';
@@ -19,3 +30,5 @@
 //@import './components/icon';
 //@import './components/editor';
 @import './layout';
+
+*/

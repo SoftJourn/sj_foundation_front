@@ -14,9 +14,7 @@ class StartProjectPage extends Component {
 
   render() {
     return (
-      <div>
-        <CreateProject />
-      </div>
+      <CreateProject />
     )
   }
 }

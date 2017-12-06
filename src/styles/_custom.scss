@@ -1,0 +1,248 @@
+// override
+
+.container-fluid {
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+// general
+
+body {
+    font-family: $font-family-base;
+    //line-height: $main-line-height;
+}
+
+// headings
+
+h1, .h1 { font-size: $h1-font-size; }
+h2, .h2 { font-size: $h2-font-size; }
+h3, .h3 { font-size: $h3-font-size; }
+h4, .h4 { font-size: $h4-font-size; }
+h5, .h5 { font-size: $h5-font-size; }
+h6, .h6 { font-size: $h6-font-size; }
+
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6 {
+  line-height: 1;
+}
+
+.sj-logo {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.text-heading {
+  font-weight: bold;
+  font-size: 3rem;
+}
+
+// -------------------------------------------------------------------------------
+// MAIN PAGE
+// -------------------------------------------------------------------------------
+
+// info block
+
+.block-info {
+  padding-top: 100px;
+  padding-bottom: 100px;
+  background: #f5f5f5;
+
+  .stats-info {
+    font-size: $font-size-xl;
+    text-align: center;
+
+    .number-info {
+      color: $fnd-blue;
+      font-size: 6rem;
+      font-weight: bold;
+    }
+  }
+}
+
+// projects block
+
+.block-projects {
+  padding-top: 90px;
+  padding-bottom: 90px;
+  background: #f9f9f9;
+
+  .filter-projects {
+    border-bottom: 1px solid lighten($fnd-dark-gray, 70%);
+    margin-top: 30px;
+    margin-bottom: 60px;
+
+    > * {
+      margin: 0 20px;
+      padding: 20px 0 10px;
+    }
+
+    > *:not(input) {
+      font-size: $font-size-base;
+      cursor: pointer;
+    }
+
+    .active {
+      border-bottom: 2px solid $fnd-light-green;
+    }
+  }
+
+  .grid-projects {
+    margin-bottom: 80px;
+
+    .card-project {
+      -webkit-box-shadow: 1px 8px 41px -7px rgba(209,209,209,1);
+      -moz-box-shadow: 1px 8px 41px -7px rgba(209,209,209,1);
+      box-shadow: 1px 8px 41px -7px rgba(209,209,209,1);
+
+      border: none;
+      color: lighten($fnd-dark-gray, 50%);
+      border-radius: $border-radius;
+
+      .card-body {
+        padding: 40px 30px 0;
+        font-size: $font-size-base;
+
+        > * {
+          margin-bottom: 20px;
+        }
+
+        .card-link {
+          text-decoration: underline;
+          cursor: pointer;
+        }
+
+        .card-title {
+          color: $fnd-dark-gray;
+          font-weight: bold;
+        }
+
+        .card-text {
+
+        }
+      }
+
+      .card-footer {
+        padding: 10px 30px 40px;
+        border: none;
+        background: #fff;
+
+        .card-coins {
+          margin-bottom: 15px;
+
+          span {
+            font-size: 2*$font-size-base;
+            color: $fnd-dark-gray;
+          }
+        }
+
+        .card-status-bar {
+          height: 3px;
+          margin-bottom: 15px;
+
+          .progress-bar {
+            width: 25%;
+            background: $fnd-light-green;
+          }
+        }
+
+        .card-stats {
+          font-size: $font-size-base;
+
+          .card-stats-value {
+            font-size: $font-size-xl;
+            color: $fnd-dark-gray;
+          }
+        }
+      }
+    }
+  }
+
+}
+
+// subscribe block
+
+.block-subscribe {
+  padding-top: 160px;
+  padding-bottom: 160px;
+  background: $white;
+
+  .title-subscribe {
+    font-size: 4*$font-size-base;
+    line-height: 1;
+    font-weight: bold;
+  }
+
+  .block-subscribe-form {
+    > * {
+      margin-bottom: 30px;
+    }
+  }
+}
+
+// -------------------------------------------------------------------------------
+// CREATE PROJECT PAGE
+// -------------------------------------------------------------------------------
+
+.create-project-page {
+
+  .block-heading {
+    background: #f5f5f5;
+    padding-top: 30px;
+    border-bottom: 1px solid lighten($fnd-dark-gray, 67%);
+
+    .text-heading {
+      margin-bottom: 30px;
+    }
+
+    .btn-rounded {
+      margin-left: 30px;
+    }
+
+    .create-project-controls {
+      padding-bottom: 45px;
+    }
+
+    .form-tabs {
+      padding: 0 15px;
+      margin-bottom: 0;
+
+      .form-tab {
+        list-style-type: none;
+        cursor: pointer;
+        padding: 10px 15px;
+        margin: 0 1px;
+        font-size: $font-size-base;
+        background: lighten($fnd-dark-gray, 70%);
+        color: lighten($fnd-dark-gray, 20%);
+        border: 1px solid lighten($fnd-dark-gray, 67%);
+        border-bottom-width: 0;
+        //border-radius: ;
+
+        &[aria-selected=true] {
+          outline: none;
+          background: white;
+          border-bottom: none;
+          color: $fnd-dark-gray;
+          margin-bottom: -1px;
+        }
+      }
+    }
+  }
+
+  .tab-panel {
+    max-width: 500px;
+    min-height: 80vh;
+    margin: auto;
+    margin-top: 45px;
+    @include make-container();
+
+    .tab-inner {
+      padding-bottom: 60px;
+      > * {
+        margin-bottom: 40px;
+      }
+    }
+  }
+}

@@ -31,32 +31,45 @@ export default class Header extends Component {
 
   render() {
     const {user} = this.state;
-    if (!user.loggedIn) {
-      return this.renderNotLogged();
-    }
+    // if (!user.loggedIn) {
+    //   return this.renderNotLogged();
+    // }
     return(
-      <nav className="navbar navbar-default navbar-fixed-top">
-        <div className="raw">
-          <div className="navbar-header">
-            <NavLink className="navbar-brand" to="/">SJ Foundation</NavLink>
-            <ul className="nav navbar-nav navbar-right">
-              <li className="dropdown">
-                <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                  Account <span className="caret"></span>
-                </a>
-                <ul className="dropdown-menu">
-                  <li className="dropdown-header">Your balance: {this.state.user.balance}</li>
-                  <li role="separator" className="divider"></li>
-                  <li><a href="/wp-admin/profile.php">Profile</a></li>
-                  {/*<li><Link to="/transactions">Transactions</Link></li>*/}
-                  <li role="separator" className="divider"></li>
-                  <li><a href={window.wpApiSettings.logout_link}>Logout</a></li>
-                </ul>
-              </li>
-            </ul>
+        <nav className="container-fluid header sticky-top">
+          <div className="container">
+            <div className="row align-items-center header-inner">
+              <div className="col-2 sj-logo">
+                sj
+              </div>
+              <div className="col">
+                <div className="row menu justify-content-end ">
+                  <div className="col-auto active">
+                    Home
+                  </div>
+                  <div className="col-auto">
+                    How it works
+                  </div>
+                  <div className="col-auto">
+                    Projects
+                  </div>
+                  <div className="col-auto">
+                    Contact Us
+                  </div>
+                  <div className="col-auto">
+                    Login
+                  </div>
+                </div>
+              </div>
+              <div className="col-3 controls">
+                <div className="row">
+                  <div className="col">
+                    <NavLink className="btn btn-rounded" to="/start">Start project</NavLink>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
-      </nav>
+        </nav>
     );
   }
 }
