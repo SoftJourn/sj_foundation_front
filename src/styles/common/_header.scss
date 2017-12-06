@@ -6,24 +6,6 @@
         height: 100px;
     }
 
-    .menu {
-        font-size: $font-size-base;
-
-        a {
-          color: $body-color;
-          text-decoration: none;
-        }
-
-        > * {
-            cursor: pointer;
-            padding: $input-btn-padding-y 0;
-            margin: 0 20px;
-        }
-
-        .menu-active {
-            border-bottom: 2px solid $fnd-light-green;
-        }
-    }
     .search {
         text-align: center;
     }
@@ -31,4 +13,23 @@
     .controls {
         text-align: right;
     }
+}
+
+.menu {
+  font-size: $font-size-base;
+
+  a {
+    color: $body-color;
+    text-decoration: none;
+  }
+
+  > * {
+    cursor: pointer;
+    padding: $input-btn-padding-y 0;
+    margin: 0 20px;
+  }
+
+  .menu-active {
+    border-bottom: 2px solid $fnd-light-green;
+  }
 }

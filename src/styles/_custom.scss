@@ -36,11 +36,38 @@ h1, h2, h3, h4, h5, h6,
 .text-heading {
   font-weight: bold;
   font-size: 3rem;
+
+  &.text-heading-thin {
+    font-weight: 100;
+  }
 }
 
 // -------------------------------------------------------------------------------
 // MAIN PAGE
 // -------------------------------------------------------------------------------
+
+// present block
+
+.present-block {
+  min-height: 100vh;
+
+  .present-video {
+    background: #bbbcbe;
+  }
+
+  .present-form {
+    background: $white;
+    padding: 60px;
+
+    > * {
+      margin-bottom: 60px;
+    }
+
+    .text-heading {
+      line-height: 1;
+    }
+  }
+}
 
 // info block
 
