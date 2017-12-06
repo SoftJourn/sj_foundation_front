@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom'
+import Menu from './_Menu';
 
 export default class Header extends Component {
 
@@ -35,30 +36,15 @@ export default class Header extends Component {
     //   return this.renderNotLogged();
     // }
     return(
-        <nav className="container-fluid header sticky-top">
+        <nav className="container-fluid header">
           <div className="container">
             <div className="row align-items-center header-inner">
               <div className="col-2 sj-logo">
                 sj
               </div>
               <div className="col">
-                <div className="row menu justify-content-end ">
-                  <div className="col-auto active">
-                    Home
-                  </div>
-                  <div className="col-auto">
-                    How it works
-                  </div>
-                  <div className="col-auto">
-                    Projects
-                  </div>
-                  <div className="col-auto">
-                    Contact Us
-                  </div>
-                  <div className="col-auto">
-                    Login
-                  </div>
-                </div>
+                  <Menu className="row menu justify-content-end"
+                        itemClassName="col-auto"/>
               </div>
               <div className="col-3 controls">
                 <div className="row">
