@@ -20,21 +20,16 @@ module.exports = {
     new webpack.DefinePlugin({
       'process.env': {
         'NODE_ENV': JSON.stringify('production'),
-        'API_HOST': 'http://sj-foundation.testing.softjourn.if.ua:3000/'
+        'API_HOST': "'http://sj-foundation.testing.softjourn.if.ua:3000/'"
       },
     }),
   ],
   module: {
     loaders: [
       {
-        test: /\.js$/,
-        loaders: ['babel'],
-      },
-      {
-        test: /\.js$/,
-        exclude: /(node_modules|bower_components)/,
-        loader: 'babel' // 'babel-loader' is also a legal name to reference
-        // include: [path.join(__dirname, 'src')],
+        test: /\.js?$/,
+        exclude: /node_modules/,
+        loader: 'babel-loader',
       },
       { test: /\.css$/, loaders: ['style-loader', 'css-loader'] },
 

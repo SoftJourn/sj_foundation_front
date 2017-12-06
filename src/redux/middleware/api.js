@@ -1,4 +1,4 @@
-import 'whatwg-fetch';
+import fetch from 'whatwg-fetch';
 
 let API_ROOT = process.env.API_HOST;
 

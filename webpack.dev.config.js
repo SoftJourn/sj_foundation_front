@@ -6,7 +6,7 @@ module.exports = {
   devtool: 'eval',
   entry: {
     app: [
-      'webpack-dev-server/client?http://localhost:3000',
+      'webpack-dev-server/client?http://localhost:3001',
       'webpack/hot/only-dev-server',
       'font-awesome-loader',
       './src/index'
@@ -15,7 +15,7 @@ module.exports = {
   output: {
     path: path.join(__dirname, '/assets/dist/'),
     filename: '[name].bundle.js',
-    publicPath: 'http://localhost:3000/assets/dist/'
+    publicPath: 'http://localhost:3001/assets/dist/'
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
