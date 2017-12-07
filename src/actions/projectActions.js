@@ -4,45 +4,44 @@ import {getBalance} from './userActions';
 import {serialize} from '../utils/utils'
 
 /**
- * fetches projects
- * @returns {{}}
- */
-function fetchSearch(page = 1, query= {}) {
-  return {
-    [CALL_API]: {
-      types: [types.SEARCH_REQUEST, types.SEARCH_SUCCESS, types.SEARCH_FAILURE],
-      endpoint: `search/?&page=${page}&${serialize(query)}`,
-    },
-  };
-}
-
-/**
  * fetches categories
  * @returns {{}}
  */
-export function fetchProjectCategories() {
-  return {
-    [CALL_API]: {
-      types: [types.CATEGORIES_REQUEST, types.CATEGORIES_SUCCESS, types.CATEGORIES_FAILURE],
-      endpoint: `categories`,
-    },
-  };
+export function getProjectsCategories() {
+    return {
+        [CALL_API]: {
+            types: [types.CATEGORIES_REQUEST, types.CATEGORIES_SUCCESS, types.CATEGORIES_FAILURE],
+            endpoint: `categories`,
+        },
+    };
+}
+
+/**
+ * get projects
+ * @returns {{}}
+ */
+function fetchProjects(page = 1, query= {}) {
+    return {
+        [CALL_API]: {
+            types: [types.PROJECTS_REQUEST, types.PROJECTS_SUCCESS, types.PROJECTS_FAILURE],
+            endpoint: `projects`,
+        },
+    };
 }
 
 /**
  * change url and dispatch search action
  */
 export function getProjects(page = 1, query = {}) {
-  return (dispatch) => {
-    if (page === 1) {
-      dispatch({type: types.SEARCH_INIT})
-    } else {
-      dispatch({type: types.SEARCH_LOAD_MORE})
-    }
-    return dispatch(fetchSearch(page, query));
-  };
+    return (dispatch) => {
+        if (page === 1) {
+            dispatch({type: types.PROJECTS_INIT})
+        } else {
+            dispatch({type: types.PROJECTS_LOAD_MORE})
+        }
+        return dispatch(fetchProjects(page, query));
+    };
 }
-
 
 
 /**
@@ -151,7 +150,7 @@ export function updateProjectById(id) {
 
 export function loadMore() {
   return (dispatch, getState) => {
-    dispatch({type: types.SEARCH_LOAD_MORE});
+    dispatch({type: types.PROJECTS_LOAD_MORE});
     dispatch(getProjectBySlug())
   }
 }

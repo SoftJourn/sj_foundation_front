@@ -11,23 +11,23 @@ const initialData = {
 
 export default function projects(state = initialData, action) {
   switch(action.type) {
-    case types.SEARCH_INIT:
+    case types.PROJECTS_INIT:
       return Object.assign({}, state, {
         page: 1,
         pages: 1,
         data: [],
       });
-    case types.SEARCH_REQUEST:
+    case types.PROJECTS_REQUEST:
       return Object.assign({}, state, {
         isFetching: true,
       });
-    case types.SEARCH_SUCCESS:
+    case types.PROJECTS_SUCCESS:
       return Object.assign({}, state, {
         data: action.response.data,
         // pages: action.response.data.meta.pages,
         isFetching: false,
       });
-    case types.SEARCH_LOAD_MORE:
+    case types.PROJECTS_LOAD_MORE:
       return Object.assign({}, state, {
         page: state.page+1,
       });

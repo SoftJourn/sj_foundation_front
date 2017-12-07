@@ -1,12 +1,57 @@
 import React, {PropTypes} from 'react';
+import { connect } from 'react-redux';
+import { getProjects, getProjectsCategories } from '../../actions/projectActions';
 
 class ProjectsList extends React.Component {
 
     constructor(props) {
-        super();
+        super(props);
+    }
+
+    componentWillMount() {
+        this.props.dispatch(getProjectsCategories());
+        this.props.dispatch(getProjects(1, {}));
     }
 
     render() {
+        let projectCards = this.props.projects.data.map((project, index) => {
+            // temporary hack, need to remove this 'if' statement:
+            if (index > 2) {
+                return;
+            }
+
+            return (
+                <div className="card card-project">
+                    <img className="card-img-top" src="https://x.kinja-static.com/assets/images/logos/placeholders/default.png" alt="Card image cap"/>
+                    <div className="card-body">
+                        <div className="card-link">{project.category.name}</div>
+                        <h4 className="card-title">{project.title}</h4>
+                        <div className="card-text">{project.shortDescription}</div>
+                        <div className="card-link">by John Smith</div>
+                    </div>
+                    <div className="card-footer">
+                        <div className="card-coins">
+                            <span>10,500</span> of 25,000
+                        </div>
+                        <div className="card-status-bar progress">
+                            <div className="progress-bar" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <div className="row card-stats">
+                            <div className="col">
+                                <div className="card-stats-value">72% </div> funded
+                            </div>
+                            <div className="col">
+                                <div className="card-stats-value">15 </div> investors
+                            </div>
+                            <div className="col">
+                                <div className="card-stats-value">22 </div> hours to go
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            );
+        });
+
         return (
             <div className="container-fluid block-projects">
                 <div className="container">
@@ -24,94 +69,7 @@ class ProjectsList extends React.Component {
                     </div>
                     <div className="row grid-projects align-items-center">
                         <div className="card-deck">
-
-                            <div className="card card-project">
-                                <img className="card-img-top" src="https://x.kinja-static.com/assets/images/logos/placeholders/default.png" alt="Card image cap"/>
-                                <div className="card-body">
-                                    <div className="card-link">Office</div>
-                                    <h4 className="card-title">Dim Sirka</h4>
-                                    <div className="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</div>
-                                    <div className="card-link">by John Smith</div>
-                                </div>
-                                <div className="card-footer">
-                                    <div className="card-coins">
-                                        <span>10,500</span> of 25,000
-                                    </div>
-                                    <div className="card-status-bar progress">
-                                        <div className="progress-bar" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <div className="row card-stats">
-                                        <div className="col">
-                                            <div className="card-stats-value">72% </div> funded
-                                        </div>
-                                        <div className="col">
-                                            <div className="card-stats-value">15 </div> investors
-                                        </div>
-                                        <div className="col">
-                                            <div className="card-stats-value">22 </div> hours to go
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className="card card-project">
-                                <img className="card-img-top" src="https://x.kinja-static.com/assets/images/logos/placeholders/default.png" alt="Card image cap"/>
-                                <div className="card-body">
-                                    <div className="card-link">Office</div>
-                                    <h4 className="card-title">Dim Sirka</h4>
-                                    <div className="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</div>
-                                    <div className="card-link">by John Smith</div>
-                                </div>
-                                <div className="card-footer">
-                                    <div className="card-coins">
-                                        <span>10,500</span> of 25,000
-                                    </div>
-                                    <div className="card-status-bar progress">
-                                        <div className="progress-bar" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <div className="row card-stats">
-                                        <div className="col">
-                                            <div className="card-stats-value">72% </div> funded
-                                        </div>
-                                        <div className="col">
-                                            <div className="card-stats-value">15 </div> investors
-                                        </div>
-                                        <div className="col">
-                                            <div className="card-stats-value">22 </div> hours to go
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className="card card-project">
-                                <img className="card-img-top" src="https://x.kinja-static.com/assets/images/logos/placeholders/default.png" alt="Card image cap"/>
-                                <div className="card-body">
-                                    <div className="card-link">Office</div>
-                                    <h4 className="card-title">Dim Sirka</h4>
-                                    <div className="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</div>
-                                    <div className="card-link">by John Smith</div>
-                                </div>
-                                <div className="card-footer">
-                                    <div className="card-coins">
-                                        <span>10,500</span> of 25,000
-                                    </div>
-                                    <div className="card-status-bar progress">
-                                        <div className="progress-bar" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <div className="row card-stats">
-                                        <div className="col">
-                                            <div className="card-stats-value">72% </div> funded
-                                        </div>
-                                        <div className="col">
-                                            <div className="card-stats-value">15 </div> investors
-                                        </div>
-                                        <div className="col">
-                                            <div className="card-stats-value">22 </div> hours to go
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
+                            {projectCards}
                         </div>
                     </div>
                     <div className="row align-items-center">
@@ -129,4 +87,19 @@ ProjectsList.propTypes = {};
 
 ProjectsList.defaultProps = {};
 
-export default ProjectsList;
+/**
+ * map redux state to project page properties
+ * @function mapStateToProps
+ * @param {object} state - redux state object
+ * @param {object} ownProps - redux properties
+ */
+function mapStateToProps(state, ownProps) {
+    return {
+        projects: state.projects
+    };
+}
+
+/**
+ * get the data from redux and feed it into component via props
+ */
+export default connect(mapStateToProps)(ProjectsList);
