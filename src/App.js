@@ -42,7 +42,7 @@ class App extends Component {
     const { children } = this.props;
     return (
       <div>
-        {/*<Header user={this.state.user} />*/}
+        <Header user={this.state.user} />
         <div className="main-content">
           {children}
         </div>

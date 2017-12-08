@@ -10,8 +10,8 @@ export default class Present extends Component {
 
     render() {
         return (
-            <div className="container-fluid">
-                <div className="row present-block">
+            <div className="container-fluid present-block">
+                <div className="row">
                     <div className="col-6 present-video">
 
                     </div>

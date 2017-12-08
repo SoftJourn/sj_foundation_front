@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom'
 import Menu from './_Menu';
 
+const viewportHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+
 export default class Header extends Component {
 
   constructor(props) {
@@ -11,10 +13,30 @@ export default class Header extends Component {
     };
   }
 
+  // TODO: need to use redux state instead of this
+  componentDidMount() {
+      if (document.location.pathname === '/') {
+          let navbar = document.querySelector('nav.header');
+          navbar.classList.add('hidden');
+      }
+      window.addEventListener('scroll', this.handleScroll);
+  }
+
   componentWillReceiveProps(newProps) {
     this.setState({
       user: newProps.user
     });
+  }
+
+  handleScroll(event) {
+      if (document.location.pathname === '/') {
+          let navbar = document.querySelector('nav.header');
+          if (window.scrollY > viewportHeight - 100) {
+              navbar.classList.remove('hidden');
+          } else {
+              navbar.classList.add('hidden');
+          }
+      }
   }
 
   renderNotLogged() {
@@ -36,7 +58,7 @@ export default class Header extends Component {
     //   return this.renderNotLogged();
     // }
     return(
-        <nav className="container-fluid header">
+        <nav className="container-fluid header fixed-top">
           <div className="container">
             <div className="row align-items-center header-inner">
               <div className="col-2 sj-logo">
