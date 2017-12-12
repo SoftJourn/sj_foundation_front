@@ -8,6 +8,16 @@ import '../../../node_modules/pretty-checkbox/src/pretty-checkbox.scss';
 
 export class CreateProject extends React.Component {
 
+    constructor() {
+        super();
+    }
+
+    // TODO: temporary hack for menu demo; need to rewrite it correct!
+    componentDidMount() {
+        let navbar = document.querySelector('nav.header');
+        navbar.classList.add('visible-header');
+    }
+
     render() {
         return (
             <Tabs>

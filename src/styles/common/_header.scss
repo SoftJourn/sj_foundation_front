@@ -2,6 +2,8 @@
     border-bottom: 1px solid lighten($fnd-dark-gray, 70%);
     background: rgba(255, 255, 255, 0.91);
     z-index: 99999;
+    margin-top: -110px;
+    display: none;
 
     .header-inner {    
         height: 100px;
@@ -17,6 +19,12 @@
 
     &.hidden {
       display: none;
+    }
+
+    &.visible-header {
+      transition: margin-top 20ms;
+      margin-top: 0;
+      display: block;
     }
 }
 

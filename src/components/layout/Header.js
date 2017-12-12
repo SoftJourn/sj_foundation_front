@@ -15,9 +15,9 @@ export default class Header extends Component {
 
   // TODO: need to use redux state instead of this
   componentDidMount() {
-      if (document.location.pathname === '/') {
+      if (document.location.pathname !== '/') {
           let navbar = document.querySelector('nav.header');
-          navbar.classList.add('hidden');
+          navbar.classList.add('visible-header');
       }
       window.addEventListener('scroll', this.handleScroll);
   }
@@ -32,9 +32,9 @@ export default class Header extends Component {
       if (document.location.pathname === '/') {
           let navbar = document.querySelector('nav.header');
           if (window.scrollY > viewportHeight - 100) {
-              navbar.classList.remove('hidden');
+              navbar.classList.add('visible-header');
           } else {
-              navbar.classList.add('hidden');
+              navbar.classList.remove('visible-header');
           }
       }
   }

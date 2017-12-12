@@ -8,6 +8,17 @@ export default class Present extends Component {
         super(props);
     }
 
+    // TODO: temporary hack for menu demo; need to rewrite it correct!
+    componentDidMount() {
+        const viewportHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+        let navbar = document.querySelector('nav.header');
+        if (window.scrollY > viewportHeight - 100) {
+            navbar.classList.add('visible-header');
+        } else {
+            navbar.classList.remove('visible-header');
+        }
+    }
+
     render() {
         return (
             <div className="container-fluid present-block">
