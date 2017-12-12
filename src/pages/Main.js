@@ -14,7 +14,7 @@ const Main = () => (
   <main>
     <Switch>
       <Route path="/" exact component={MainPage} />
-      <Route path="/search" component={ProjectListPage} />
+      <Route path="/projects" component={ProjectListPage} />
       <Route path="/category/:category" component={ProjectListPage} />
       <Route path="/signin" component={LoginPage} />
       <Route path="/transactions" component={TransactionPage} />

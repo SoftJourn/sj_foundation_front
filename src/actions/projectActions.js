@@ -24,7 +24,7 @@ function fetchProjects(page = 1, query= {}) {
     return {
         [CALL_API]: {
             types: [types.PROJECTS_REQUEST, types.PROJECTS_SUCCESS, types.PROJECTS_FAILURE],
-            endpoint: `projects`,
+            endpoint: `projects?` + serialize(query),
         },
     };
 }

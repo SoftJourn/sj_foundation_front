@@ -10,18 +10,23 @@ class ProjectsList extends React.Component {
 
     componentWillMount() {
         this.props.dispatch(getProjectsCategories());
-        this.props.dispatch(getProjects(1, {}));
+        this.props.dispatch(getProjects(1, {limit: 3}));
     }
 
     render() {
-        let projectCards = this.props.projects.data.map((project, index) => {
-            // temporary hack, need to remove this 'if' statement:
-            if (index > 2) {
-                return;
-            }
-
+        let categories = this.props.categories.map(category => {
             return (
-                <div className="card card-project">
+                <div className="col-auto"
+                     key={category.id}
+                    onClick={() => {this.props.dispatch(getProjects(1, {category: category.slug}))}}>
+                    {category.name}
+                </div>
+            );
+        });
+
+        let projectCards = this.props.projects.map((project, index) => {
+            return (
+                <div className="card col-4 card-project" key={project.id}>
                     <img className="card-img-top" src="https://x.kinja-static.com/assets/images/logos/placeholders/default.png" alt="Card image cap"/>
                     <div className="card-body">
                         <div className="card-link">{project.category.name}</div>
@@ -60,17 +65,13 @@ class ProjectsList extends React.Component {
                     </div>
                     <div className="row filter-projects align-items-center justify-content-between">
                         <input type="text" className="col-2 input-outline align-self-start" />
-                        <div className="col-auto">All</div>
-                        <div className="col-auto">Art</div>
-                        <div className="col-auto">Design</div>
-                        <div className="col-auto">Film&Video</div>
-                        <div className="col-auto active">Food</div>
+                        <div className="col-auto"
+                             onClick={() => {this.props.dispatch(getProjects(1, {limit: 3}))}}>All</div>
+                            {categories}
                         <div className="col-2"></div>
                     </div>
-                    <div className="row grid-projects align-items-center">
-                        <div className="card-deck">
-                            {projectCards}
-                        </div>
+                    <div className="row card-group grid-projects">
+                        {projectCards}
                     </div>
                     <div className="row align-items-center">
                         <h1 className="col text-center">
@@ -87,15 +88,10 @@ ProjectsList.propTypes = {};
 
 ProjectsList.defaultProps = {};
 
-/**
- * map redux state to project page properties
- * @function mapStateToProps
- * @param {object} state - redux state object
- * @param {object} ownProps - redux properties
- */
 function mapStateToProps(state, ownProps) {
     return {
-        projects: state.projects
+        projects: state.projects.data,
+        categories: state.projects.categories
     };
 }
 

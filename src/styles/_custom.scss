@@ -129,15 +129,18 @@ h1, h2, h3, h4, h5, h6,
 
   .grid-projects {
     margin-bottom: 80px;
+    margin-left: -30px;
+    margin-right: -30px;
 
     .card-project {
       -webkit-box-shadow: 1px 8px 41px -7px rgba(209,209,209,1);
       -moz-box-shadow: 1px 8px 41px -7px rgba(209,209,209,1);
       box-shadow: 1px 8px 41px -7px rgba(209,209,209,1);
-
       border: none;
       color: lighten($fnd-dark-gray, 50%);
       border-radius: $border-radius;
+      padding: 0;
+      margin: 0 15px;
 
       .card-body {
         padding: 40px 30px 0;
