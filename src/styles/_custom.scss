@@ -64,7 +64,9 @@ h1, h2, h3, h4, h5, h6,
   min-height: 100vh;
 
   .present-video {
-    background: #bbbcbe;
+    background: url("../images/foundation-main.jpg");
+    background-position: center;
+    background-size: cover;
   }
 
   .present-form {

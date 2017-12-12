@@ -17,6 +17,7 @@ export default class Present extends Component {
         } else {
             navbar.classList.remove('visible-header');
         }
+        window.scrollTo(0, 0);
     }
 
     render() {

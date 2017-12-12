@@ -16,6 +16,7 @@ export class CreateProject extends React.Component {
     componentDidMount() {
         let navbar = document.querySelector('nav.header');
         navbar.classList.add('visible-header');
+        window.scrollTo(0, 0);
     }
 
     render() {
