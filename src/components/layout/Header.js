@@ -71,7 +71,7 @@ export default class Header extends Component {
               <div className="col-3 controls">
                 <div className="row">
                   <div className="col">
-                    <NavLink className="btn btn-rounded" to="/start">Start project</NavLink>
+                    <NavLink className="btn btn-prime" to="/start">Start project</NavLink>
                   </div>
                 </div>
               </div>

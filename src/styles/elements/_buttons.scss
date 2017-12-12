@@ -19,7 +19,7 @@
         }
     }
 
-    &.btn-rounded {
+    &.btn-prime {
         @include button-size($input-btn-padding-y, $input-btn-padding-x, $font-size-sm, $input-btn-line-height, $btn-border-radius);
         color: $white;
         border-color: $fnd-blue;
@@ -43,6 +43,10 @@
         &:disabled {
             color: lighten($fnd-dark-gray, 20%);
         }
+    }
+
+    &.btn-rounded {
+        @include button-size($input-btn-padding-y, $input-btn-padding-x, $font-size-sm, $input-btn-line-height, $btn-border-radius);
     }
     
     &.btn-long {

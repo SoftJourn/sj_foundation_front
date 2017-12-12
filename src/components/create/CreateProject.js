@@ -31,7 +31,7 @@ export class CreateProject extends React.Component {
                                     <button className="btn btn-outline">Visibility</button>
                                     <button className="btn btn-outline">Preview</button>
                                     <button className="btn btn-outline">Save Draft</button>
-                                    <button className="btn btn-rounded">Submit</button>
+                                    <button className="btn btn-prime">Submit</button>
                                 </div>
                             </div>
                         </div>

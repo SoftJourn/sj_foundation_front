@@ -53,7 +53,7 @@ export default class Present extends Component {
 
                         <div className="row align-items-center">
                             <div className="col">
-                                <NavLink className='btn btn-rounded' to="/start" exact>Start project</NavLink>
+                                <NavLink className='btn btn-prime' to="/start" exact>Start project</NavLink>
                             </div>
                         </div>
                     </div>

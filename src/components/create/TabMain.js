@@ -42,7 +42,7 @@ export class TabMain extends React.Component {
                     </div>
 
                     <div className="text-center">
-                        <button className="btn btn-rounded">Next</button>
+                        <button className="btn btn-prime">Next</button>
                     </div>
                     
                 </div>

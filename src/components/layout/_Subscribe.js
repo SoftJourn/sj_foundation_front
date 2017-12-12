@@ -18,7 +18,7 @@ class Subscribe extends React.Component {
                         <div className="col block-subscribe-form">
                             <div>Interested in receiving our e-mails? Just subscribe </div>
                             <input type="text" placeholder="you@mail.com"/> <br/>
-                            <button className="btn btn-rounded">Subscribe</button>
+                            <button className="btn btn-prime">Subscribe</button>
                         </div>
                     </div>
                 </div>
