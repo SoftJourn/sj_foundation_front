@@ -1,12 +1,12 @@
 import { combineReducers } from 'redux';
+import { routerReducer as routing } from 'react-router-redux';
 import form from './form';
 import projects from './projects';
-import user from './user';
 import project from './project';
+import user from './user';
 import pages from './pages';
 import donation from './donation';
 import auth from './auth';
-import { routerReducer as routing } from 'react-router-redux';
 
 // combine all reducers
 const rootReducer = combineReducers({

@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import TabMain from './TabMain';
 import TabDetails from './TabDetails';
@@ -65,4 +66,4 @@ export class CreateProject extends React.Component {
 
 }
 
-export default CreateProject;
+export default connect()(CreateProject);

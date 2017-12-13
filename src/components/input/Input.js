@@ -11,6 +11,7 @@ class Input extends Component {
             <div className="custom-input">
                 <div className="input-label">{this.props.label}</div>
                 <input type="text"
+                       ref={this.props.value}
                        className={this.props.className}
                        placeholder={this.props.placeholder}/>
             </div>
