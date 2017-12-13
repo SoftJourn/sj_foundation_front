@@ -96,14 +96,14 @@ export default class Project extends Component {
                             </div>
                         </div>
                         <div className="row">
-                            <div className="col text-heading text-center">Project title</div>
+                            <div className="col text-heading text-center">{this.state.project.title}</div>
                         </div>
                         {/*<div className="row">*/}
                             {/*<div className="col text-center">Watch video</div>*/}
                         {/*</div>*/}
                         <div className="row justify-content-center project-image-wrap">
                             <div className="col-auto project-image">
-                                <img src="https://x.kinja-static.com/assets/images/logos/placeholders/default.png" alt="Project image"/>
+                                <img src={this.state.project.thumbUrl} alt="Project image"/>
                             </div>
                         </div>
                     </div>
@@ -119,13 +119,7 @@ export default class Project extends Component {
                         <div className="row">
                             <div className="col">
                                 <div>
-                                    Lorem ipsum dolor sit amet,consectetur adipiscing elit.
-                                    Nulla quam velit, vulputate eu pharetra nec, mattis ac neque. Duis vulputate.
-                                    Lorem ipsum dolor sit amet,consectetur adipiscing elit. Nulla quam velit, vulputate eu pharetra nec, mattis ac neque. Duis vulputate commodo Lorem ipsum dolor sit amet,consectetur adipiscing elit. Nulla quam velit, vulputate eu pharetra nec, mattis ac neque. Duis vulputate commodoLorem ipsum dolor sit amet,consectetur adipiscing elit.
-                                    <br/><br/>
-
-                                    Nulla quam velit, vulputate eu pharetra nec, mattis ac neque. Duis vulputate.
-                                    Lorem ipsum dolor sit amet,consectetur adipiscing elit. Nulla quam velit, vulputate eu pharetra nec, mattis ac neque. Duis vulputate commodo Lorem ipsum dolor sit amet,consectetur adipiscing elit. Nulla quam velit, vulputate eu pharetra nec, mattis ac neque. Duis vulputate commodoLorem ipsum dolor sit amet,consectetur adipiscing elit.
+                                    {this.state.project.content}
                                 </div>
                             </div>
                         </div>

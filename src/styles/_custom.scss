@@ -139,10 +139,15 @@ h1, h2, h3, h4, h5, h6,
       -moz-box-shadow: 1px 8px 41px -7px rgba(209,209,209,1);
       box-shadow: 1px 8px 41px -7px rgba(209,209,209,1);
       border: none;
-      color: lighten($fnd-dark-gray, 50%);
+      color: lighten($fnd-dark-gray, 30%);
       border-radius: $border-radius;
       padding: 0;
       margin: 0 15px;
+
+      .card-image {
+        height: 250px;
+        background-position: center !important;
+      }
 
       .card-body {
         padding: 40px 30px 0;
@@ -158,8 +163,12 @@ h1, h2, h3, h4, h5, h6,
         }
 
         .card-title {
-          color: $fnd-dark-gray;
           font-weight: bold;
+
+          > a {
+            text-decoration: none;
+            color: $fnd-dark-gray;
+          }
         }
 
         .card-text {

@@ -1,5 +1,6 @@
 import React, {PropTypes} from 'react';
 import { connect } from 'react-redux';
+import { NavLink } from 'react-router-dom'
 import { getProjects, getProjectsCategories } from '../../actions/projectActions';
 
 class ProjectsList extends React.Component {
@@ -27,16 +28,20 @@ class ProjectsList extends React.Component {
         let projectCards = this.props.projects.map((project, index) => {
             return (
                 <div className="card col-4 card-project" key={project.id}>
-                    <img className="card-img-top" src="https://x.kinja-static.com/assets/images/logos/placeholders/default.png" alt="Card image cap"/>
+                    <div className="card-image"
+                         style={{background: 'url(' + project.thumbUrl+ ')'}}>
+                    </div>
                     <div className="card-body">
                         <div className="card-link">{project.category.name}</div>
-                        <h4 className="card-title">{project.title}</h4>
+                        <h4 className="card-title">
+                            <NavLink to={'/project/' + project.id} exact> {project.title}</NavLink>
+                        </h4>
                         <div className="card-text">{project.shortDescription}</div>
                         <div className="card-link">by John Smith</div>
                     </div>
                     <div className="card-footer">
                         <div className="card-coins">
-                            <span>10,500</span> of 25,000
+                            <span>{project.projectStats.raised} </span> of {project.price}
                         </div>
                         <div className="card-status-bar progress">
                             <div className="progress-bar" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
@@ -46,7 +51,7 @@ class ProjectsList extends React.Component {
                                 <div className="card-stats-value">72% </div> funded
                             </div>
                             <div className="col">
-                                <div className="card-stats-value">15 </div> investors
+                                <div className="card-stats-value">{project.projectStats.supporters || 0} </div> investors
                             </div>
                             <div className="col">
                                 <div className="card-stats-value">22 </div> hours to go
