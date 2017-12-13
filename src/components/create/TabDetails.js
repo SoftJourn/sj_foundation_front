@@ -1,6 +1,6 @@
 import React from 'react';
-import { Editor } from 'react-draft-wysiwyg';
-import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
+// import { Editor } from 'react-draft-wysiwyg';
+// import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 
 export class TabDetails extends React.Component {
 
@@ -14,11 +14,13 @@ export class TabDetails extends React.Component {
                 <div className="col tab-inner">
                     <div>
                         <label>Project Description</label>
-                        <Editor editorClassName="editorClass"
-                                toolbar={{
-                                    options: ['inline', 'blockType', 'fontSize',
-                                        'list', 'textAlign', 'link', 'remove', 'history']
-                                }}/>
+                        <div>'Save project' functionality not working correctly for now. <br/>
+                            It will be available soon.</div>
+                        {/*<Editor editorClassName="editorClass"*/}
+                                {/*toolbar={{*/}
+                                    {/*options: ['inline', 'blockType', 'fontSize',*/}
+                                        {/*'list', 'textAlign', 'link', 'remove', 'history']*/}
+                                {/*}}/>*/}
                     </div>
 
                     <div className="text-center">
