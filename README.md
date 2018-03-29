@@ -10,7 +10,7 @@ npm install
 ```
 npm run start-dev
 ```
-Front is now running on: `http://localhost:3000`
+Front is now running on: `http://localhost:3001`
 
 ### Build
 ```

@@ -10,25 +10,25 @@ import App from '../App';
  * @class Root
  */
 export default class Root extends Component {
-
-  /**
-   * transfer data through Provider component
-   * React Route sync data with URL
-   * @returns {XML}
-   */
-  render() {
-    const { store } = this.props;
-    return (
-      <Provider store={store}>
-        <div>
-          <App>
-            <Main />
-          </App>
-          <DevTools />
-        </div>
-      </Provider>
-    );
-  }
+    
+    /**
+     * transfer data through Provider component
+     * React Route sync data with URL
+     * @returns {XML}
+     */
+    render() {
+        const { store } = this.props;
+        return (
+            <Provider store={store}>
+                <div>
+                    <App>
+                        <Main />
+                    </App>
+                    <DevTools />
+                </div>
+            </Provider>
+        );
+    }
 }
 
 /**
@@ -36,5 +36,5 @@ export default class Root extends Component {
  * @type {{store: *, history: *}}
  */
 Root.propTypes = {
-  store: PropTypes.object.isRequired,
+    store: PropTypes.object.isRequired,
 };

@@ -11,20 +11,20 @@ import HowItWorksPage from './HowItWorksPage';
 import StartProjectPage from './StartProjectPage';
 
 const Main = () => (
-  <main>
-    <Switch>
-      <Route path="/" exact component={MainPage} />
-      <Route path="/projects" component={ProjectListPage} />
-      <Route path="/category/:category" component={ProjectListPage} />
-      <Route path="/signin" component={LoginPage} />
-      <Route path="/transactions" component={TransactionPage} />
-      <Route path="/project/:slug" preview={false} component={ProjectPage} />
-      <Route path="/preview/:slug(/:tab)" preview={true} component={ProjectPage} />
-      <Route path="/admin" component={AdminPage} />
-      <Route path="/how-it-works" component={HowItWorksPage} />
-      <Route path="/start" component={StartProjectPage} />
-    </Switch>
-  </main>
+    <main>
+        <Switch>
+            <Route path="/" exact component={MainPage} />
+            <Route path="/projects" component={ProjectListPage} />
+            <Route path="/category/:category" component={ProjectListPage} />
+            <Route path="/signin" component={LoginPage} />
+            <Route path="/transactions" component={TransactionPage} />
+            <Route path="/project/:slug" preview={false} component={ProjectPage} />
+            <Route path="/preview/:slug(/:tab)" preview={true} component={ProjectPage} />
+            <Route path="/admin" component={AdminPage} />
+            <Route path="/how-it-works" component={HowItWorksPage} />
+            <Route path="/start" component={StartProjectPage} />
+        </Switch>
+    </main>
 );
 
 export default Main

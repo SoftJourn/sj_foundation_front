@@ -1,1 +1,0 @@
-![infrastructure](sj_foundation_infrastructure.png)

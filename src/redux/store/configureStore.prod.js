@@ -11,13 +11,13 @@ import rootReducer from '../reducers';
  * @returns {Object}
  */
 export default function configureStore(initialState) {
-  const store = createStore(
-    rootReducer,
-    initialState,
-    compose(
-      applyMiddleware(thunk, api),
-    )
-  );
-
-  return store;
+    const store = createStore(
+        rootReducer,
+        initialState,
+        compose(
+            applyMiddleware(thunk, api),
+        )
+    );
+    
+    return store;
 }

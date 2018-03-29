@@ -13,22 +13,22 @@ import DevTools from '../../pages/DevTools';
  * @returns {Object}
  */
 export default function configureStore(initialState) {
-  const store = createStore(
-    rootReducer,
-    initialState,
-    compose(
-      applyMiddleware(thunk, api),
-      DevTools.instrument()
-    )
-  );
-
-  // live reload when code changing
-  if (module.hot) {
-    module.hot.accept('../reducers', () => {
-      const nextRootReducer = require('../reducers').default;
-      store.replaceReducer(nextRootReducer);
-    });
-  }
-
-  return store;
+    const store = createStore(
+        rootReducer,
+        initialState,
+        compose(
+            applyMiddleware(thunk, api),
+            DevTools.instrument()
+        )
+    );
+    
+    // live reload when code changing
+    if (module.hot) {
+        module.hot.accept('../reducers', () => {
+            const nextRootReducer = require('../reducers').default;
+            store.replaceReducer(nextRootReducer);
+        });
+    }
+    
+    return store;
 }
