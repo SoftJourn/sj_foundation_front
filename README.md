@@ -40,10 +40,10 @@ sj_foundation_front [project root]
 │   │   ├── <component>.js [component file (simple component)]
 │   │   └── ...
 │   ├── images [images folder]
-│   ├── pages  [components, that presents pages]
+│   ├── pages  [components, that present pages]
 │   ├── redux  [Redux logic]
 │   │   ├── _old_reducers [old reducers, that were used for the previous app;
-│   │   │                    possible to use for new components]
+│   │   │                    possible to use for new reducers]
 │   │   ├── middleware [Redux middlewares]
 │   │   ├── reducers [Redux reducers]
 │   │   └── store [Redux store configurations]
