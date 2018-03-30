@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Header from './components/layout/Header';
-import Footer from './components/layout/Footer';
+import Header from './Header/Header';
+import Footer from './Footer/Footer';
 
-import './styles/styles.scss';
+import '../styles/styles.scss';
 
 /**
  * main component - wrapper for all pages

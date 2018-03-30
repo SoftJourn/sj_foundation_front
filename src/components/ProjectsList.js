@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom'
-import { getProjects, getProjectsCategories } from '../../actions/projectActions';
+import { getProjects, getProjectsCategories } from '../actions/projectActions';
 
 class ProjectsList extends React.Component {
 
@@ -91,11 +91,9 @@ class ProjectsList extends React.Component {
 
 ProjectsList.propTypes = {};
 
-ProjectsList.defaultProps = {};
-
 function mapStateToProps(state, ownProps) {
     return {
-        projects: state.projects.data,
+        projects: state.projects.list,
         categories: state.projects.categories
     };
 }

@@ -1,7 +1,7 @@
 /* eslint react/prefer-stateless-function: off */
 import React, { Component, PropTypes } from 'react';
 import { Provider } from 'react-redux';
-import Main from './Main';
+import Main from '../Main';
 import App from '../App';
 
 /**

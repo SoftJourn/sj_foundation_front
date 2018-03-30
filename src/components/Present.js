@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom'
-import Menu from './_Menu';
+import Menu from './Header/Menu';
 
 export default class Present extends Component {
 

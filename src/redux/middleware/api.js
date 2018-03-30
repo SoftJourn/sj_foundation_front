@@ -1,13 +1,15 @@
 import 'whatwg-fetch'
 
-let API_ROOT = process.env.API_HOST;
+// temporary hardcoded API_HOST to localhost
+// TODO: need to move this into separate configuration
+let API_ROOT = process.env.API_HOST || 'http://localhost:3000';
 
 /**
  * call api and return results
  * This makes every API response have the same shape
  */
 function callApi(endpoint, store, method, body) {
-    const fullUrl = (endpoint.indexOf(API_ROOT) === -1) ? API_ROOT + endpoint : endpoint;
+    const fullUrl = API_ROOT + '/' + endpoint;
     let apiHeaders = new Headers();
     apiHeaders.append('Content-Type', 'application/json');
     
