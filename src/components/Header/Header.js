@@ -13,6 +13,14 @@ class Header extends Component {
         this.handleScroll = this.handleScroll.bind(this);
     }
 
+    toggleHeader(visibleHeader) {
+        const action = {
+            type: types.TOGGLE_HEADER,
+            visibleHeader
+        }
+        return action;
+    }
+
     componentDidMount() {
         if (document.location.pathname !== '/') {
             this.props.dispatch(headerActions.show());
