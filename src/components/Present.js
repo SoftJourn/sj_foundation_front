@@ -13,17 +13,11 @@ class Present extends Component {
     // TODO: temporary hack for menu demo; need to rewrite it correct!
     componentDidMount() {
         const viewportHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
-        if (window.scrollY > viewportHeight - 100) {
-            this.props.dispatch({
-                type: types.TOGGLE_HEADER,
-                visibleHeader: true
-            });
-        } else {
-            this.props.dispatch({
-                type: types.TOGGLE_HEADER,
-                visibleHeader: false
-            });
-        }
+        let visibleHeader = (window.scrollY > viewportHeight - 100);
+        this.props.dispatch({
+            type: types.TOGGLE_HEADER,
+            visibleHeader
+        });
         window.scrollTo(0, 0);
     }
 

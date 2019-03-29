@@ -25,17 +25,11 @@ class Header extends Component {
 
     handleScroll(event) {
         if (document.location.pathname === '/') {
-            if (window.scrollY > viewportHeight - 100) {
-                this.props.dispatch({
-                    type: types.TOGGLE_HEADER,
-                    visibleHeader: true
-                });
-            } else {
-                this.props.dispatch({
-                    type: types.TOGGLE_HEADER,
-                    visibleHeader: false
-                });
-            }
+            let visibleHeader = (window.scrollY > viewportHeight - 100);
+            this.props.dispatch({
+                type: types.TOGGLE_HEADER,
+                visibleHeader
+            });
         }
     }
 
