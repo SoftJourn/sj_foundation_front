@@ -63,7 +63,7 @@ class Present extends Component {
 }
 
 function mapStateToProps(state, ownProps) {
-    return { };
+    return {};
 }
 
 export default connect(mapStateToProps)(Present)
