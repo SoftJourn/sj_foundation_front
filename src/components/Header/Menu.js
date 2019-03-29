@@ -18,7 +18,7 @@ export default class Menu extends Component {
                 <NavLink className={this.state.itemClassName} to="/" exact>How it works</NavLink>
                 <NavLink className={this.state.itemClassName} to="/" exact>Projects</NavLink>
                 <NavLink className={this.state.itemClassName} to="/" exact>Contact Us</NavLink>
-                <NavLink className={this.state.itemClassName} to="/" exact>Login</NavLink>
+                <NavLink className={this.state.itemClassName} to="/login" exact>Login</NavLink>
             </div>
         );
     }

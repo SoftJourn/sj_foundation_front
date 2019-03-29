@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom'
 import Menu from './Header/Menu';
+import { connect } from 'react-redux';
+import * as types from '../ActionTypes';
 
-export default class Present extends Component {
+class Present extends Component {
 
     constructor(props) {
         super(props);
@@ -11,11 +13,16 @@ export default class Present extends Component {
     // TODO: temporary hack for menu demo; need to rewrite it correct!
     componentDidMount() {
         const viewportHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
-        let navbar = document.querySelector('nav.header');
         if (window.scrollY > viewportHeight - 100) {
-            navbar.classList.add('visible-header');
+            this.props.dispatch({
+                type: types.TOGGLE_HEADER,
+                visibleHeader: true
+            });
         } else {
-            navbar.classList.remove('visible-header');
+            this.props.dispatch({
+                type: types.TOGGLE_HEADER,
+                visibleHeader: false
+            });
         }
         window.scrollTo(0, 0);
     }
@@ -63,3 +70,11 @@ export default class Present extends Component {
         );
     }
 }
+
+function mapStateToProps(state, ownProps) {
+    return {
+        visibleHeader: state.header.visibleHeader
+    };
+}
+
+export default connect(mapStateToProps)(Present)

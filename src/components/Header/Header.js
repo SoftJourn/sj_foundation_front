@@ -1,44 +1,44 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom'
 import Menu from './Menu';
+import { connect } from 'react-redux';
+import * as types from '../../ActionTypes';
 
 const viewportHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
 
-export default class Header extends Component {
+class Header extends Component {
     
     constructor(props) {
-        super();
-        this.state = {
-            user: props.user,
-        };
+        super(props);
+        this.handleScroll = this.handleScroll.bind(this);
     }
-    
-    // TODO: need to use redux state instead of this
+
     componentDidMount() {
         if (document.location.pathname !== '/') {
-            let navbar = document.querySelector('nav.header');
-            navbar.classList.add('visible-header');
+            this.props.dispatch({
+                type: types.TOGGLE_HEADER,
+                visibleHeader: true
+            });
         }
         window.addEventListener('scroll', this.handleScroll);
     }
-    
-    componentWillReceiveProps(newProps) {
-        this.setState({
-            user: newProps.user
-        });
-    }
-    
+
     handleScroll(event) {
         if (document.location.pathname === '/') {
-            let navbar = document.querySelector('nav.header');
             if (window.scrollY > viewportHeight - 100) {
-                navbar.classList.add('visible-header');
+                this.props.dispatch({
+                    type: types.TOGGLE_HEADER,
+                    visibleHeader: true
+                });
             } else {
-                navbar.classList.remove('visible-header');
+                this.props.dispatch({
+                    type: types.TOGGLE_HEADER,
+                    visibleHeader: false
+                });
             }
         }
     }
-    
+
     renderNotLogged() {
         return (
             <nav className="navbar navbar-light">
@@ -51,14 +51,14 @@ export default class Header extends Component {
             </nav>
         );
     }
-    
+
     render() {
-        const {user} = this.state;
-        // if (!user.loggedIn) {
-        //   return this.renderNotLogged();
-        // }
+        let visibleHeaderClass = this.props.visibleHeader && 'visible-header';
+//        if (!user.loggedIn) {
+//           return this.renderNotLogged();
+//        }
         return(
-            <nav className="container-fluid header fixed-top">
+            <nav className={"container-fluid header fixed-top " + visibleHeaderClass}>
                 <div className="container">
                     <div className="row align-items-center header-inner">
                         <div className="col-2 sj-logo">
@@ -81,3 +81,12 @@ export default class Header extends Component {
         );
     }
 }
+
+function mapStateToProps(state, ownProps) {
+    return {
+        projects: state.projects.list,
+        visibleHeader: state.header.visibleHeader
+    };
+}
+
+export default connect(mapStateToProps)(Header)
