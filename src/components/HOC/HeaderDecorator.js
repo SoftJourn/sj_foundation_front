@@ -9,7 +9,7 @@ export const withHeader = (WrappedComponent) => {
 
         render() {
             return (
-                <WrappedComponent />
+                <WrappedComponent {... this.props} />
             )
         }
     }

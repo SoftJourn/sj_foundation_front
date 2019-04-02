@@ -1,11 +1,8 @@
-import * as types from '../../ActionTypes';
+import { TOGGLE_HEADER } from '../../ActionTypes';
 
 export default function headerVisibility(state = [], action) {
     switch(action.type) {
-        case types.TOGGLE_HEADER:
-            if (state.visibleHeader == action.visibleHeader) {
-                return state;
-            }
+        case TOGGLE_HEADER:
             return {
                 ...state,
                 visibleHeader: action.visibleHeader
