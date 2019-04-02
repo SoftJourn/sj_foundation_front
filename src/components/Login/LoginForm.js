@@ -1,17 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import * as types from '../../ActionTypes';
+import { withHeader } from 'components/Header/HeaderDecorator';
 
 class LoginForm extends Component {
     constructor(props) {
         super()
-    }
-
-    componentDidMount() {
-        this.props.dispatch({
-            type: types.TOGGLE_HEADER,
-            visibleHeader: true
-        })
     }
 
     render() {
@@ -24,9 +17,7 @@ class LoginForm extends Component {
 }
 
 function mapStateToProps(state, ownProps) {
-    return {
-        visibleHeader: state.visibleHeader
-    };
+    return {};
 }
 
-export default connect(mapStateToProps)(LoginForm)
+export default connect(mapStateToProps)(withHeader(LoginForm))

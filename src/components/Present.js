@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom'
 import Menu from './Header/Menu';
 import { connect } from 'react-redux';
-import * as types from '../ActionTypes';
+import { headerActions } from 'actions/headerActions';
 
 class Present extends Component {
 
@@ -14,10 +14,7 @@ class Present extends Component {
     componentDidMount() {
         const viewportHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
         let visibleHeader = (window.scrollY > viewportHeight - 100);
-        this.props.dispatch({
-            type: types.TOGGLE_HEADER,
-            visibleHeader
-        });
+        this.props.dispatch(headerActions.toggle(visibleHeader));
         window.scrollTo(0, 0);
     }
 
@@ -66,9 +63,7 @@ class Present extends Component {
 }
 
 function mapStateToProps(state, ownProps) {
-    return {
-        visibleHeader: state.header.visibleHeader
-    };
+    return { };
 }
 
 export default connect(mapStateToProps)(Present)

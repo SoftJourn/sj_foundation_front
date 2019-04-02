@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom'
 import Menu from './Menu';
 import { connect } from 'react-redux';
-import * as types from '../../ActionTypes';
+import { headerActions } from 'actions/headerActions';
+import _ from 'lodash';
 
 const viewportHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
 
 class Header extends Component {
-    
     constructor(props) {
         super(props);
         this.handleScroll = this.handleScroll.bind(this);
@@ -15,21 +15,15 @@ class Header extends Component {
 
     componentDidMount() {
         if (document.location.pathname !== '/') {
-            this.props.dispatch({
-                type: types.TOGGLE_HEADER,
-                visibleHeader: true
-            });
+            this.props.dispatch(headerActions.show());
         }
-        window.addEventListener('scroll', this.handleScroll);
+        window.addEventListener('scroll', _.throttle(this.handleScroll), 500);
     }
 
     handleScroll(event) {
         if (document.location.pathname === '/') {
             let visibleHeader = (window.scrollY > viewportHeight - 100);
-            this.props.dispatch({
-                type: types.TOGGLE_HEADER,
-                visibleHeader
-            });
+            this.props.dispatch(headerActions.toggle(visibleHeader));
         }
     }
 
