@@ -14,11 +14,11 @@ export default class Menu extends Component {
     render() {
         return(
             <div className={this.state.className + ' menu'}>
-                <NavLink className={this.state.itemClassName + ' menu-active'} to="/" exact>Home</NavLink>
-                <NavLink className={this.state.itemClassName} to="/" exact>How it works</NavLink>
-                <NavLink className={this.state.itemClassName} to="/" exact>Projects</NavLink>
-                <NavLink className={this.state.itemClassName} to="/" exact>Contact Us</NavLink>
-                <NavLink className={this.state.itemClassName} to="/" exact>Login</NavLink>
+                <NavLink className={this.state.itemClassName} activeClassName="menu-active" to="/" exact>Home</NavLink>
+                <NavLink className={this.state.itemClassName} activeClassName="menu-active" to="/how" exact>How it works</NavLink>
+                <NavLink className={this.state.itemClassName} activeClassName="menu-active" to="/projects" exact>Projects</NavLink>
+                <NavLink className={this.state.itemClassName} activeClassName="menu-active" to="/contact" exact>Contact Us</NavLink>
+                <NavLink className={this.state.itemClassName} activeClassName="menu-active" to="/login" exact>Login</NavLink>
             </div>
         );
     }
