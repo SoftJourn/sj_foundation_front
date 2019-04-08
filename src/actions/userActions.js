@@ -1,6 +1,6 @@
-import { userService } from '../services'
+import { userService } from 'services'
 import { alertActions } from './alertActions'
-import { LOGIN_SUCCESS } from '../ActionTypes'
+import { LOGIN_SUCCESS, LOGOUT } from 'ActionTypes'
 
 export const userActions = {
     login,
@@ -24,5 +24,5 @@ function login(username, password) {
 
 function logout() {
     userService.logout();
-    return { type: userConstants.LOGOUT };
+    return { type: LOGOUT };
 }

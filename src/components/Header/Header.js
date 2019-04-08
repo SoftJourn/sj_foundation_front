@@ -31,25 +31,9 @@ class Header extends Component {
         }
     }
 
-    renderNotLogged() {
-        return (
-            <nav className="navbar navbar-light">
-                <NavLink className="navbar-brand" to="/">SJ Foundation</NavLink>
-                <ul className="navbar-nav">
-                    <li className="nav-item active">
-                        <NavLink className="nav-link" to="/signin">Login</NavLink>
-                    </li>
-                </ul>
-            </nav>
-        );
-    }
-
     render() {
         let visibleHeaderClass = this.props.visibleHeader && 'visible-header';
-//        if (!user.loggedIn) {
-//           return this.renderNotLogged();
-//        }
-        return(
+        return (
             <nav className={"container-fluid header fixed-top " + visibleHeaderClass}>
                 <div className="container">
                     <div className="row align-items-center header-inner">
@@ -76,7 +60,6 @@ class Header extends Component {
 
 function mapStateToProps(state, ownProps) {
     return {
-        projects: state.projects.list,
         visibleHeader: state.header.visibleHeader
     };
 }

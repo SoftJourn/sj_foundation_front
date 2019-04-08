@@ -39,8 +39,6 @@ class LoginComponent extends Component {
     }
 
     render() {
-        const { username, password, submitPressed } = this.state;
-
         if (this.props.isLoggedIn) {
             return (
                 <PrivatePage />
@@ -48,7 +46,7 @@ class LoginComponent extends Component {
         } else {
             return (
                 <LoginForm
-                    state={this.state}
+                    formData={this.state}
                     onSubmit={this.onSubmit}
                     handleChange={this.handleChange}
                 />
