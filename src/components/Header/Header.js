@@ -11,19 +11,23 @@ class Header extends Component {
     constructor(props) {
         super(props);
         this.handleScroll = this.handleScroll.bind(this);
+        this.throttledScroll = _.throttle(this.handleScroll, 500);
     }
 
     componentDidMount() {
-        if (document.location.pathname !== '/') {
-            this.props.dispatch(headerActions.show());
-        }
-        window.addEventListener('scroll', _.throttle(this.handleScroll), 500);
+        window.addEventListener('scroll', this.throttledScroll);
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener('scroll', this.throttledScroll);
     }
 
     handleScroll(event) {
         if (document.location.pathname === '/') {
             let visibleHeader = (window.scrollY > viewportHeight - 100);
-            this.props.dispatch(headerActions.toggle(visibleHeader));
+            if (this.props.visibleHeader != visibleHeader) {
+                this.props.dispatch(headerActions.toggle(visibleHeader));
+            }
         }
     }
 

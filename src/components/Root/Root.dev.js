@@ -3,15 +3,14 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Provider } from 'react-redux';
 import DevTools from '../DevTools';
-import Main from '../Main';
-import App from '../App';
+import Main from 'components/Main';
+import App from 'components/App';
 
 /**
  * Dev Root component to transfer data to react app & init DevTool
  * @class Root
  */
 export default class Root extends Component {
-    
     /**
      * transfer data through Provider component
      * React Route sync data with URL

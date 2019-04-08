@@ -13,11 +13,13 @@ import DevTools from '../../components/DevTools';
  * @returns {Object}
  */
 export default function configureStore(initialState) {
+    let loggerMiddleware = createLogger();
+
     const store = createStore(
         rootReducer,
         initialState,
         compose(
-            applyMiddleware(thunk, api),
+            applyMiddleware(thunk, api, loggerMiddleware),
             DevTools.instrument()
         )
     );

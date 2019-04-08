@@ -49,4 +49,9 @@ module.exports = {
   resolve: {
     root: path.join(__dirname, 'src'),
   },
+  externals: {
+      config: JSON.stringify({
+          apiUrl: 'http://172.17.0.1:3000'
+      })
+  }
 };
