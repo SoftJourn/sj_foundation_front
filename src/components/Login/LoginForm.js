@@ -17,35 +17,35 @@ class LoginForm extends Component {
                         <div className="form-label-group mb-4">
                             <label htmlFor="inputUsername">LDAP Username</label>
                             <input
-                              value={this.props.username}
+                              value={this.props.formData.username}
                               name="username"
                               type="text"
                               autoComplete="off"
                               id="inputUsername"
                               placeholder="Enter you LDAP login"
-                              className={"form-control border border-primary " + (this.props.submitPressed && !this.props.username ? 'is-invalid' : '')}
+                              className={"form-control border " + (this.props.formData.submitPressed && !this.props.formData.username ? 'is-invalid' : '')}
                               autoFocus={true}
                               onChange={this.props.handleChange}
                             />
                             {
-                                this.props.submitPressed && !this.props.username &&
-                                <div className="help-block">Username is required</div>
+                                this.props.formData.submitPressed && !this.props.formData.username &&
+                                <div className="invalid-feedback">Username is required</div>
                             }
                         </div>
                         <div className="form-label-group">
                             <label htmlFor="inputPassword">Password</label>
                             <input
-                              value={this.props.password}
+                              value={this.props.formData.password}
                               name="password"
                               type="password"
                               id="inputPassword"
                               placeholder="Enter your password"
-                              className={"form-control border border-primary " + (this.props.submitPressed && !this.props.password ? 'is-invalid' : '')}
+                              className={"form-control border " + (this.props.formData.submitPressed && !this.props.formData.password ? 'is-invalid' : '')}
                               onChange={this.props.handleChange}
                             />
                             {
-                                this.props.submitPressed && !this.props.password &&
-                                <div className="help-block">Password is required</div>
+                                this.props.formData.submitPressed && !this.props.formData.password &&
+                                <div className="invalid-feedback">Password is required</div>
                             }
                         </div>
                         <div className="form-group text-center m-4">

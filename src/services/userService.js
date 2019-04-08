@@ -1,7 +1,8 @@
 import config from 'config'
 
 export const userService = {
-    login
+    login,
+    logout
 }
 
 function login(username, password) {
@@ -18,6 +19,10 @@ function login(username, password) {
             sessionStorage.setItem('user', JSON.stringify(user));
             return user;
         });
+}
+
+function logout() {
+    sessionStorage.removeItem('user');
 }
 
 function handleResponse(response) {
