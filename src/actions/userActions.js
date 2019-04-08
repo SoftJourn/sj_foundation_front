@@ -12,7 +12,7 @@ function login(username, password) {
         userService.login(username, password)
             .then(
                 user => {
-                    dispatch(success(user));
+                    dispatch({ type: LOGIN_SUCCESS, user, isLoggedIn: true });
                 },
                 error => {
                     dispatch(alertActions.error(error.toString()));
@@ -20,7 +20,6 @@ function login(username, password) {
             );
     }
 
-    function success(user) { return { type: LOGIN_SUCCESS, user, isLoggedIn: true } }
 }
 
 function logout() {

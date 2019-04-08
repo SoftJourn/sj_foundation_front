@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { Switch, Route } from 'react-router-dom'
 import Home from 'pages/Home';
-import LoginForm from 'components/Login/LoginForm';
+import LoginComponent from 'components/Login/LoginComponent';
 import { alertActions } from '../actions/alertActions';
 import { withRouter } from "react-router";
 import PrivatePage from 'components/Private/PrivatePage';
@@ -13,10 +13,14 @@ class Main extends Component {
         super(props);
 
         const { dispatch } = this.props;
-        this.props.history.listen((location, action) => {
+        this.historyUnlisten = this.props.history.listen((location, action) => {
             // clear alert on location change
             dispatch(alertActions.clear());
         });
+    }
+
+    componentWillUnmount() {
+        this.historyUnlisten();
     }
 
     render() {
@@ -30,7 +34,7 @@ class Main extends Component {
                 </div>
                 <Switch>
                     <Route path="/" exact component={Home} />
-                    <Route path="/login" exact component={LoginForm} />
+                    <Route path="/login" exact component={LoginComponent} />
                     <Route path="/private" exact component={withPrivateRoute(PrivatePage)} />
                 </Switch>
             </main>

@@ -11,10 +11,15 @@ class Header extends Component {
     constructor(props) {
         super(props);
         this.handleScroll = this.handleScroll.bind(this);
+        this.throttledScroll = _.throttle(this.handleScroll, 500);
     }
 
     componentDidMount() {
-        window.addEventListener('scroll', _.throttle(this.handleScroll, 500));
+        window.addEventListener('scroll', this.throttledScroll);
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener('scroll', this.throttledScroll);
     }
 
     handleScroll(event) {
