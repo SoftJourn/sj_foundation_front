@@ -43,21 +43,6 @@ export function getProjects(page = 1, query = {}) {
     };
 }
 
-
-/**
- * get project
- * @param slug
- * @returns {{}}
- */
-export function getProjectBySlug(slug) {
-  return {
-    [CALL_API]: {
-      types: [types.PROJECT_REQUEST, types.PROJECT_SUCCESS, types.PROJECT_FAILURE],
-      endpoint: `projects/${slug}`,
-    },
-  };
-}
-
 /**
  * get project by id
  * @param id
@@ -66,8 +51,8 @@ export function getProjectBySlug(slug) {
 export function getProjectById(id) {
   return {
     [CALL_API]: {
-      types: [types.PROJECT_PREVIEW_REQUEST, types.PROJECT_PREVIEW_SUCCESS, types.PROJECT_PREVIEW_FAILURE],
-      endpoint: `get_project?id=${id}`,
+      types: [types.PROJECT_REQUEST, types.PROJECT_SUCCESS, types.PROJECT_FAILURE],
+      endpoint: `projects/${id}`,
     },
   };
 }

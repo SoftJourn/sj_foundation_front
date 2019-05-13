@@ -58,11 +58,7 @@ export default store => next => action => {
     if (typeof endpoint === 'function') {
         endpoint = endpoint(store.getState());
     }
-    
-    if (typeof method !== 'string') {
-        method = 'GET'
-    }
-    
+
     if (typeof endpoint !== 'string') {
         throw new Error('Specify a string endpoint URL.');
     }
@@ -72,7 +68,7 @@ export default store => next => action => {
     if (!types.every(type => typeof type === 'string')) {
         throw new Error('Expected action types to be strings.');
     }
-    
+
     function actionWith(data) {
         const finalAction = Object.assign({}, action, data);
         delete finalAction[CALL_API];

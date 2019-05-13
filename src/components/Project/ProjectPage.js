@@ -1,34 +1,28 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getProjectBySlug, getProjectById } from '../actions/projectActions';
+import { getProjectById } from 'actions/projectActions';
 import moment from 'moment';
-import Spinner from '../components/helper/Spinner';
-import * as types from '../ActionTypes';
-import Project from "../components/project/Project";
+import { withHeader } from 'components/HOC/HeaderDecorator';
+import Spinner from 'components/helper/Spinner';
+import { PROJECT_INIT } from 'ActionTypes';
+import Project from "components/Project/Project";
 
 class ProjectPage extends Component {
 
   constructor(props) {
-    super();
+    super(props);
     this.state = {
-      // tab: props.routeParams.tab ? props.routeParams.tab : '',
       tab: props.match.params.tab,
-      slug: props.match.params.slug,
-      // slug: props.routeParams.slug,
+      projectId: props.match.params.projectId,
       project: props.project,
       donation: props.donation,
-      user: props.user,
-      preview: false,
+      user: props.user
     };
   }
 
   componentWillMount() {
-    this.props.dispatch({type: types.PROJECT_INIT});
-    if (this.state.preview) {
-      this.props.dispatch(getProjectById(this.state.slug));
-    } else {
-      this.props.dispatch(getProjectBySlug(this.state.slug));
-    }
+    this.props.dispatch({type: PROJECT_INIT});
+    this.props.dispatch(getProjectById(this.state.projectId));
   }
 
   /**
@@ -39,12 +33,10 @@ class ProjectPage extends Component {
   componentWillReceiveProps(nextProps) {
     this.setState({
       tab: nextProps.match.params.tab,
-      slug: nextProps.match.params.slug,
       user: nextProps.user,
       form: nextProps.form,
-      projects: nextProps.projects,
       project: nextProps.project,
-      id: nextProps.project.id,
+      projectId: nextProps.project.id,
       donation: nextProps.donation,
     });
   }
@@ -71,16 +63,13 @@ class ProjectPage extends Component {
   }
 
   getMainUrl() {
-    if (this.state.preview) {
-      return `/preview/${this.state.id}/`;
-    }
-    return `/project/${this.state.slug}/`;
+      return `/preview/${this.state.projectId}/`;
   }
 
   render() {
-    const { project, slug, tab, id, preview, user } = this.state;
+    const { project, user } = this.state;
     const mainUrl = this.getMainUrl();
-    const data = project.data;
+
     if (project.isFetching) {
       return (<div className="project-results text-center"><div style={{marginTop: '100px'}}><Spinner/></div></div>);
     } else if(project.error) {
@@ -116,8 +105,7 @@ class ProjectPage extends Component {
 function mapStateToProps(state, ownProps) {
   return {
     form: state.form,
-    projects: state.projects,
-    project: state.project,
+    project: state.projects.project,
     user: state.user,
   };
 }
@@ -125,4 +113,4 @@ function mapStateToProps(state, ownProps) {
 /**
  * get the data from redux and feed it into component via props
  */
-export default connect(mapStateToProps)(ProjectPage);
+export default connect(mapStateToProps)(withHeader(ProjectPage));

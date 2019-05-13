@@ -7,6 +7,8 @@ import { alertActions } from '../actions/alertActions';
 import { withRouter } from "react-router";
 import PrivatePage from 'components/Private/PrivatePage';
 import withPrivateRoute from 'components/HOC/PrivateRoute';
+import ProjectsPage from 'components/Project/ProjectsPage';
+import ProjectPage from 'components/Project/ProjectPage';
 
 class Main extends Component {
     constructor(props) {
@@ -36,6 +38,8 @@ class Main extends Component {
                     <Route path="/" exact component={Home} />
                     <Route path="/login" exact component={LoginComponent} />
                     <Route path="/private" exact component={withPrivateRoute(PrivatePage)} />
+                    <Route path="/projects" exact component={ProjectsPage} />
+                    <Route path="/project/:projectId" component={ProjectPage} />
                 </Switch>
             </main>
         )
