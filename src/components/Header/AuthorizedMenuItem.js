@@ -5,9 +5,6 @@ import { userActions } from 'actions/userActions';
 class AuthorizedMenuItem extends Component {
     constructor(props) {
         super(props)
-        this.state = {
-            username: props.user.username
-        }
         this.clickHandler = this.clickHandler.bind(this);
     }
 
@@ -17,9 +14,10 @@ class AuthorizedMenuItem extends Component {
     }
 
     render() {
+        var user = JSON.parse(this.props.user)
         return (
             <div className="m-0 p-0">
-                <span className="navbar-text mr-2 text-success">Logged in as {this.state.username}</span>
+                <span className="navbar-text mr-2 text-success">Logged in as {user.username}</span>
                 <button className="btn btn-primary" onClick={this.clickHandler}>Sign out</button>
             </div>
         )

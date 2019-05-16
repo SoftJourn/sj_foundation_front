@@ -85,11 +85,8 @@ class ProjectPage extends Component {
       <div>
         <Project
           title={project.data.title}
-          slug={project.data.slug}
-          mainUrl={mainUrl}
-          project={project.data}
-          projectStats={project.data.projectStats}
-          comments={project.data.comments}
+          thumbUrl={project.data.thumbUrl}
+          content={project.data.content}
         />
       </div>
     );
