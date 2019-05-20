@@ -1,0 +1,61 @@
+.start-project-step1 {
+    font-family: Roboto;
+
+    .project-status {
+      .col {
+        color: $status-blue;
+        white-space: nowrap;
+        height: 1rem;
+        font-size: 14px;
+      }
+    }
+
+    .project-progress {
+        .col {
+            color: $progress;
+            font-size: 2rem;
+
+            .general-steps {
+                font-size: 1.2rem;
+                color: $general-steps;
+            }
+        }
+    }
+
+    .progress-wrapper {
+        height: 0.4rem;
+        background-color: $progress-bar-bg;
+    }
+
+    .progress-bar-done {
+        height: 0.4rem;
+        background-color: $progress-bar-done-bg;
+    }
+
+    .new-project-title > .col {
+        text-transform: capitalize;
+        color: $progress-bar-title;
+        font-size: 3rem;
+        margin-top: 5rem;
+    }
+
+    .new-project-name > .col > .project-name {
+        color: $project-name-input;
+        border-bottom: 2px solid $project-name-input;
+        font-size: 1.1rem;
+        width: 100%;
+        margin-top: 3rem;
+    }
+
+    .new-project-next > .col > .btn {
+        margin-top: 2rem;
+        color: white;
+        background-color: $project-name-next;
+        border-color: $project-name-next;
+        border-radius: 20px;
+        width: 9.8rem;
+        height: 2.5rem;
+        margin-top: 4rem;
+        margin-bottom: 10rem;
+    }
+}
