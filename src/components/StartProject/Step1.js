@@ -3,6 +3,10 @@ import { withHeader } from 'components/HOC/HeaderDecorator';
 import { connect } from 'react-redux';
 import { newProjectStep1 } from 'actions/projectActions'
 import { alertActions } from 'actions/alertActions'
+import ProjectStatus from './ProjectStatus'
+import ProjectProgressBar from './ProjectProgressBar'
+import ProjectTitle from './ProjectTitle'
+import ProjectButtons from './ProjectButtons'
 
 class Step1 extends Component {
     constructor(props) {
@@ -14,9 +18,6 @@ class Step1 extends Component {
 
         this.handleChange = this.handleChange.bind(this);
         this.clickHandler = this.clickHandler.bind(this);
-    }
-
-    componentDidUpdate(prevProps) {
     }
 
     handleChange(event) {
@@ -35,43 +36,13 @@ class Step1 extends Component {
     }
 
     render() {
-        var progressStyle = {
-            width: '25%'
-        }
-
         return (
             <div className="container-fluid start-project-step1">
-                <div className="row justify-content-start project-status pt-2">
-                    <div className="col col-sm-2 offset-sm-1 pr-0">
-                        <i className="fa fa-eye pr-2"></i>
-                        Visibility: Public
-                    </div>
-                    <div className="col col-sm-2 pl-0">
-                        <i className="fa fa-file-alt pr-2"></i>
-                        Status: Draft
-                    </div>
-                </div>
-                <div className="row project-progress justify-content-around my-2">
-                    <div className="col text-center">
-                        <div>
-                            1 Step <span className="general-steps">of 4</span>
-                        </div>
-                    </div>
-                </div>
-                <div className="row justify-content-around">
-                    <div className="col col-sm-6">
-                        <div className="progress progress-wrapper">
-                          <div className="progress-bar progress-bar-done" role="progressbar" style={progressStyle} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                    </div>
-                </div>
-                <div className="row new-project-title">
-                    <div className="col text-center">
-                        add new project
-                    </div>
-                </div>
+                <ProjectStatus />
+                <ProjectProgressBar step="1" status="25" />
+                <ProjectTitle title="Add New Project" />
                 <div className="row new-project-name justify-content-around">
-                    <div className="col col-sm-5 text-center">
+                    <div className="col col-sm-6 text-center">
                         <input
                             className="project-name py-0"
                             type="text"
@@ -82,14 +53,8 @@ class Step1 extends Component {
                     </div>
                 </div>
 
-                <div className="row justify-content-around new-project-next">
-                    <div className="col col-sm-5 text-right">
-                        <button
-                            className="btn"
-                            onClick={this.clickHandler}
-                        >Next</button>
-                    </div>
-                </div>
+                <ProjectButtons
+                    nextClickHandler={this.clickHandler} />
             </div>
         )
     }

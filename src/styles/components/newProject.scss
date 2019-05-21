@@ -1,4 +1,4 @@
-.start-project-step1 {
+.start-project-step1, .start-project-step2 {
     font-family: Roboto;
 
     .project-status {
@@ -7,6 +7,7 @@
         white-space: nowrap;
         height: 1rem;
         font-size: 14px;
+        margin-right: 55px;
       }
     }
 
@@ -33,7 +34,6 @@
     }
 
     .new-project-title > .col {
-        text-transform: capitalize;
         color: $progress-bar-title;
         font-size: 3rem;
         margin-top: 5rem;
@@ -47,7 +47,18 @@
         margin-top: 3rem;
     }
 
-    .new-project-next > .col > .btn {
+    .new-project-buttons > .text-left > .btn {
+        color: $new-project-prev-step;
+        height: 2.5rem;
+        margin-top: 4rem;
+        margin-bottom: 10rem;
+
+        i.fas {
+            margin-right: 0.4rem;
+        }
+    }
+
+    .new-project-buttons > .text-right > .btn {
         margin-top: 2rem;
         color: white;
         background-color: $project-name-next;
@@ -57,5 +68,50 @@
         height: 2.5rem;
         margin-top: 4rem;
         margin-bottom: 10rem;
+    }
+
+    .project-category {
+        margin-top: 5rem;
+
+        .col {
+            .dropdown > .category-select {
+                background-color: white;
+                border: solid 1px $category-dropdown-border;
+                border-radius: 2px;
+                height: 3em;
+                font-size: 1.1rem;
+                color: $category-dropdown-text;
+                width: 31rem;
+                text-transform: none;
+                text-align: left;
+
+                i.fas {
+                    float: right;
+                }
+            }
+
+            .dropdown-menu {
+                width: 31rem;
+                padding-top: 1rem;
+                padding-bottom: 1rem;
+
+                a > .fa {
+                    visibility: hidden;
+                }
+
+                a.selected {
+                    color: $category-selected;
+
+                    .fa {
+                        visibility: visible;
+                        padding-left: 0.5rem;
+                    }
+                }
+            }
+        }
+    }
+
+    .dropdown-toggle::after {
+        display: none;
     }
 }

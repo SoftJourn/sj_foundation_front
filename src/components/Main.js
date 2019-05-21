@@ -10,6 +10,7 @@ import withPrivateRoute from 'components/HOC/PrivateRoute';
 import ProjectsPage from 'components/Project/ProjectsPage';
 import ProjectPage from 'components/Project/ProjectPage';
 import Step1 from 'components/StartProject/Step1';
+import Step2 from 'components/StartProject/Step2';
 
 class Main extends Component {
     constructor(props) {
@@ -42,6 +43,7 @@ class Main extends Component {
                     <Route path="/projects" exact component={ProjectsPage} />
                     <Route path="/project/:projectId" component={ProjectPage} />
                     <Route path="/start" exact component={Step1} />
+                    <Route path="/step2" exact component={Step2} />
                 </Switch>
             </main>
         )

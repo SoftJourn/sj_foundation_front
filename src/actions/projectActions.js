@@ -2,7 +2,7 @@ import { CALL_API } from '../redux/middleware/api';
 import * as types from '../ActionTypes';
 import {getBalance} from './userActions';
 import {serialize} from '../utils/utils'
-import { NEW_PROJECT_STEP_1 } from 'ActionTypes'
+import { NEW_PROJECT_STEP_1, NEW_PROJECT_STEP_2 } from 'ActionTypes'
 
 /**
  * fetches categories
@@ -143,4 +143,8 @@ export function loadMore() {
 
 export function newProjectStep1(title) {
     return { type: NEW_PROJECT_STEP_1, title };
+}
+
+export function newProjectStep2(category) {
+    return { type: NEW_PROJECT_STEP_2, category };
 }
