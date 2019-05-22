@@ -7,7 +7,7 @@ function ProjectStatus() {
                 <i className="fa fa-eye pr-2"></i>
                 Visibility: Public
             </div>
-            <div className="col col-sm-2 pl-0">
+            <div className="col col-sm-1 pl-0">
                 <i className="fa fa-file-alt pr-2"></i>
                 Status: Draft
             </div>

@@ -42,7 +42,7 @@ class Step1 extends Component {
                 <ProjectProgressBar step="1" status="25" />
                 <ProjectTitle title="Add New Project" />
                 <div className="row new-project-name justify-content-around">
-                    <div className="col col-sm-6 text-center">
+                    <div className="col col-sm-4 text-center">
                         <input
                             className="project-name py-0"
                             type="text"
