@@ -1,4 +1,4 @@
-.start-project-step1, .start-project-step2, .start-project-step3 {
+.start-project-step1, .start-project-step2, .start-project-step3, .start-project-step4 {
     font-family: Roboto;
 
     .project-status {
@@ -7,7 +7,21 @@
         white-space: nowrap;
         height: 1rem;
         font-size: 14px;
-        margin-right: 55px;
+
+        .green-button {
+            border: 1px solid $status-green;
+            border-radius: 2px;
+            background-color: white;
+            color: $button-green-text;
+            padding: 6px 3rem;
+            margin-right: 10px;
+            text-transform: uppercase;
+        }
+
+        .green-button.submit {
+            background-color: $button-green-text;
+            color: white;
+        }
       }
     }
 
@@ -76,6 +90,11 @@
             margin-top: 4rem;
             margin-bottom: 10rem;
         }
+
+        .blue-button {
+            background-color: $submit-color;
+            border-color: $submit-color;
+        }
     }
 
     .project-category {
@@ -88,7 +107,7 @@
 
             .category-select {
                 background-color: white;
-                border: solid 1px $category-dropdown-border;
+                border: solid 1px $component-border;
                 border-radius: 2px;
                 height: 3em;
                 font-size: 1.1rem;
@@ -129,20 +148,23 @@
 }
 
 .start-project-step3 {
+    .project-description-label > .col {
+        padding-top: 4rem;
+    }
+
     .project-description-label > .col, .project-files-label > .col {
         color: $component-label;
         font-size: 1rem;
-        padding-top: 4rem;
         padding-bottom: 1rem;
     }
 
     .project-description > .col {
-        height: 27rem;
+        height: 24rem;
 
         .description-wrapper {
-            height: 80%;
+            height: 90%;
             border-radius: 4px;
-            border: 2px solid $description-wrapper-border;
+            border: 2px solid $container-wrapper-border;
             overflow: auto;
 
             .description-editor {
@@ -154,4 +176,174 @@
         }
     }
 
+    .project-images {
+        .col {
+            height: 17rem;
+        }
+
+        .project-image > .fileUploader {
+            background-color: $upload-background;
+            border: 2px solid $container-wrapper-border;
+            border-radius: 4px;
+            text-align: center;
+            padding-top: 2rem;
+            color: $upload-color;
+            min-height: 14rem;
+            max-height: 14rem;
+            overflow: auto;
+
+            .dropzone:focus {
+                outline: none;
+            }
+
+            .dropzone > .upload-title {
+                font-size: 2rem;
+                padding-left: 2.5rem;
+                padding-right: 2.5rem;
+
+                :focus {
+                    ouline: none;
+                }
+            }
+
+            .dropzone > .upload-description {
+                font-size: 1rem;
+                display: block;
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+
+            .dropzone > .uploaded-file {
+                padding-top: 4rem;
+                display: block;
+
+                .fas {
+                    margin-left: 10px;
+                    color: black;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+
+    .project-video {
+        .col {
+            height: 17rem;
+        }
+
+        .uploaded-video > .fileUploader {
+            background-color: $upload-background;
+            border: 2px solid $container-wrapper-border;
+            border-radius: 4px;
+            text-align: center;
+            padding-top: 2rem;
+            color: $upload-color;
+            min-height: 14rem;
+            max-height: 14rem;
+            overflow: auto;
+
+            .dropzone:focus {
+                outline: none;
+            }
+
+            .dropzone:focus {
+                outline: none;
+            }
+
+            .dropzone > .upload-title {
+                font-size: 2rem;
+                padding-left: 2.5rem;
+                padding-right: 2.5rem;
+
+                :focus {
+                    ouline: none;
+                }
+            }
+
+            .dropzone > .upload-description {
+                font-size: 1rem;
+                display: block;
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+
+            .dropzone > .uploaded-file {
+                padding-top: 4rem;
+                display: block;
+
+                .fas {
+                    margin-left: 10px;
+                    color: black;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+}
+
+.start-project-step4 {
+    .project-price-label > .col, .due-date-label > .col {
+        color: $component-label;
+        font-size: 1rem;
+        padding-bottom: 1rem;
+
+    }
+
+    .project-price > .col {
+        .price-input {
+            width: 100%;
+            border-radius: 2px;
+            border: 1px solid $component-border;
+            padding-left: 10px;
+            color: $step4-input-text;
+        }
+    }
+
+    .donate-more > .col {
+        padding-top: 2rem;
+        margin-bottom: 2rem;
+
+        .donate-more-input {
+            cursor:pointer;
+            height: 30px;
+            width: 30px;
+            border-radius: 2px;
+            border: 1px solid $component-border;
+        }
+
+        .donate-label {
+            padding-left: 1rem;
+            padding-top: 4px;
+            text-transform: capitalize;
+        }
+    }
+
+    .due-date > .col {
+        .DayPickerInput {
+            width: 55%;
+            margin-right: 22px;
+
+            input {
+                border-radius: 2px;
+                border: 1px solid $component-border;
+                padding-left: 10px;
+                color: $step4-input-text;
+                height: 2rem;
+                width: 100%;
+            }
+        }
+
+        .hour-input {
+            border: 1px solid $component-border;
+            border-radius: 2px;
+            padding-left: 10px;
+            color: $step4-input-text;
+            width: 40%;
+            height: 2rem;
+        }
+    }
+}
+
+input.invalid {
+    border-color: $fnd-red !important;
 }

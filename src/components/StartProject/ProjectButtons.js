@@ -20,9 +20,9 @@ function ProjectButton(props) {
             </div>
             <div className="col col-sm-2 button-right">
                 <button
-                    className="btn"
+                    className={ props.nextStyle ? props.nextStyle + " btn" : 'btn' }
                     onClick={props.nextClickHandler}
-                >Next</button>
+                >{ props.nextValue ? props.nextValue : 'Next' }</button>
             </div>
         </div>
     )

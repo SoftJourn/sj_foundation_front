@@ -9,9 +9,10 @@ import PrivatePage from 'components/Private/PrivatePage';
 import withPrivateRoute from 'components/HOC/PrivateRoute';
 import ProjectsPage from 'components/Project/ProjectsPage';
 import ProjectPage from 'components/Project/ProjectPage';
-import Step1 from 'components/StartProject/Step1';
-import Step2 from 'components/StartProject/Step2';
-import Step3 from 'components/StartProject/Step3';
+import Step1 from 'components/StartProject/Step1'
+import Step2 from 'components/StartProject/Step2'
+import Step3 from 'components/StartProject/Step3'
+import Step4 from 'components/StartProject/Step4'
 
 class Main extends Component {
     constructor(props) {
@@ -46,6 +47,7 @@ class Main extends Component {
                     <Route path="/start" exact component={Step1} />
                     <Route path="/step2" exact component={Step2} />
                     <Route path="/step3" exact component={Step3} />
+                    <Route path="/step4" exact component={Step4} />
                 </Switch>
             </main>
         )

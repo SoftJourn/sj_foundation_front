@@ -1,4 +1,4 @@
-import { ALERT_ERROR, ALERT_CLEAR } from 'ActionTypes';
+import { ALERT_ERROR, ALERT_CLEAR, ALERT_SUCCESS } from 'ActionTypes';
 
 export default function alert(state = {}, action) {
     switch (action.type) {
@@ -9,6 +9,11 @@ export default function alert(state = {}, action) {
             }
         case ALERT_CLEAR:
             return { };
+        case ALERT_SUCCESS:
+            return {
+                type: 'alert-success',
+                message: action.message
+            }
         default:
             return state
     }

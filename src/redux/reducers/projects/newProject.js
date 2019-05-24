@@ -1,4 +1,4 @@
-import { NEW_PROJECT_STEP_1, NEW_PROJECT_STEP_2 } from 'ActionTypes'
+import { NEW_PROJECT_STEP_1, NEW_PROJECT_STEP_2, NEW_PROJECT_STEP_3  } from 'ActionTypes'
 
 const initialData = {};
 
@@ -13,6 +13,11 @@ export default function newProject (state = initialData, action) {
             return {
                 ...state,
                 category: action.category
+            }
+        case NEW_PROJECT_STEP_3:
+            return {
+                ...state,
+                description: action.description
             }
         default:
             return state;
