@@ -1,5 +1,5 @@
-import React, { Fragment, useCallback } from 'react'
-import { useDropzone } from 'react-dropzone'
+import React, { Component, Fragment, useCallback } from 'react'
+import { useDropzone } from 'react-dropzone'::
 
 function AcceptImage(props) {
     const onDrop = useCallback(acceptedFiles => {
