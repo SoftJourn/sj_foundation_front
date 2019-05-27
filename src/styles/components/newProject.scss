@@ -213,8 +213,18 @@
                 padding-right: 1rem;
             }
 
-            .dropzone > .uploaded-file {
-                padding-top: 4rem;
+            .dropzone > .uploaded-image {
+                margin-top: 4rem;
+                display: block;
+
+                .fas {
+                    margin-left: 10px;
+                    color: black;
+                    cursor: pointer;
+                }
+            }
+
+            .dropzone > .uploaded-attachments {
                 display: block;
 
                 .fas {
@@ -346,4 +356,13 @@
 
 input.invalid {
     border-color: $fnd-red !important;
+}
+
+span.invalid {
+    color: red;
+    font-weight: bold;
+}
+
+span.file-present {
+    color: black;
 }

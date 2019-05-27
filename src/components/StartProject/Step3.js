@@ -36,6 +36,69 @@ class Step3 extends Component {
         this.onEditorStateChange = this.onEditorStateChange.bind(this)
         this.nextClickHandler = this.nextClickHandler.bind(this)
         this.prevClickHandler = this.prevClickHandler.bind(this)
+        this.addProjectImage = this.addProjectImage.bind(this)
+        this.removeProjectImage = this.removeProjectImage.bind(this)
+        this.getProjectImage = this.getProjectImage.bind(this)
+        this.addProjectAttachment = this.addProjectAttachment.bind(this)
+        this.removeProjectAttachment = this.removeProjectAttachment.bind(this)
+        this.getProjectAttachments = this.getProjectAttachments.bind(this)
+    }
+
+    addProjectImage(image) {
+        if (typeof image === 'undefined') {
+            this.setState({
+                ...this.state,
+                projectImage: []
+            })
+            return
+        }
+        this.setState({
+            ...this.state,
+            projectImage: [ image ]
+        })
+    }
+
+    removeProjectImage() {
+        this.setState({
+            ...this.state,
+            projectImage: []
+        })
+    }
+
+    getProjectImage() {
+        return [ ...this.state.projectImage ]
+    }
+
+    addProjectAttachment(attachment) {
+        if (typeof attachment == 'undefined') {
+            return
+        }
+
+        this.setState({
+            ...this.state,
+            projectAttachments: [
+                ...this.state.projectAttachments,
+                attachment
+            ]
+        })
+    }
+
+    removeProjectAttachment(fileName) {
+        var indexToRemove = this.state.projectAttachments
+            .map(e => e.name)
+            .indexOf(fileName)
+
+        this.setState({
+            ...this.state,
+            projectAttachments: [
+                ...this.state.projectAttachments.slice(0, indexToRemove),
+                ...this.state.projectAttachments.slice(indexToRemove + 1)
+            ]
+        })
+    }
+
+    getProjectAttachments() {
+        return [ ...this.state.projectAttachments ]
     }
 
     onEditorStateChange(editorState) {
@@ -51,8 +114,7 @@ class Step3 extends Component {
 
     nextClickHandler() {
         var projectDescription = draftToHtml(convertToRaw(this.state.editorState.getCurrentContent()))
-        projectDescription = this.trim(projectDescription)
-        if (projectDescription.trim() === '') {
+        if (projectDescription.trim() === '<p></p>') {
             this.props.dispatch(alertActions.error("Project description is empty"));
             window.scrollTo(0,0)
             return;
@@ -60,12 +122,6 @@ class Step3 extends Component {
         this.props.dispatch(newProjectStep3(projectDescription));
         window.scrollTo(0,0)
         this.props.history.push('/step4');
-    }
-
-    trim(editorContent) {
-        var result = editorContent.trim()
-        result = result.substring(3, result.length - 4)
-        return result
     }
 
     prevClickHandler() {
@@ -127,10 +183,22 @@ class Step3 extends Component {
                 </div>
                 <div className="row project-images justify-content-center">
                     <div className="col col-sm-3 project-image">
-                        <AcceptImage files={this.state.projectImage} multiple={false} />
+                        <AcceptImage
+                            imgContainer="uploaded-image"
+                            multiple={false}
+                            addFile={this.addProjectImage}
+                            removeFile={this.removeProjectImage}
+                            getFiles={this.getProjectImage}
+                        />
                     </div>
                     <div className="col col-sm-3 project-image">
-                        <AcceptImage files={this.state.projectAttachments} multiple={true} />
+                        <AcceptImage
+                            imgContainer="uploaded-attachments"
+                            multiple={true}
+                            addFile={this.addProjectAttachment}
+                            removeFile={this.removeProjectAttachment}
+                            getFiles={this.getProjectAttachments}
+                        />
                     </div>
                 </div>
                 <div className="row project-files-label justify-content-center">
