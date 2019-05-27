@@ -2,7 +2,6 @@ import { CALL_API } from '../redux/middleware/api';
 import * as types from '../ActionTypes';
 import {getBalance} from './userActions';
 import {serialize} from '../utils/utils'
-<<<<<<< HEAD
 import {
     NEW_PROJECT_STEP_1,
     NEW_PROJECT_STEP_2,
@@ -11,9 +10,6 @@ import {
     PROJECT_CREATE_SUCCESS,
     PROJECT_CREATE_FAILURE
 } from 'ActionTypes'
-=======
-import { NEW_PROJECT_STEP_1, NEW_PROJECT_STEP_2, NEW_PROJECT_STEP_3 } from 'ActionTypes'
->>>>>>> Add new project page - Step 3 and 4
 
 /**
  * fetches categories
