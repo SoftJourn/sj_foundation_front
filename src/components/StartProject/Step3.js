@@ -4,7 +4,8 @@ import { withHeader } from 'components/HOC/HeaderDecorator';
 import ProjectStatus from './ProjectStatus'
 import ProjectProgressBar from './ProjectProgressBar'
 import ProjectTitle from './ProjectTitle'
-import { ContentState, EditorState, convertToRaw } from 'draft-js'
+import { EditorState, convertToRaw } from 'draft-js'
+import { stateFromHTML } from 'draft-js-import-html'
 import { Editor } from 'react-draft-wysiwyg';
 import draftToHtml from 'draftjs-to-html';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
@@ -22,8 +23,8 @@ class Step3 extends Component {
         if (this.props.description === '') {
             editorState = EditorState.createEmpty()
         } else {
-            editorState =
-                EditorState.createWithContent(ContentState.createFromText(this.props.description));
+            var contentState = stateFromHTML(this.props.description)
+            editorState = EditorState.createWithContent(contentState)
         }
         this.state = {
             editorState: editorState,
@@ -92,11 +93,26 @@ class Step3 extends Component {
                             editorClassName="description-editor"
                             onEditorStateChange={this.onEditorStateChange}
                             toolbar={{
-                                inline: { inDropdown: false },
-                                list: { inDropdown: true },
-                                textAlign: { inDropdown: true },
-                                link: { inDropdown: true },
-                                image: { inDropdown: true }
+                                options: ['blockType', 'inline', 'list', 'textAlign', 'link'],
+                                inline: {
+                                    inDropdown: false,
+                                    options: [ 'bold', 'italic' ]
+                                },
+                                list: {
+                                    inDropdown: false,
+                                    options: [ 'unordered', 'ordered' ]
+                                },
+                                blockType: {
+                                    inDropdown: true,
+                                    options: ['Normal', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'Blockquote', 'Code']
+                                },
+                                textAlign: {
+                                    inDropdown: false,
+                                    options: ['left', 'center', 'right']
+                                },
+                                link: {
+                                    inDropdown: false
+                                }
                             }}
                         />
                     </div>

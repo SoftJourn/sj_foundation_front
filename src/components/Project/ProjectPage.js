@@ -15,8 +15,7 @@ class ProjectPage extends Component {
       tab: props.match.params.tab,
       projectId: props.match.params.projectId,
       project: props.project,
-      donation: props.donation,
-      user: props.user
+      donation: props.donation
     };
   }
 
@@ -33,8 +32,6 @@ class ProjectPage extends Component {
   componentWillReceiveProps(nextProps) {
     this.setState({
       tab: nextProps.match.params.tab,
-      user: nextProps.user,
-      form: nextProps.form,
       project: nextProps.project,
       projectId: nextProps.project.id,
       donation: nextProps.donation,
@@ -67,7 +64,7 @@ class ProjectPage extends Component {
   }
 
   render() {
-    const { project, user } = this.state;
+    const { project } = this.state;
     const mainUrl = this.getMainUrl();
 
     if (project.isFetching) {
@@ -101,9 +98,7 @@ class ProjectPage extends Component {
  */
 function mapStateToProps(state, ownProps) {
   return {
-    form: state.form,
-    project: state.projects.project,
-    user: state.user,
+    project: state.projects.project
   };
 }
 

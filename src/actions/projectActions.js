@@ -2,7 +2,12 @@ import { CALL_API } from '../redux/middleware/api';
 import * as types from '../ActionTypes';
 import {getBalance} from './userActions';
 import {serialize} from '../utils/utils'
-import { NEW_PROJECT_STEP_1, NEW_PROJECT_STEP_2, NEW_PROJECT_STEP_3 } from 'ActionTypes'
+import {
+    NEW_PROJECT_STEP_1,
+    NEW_PROJECT_STEP_2,
+    NEW_PROJECT_STEP_3,
+    NEW_PROJECT_SUBMIT
+} from 'ActionTypes'
 
 /**
  * fetches categories
@@ -151,4 +156,8 @@ export function newProjectStep2(category) {
 
 export function newProjectStep3(description) {
     return { type: NEW_PROJECT_STEP_3, description };
+}
+
+export function newProjectSubmit(projectProps) {
+    return { type: NEW_PROJECT_SUBMIT, projectProps };
 }

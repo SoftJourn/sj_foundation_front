@@ -9,6 +9,7 @@ import 'react-day-picker/lib/style.css'
 import { DateUtils } from 'react-day-picker'
 import ProjectButtons from './ProjectButtons'
 import { alertActions } from 'actions/alertActions'
+import { newProjectSubmit } from 'actions/projectActions'
 
 import dateFnsFormat from 'date-fns/format'
 import dateFnsParse from 'date-fns/parse'
@@ -162,6 +163,7 @@ class Step4 extends Component {
             })
         }
 
+        this.props.dispatch(newProjectSubmit(this.state))
         this.props.history.push('/')
     }
 
