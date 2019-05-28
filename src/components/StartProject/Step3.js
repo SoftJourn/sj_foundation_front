@@ -42,6 +42,9 @@ class Step3 extends Component {
         this.addProjectAttachment = this.addProjectAttachment.bind(this)
         this.removeProjectAttachment = this.removeProjectAttachment.bind(this)
         this.getProjectAttachments = this.getProjectAttachments.bind(this)
+        this.addProjectVideo = this.addProjectVideo.bind(this)
+        this.removeProjectVideo = this.removeProjectVideo.bind(this)
+        this.getProjectVideo = this.getProjectVideo.bind(this)
     }
 
     addProjectImage(image) {
@@ -67,6 +70,31 @@ class Step3 extends Component {
 
     getProjectImage() {
         return [ ...this.state.projectImage ]
+    }
+
+    addProjectVideo(video) {
+        if (typeof video === 'undefined') {
+            this.setState({
+                ...this.state,
+                projectVideo: []
+            })
+            return
+        }
+        this.setState({
+            ...this.state,
+            projectVideo: [ video ]
+        })
+    }
+
+    removeProjectVideo() {
+        this.setState({
+            ...this.state,
+            projectVideo: []
+        })
+    }
+
+    getProjectVideo() {
+        return [ ...this.state.projectVideo ]
     }
 
     addProjectAttachment(attachment) {
@@ -194,7 +222,7 @@ class Step3 extends Component {
                     <div className="col col-sm-3 project-image">
                         <AcceptImage
                             imgContainer="uploaded-attachments"
-                            multiple={true}
+                            videoContainer="uploaded-video"
                             addFile={this.addProjectAttachment}
                             removeFile={this.removeProjectAttachment}
                             getFiles={this.getProjectAttachments}
@@ -208,7 +236,12 @@ class Step3 extends Component {
                 </div>
                 <div className="row project-video justify-content-center">
                     <div className="col col-sm-6 uploaded-video">
-                        <AcceptVideo files={this.state.projectVideo} />
+                        <AcceptVideo
+                            videoContainer="uploaded-video"
+                            addFile={this.addProjectVideo}
+                            removeFile={this.removeProjectVideo}
+                            getFiles={this.getProjectVideo}
+                        />
                     </div>
                 </div>
                 <ProjectButtons

@@ -196,41 +196,45 @@
                 outline: none;
             }
 
-            .dropzone > .upload-title {
-                font-size: 2rem;
-                padding-left: 2.5rem;
-                padding-right: 2.5rem;
+            .dropzone {
+                .upload-title {
+                    font-size: 2rem;
+                    padding-left: 2.5rem;
+                    padding-right: 2.5rem;
 
-                :focus {
-                    ouline: none;
+                    :focus {
+                        ouline: none;
+                    }
                 }
-            }
 
-            .dropzone > .upload-description {
-                font-size: 1rem;
-                display: block;
-                padding-left: 1rem;
-                padding-right: 1rem;
-            }
-
-            .dropzone > .uploaded-image {
-                margin-top: 4rem;
-                display: block;
-
-                .fas {
-                    margin-left: 10px;
-                    color: black;
-                    cursor: pointer;
+                .upload-description {
+                    font-size: 1rem;
+                    display: block;
+                    padding-left: 1rem;
+                    padding-right: 1rem;
                 }
-            }
 
-            .dropzone > .uploaded-attachments {
-                display: block;
+                .uploaded-image {
+                    margin-top: 4rem;
+                    display: block;
+                    color: $fnd-gray;
 
-                .fas {
-                    margin-left: 10px;
-                    color: black;
-                    cursor: pointer;
+                    .fas {
+                        margin-left: 10px;
+                        color: black;
+                        cursor: pointer;
+                    }
+                }
+
+                .uploaded-attachments {
+                    display: block;
+                    color: $fnd-gray;
+
+                    .fas {
+                        margin-left: 10px;
+                        color: black;
+                        cursor: pointer;
+                    }
                 }
             }
         }
@@ -256,35 +260,34 @@
                 outline: none;
             }
 
-            .dropzone:focus {
-                outline: none;
-            }
+            .dropzone {
+                .upload-title {
+                    font-size: 2rem;
+                    padding-left: 2.5rem;
+                    padding-right: 2.5rem;
 
-            .dropzone > .upload-title {
-                font-size: 2rem;
-                padding-left: 2.5rem;
-                padding-right: 2.5rem;
-
-                :focus {
-                    ouline: none;
+                    :focus {
+                        ouline: none;
+                    }
                 }
-            }
 
-            .dropzone > .upload-description {
-                font-size: 1rem;
-                display: block;
-                padding-left: 1rem;
-                padding-right: 1rem;
-            }
+                .upload-description {
+                    font-size: 1rem;
+                    display: block;
+                    padding-left: 1rem;
+                    padding-right: 1rem;
+                }
 
-            .dropzone > .uploaded-file {
-                padding-top: 4rem;
-                display: block;
+                .uploaded-video {
+                    margin-top: 4rem;
+                    display: block;
+                    color: $fnd-gray;
 
-                .fas {
-                    margin-left: 10px;
-                    color: black;
-                    cursor: pointer;
+                    .fas {
+                        margin-left: 10px;
+                        color: black;
+                        cursor: pointer;
+                    }
                 }
             }
         }
@@ -361,8 +364,4 @@ input.invalid {
 span.invalid {
     color: red;
     font-weight: bold;
-}
-
-span.file-present {
-    color: black;
 }

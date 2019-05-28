@@ -11,7 +11,7 @@ function AcceptImage(props) {
         }
     })
 
-    var maxSize = 1048576
+    var maxSize = 200 * 1048576
 
     const {isDragActive, rejectedFiles, getRootProps, getInputProps} = useDropzone({
         accept: 'image/*',

@@ -3,29 +3,51 @@ import { useDropzone } from 'react-dropzone'
 
 function AcceptVideo(props) {
     const onDrop = useCallback(acceptedFiles => {
-        props.files.push(acceptedFiles[0]);
+        var itemExists = props.getFiles().filter(function (el) {
+            return el.name === acceptedFiles[0].name
+        })
+        if (itemExists.length == 0) {
+            props.addFile(acceptedFiles[0]);
+        }
     });
 
-    const {acceptedFiles, rejectedFiles, getRootProps, getInputProps} = useDropzone({
+    var maxSize = 5120 * 1048576
+
+    const {isDragActive, rejectedFiles, getRootProps, getInputProps} = useDropzone({
         accept: 'video/*',
-        multiple: true,
+        multiple: false,
+        minSize: 0,
+        maxSize,
         onDrop
     });
 
-    const removeVideo = useCallback((e) => {
+    const removeFile = useCallback((e) => {
         e.stopPropagation()
-        props.files.pop()
-        acceptedFiles.pop()
+        props.removeFile()
     });
 
     var content = ''
-    if (acceptedFiles.length > 0) {
-        content = acceptedFiles.map(acceptedFile => (
-            <span key={acceptedFile.name} className="uploaded-file">
+    if (props.getFiles().length > 0) {
+        content = props.getFiles().map(acceptedFile => (
+            <span
+                key={acceptedFile.name + props.videoContainer}
+                className={props.videoContainer + " file-present"}
+            >
                 {acceptedFile.name}
-                <i className="fas fa-times" onClick={removeVideo}></i>
+                <i
+                    className="fas fa-times"
+                    onClick={removeFile}
+                ></i>
             </span>
         ))
+    } else if (rejectedFiles.length > 0 && rejectedFiles[0].size > maxSize) {
+        content = (
+            <span
+                className={props.videoContainer + " invalid"}
+            >
+                File is too large
+            </span>
+        )
     } else {
         content = (
             <Fragment>
