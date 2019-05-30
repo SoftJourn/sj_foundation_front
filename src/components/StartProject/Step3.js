@@ -13,7 +13,8 @@ import AcceptImage from './AcceptImage'
 import AcceptVideo from './AcceptVideo'
 import ProjectButtons from './ProjectButtons'
 import { alertActions } from 'actions/alertActions'
-import { newProjectStep3 } from 'actions/projectActions'
+import { newProjectStep3, uploadImage } from 'actions/projectActions'
+import config from 'config'
 
 class Step3 extends Component {
     constructor(props) {
@@ -28,9 +29,9 @@ class Step3 extends Component {
         }
         this.state = {
             editorState: editorState,
-            projectImage: [],
-            projectVideo: [],
-            projectAttachments: []
+            projectImage: this.props.projectImage,
+            projectVideo: this.props.projectVideo,
+            projectAttachments: this.props.projectAttachments
         }
 
         this.onEditorStateChange = this.onEditorStateChange.bind(this)
@@ -45,6 +46,7 @@ class Step3 extends Component {
         this.addProjectVideo = this.addProjectVideo.bind(this)
         this.removeProjectVideo = this.removeProjectVideo.bind(this)
         this.getProjectVideo = this.getProjectVideo.bind(this)
+        this.sendFileRequest = this.sendFileRequest.bind(this)
     }
 
     addProjectImage(image) {
@@ -59,6 +61,20 @@ class Step3 extends Component {
             ...this.state,
             projectImage: [ image ]
         })
+
+        this.sendFileRequest(image);
+    }
+
+    sendFileRequest(file) {
+        return new Promise((resolve, reject) => {
+            const req = new XMLHttpRequest();
+
+            const formData = new FormData();
+            formData.append("file", file, file.name);
+
+            req.open("POST", `${config.apiUrl}/projects/uploadProjectFile`);
+            req.send(formData);
+        });
     }
 
     removeProjectImage() {
@@ -84,6 +100,7 @@ class Step3 extends Component {
             ...this.state,
             projectVideo: [ video ]
         })
+        this.sendFileRequest(video);
     }
 
     removeProjectVideo() {
@@ -109,6 +126,8 @@ class Step3 extends Component {
                 attachment
             ]
         })
+
+        this.sendFileRequest(attachment);
     }
 
     removeProjectAttachment(fileName) {
@@ -135,11 +154,6 @@ class Step3 extends Component {
         })
     }
 
-    componentWillUnmount() {
-        this.state.projectImage.forEach(file => URL.revokeObjectURL(file.preview));
-        this.state.projectAttachments.forEach(file => URL.revokeObjectURL(file.preview));
-    }
-
     nextClickHandler() {
         var projectDescription = draftToHtml(convertToRaw(this.state.editorState.getCurrentContent()))
         if (projectDescription.trim() === '<p></p>') {
@@ -147,7 +161,11 @@ class Step3 extends Component {
             window.scrollTo(0,0)
             return;
         }
-        this.props.dispatch(newProjectStep3(projectDescription));
+        this.props.dispatch(newProjectStep3(projectDescription,
+            this.state.projectImage,
+            this.state.projectVideo,
+            this.state.projectAttachments
+        ));
         window.scrollTo(0,0)
         this.props.history.push('/step4');
     }
@@ -255,7 +273,10 @@ class Step3 extends Component {
 
 function mapStateToProps(state, ownProps) {
     return {
-        description: state.projects.newProject.description || ''
+        description: state.projects.newProject.description || '',
+        projectImage: state.projects.newProject.projectImage || [],
+        projectVideo: state.projects.newProject.projectVideo || [],
+        projectAttachments: state.projects.newProject.projectAttachments || [],
     };
 }
 

@@ -2,7 +2,8 @@ import {
     NEW_PROJECT_STEP_1,
     NEW_PROJECT_STEP_2,
     NEW_PROJECT_STEP_3,
-    NEW_PROJECT_SUBMIT
+    PROJECT_CREATE_REQUEST,
+    PROJECT_CREATE_SUCCESS
 } from 'ActionTypes'
 
 const initialData = {};
@@ -22,11 +23,20 @@ export default function newProject (state = initialData, action) {
         case NEW_PROJECT_STEP_3:
             return {
                 ...state,
-                description: action.description
+                description: action.description,
+                projectImage: action.image,
+                projectVideo: action.video,
+                projectAttachments: action.attachments
             }
-        case NEW_PROJECT_SUBMIT:
+        case PROJECT_CREATE_REQUEST:
             return {
+                ...state,
+                price: action.price,
+                canDonate: action.canDonate,
+                due: action.due
             }
+        case PROJECT_CREATE_SUCCESS:
+            return initialData;
         default:
             return state;
     }

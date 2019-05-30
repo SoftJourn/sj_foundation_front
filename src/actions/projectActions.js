@@ -6,7 +6,9 @@ import {
     NEW_PROJECT_STEP_1,
     NEW_PROJECT_STEP_2,
     NEW_PROJECT_STEP_3,
-    NEW_PROJECT_SUBMIT
+    PROJECT_CREATE_REQUEST,
+    PROJECT_CREATE_SUCCESS,
+    PROJECT_CREATE_FAILURE
 } from 'ActionTypes'
 
 /**
@@ -154,10 +156,24 @@ export function newProjectStep2(category) {
     return { type: NEW_PROJECT_STEP_2, category };
 }
 
-export function newProjectStep3(description) {
-    return { type: NEW_PROJECT_STEP_3, description };
+export function newProjectStep3(description, image, video, attachments) {
+    return { type: NEW_PROJECT_STEP_3, description, image, video, attachments };
 }
 
-export function newProjectSubmit(projectProps) {
-    return { type: NEW_PROJECT_SUBMIT, projectProps };
+export function createProject(title, price, canDonate, due, category, description) {
+    return {
+        [CALL_API]: {
+            types: [ PROJECT_CREATE_REQUEST, PROJECT_CREATE_SUCCESS, PROJECT_CREATE_FAILURE],
+            method: 'POST',
+            endpoint: 'projects',
+            body: {
+                title,
+                price,
+                canDonate,
+                due,
+                category,
+                description
+            }
+        }
+    };
 }
