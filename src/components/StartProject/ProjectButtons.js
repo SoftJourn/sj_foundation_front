@@ -8,21 +8,21 @@ function ProjectButton(props) {
                 className="btn"
                 onClick={props.prevClickHandler}
             >
-                <i class="fas fa-arrow-left"></i>
+                <i className="fas fa-arrow-left"></i>
                 STEP 1
             </button>
         )
     }
     return (
         <div className="row justify-content-center new-project-buttons">
-            <div className="col col-sm-3 text-left">
+            <div className="col col-sm-2 button-left">
                 {prevButton}
             </div>
-            <div className="col col-sm-3 text-right">
+            <div className="col col-sm-2 button-right">
                 <button
-                    className="btn"
+                    className={ props.nextStyle ? props.nextStyle + " btn" : 'btn' }
                     onClick={props.nextClickHandler}
-                >Next</button>
+                >{ props.nextValue ? props.nextValue : 'Next' }</button>
             </div>
         </div>
     )

@@ -14,7 +14,7 @@ class AuthorizedMenuItem extends Component {
     }
 
     render() {
-        var user = JSON.parse(this.props.user)
+        var user = this.props.user
         return (
             <div className="m-0 p-0">
                 <span className="navbar-text mr-2 text-success">Logged in as {user.username}</span>

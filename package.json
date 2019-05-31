@@ -46,9 +46,12 @@
     "babel-plugin-transform-runtime": "^6.23.0",
     "bootstrap": "^4.0.0-beta.2",
     "classnames": "^2.2.5",
+    "date-fns": "^1.30.1",
     "dotenv": "^4.0.0",
     "dotenv-webpack": "^1.5.4",
     "draft-js": "^0.10.4",
+    "draft-js-import-html": "^1.3.3",
+    "draftjs-to-html": "^0.8.4",
     "es6-promise": "^3.2.1",
     "history": "^4.9.0",
     "isomorphic-fetch": "^2.2.1",
@@ -59,8 +62,10 @@
     "query-string": "^5.0.1",
     "react": "^16.8.5",
     "react-datepicker": "^0.61.0",
+    "react-day-picker": "^7.3.0",
     "react-dom": "^16.8.5",
     "react-draft-wysiwyg": "^1.12.0",
+    "react-dropzone": "^10.1.5",
     "react-menu-list": "^3.2.2",
     "react-modal": "^1.5.2",
     "react-redux": "^4.4.9",
@@ -79,6 +84,6 @@
     "start-dev": "NODE_ENV=development node server.js",
     "test-api": "json-server --watch test/api/db.json --port=3001 --routes test/api/routes.json",
     "lint": "eslint src/",
-    "build": "webpack -p "
+    "build": "./node_modules/webpack/bin/webpack.js -p "
   }
 }

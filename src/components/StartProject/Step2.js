@@ -37,6 +37,7 @@ class Step2 extends Component {
     }
 
     prevClickHandler() {
+        this.props.history.push('/start');
     }
 
     clickHandler() {
@@ -79,8 +80,8 @@ class Step2 extends Component {
                 <ProjectProgressBar step="2" status="50" />
                 <ProjectTitle title="Pick a Project Category" />
                 <div className="row project-category justify-content-center">
-                    <div className="col col-sm-6">
-                        <div className="dropdown" onClick={this.clickHandler}>
+                    <div className="col col-sm-4 text-center">
+                        <div className="dropdown btn-group" onClick={this.clickHandler}>
                             <button
                                 type="button"
                                 className="btn btn-default dropdown-toggle category-select"

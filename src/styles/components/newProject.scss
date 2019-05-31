@@ -1,4 +1,4 @@
-.start-project-step1, .start-project-step2 {
+.start-project-step1, .start-project-step2, .start-project-step3, .start-project-step4 {
     font-family: Roboto;
 
     .project-status {
@@ -7,7 +7,21 @@
         white-space: nowrap;
         height: 1rem;
         font-size: 14px;
-        margin-right: 55px;
+
+        .green-button {
+            border: 1px solid $status-green;
+            border-radius: 2px;
+            background-color: white;
+            color: $button-green-text;
+            padding: 6px 3rem;
+            margin-right: 10px;
+            text-transform: uppercase;
+        }
+
+        .green-button.submit {
+            background-color: $button-green-text;
+            color: white;
+        }
       }
     }
 
@@ -34,7 +48,7 @@
     }
 
     .new-project-title > .col {
-        color: $progress-bar-title;
+        color: $component-label;
         font-size: 3rem;
         margin-top: 5rem;
     }
@@ -47,41 +61,58 @@
         margin-top: 3rem;
     }
 
-    .new-project-buttons > .text-left > .btn {
-        color: $new-project-prev-step;
-        height: 2.5rem;
-        margin-top: 4rem;
-        margin-bottom: 10rem;
+    .new-project-buttons > .button-left {
+        text-align: left;
 
-        i.fas {
-            margin-right: 0.4rem;
+        .btn {
+            color: $new-project-prev-step;
+            height: 2.5rem;
+            margin-top: 4rem;
+            margin-bottom: 10rem;
+
+            i.fas {
+                margin-right: 0.4rem;
+            }
         }
     }
 
-    .new-project-buttons > .text-right > .btn {
-        margin-top: 2rem;
-        color: white;
-        background-color: $project-name-next;
-        border-color: $project-name-next;
-        border-radius: 20px;
-        width: 9.8rem;
-        height: 2.5rem;
-        margin-top: 4rem;
-        margin-bottom: 10rem;
+    .new-project-buttons > .button-right {
+        text-align: right;
+
+        .btn {
+            margin-top: 2rem;
+            color: white;
+            background-color: $project-name-next;
+            border-color: $project-name-next;
+            border-radius: 20px;
+            width: 9.8rem;
+            height: 2.5rem;
+            margin-top: 4rem;
+            margin-bottom: 10rem;
+        }
+
+        .blue-button {
+            background-color: $submit-color;
+            border-color: $submit-color;
+        }
     }
 
     .project-category {
         margin-top: 5rem;
 
         .col {
-            .dropdown > .category-select {
+            .dropdown {
+                width: 100%;
+            }
+
+            .category-select {
                 background-color: white;
-                border: solid 1px $category-dropdown-border;
+                border: solid 1px $component-border;
                 border-radius: 2px;
                 height: 3em;
                 font-size: 1.1rem;
                 color: $category-dropdown-text;
-                width: 31rem;
+                width: 100%;
                 text-transform: none;
                 text-align: left;
 
@@ -91,7 +122,7 @@
             }
 
             .dropdown-menu {
-                width: 31rem;
+                width: 100%;
                 padding-top: 1rem;
                 padding-bottom: 1rem;
 
@@ -114,4 +145,223 @@
     .dropdown-toggle::after {
         display: none;
     }
+}
+
+.start-project-step3 {
+    .project-description-label > .col {
+        padding-top: 4rem;
+    }
+
+    .project-description-label > .col, .project-files-label > .col {
+        color: $component-label;
+        font-size: 1rem;
+        padding-bottom: 1rem;
+    }
+
+    .project-description > .col {
+        height: 24rem;
+
+        .description-wrapper {
+            height: 90%;
+            border-radius: 4px;
+            border: 2px solid $container-wrapper-border;
+            overflow: auto;
+
+            .description-editor {
+                height: inherit;
+                padding-left: 1rem;
+                line-height: 1rem;
+                max-height: 75%;
+            }
+        }
+    }
+
+    .project-images {
+        .col {
+            height: 17rem;
+        }
+
+        .project-image > .fileUploader {
+            background-color: $upload-background;
+            border: 2px solid $container-wrapper-border;
+            border-radius: 4px;
+            text-align: center;
+            padding-top: 2rem;
+            color: $upload-color;
+            min-height: 14rem;
+            max-height: 14rem;
+            overflow: auto;
+
+            .dropzone:focus {
+                outline: none;
+            }
+
+            .dropzone {
+                .upload-title {
+                    font-size: 2rem;
+                    padding-left: 2.5rem;
+                    padding-right: 2.5rem;
+
+                    :focus {
+                        ouline: none;
+                    }
+                }
+
+                .upload-description {
+                    font-size: 1rem;
+                    display: block;
+                    padding-left: 1rem;
+                    padding-right: 1rem;
+                }
+
+                .uploaded-image {
+                    margin-top: 4rem;
+                    display: block;
+                    color: $fnd-gray;
+
+                    .fas {
+                        margin-left: 10px;
+                        color: black;
+                        cursor: pointer;
+                    }
+                }
+
+                .uploaded-attachments {
+                    display: block;
+                    color: $fnd-gray;
+
+                    .fas {
+                        margin-left: 10px;
+                        color: black;
+                        cursor: pointer;
+                    }
+                }
+            }
+        }
+    }
+
+    .project-video {
+        .col {
+            height: 17rem;
+        }
+
+        .uploaded-video > .fileUploader {
+            background-color: $upload-background;
+            border: 2px solid $container-wrapper-border;
+            border-radius: 4px;
+            text-align: center;
+            padding-top: 2rem;
+            color: $upload-color;
+            min-height: 14rem;
+            max-height: 14rem;
+            overflow: auto;
+
+            .dropzone:focus {
+                outline: none;
+            }
+
+            .dropzone {
+                .upload-title {
+                    font-size: 2rem;
+                    padding-left: 2.5rem;
+                    padding-right: 2.5rem;
+
+                    :focus {
+                        ouline: none;
+                    }
+                }
+
+                .upload-description {
+                    font-size: 1rem;
+                    display: block;
+                    padding-left: 1rem;
+                    padding-right: 1rem;
+                }
+
+                .uploaded-video {
+                    margin-top: 4rem;
+                    display: block;
+                    color: $fnd-gray;
+
+                    .fas {
+                        margin-left: 10px;
+                        color: black;
+                        cursor: pointer;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.start-project-step4 {
+    .project-price-label > .col, .due-date-label > .col {
+        color: $component-label;
+        font-size: 1rem;
+        padding-bottom: 1rem;
+
+    }
+
+    .project-price > .col {
+        .price-input {
+            width: 100%;
+            border-radius: 2px;
+            border: 1px solid $component-border;
+            padding-left: 10px;
+            color: $step4-input-text;
+        }
+    }
+
+    .donate-more > .col {
+        padding-top: 2rem;
+        margin-bottom: 2rem;
+
+        .donate-more-input {
+            cursor:pointer;
+            height: 30px;
+            width: 30px;
+            border-radius: 2px;
+            border: 1px solid $component-border;
+        }
+
+        .donate-label {
+            padding-left: 1rem;
+            padding-top: 4px;
+            text-transform: capitalize;
+        }
+    }
+
+    .due-date > .col {
+        .DayPickerInput {
+            width: 55%;
+            margin-right: 22px;
+
+            input {
+                border-radius: 2px;
+                border: 1px solid $component-border;
+                padding-left: 10px;
+                color: $step4-input-text;
+                height: 2rem;
+                width: 100%;
+            }
+        }
+
+        .hour-input {
+            border: 1px solid $component-border;
+            border-radius: 2px;
+            padding-left: 10px;
+            color: $step4-input-text;
+            width: 40%;
+            height: 2rem;
+        }
+    }
+}
+
+input.invalid {
+    border-color: $fnd-red !important;
+}
+
+span.invalid {
+    color: red;
+    font-weight: bold;
 }
