@@ -31,7 +31,8 @@ class Step3 extends Component {
             editorState: editorState,
             projectImage: this.props.projectImage,
             projectVideo: this.props.projectVideo,
-            projectAttachments: this.props.projectAttachments
+            projectAttachments: this.props.projectAttachments,
+            projectImageUrl: this.props.projectImageUrl
         }
 
         this.onEditorStateChange = this.onEditorStateChange.bind(this)
@@ -47,6 +48,7 @@ class Step3 extends Component {
         this.removeProjectVideo = this.removeProjectVideo.bind(this)
         this.getProjectVideo = this.getProjectVideo.bind(this)
         this.sendFileRequest = this.sendFileRequest.bind(this)
+        this.handleProjectImageUpload = this.handleProjectImageUpload.bind(this)
     }
 
     addProjectImage(image) {
@@ -62,16 +64,34 @@ class Step3 extends Component {
             projectImage: [ image ]
         })
 
-        this.sendFileRequest(image);
+        this.sendFileRequest(image)
+        .then(this.handleProjectImageUpload)
+    }
+
+    handleProjectImageUpload(responseText) {
+        var response = JSON.parse(responseText)
+        this.setState({
+            ...this.state,
+            projectImageUrl: response.uploadedFile
+        })
     }
 
     sendFileRequest(file) {
         return new Promise((resolve, reject) => {
             const req = new XMLHttpRequest();
-
             const formData = new FormData();
             formData.append("file", file, file.name);
-
+            req.onreadystatechange = function() {
+                if (req.readyState !== 4) return;
+                if (req.status >= 200 && req.status < 300) {
+                    resolve(req.response);
+                } else {
+                    reject({
+                        status: req.status,
+                        statusText: req.statusText
+                    });
+                }
+            }
             req.open("POST", `${config.apiUrl}/projects/uploadProjectFile`);
             req.send(formData);
         });
@@ -164,7 +184,8 @@ class Step3 extends Component {
         this.props.dispatch(newProjectStep3(projectDescription,
             this.state.projectImage,
             this.state.projectVideo,
-            this.state.projectAttachments
+            this.state.projectAttachments,
+            this.state.projectImageUrl
         ));
         window.scrollTo(0,0)
         this.props.history.push('/step4');
@@ -277,6 +298,7 @@ function mapStateToProps(state, ownProps) {
         projectImage: state.projects.newProject.projectImage || [],
         projectVideo: state.projects.newProject.projectVideo || [],
         projectAttachments: state.projects.newProject.projectAttachments || [],
+        projectImageUrl: state.projects.newProject.projectImageUrl || ''
     };
 }
 

@@ -8,7 +8,7 @@ import Root from './components/Root/Root';
 const userFromStorage = sessionStorage.getItem('user');
 const authentication = {
     isLoggedIn: userFromStorage != null || false,
-    user: userFromStorage
+    user: JSON.parse(userFromStorage)
 }
 const initialState = {
     authentication
