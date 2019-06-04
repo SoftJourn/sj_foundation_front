@@ -156,11 +156,11 @@ export function newProjectStep2(category) {
     return { type: NEW_PROJECT_STEP_2, category };
 }
 
-export function newProjectStep3(description, image, video, attachments) {
-    return { type: NEW_PROJECT_STEP_3, description, image, video, attachments };
+export function newProjectStep3(description, image, video, attachments, imageUrl) {
+    return { type: NEW_PROJECT_STEP_3, description, image, video, attachments, imageUrl };
 }
 
-export function createProject(title, price, canDonate, due, category, description) {
+export function createProject(title, price, canDonate, due, category, description, imageUrl) {
     return {
         [CALL_API]: {
             types: [ PROJECT_CREATE_REQUEST, PROJECT_CREATE_SUCCESS, PROJECT_CREATE_FAILURE],
@@ -172,7 +172,8 @@ export function createProject(title, price, canDonate, due, category, descriptio
                 canDonate,
                 due,
                 category,
-                description
+                description,
+                imageUrl
             }
         }
     };

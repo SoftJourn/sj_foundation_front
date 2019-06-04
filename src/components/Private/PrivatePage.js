@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { withHeader } from 'components/HOC/HeaderDecorator';
+import { connect } from 'react-redux';
 
 class PrivatePage extends Component {
     constructor(props) {
@@ -14,4 +16,4 @@ class PrivatePage extends Component {
     }
 }
 
-export default PrivatePage;
+export default connect()(withHeader(PrivatePage));

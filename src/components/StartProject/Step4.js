@@ -21,7 +21,7 @@ import setMinutes from 'date-fns/set_minutes'
 class Step4 extends Component {
     constructor(props) {
         super(props)
-        this.FORMAT = 'DD/MM/YY'
+        this.FORMAT = 'MM/DD/YY'
         this.state = {
             price: this.props.price,
             priceInvalid: false,
@@ -175,7 +175,8 @@ class Step4 extends Component {
             this.state.canDonate,
             due,
             this.props.category,
-            this.props.description
+            this.props.description,
+            this.props.imageUrl
         ))
         this.props.history.push('/')
     }
@@ -251,7 +252,7 @@ class Step4 extends Component {
                             format={this.FORMAT}
                             parseDate={this.parseDate}
                             value={this.state.selectedDay}
-                            placeholder={`${dateFnsFormat(new Date(), this.FORMAT)}`}
+                            placeholder={this.formatDate(new Date(), this.FORMAT)}
                             onDayChange={this.handleDayChange}
                         />
                         <input
@@ -285,6 +286,7 @@ const mapStateToProps = (state) => ({
     title: state.projects.newProject.title || '',
     category: state.projects.newProject.category || '',
     description: state.projects.newProject.description || '',
+    imageUrl: state.projects.newProject.projectImageUrl || ''
 })
 
 export default connect(mapStateToProps)(withHeader(Step4))

@@ -26,7 +26,8 @@ export default function newProject (state = initialData, action) {
                 description: action.description,
                 projectImage: action.image,
                 projectVideo: action.video,
-                projectAttachments: action.attachments
+                projectAttachments: action.attachments,
+                projectImageUrl: action.imageUrl
             }
         case PROJECT_CREATE_REQUEST:
             return {

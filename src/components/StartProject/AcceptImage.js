@@ -1,4 +1,4 @@
-import React, { Fragment, useCallback } from 'react'
+import React, { Component, Fragment, useCallback } from 'react'
 import { useDropzone } from 'react-dropzone'
 
 function AcceptImage(props) {

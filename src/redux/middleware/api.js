@@ -1,8 +1,9 @@
+import config from 'config'
 import 'whatwg-fetch'
 
 // temporary hardcoded API_HOST to localhost
 // TODO: need to move this into separate configuration
-let API_ROOT = process.env.API_HOST || 'http://localhost:3000';
+let API_ROOT = process.env.API_HOST || `${config.apiUrl}`;
 
 /**
  * call api and return results
@@ -13,15 +14,21 @@ function callApi(endpoint, store, method, body) {
     let apiHeaders = new Headers();
     apiHeaders.append('Content-Type', 'application/json');
 
+    let user = sessionStorage.getItem('user');
+    if (user != null) {
+        user = JSON.parse(user)
+        apiHeaders.append('user-info', user.token);
+    }
+
     return fetch(fullUrl, {
         body: JSON.stringify(body),
         // mode: 'cors',
-        // headers: apiHeaders,
+        headers: apiHeaders,
         method: method
     })
         .then(response => {
             if (response.status === 401 || response.status === 403) {
-                
+
             }
             return response.json().then(json => ({ json, response }))
         })

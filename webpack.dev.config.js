@@ -15,7 +15,7 @@ module.exports = {
     output: {
         path: path.join(__dirname, '/assets/dist/'),
         filename: '[name].bundle.js',
-        publicPath: 'http://localhost:3001/assets/dist/'
+        publicPath: '/assets/dist/'
     },
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
@@ -37,9 +37,9 @@ module.exports = {
                     presets: ["es2015", "stage-0", "react"]
                 }
             },
-            
+
             { test: /\.css$/, loaders: ['style-loader', 'css-loader'] },
-            
+
             { test: /\.scss$/, loaders: [ 'style-loader', 'css-loader', 'sass-loader' ] },
             {
                 test: /\.(jpe?g|png|gif|svg)$/i,
