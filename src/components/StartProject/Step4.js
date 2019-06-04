@@ -21,7 +21,7 @@ import setMinutes from 'date-fns/set_minutes'
 class Step4 extends Component {
     constructor(props) {
         super(props)
-        this.FORMAT = 'DD/MM/YY'
+        this.FORMAT = 'MM/DD/YY'
         this.state = {
             price: this.props.price,
             priceInvalid: false,
@@ -252,7 +252,7 @@ class Step4 extends Component {
                             format={this.FORMAT}
                             parseDate={this.parseDate}
                             value={this.state.selectedDay}
-                            placeholder={`${dateFnsFormat(new Date(), this.FORMAT)}`}
+                            placeholder={this.formatDate(new Date(), this.FORMAT)}
                             onDayChange={this.handleDayChange}
                         />
                         <input
