@@ -10,7 +10,7 @@ import { DateUtils } from 'react-day-picker'
 import ProjectButtons from './ProjectButtons'
 import { alertActions } from 'actions/alertActions'
 import { createProject } from 'actions/projectActions'
-
+import Checkbox from './Checkbox'
 import dateFnsFormat from 'date-fns/format'
 import dateFnsParse from 'date-fns/parse'
 import isFuture from 'date-fns/is_future'
@@ -231,13 +231,11 @@ class Step4 extends Component {
                 </div>
                 <div className="row donate-more justify-content-center">
                     <div className="col col-sm-3 d-flex">
-                        <input
-                            type="checkbox"
-                            className="donate-more-input"
+                        <Checkbox
+                            label="can donate more"
                             checked={this.state.canDonate}
                             onChange={this.handleDonateChange}
                         />
-                        <div className="donate-label">can donate more</div>
                     </div>
                 </div>
                 <div className="row due-date-label justify-content-center">

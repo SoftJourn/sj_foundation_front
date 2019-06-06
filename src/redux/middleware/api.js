@@ -30,6 +30,15 @@ function callApi(endpoint, store, method, body) {
             if (response.status === 401 || response.status === 403) {
 
             }
+            let userInfo = response.headers.get('user-info');
+            if (userInfo) {
+                let userItem = sessionStorage.getItem('user');
+                userItem = JSON.parse(userItem);
+                userItem.token = userInfo;
+                sessionStorage.setItem('user', JSON.stringify(userItem));
+            } else {
+                sessionStorage.removeItem('user');
+            }
             return response.json().then(json => ({ json, response }))
         })
         .then(({ json, response }) => {
