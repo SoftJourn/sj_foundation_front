@@ -4,38 +4,32 @@ import { connect } from 'react-redux';
 import ProjectStatus from './ProjectStatus'
 import ProjectProgressBar from './ProjectProgressBar'
 import ProjectTitle from './ProjectTitle'
-import DayPickerInput from 'react-day-picker/DayPickerInput'
-import 'react-day-picker/lib/style.css'
-import { DateUtils } from 'react-day-picker'
 import ProjectButtons from './ProjectButtons'
 import { alertActions } from 'actions/alertActions'
 import { createProject } from 'actions/projectActions'
 import Checkbox from './Checkbox'
 import dateFnsFormat from 'date-fns/format'
-import dateFnsParse from 'date-fns/parse'
 import isFuture from 'date-fns/is_future'
-import getMilliseconds from 'date-fns/get_milliseconds'
 import setHours from 'date-fns/set_hours'
 import setMinutes from 'date-fns/set_minutes'
+import DueDatePicker from './DueDatePicker'
 
 class Step4 extends Component {
     constructor(props) {
         super(props)
-        this.FORMAT = 'MM/DD/YY'
         this.state = {
             price: this.props.price,
             priceInvalid: false,
             canDonate: this.props.canDonate,
-            selectedDay: this.props.selectedDay,
-            hour: this.props.hour,
-            hourInvalid: false
+            dueDate: new Date(),
+            dueHour: new Date()
         }
         this.handleDonateChange = this.handleDonateChange.bind(this)
         this.handlePriceChange = this.handlePriceChange.bind(this)
-        this.handleHourChange = this.handleHourChange.bind(this)
         this.nextClickHandler = this.nextClickHandler.bind(this)
         this.prevClickHandler = this.prevClickHandler.bind(this)
-        this.handleDayChange = this.handleDayChange.bind(this)
+        this.handleDueDateChange = this.handleDueDateChange.bind(this)
+        this.handleDueHourChange = this.handleDueHourChange.bind(this)
     }
 
     handlePriceChange(event) {
@@ -53,77 +47,11 @@ class Step4 extends Component {
         })
     }
 
-    handleHourChange(event) {
-        let hour
-        var regexLengthOne = RegExp('^[012]$')
-        var regexLengthTwo = RegExp('([01]?[0-9]|2[0-3])$')
-        var regexLengthThree = RegExp('([01]?[0-9]|2[0-3]):$')
-        var regexLengthFour = RegExp('([01]?[0-9]|2[0-3]):[0-5]$')
-        var regexLengthFive = RegExp('([01]?[0-9]|2[0-3]):[0-5][0-9]$')
-        switch (event.target.value.length) {
-            case 1:
-                if (regexLengthOne.test(event.target.value)) {
-                    hour = event.target.value
-                } else {
-                    hour = this.state.hour
-                }
-                break;
-            case 2:
-                if (regexLengthTwo.test(event.target.value)) {
-                    hour = event.target.value
-                } else {
-                    hour = this.state.hour
-                }
-                break;
-            case 3:
-                if (regexLengthThree.test(event.target.value)) {
-                    hour = event.target.value
-                } else {
-                    hour = this.state.hour
-                }
-                break;
-            case 4:
-                if (regexLengthFour.test(event.target.value)) {
-                    hour = event.target.value
-                } else {
-                    hour = this.state.hour
-                }
-                break;
-            case 5:
-                if (regexLengthFive.test(event.target.value)) {
-                    hour = event.target.value
-                } else {
-                    hour = this.state.hour
-                }
-                break;
-            default:
-                hour = this.state.hour
-                break;
-        }
-        this.setState({
-            ...this.state,
-            hour
-        })
-    }
-
     handleDonateChange(event) {
         this.setState({
             ...this.state,
             canDonate: !this.state.canDonate
         })
-    }
-
-    parseDate(str, format, locale) {
-        const parsed = dateFnsParse(str, format, { locale });
-        if (DateUtils.isDate(parsed)) {
-            return parsed;
-        } else {
-            return undefined;
-        }
-    }
-
-    formatDate(date, format, locale) {
-        return dateFnsFormat(date, format, { locale });
     }
 
     nextClickHandler() {
@@ -141,33 +69,11 @@ class Step4 extends Component {
                 priceInvalid: false
             })
         }
-        if (!isFuture(this.state.selectedDay)) {
+        var due = this.buildDueDate();
+        if (!isFuture(due)) {
             this.props.dispatch(alertActions.error("Due Date is expired"))
             return
         }
-        var regexHour = RegExp('([01]?[0-9]|2[0-3]):[0-5][0-9]$')
-        if (this.state.hour === '') {
-            this.props.dispatch(alertActions.error("Hour is not specified"))
-            this.setState({
-                ...this.state,
-                hourInvalid: true
-            })
-            return
-        } else if (!regexHour.test(this.state.hour)) {
-            this.props.dispatch(alertActions.error("Hour is invalid"))
-            this.setState({
-                ...this.state,
-                hourInvalid: true
-            })
-            return
-        } else {
-            this.setState({
-                ...this.state,
-                hourInvalid: false
-            })
-        }
-
-        var due = this.buildDueDate();
 
         this.props.dispatch(createProject(
             this.props.title,
@@ -182,26 +88,30 @@ class Step4 extends Component {
     }
 
     buildDueDate() {
-        var day = this.state.selectedDay;
-        var hourRegex = /^(\d\d):(\d\d)$/;
-        var hour = this.state.hour;
-        var match = hourRegex.exec(hour);
-        var hour = match[1];
-        var minutes = match[2];
-        var dueDate = this.formatDate(day);
-        dueDate = setHours(dueDate, hour);
-        dueDate = setMinutes(dueDate, minutes);
+        var dueDate = this.state.dueDate;
+        var dueHour = this.state.dueHour;
+        var formattedDueDate = dateFnsFormat(dueDate);
+        var hours = dueHour.getHours();
+        var minutes = dueHour.getMinutes();
+        formattedDueDate = setHours(formattedDueDate, hours);
+        formattedDueDate = setMinutes(formattedDueDate, minutes);
 
-        return dueDate.getTime();
+        return formattedDueDate.getTime();
     }
 
     prevClickHandler() {
         this.props.history.push('start');
     }
 
-    handleDayChange(day) {
+    handleDueDateChange(date) {
         this.setState({
-            selectedDay: day
+            dueDate: date
+        })
+    }
+
+    handleDueHourChange(hour) {
+        this.setState({
+            dueHour: hour
         })
     }
 
@@ -238,33 +148,12 @@ class Step4 extends Component {
                         />
                     </div>
                 </div>
-                <div className="row due-date-label justify-content-center">
-                    <div className="col col-sm-3">
-                        Due Date
-                    </div>
-                </div>
-                <div className="row due-date justify-content-center">
-                    <div className="col col-sm-3">
-                        <DayPickerInput
-                            formatDate={this.formatDate}
-                            format={this.FORMAT}
-                            parseDate={this.parseDate}
-                            value={this.state.selectedDay}
-                            placeholder={this.formatDate(new Date(), this.FORMAT)}
-                            onDayChange={this.handleDayChange}
-                        />
-                        <input
-                            type="text"
-                            className={ this.state.hourInvalid ?
-                                "hour-input invalid" :
-                                    "hour-input" }
-                            value={this.state.hour}
-                            pattern="^([01]?[0-9]|2[0-3]):[0-5][0-9]$"
-                            onChange={this.handleHourChange}
-                            placeholder="12:00"
-                        />
-                    </div>
-                </div>
+                <DueDatePicker
+                    dueDate={this.state.dueDate}
+                    onDueDateChange={this.handleDueDateChange}
+                    dueHour={this.state.dueHour}
+                    onDueHourChange={this.handleDueHourChange}
+                />
                 <ProjectButtons
                     nextClickHandler={this.nextClickHandler}
                     nextValue="submit project"
@@ -279,8 +168,6 @@ class Step4 extends Component {
 const mapStateToProps = (state) => ({
     price: state.projects.newProject.price || '',
     canDonate: state.projects.newProject.canDonate || false,
-    hour: state.projects.newProject.hour || '',
-    selectedDay: state.projects.newProject.selectedDay || new Date(),
     title: state.projects.newProject.title || '',
     category: state.projects.newProject.category || '',
     description: state.projects.newProject.description || '',
