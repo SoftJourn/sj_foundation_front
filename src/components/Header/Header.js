@@ -41,10 +41,10 @@ class Header extends Component {
                             sj
                         </div>
                         <div className="col">
-                            <Menu className="row menu justify-content-end"
+                            <Menu className="row menu justify-content-center"
                                   itemClassName="col-auto"/>
                         </div>
-                        <div className="col-3 controls">
+                        <div className="col-2 controls">
                             <div className="row">
                                 <div className="col">
                                     <NavLink className="btn btn-prime" to="/start">Start project</NavLink>

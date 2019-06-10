@@ -29,7 +29,7 @@ class ProjectsList extends React.Component {
             return (
                 <div className="card col-4 card-project" key={project.id}>
                     <div className="card-image"
-                         style={{background: 'url(' + project.thumbUrl+ ')'}}>
+                         style={{backgroundImage: 'url(' + project.thumbUrl+ ')'}}>
                     </div>
                     <div className="card-body">
                         <div className="card-link">{project.category.name}</div>

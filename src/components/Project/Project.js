@@ -45,7 +45,9 @@ function Project(props) {
                 </div>
                 <div className="row">
                     <div className="col stat-widget-wrap">
-                        <StatsWidget />
+                        <StatsWidget
+                            supporters={props.supporters}
+                        />
                     </div>
                 </div>
             </div>

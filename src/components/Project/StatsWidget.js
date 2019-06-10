@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-function StatsWidget() {
+function StatsWidget(props) {
      return (
         <div className="stat-widget">
             <div className="widget-coins">
@@ -15,7 +15,7 @@ function StatsWidget() {
                     <div className="widget-value">72% </div> funded
                 </div>
                 <div className="col-auto">
-                    <div className="widget-value">15 </div> investors
+                    <div className="widget-value">{props.supporters} </div> investors
                 </div>
                 <div className="col-auto">
                     <div className="widget-value">22 </div> hours to go

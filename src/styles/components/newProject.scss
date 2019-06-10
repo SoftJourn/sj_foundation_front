@@ -365,3 +365,99 @@ span.invalid {
     color: red;
     font-weight: bold;
 }
+
+.m-checkbox {
+    display: block;
+    position: relative;
+    padding-left: 3rem;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    text-transform: capitalize;
+    font-size: 1rem;
+
+    input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+        height: 0;
+        width: 0;
+    }
+
+    .checkmark {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 30px;
+        width: 30px;
+        border: 1px solid $component-border;
+        border-radius: 2px;
+    }
+
+    .checkmark:after {
+        content: "";
+        position: absolute;
+        display: none;
+    }
+
+    input:checked ~ .checkmark:after {
+        display: block;
+    }
+}
+
+.m-checkbox .checkmark:after {
+    left: 8px;
+    top: 3px;
+    width: 11px;
+    height: 18px;
+    border: solid $button-green-text;
+    border-width: 0 4px 4px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+input.due-date-picker {
+    border-radius: 2px;
+    border: 1px solid $component-border;
+    padding-left: 10px;
+    color: $step4-input-text;
+    height: 2rem;
+    padding-right: 2.7rem;
+    font-size: 1rem;
+}
+
+input.due-date-picker:focus {
+    border-color: $component-border;
+}
+
+input.due-time-picker {
+    border-radius: 2px;
+    border: 1px solid $component-border;
+    color: $step4-input-text;
+    height: 2rem;
+    font-size: 1rem;
+    padding-left: 10px;
+    width: 11rem;
+}
+
+input.due-time-picker:focus {
+    border-color: $component-border;
+}
+
+.react-datepicker__time-container {
+    width: 6rem;
+}
+
+.react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box {
+    width: 6rem;
+}
+
+.date-picker-component {
+    width: 50%;
+    display: inline-block;
+}

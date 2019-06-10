@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import UnauthorizedMenuItem from './UnauthorizedMenuItem';
 import AuthorizedMenuItem from './AuthorizedMenuItem';
+import { userActions } from 'actions/userActions';
 
 class LoginInfoItem extends Component {
     constructor(props) {
@@ -12,6 +13,10 @@ class LoginInfoItem extends Component {
     }
 
     render() {
+        let sessionUser = sessionStorage.getItem('user');
+        if (!sessionUser) {
+            this.props.dispatch(userActions.logout());
+        }
         if (this.props.loggedIn) {
             return (
                 <AuthorizedMenuItem />

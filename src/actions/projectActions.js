@@ -160,7 +160,7 @@ export function newProjectStep3(description, image, video, attachments, imageUrl
     return { type: NEW_PROJECT_STEP_3, description, image, video, attachments, imageUrl };
 }
 
-export function createProject(title, price, canDonate, due, category, description, imageUrl) {
+export function createProject(title, price, donateMore, due, category, description, imageUrl) {
     return {
         [CALL_API]: {
             types: [ PROJECT_CREATE_REQUEST, PROJECT_CREATE_SUCCESS, PROJECT_CREATE_FAILURE],
@@ -169,7 +169,7 @@ export function createProject(title, price, canDonate, due, category, descriptio
             body: {
                 title,
                 price,
-                canDonate,
+                donateMore,
                 due,
                 category,
                 description,

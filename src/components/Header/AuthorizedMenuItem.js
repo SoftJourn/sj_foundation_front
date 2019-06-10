@@ -17,7 +17,7 @@ class AuthorizedMenuItem extends Component {
         var user = this.props.user
         return (
             <div className="m-0 p-0">
-                <span className="navbar-text mr-2 text-success">Logged in as {user.username}</span>
+                <span className="navbar-text mr-2 text-success logged-in-info">Logged in as {user.username}</span>
                 <button className="btn btn-primary" onClick={this.clickHandler}>Sign out</button>
             </div>
         )
